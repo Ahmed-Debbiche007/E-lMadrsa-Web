@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Messages
 {
     #[ORM\Id]
+    #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $idmessage;
    

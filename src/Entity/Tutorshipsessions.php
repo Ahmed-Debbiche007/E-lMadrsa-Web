@@ -16,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Tutorshipsessions
 {
     #[ORM\Id]
+    #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $idsession;
     #[ORM\Column]

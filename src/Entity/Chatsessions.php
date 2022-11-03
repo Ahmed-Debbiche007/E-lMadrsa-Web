@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Chatsessions
 {
     #[ORM\Id]
+    #[ORM\GeneratedValue]
     #[ORM\Column]
     private $idsession;
 
