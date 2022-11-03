@@ -2,73 +2,126 @@
 
 namespace App\Entity;
 
+use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Users
- *
- * @ORM\Table(name="users", uniqueConstraints={@ORM\UniqueConstraint(name="NEW_INDEX", columns={"username"})})
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 class Users
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="bigint", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+   
+   
+    #[ORM\Id]
+    #[ORM\Column]
+    private ?int $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
-     */
-    private $nom;
+    #[ORM\Column(length: 255)]
+    private ?string $nom;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="prenom", type="string", length=255, nullable=false)
-     */
-    private $prenom;
+    #[ORM\Column(length: 255)]
+    private ?string $prenom;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=255, nullable=false)
-     */
-    private $username;
+    #[ORM\Column(length: 255)]
+    private ?string $username;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
-     */
-    private $password;
+    #[ORM\Column(length: 255)]
+    private ?string $password;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="age", type="integer", nullable=false)
-     */
-    private $age;
+    #[ORM\Column]
+    private ?float $age;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="role", type="string", length=15, nullable=false)
-     */
-    private $role;
+    #[ORM\Column(length: 255)]
+    private ?string $role;
+    #[ORM\Column(length: 255)]
+    private ?string $mail;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="mail", type="string", length=255, nullable=false)
-     */
-    private $mail;
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getAge(): ?float
+    {
+        return $this->age;
+    }
+
+    public function setAge(float $age): self
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(string $mail): self
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
 
 
 }

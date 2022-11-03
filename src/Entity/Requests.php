@@ -2,59 +2,97 @@
 
 namespace App\Entity;
 
+use App\Repository\RequestsRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Requests
- *
- * @ORM\Table(name="requests")
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: RequestsRepository::class)]
 class Requests
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idRequest", type="bigint", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idrequest;
+    #[ORM\Id]
+    #[ORM\Column]
+    private ?int $idrequest;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idTutor", type="bigint", nullable=false)
-     */
-    private $idtutor;
+    #[ORM\Column]
+    private ?int $idtutor;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idStudent", type="bigint", nullable=false)
-     */
-    private $idstudent;
+    #[ORM\Column]
+    private ?int $idstudent;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=15, nullable=false)
-     */
-    private $type;
+    #[ORM\Column(length: 255)]
+    private ?string $type;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="body", type="string", length=255, nullable=false)
-     */
-    private $body;
+    #[ORM\Column(length: 255)]
+    private ?string $body;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date", type="datetime", nullable=false)
-     */
-    private $date;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $date = null;
+
+    public function getIdrequest(): ?int
+    {
+        return $this->idrequest;
+    }
+
+    public function getIdtutor(): ?int
+    {
+        return $this->idtutor;
+    }
+
+    public function setIdtutor(int $idtutor): self
+    {
+        $this->idtutor = $idtutor;
+
+        return $this;
+    }
+
+    public function getIdstudent(): ?int
+    {
+        return $this->idstudent;
+    }
+
+    public function setIdstudent(int $idstudent): self
+    {
+        $this->idstudent = $idstudent;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getBody(): ?string
+    {
+        return $this->body;
+    }
+
+    public function setBody(string $body): self
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
 
 
 }

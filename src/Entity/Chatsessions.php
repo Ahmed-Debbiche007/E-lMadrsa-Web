@@ -1,32 +1,35 @@
 <?php
 
 namespace App\Entity;
-
+use App\Repository\SessionsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Chatsessions
- *
- * @ORM\Table(name="chatSessions", uniqueConstraints={@ORM\UniqueConstraint(name="idTutorshipSession", columns={"idTutorshipSession"})})
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: SessionsRepository::class)]
 class Chatsessions
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idSession", type="bigint", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
+    #[ORM\Id]
+    #[ORM\Column]
     private $idsession;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idTutorshipSession", type="bigint", nullable=false)
-     */
+    #[ORM\Column]
     private $idtutorshipsession;
+
+    public function getIdsession(): ?string
+    {
+        return $this->idsession;
+    }
+
+    public function getIdtutorshipsession(): ?string
+    {
+        return $this->idtutorshipsession;
+    }
+
+    public function setIdtutorshipsession(string $idtutorshipsession): self
+    {
+        $this->idtutorshipsession = $idtutorshipsession;
+
+        return $this;
+    }
 
 
 }
