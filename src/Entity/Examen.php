@@ -2,60 +2,31 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
+use App\Repository\ExamenRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Examen
- *
- * @ORM\Table(name="examen", indexes={@ORM\Index(name="Examen_fk1", columns={"idcategorie"}), @ORM\Index(name="Examen_fk0", columns={"formationId"})})
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: ExamenRepository::class)]
 class Examen
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idExamen", type="bigint", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
     private $idexamen;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nomExamen", type="string", length=255, nullable=false)
-     */
-    private $nomexamen;
+    #[ORM\Column(length: 255)]
+    private ?string $nomexamen;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="pourcentage", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $pourcentage;
+    #[ORM\Column]
+    private ?float $pourcentage;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="DureeExamen", type="integer", nullable=false)
-     */
-    private $dureeexamen;
+    #[ORM\Column]
+    private ?int $dureeexamen;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="formationId", type="bigint", nullable=true)
-     */
-    private $formationid;
+    #[ORM\Column]
+    private ?int $formationid;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="idcategorie", type="bigint", nullable=true)
-     */
-    private $idcategorie;
+    #[ORM\Column]
+    private ?int $idcategorie;
 
     public function getIdexamen(): ?string
     {
@@ -98,24 +69,24 @@ class Examen
         return $this;
     }
 
-    public function getFormationid(): ?string
+    public function getFormationid(): ?int
     {
         return $this->formationid;
     }
 
-    public function setFormationid(?string $formationid): self
+    public function setFormationid(int $formationid): self
     {
         $this->formationid = $formationid;
 
         return $this;
     }
 
-    public function getIdcategorie(): ?string
+    public function getIdcategorie(): ?int
     {
         return $this->idcategorie;
     }
 
-    public function setIdcategorie(?string $idcategorie): self
+    public function setIdcategorie(int $idcategorie): self
     {
         $this->idcategorie = $idcategorie;
 

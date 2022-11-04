@@ -2,41 +2,25 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
+use App\Repository\BadgeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Badge
- *
- * @ORM\Table(name="badge")
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: BadgeRepository::class)]
 class Badge
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="badgeID", type="bigint", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $badgeid;
+   
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $badgeid;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="badgeTYPE", type="string", length=255, nullable=false)
-     */
-    private $badgetype;
+    #[ORM\Column(length: 255)]
+    private ?string $badgetype;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="badgeIMAGE", type="string", length=255, nullable=false)
-     */
-    private $badgeimage;
+    #[ORM\Column(length: 255)]
+    private ?string $badgeimage;
 
-    public function getBadgeid(): ?string
+    public function getBadgeid(): ?int
     {
         return $this->badgeid;
     }

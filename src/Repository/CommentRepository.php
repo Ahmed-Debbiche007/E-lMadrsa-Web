@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Chatsessions;
+use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Chatsessions>
+ * @extends ServiceEntityRepository<Comment>
  *
- * @method Chatsessions|null find($id, $lockMode = null, $lockVersion = null)
- * @method Chatsessions|null findOneBy(array $criteria, array $orderBy = null)
- * @method Chatsessions[]    findAll()
- * @method Chatsessions[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Comment|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Comment|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Comment[]    findAll()
+ * @method Comment[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SessionsRepository extends ServiceEntityRepository
+class CommentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Chatsessions::class);
+        parent::__construct($registry, Comment::class);
     }
 
-    public function save(Chatsessions $entity, bool $flush = false): void
+    public function save(Comment $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class SessionsRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Chatsessions $entity, bool $flush = false): void
+    public function remove(Comment $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class SessionsRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Chatsessions[] Returns an array of Chatsessions objects
+//     * @return Comment[] Returns an array of Comment objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class SessionsRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Chatsessions
+//    public function findOneBySomeField($value): ?Comment
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')

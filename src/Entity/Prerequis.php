@@ -2,34 +2,21 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
+use App\Repository\PrerequisRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Prerequis
- *
- * @ORM\Table(name="prerequis")
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: PrerequisRepository::class)]
 class Prerequis
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idPrerequis", type="bigint", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idprerequis;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $idprerequis;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nomPrerequis", type="string", length=255, nullable=false)
-     */
-    private $nomprerequis;
+    #[ORM\Column(length: 100)]
+    private ?string $nomprerequis;
 
-    public function getIdprerequis(): ?string
+    public function getIdprerequis(): ?int
     {
         return $this->idprerequis;
     }

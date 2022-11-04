@@ -1,22 +1,14 @@
 <?php
-
 namespace App\Entity;
 
 use App\Repository\TutorshipSessionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Tutorshipsessions
- *
- * @ORM\Table(name="tutorshipSessions")
- * @ORM\Entity
- */
 #[ORM\Entity(repositoryClass: TutorshipSessionRepository::class)]
 class Tutorshipsessions
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $idsession;
     #[ORM\Column]
@@ -109,6 +101,4 @@ class Tutorshipsessions
 
         return $this;
     }
-
-
 }

@@ -2,33 +2,21 @@
 
 namespace App\Entity;
 
+use App\Repository\CategorieEvRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * CategorieEv
- *
- * @ORM\Table(name="categorie_ev")
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: CategorieEvRepository::class)]
 class CategorieEv
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_Cat", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idCat;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?string $idCat;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type_evenement", type="string", length=255, nullable=false)
-     */
-    private $typeEvenement;
+    #[ORM\Column(length: 255)]
+    private ?string $typeEvenement;
 
-    public function getIdCat(): ?int
+    public function getIdCat(): ?string
     {
         return $this->idCat;
     }

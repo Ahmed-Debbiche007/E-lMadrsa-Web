@@ -2,56 +2,141 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use phpDocumentor\Reflection\Types\Boolean;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    #[ORM\Column(length: 255)]
-    private ?string $nom;
-
-    #[ORM\Column(length: 255)]
-    private ?string $prenom;
-
-    #[ORM\Column(length: 255)]
-    private ?string $nomutilisateur;
-
-    #[ORM\Column(length: 255)]
-    private ?string $tel;
-
-    #[ORM\Column(length: 255)]
-    private ?string $email;
-
-    #[ORM\Column(length: 255)]
-    private ?string $motdepasse;
-
-    #[ORM\Column(length: 255)]
-    private ?string $image;
-
-    #[ORM\Column(length: 255)]
-    private ?string $role;
-
-    
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $datenaissance = null;
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $idutilisateur;
+    private ?int $idUtilisateur = null;
 
-    #[ORM\Column (type : "boolean")]
-    private ?bool $approved = false;
+    #[ORM\Column(length: 180, unique: true)]
+    private ?string $email = null;
+
+    #[ORM\Column (length: 255)]
+    private ?string $role ;
+
+    /**
+     * @var string The hashed motDePasse
+     */
+    #[ORM\Column]
+    private ?string $motDePasse = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $prenom = null;
+
+    #[ORM\Column(length: 255 ,unique: true)]
+    private ?string $nomUtilisateur = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $image = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $dateNaissance = null;
+
+    #[ORM\Column]
+    private ?bool $approved = null;
+
+    public function getId(): ?int
+    {
+        return $this->idUtilisateur;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @deprecated since Symfony 5.3, use getUserIdentifier instead
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): string
+    {
+        return $this->role;
+    }
+
+    public function setRoles(string $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->motDePasse;
+    }
+
+    public function setPassword(string $motDePasse): self
+    {
+        $this->motDePasse = $motDePasse;
+
+        return $this;
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
 
     public function getNom(): ?string
     {
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom(?string $nom): self
     {
         $this->nom = $nom;
 
@@ -70,50 +155,14 @@ class User
         return $this;
     }
 
-    public function getNomutilisateur(): ?string
+    public function getNomUtilisateur(): ?string
     {
-        return $this->nomutilisateur;
+        return $this->nomUtilisateur;
     }
 
-    public function setNomutilisateur(string $nomutilisateur): self
+    public function setNomUtilisateur(string $nomUtilisateur): self
     {
-        $this->nomutilisateur = $nomutilisateur;
-
-        return $this;
-    }
-
-    public function getTel(): ?string
-    {
-        return $this->tel;
-    }
-
-    public function setTel(string $tel): self
-    {
-        $this->tel = $tel;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getMotdepasse(): ?string
-    {
-        return $this->motdepasse;
-    }
-
-    public function setMotdepasse(string $motdepasse): self
-    {
-        $this->motdepasse = $motdepasse;
+        $this->nomUtilisateur = $nomUtilisateur;
 
         return $this;
     }
@@ -130,33 +179,16 @@ class User
         return $this;
     }
 
-    public function getRole(): ?string
+    public function getDateNaissance(): ?\DateTimeInterface
     {
-        return $this->role;
+        return $this->dateNaissance;
     }
 
-    public function setRole(string $role): self
+    public function setDateNaissance(\DateTimeInterface $dateNaissance): self
     {
-        $this->role = $role;
+        $this->dateNaissance = $dateNaissance;
 
         return $this;
-    }
-
-    public function getDatenaissance(): ?\DateTimeInterface
-    {
-        return $this->datenaissance;
-    }
-
-    public function setDatenaissance(\DateTimeInterface $datenaissance): self
-    {
-        $this->datenaissance = $datenaissance;
-
-        return $this;
-    }
-
-    public function getIdutilisateur(): ?string
-    {
-        return $this->idutilisateur;
     }
 
     public function isApproved(): ?bool
@@ -171,5 +203,32 @@ class User
         return $this;
     }
 
+    public function getIdUtilisateur(): ?int
+    {
+        return $this->idUtilisateur;
+    }
 
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    public function getMotDePasse(): ?string
+    {
+        return $this->motDePasse;
+    }
+
+    public function setMotDePasse(string $motDePasse): self
+    {
+        $this->motDePasse = $motDePasse;
+
+        return $this;
+    }
 }

@@ -2,70 +2,49 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
+use App\Repository\VotecommentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Votecomment
- *
- * @ORM\Table(name="votecomment")
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: VotecommentRepository::class)]
 class Votecomment
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="votecommentID", type="bigint", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $votecommentid;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $votecommentid;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="userID", type="bigint", nullable=false)
-     */
-    private $userid;
+    #[ORM\Column]
+    private ?int $userid;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="commentID", type="bigint", nullable=false)
-     */
-    private $commentid;
+    #[ORM\Column]
+    private ?int $commentid;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="votenb", type="integer", nullable=false)
-     */
-    private $votenb;
+    #[ORM\Column]
+    private ?int $votenb;
 
-    public function getVotecommentid(): ?string
+    public function getVotecommentid(): ?int
     {
         return $this->votecommentid;
     }
 
-    public function getUserid(): ?string
+    public function getUserid(): ?int
     {
         return $this->userid;
     }
 
-    public function setUserid(string $userid): self
+    public function setUserid(int $userid): self
     {
         $this->userid = $userid;
 
         return $this;
     }
 
-    public function getCommentid(): ?string
+    public function getCommentid(): ?int
     {
         return $this->commentid;
     }
 
-    public function setCommentid(string $commentid): self
+    public function setCommentid(int $commentid): self
     {
         $this->commentid = $commentid;
 

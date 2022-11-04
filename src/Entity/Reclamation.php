@@ -2,55 +2,32 @@
 
 namespace App\Entity;
 
+use App\Repository\ReclamationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Reclamation
- *
- * @ORM\Table(name="reclamation")
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: ReclamationRepository::class)]
 class Reclamation
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idReclamation", type="bigint", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idreclamation;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $idreclamation;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="sujet", type="string", length=150, nullable=false)
-     */
-    private $sujet;
+     #[ORM\Column(length: 255)]
+    private ?string $sujet;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="string", length=500, nullable=false)
-     */
-    private $description;
+     #[ORM\Column(length: 255)]
+    private ?string $description;
 
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="dateRec", type="date", nullable=true)
-     */
-    private $daterec;
+    
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $daterec = null;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="idUser", type="bigint", nullable=true)
-     */
-    private $iduser;
+    #[ORM\Column]
+    private ?int $iduser;
 
-    public function getIdreclamation(): ?string
+    public function getIdreclamation(): ?int
     {
         return $this->idreclamation;
     }
@@ -84,19 +61,19 @@ class Reclamation
         return $this->daterec;
     }
 
-    public function setDaterec(?\DateTimeInterface $daterec): self
+    public function setDaterec(\DateTimeInterface $daterec): self
     {
         $this->daterec = $daterec;
 
         return $this;
     }
 
-    public function getIduser(): ?string
+    public function getIduser(): ?int
     {
         return $this->iduser;
     }
 
-    public function setIduser(?string $iduser): self
+    public function setIduser(int $iduser): self
     {
         $this->iduser = $iduser;
 

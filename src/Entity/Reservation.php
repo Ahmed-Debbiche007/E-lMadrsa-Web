@@ -2,46 +2,27 @@
 
 namespace App\Entity;
 
+use App\Repository\ReservationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Reservation
- *
- * @ORM\Table(name="reservation", indexes={@ORM\Index(name="fkEv", columns={"id_evenement"}), @ORM\Index(name="fkUser", columns={"id_utilisateur"})})
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_reservation", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idReservation;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $idReservation;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_reservation", type="date", nullable=false)
-     */
-    private $dateReservation;
+    
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $dateReservation = null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_evenement", type="integer", nullable=false)
-     */
-    private $idEvenement;
+    #[ORM\Column]
+    private ?int $idEvenement;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_utilisateur", type="integer", nullable=false)
-     */
-    private $idUtilisateur;
+    #[ORM\Column]
+    private ?int $idUtilisateur;
 
     public function getIdReservation(): ?int
     {

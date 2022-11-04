@@ -1,71 +1,49 @@
 <?php
 
 namespace App\Entity;
-
-use Doctrine\DBAL\Types\Types;
+use App\Repository\VoteRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Vote
- *
- * @ORM\Table(name="vote")
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: VoteRepository::class)]
 class Vote
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="voteID", type="bigint", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $voteid;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $voteid;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="userID", type="bigint", nullable=false)
-     */
-    private $userid;
+    #[ORM\Column]
+    private ?int $userid;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="postID", type="bigint", nullable=false)
-     */
-    private $postid;
+    #[ORM\Column]
+    private ?int $postid;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="votenb", type="integer", nullable=false)
-     */
-    private $votenb;
+    #[ORM\Column]
+    private ?int $votenb;
 
-    public function getVoteid(): ?string
+    public function getVoteid(): ?int
     {
         return $this->voteid;
     }
 
-    public function getUserid(): ?string
+    public function getUserid(): ?int
     {
         return $this->userid;
     }
 
-    public function setUserid(string $userid): self
+    public function setUserid(int $userid): self
     {
         $this->userid = $userid;
 
         return $this;
     }
 
-    public function getPostid(): ?string
+    public function getPostid(): ?int
     {
         return $this->postid;
     }
 
-    public function setPostid(string $postid): self
+    public function setPostid(int $postid): self
     {
         $this->postid = $postid;
 

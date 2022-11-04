@@ -2,76 +2,40 @@
 
 namespace App\Entity;
 
+use App\Repository\PostRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Post
- *
- * @ORM\Table(name="post")
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: PostRepository::class)]
 class Post
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="postID", type="bigint", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $postid;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $postid;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="postTITLE", type="string", length=255, nullable=false)
-     */
-    private $posttitle;
+    #[ORM\Column(length: 255)]
+    private ?string $posttitle;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="postCONTENT", type="text", length=65535, nullable=false)
-     */
-    private $postcontent;
+    #[ORM\Column(length: 255)]
+    private ?string $postcontent;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="userID", type="bigint", nullable=true)
-     */
-    private $userid;
+    #[ORM\Column]
+    private ?int $userid;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="categoryID", type="bigint", nullable=true)
-     */
-    private $categoryid;
+    #[ORM\Column]
+    private ?int $categoryid;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="postVOTE", type="integer", nullable=false)
-     */
-    private $postvote = '0';
+    #[ORM\Column]
+    private ?int $postvote = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="postNBCOM", type="integer", nullable=false)
-     */
-    private $postnbcom = '0';
+    #[ORM\Column]
+    private ?int $postnbcom = 0;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="postDATE", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
-     */
-    private $postdate = 'CURRENT_TIMESTAMP';
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $postdate ;
 
-    public function getPostid(): ?string
+    public function getPostid(): ?int
     {
         return $this->postid;
     }
@@ -100,24 +64,24 @@ class Post
         return $this;
     }
 
-    public function getUserid(): ?string
+    public function getUserid(): ?int
     {
         return $this->userid;
     }
 
-    public function setUserid(?string $userid): self
+    public function setUserid(int $userid): self
     {
         $this->userid = $userid;
 
         return $this;
     }
 
-    public function getCategoryid(): ?string
+    public function getCategoryid(): ?int
     {
         return $this->categoryid;
     }
 
-    public function setCategoryid(?string $categoryid): self
+    public function setCategoryid(int $categoryid): self
     {
         $this->categoryid = $categoryid;
 
@@ -159,6 +123,7 @@ class Post
 
         return $this;
     }
+    
 
 
 }

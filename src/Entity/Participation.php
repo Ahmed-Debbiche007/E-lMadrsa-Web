@@ -2,70 +2,49 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
+use App\Repository\ParticipationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Participation
- *
- * @ORM\Table(name="participation", indexes={@ORM\Index(name="Participation_fk0", columns={"idUser"}), @ORM\Index(name="Participation_fk1", columns={"idFormation"})})
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: ParticipationRepository::class)]
 class Participation
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idParticipation", type="bigint", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idparticipation;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $idparticipation;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="idUser", type="bigint", nullable=true)
-     */
-    private $iduser;
+    #[ORM\Column]
+    private ?int $iduser;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="idFormation", type="bigint", nullable=true)
-     */
-    private $idformation;
+    #[ORM\Column]
+    private ?int $idformation;
 
-    /**
-     * @var float|null
-     *
-     * @ORM\Column(name="resultat", type="float", precision=10, scale=0, nullable=true)
-     */
-    private $resultat;
+    #[ORM\Column]
+    private ?float $resultat;
 
-    public function getIdparticipation(): ?string
+    public function getIdparticipation(): ?int
     {
         return $this->idparticipation;
     }
 
-    public function getIduser(): ?string
+    public function getIduser(): ?int
     {
         return $this->iduser;
     }
 
-    public function setIduser(?string $iduser): self
+    public function setIduser(int $iduser): self
     {
         $this->iduser = $iduser;
 
         return $this;
     }
 
-    public function getIdformation(): ?string
+    public function getIdformation(): ?int
     {
         return $this->idformation;
     }
 
-    public function setIdformation(?string $idformation): self
+    public function setIdformation(int $idformation): self
     {
         $this->idformation = $idformation;
 
@@ -77,7 +56,7 @@ class Participation
         return $this->resultat;
     }
 
-    public function setResultat(?float $resultat): self
+    public function setResultat(float $resultat): self
     {
         $this->resultat = $resultat;
 

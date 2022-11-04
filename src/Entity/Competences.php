@@ -2,34 +2,21 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
+use App\Repository\CategorieRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Competences
- *
- * @ORM\Table(name="competences")
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: CategorieRepository::class)]
 class Competences
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idCompetence", type="bigint", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idcompetence;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $idcompetence;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nomCompetence", type="string", length=255, nullable=false)
-     */
-    private $nomcompetence;
+    #[ORM\Column(length: 255)]
+    private ?string $nomcompetence;
 
-    public function getIdcompetence(): ?string
+    public function getIdcompetence(): ?int
     {
         return $this->idcompetence;
     }

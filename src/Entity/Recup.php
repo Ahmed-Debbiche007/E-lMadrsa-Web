@@ -2,51 +2,34 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
+use App\Repository\RecupRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Recup
- *
- * @ORM\Table(name="recup")
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: RecupRepository::class)]
 class Recup
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idUser", type="bigint", nullable=false)
-     */
-    private $iduser;
+    #[ORM\Column]
+    private ?int $iduser;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="code", type="string", length=15, nullable=false)
-     */
-    private $code;
+    #[ORM\Column(length: 255)]
+    private ?string $code;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIduser(): ?string
+    public function getIduser(): ?int
     {
         return $this->iduser;
     }
 
-    public function setIduser(string $iduser): self
+    public function setIduser(int $iduser): self
     {
         $this->iduser = $iduser;
 

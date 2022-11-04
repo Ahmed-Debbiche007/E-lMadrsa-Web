@@ -2,69 +2,36 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
+use App\Repository\QuestionRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Question
- *
- * @ORM\Table(name="question", indexes={@ORM\Index(name="Question_fk0", columns={"idExamen"})})
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: QuestionRepository::class)]
 class Question
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idQuestion", type="bigint", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idquestion;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $idquestion;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="ennonce", type="string", length=500, nullable=false)
-     */
-    private $ennonce;
+   #[ORM\Column(length: 255)]
+    private ?string $ennonce;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="option1", type="string", length=500, nullable=false)
-     */
-    private $option1;
+   #[ORM\Column(length: 255)]
+    private ?string $option1;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="option2", type="string", length=500, nullable=false)
-     */
-    private $option2;
+   #[ORM\Column(length: 255)]
+    private ?string $option2;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="option3", type="string", length=500, nullable=false)
-     */
-    private $option3;
+   #[ORM\Column(length: 255)]
+    private ?string $option3;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="answer", type="string", length=500, nullable=false)
-     */
-    private $answer;
+   #[ORM\Column(length: 255)]
+    private ?string $answer;
+    
+    #[ORM\Column]
+    private ?int $idexamen;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="idExamen", type="bigint", nullable=true)
-     */
-    private $idexamen;
-
-    public function getIdquestion(): ?string
+    public function getIdquestion(): ?int
     {
         return $this->idquestion;
     }
@@ -129,12 +96,12 @@ class Question
         return $this;
     }
 
-    public function getIdexamen(): ?string
+    public function getIdexamen(): ?int
     {
         return $this->idexamen;
     }
 
-    public function setIdexamen(?string $idexamen): self
+    public function setIdexamen(int $idexamen): self
     {
         $this->idexamen = $idexamen;
 

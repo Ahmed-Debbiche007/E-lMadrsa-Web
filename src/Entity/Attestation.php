@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use App\Repository\AttestationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -11,30 +11,25 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="attestation", indexes={@ORM\Index(name="Attestation_fk0", columns={"idparticipation"})})
  * @ORM\Entity
  */
+#[ORM\Entity(repositoryClass: AttestationRepository::class)]
 class Attestation
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idAttestation", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idattestation;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $idattestation;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idparticipation", type="integer", nullable=false)
-     */
-    private $idparticipation;
+    #[ORM\Column]
+    private ?int $idparticipation;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="dateAcq", type="date", nullable=false)
      */
-    private $dateacq;
+    
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $datecq = null;
 
     public function getIdattestation(): ?int
     {
@@ -53,14 +48,14 @@ class Attestation
         return $this;
     }
 
-    public function getDateacq(): ?\DateTimeInterface
+    public function getDatecq(): ?\DateTimeInterface
     {
-        return $this->dateacq;
+        return $this->datecq;
     }
 
-    public function setDateacq(\DateTimeInterface $dateacq): self
+    public function setDatecq(\DateTimeInterface $datecq): self
     {
-        $this->dateacq = $dateacq;
+        $this->datecq = $datecq;
 
         return $this;
     }

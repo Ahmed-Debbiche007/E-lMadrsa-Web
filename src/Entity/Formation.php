@@ -2,81 +2,40 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
+use App\Repository\FormationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Formation
- *
- * @ORM\Table(name="formation", indexes={@ORM\Index(name="Formation_fk3", columns={"idCategorie"}), @ORM\Index(name="Formation_fk2", columns={"idExamen"}), @ORM\Index(name="Formation_fk0", columns={"idPrerequis"}), @ORM\Index(name="Formation_fk1", columns={"idCompetence"})})
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: FormationRepository::class)]
 class Formation
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idFormation", type="bigint", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
     private $idformation;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Sujet", type="string", length=255, nullable=false)
-     */
-    private $sujet;
+    #[ORM\Column(length: 255)]
+    private ?string $sujet;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Description", type="string", length=255, nullable=false)
-     */
-    private $description;
+    #[ORM\Column(length: 255)]
+    private ?string $description;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="Difficulté", type="string", length=255, nullable=true)
-     */
-    private $difficulté;
+    #[ORM\Column(length: 255)]
+    private ?string $difficulté;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="durée", type="integer", nullable=false)
-     */
-    private $durée;
+    #[ORM\Column]
+    private ?int $durée;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="idPrerequis", type="bigint", nullable=true)
-     */
-    private $idprerequis;
+    #[ORM\Column]
+    private ?int $idprerequis;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="idCompetence", type="bigint", nullable=true)
-     */
-    private $idcompetence;
+    #[ORM\Column]
+    private ?int $idcompetence;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="idExamen", type="bigint", nullable=true)
-     */
-    private $idexamen;
+    #[ORM\Column]
+    private ?int $idexamen;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="idCategorie", type="bigint", nullable=true)
-     */
-    private $idcategorie;
+    #[ORM\Column]
+    private ?int $idcategorie;
 
     public function getIdformation(): ?string
     {
@@ -112,7 +71,7 @@ class Formation
         return $this->difficulté;
     }
 
-    public function setDifficulté(?string $difficulté): self
+    public function setDifficulté(string $difficulté): self
     {
         $this->difficulté = $difficulté;
 
@@ -131,48 +90,48 @@ class Formation
         return $this;
     }
 
-    public function getIdprerequis(): ?string
+    public function getIdprerequis(): ?int
     {
         return $this->idprerequis;
     }
 
-    public function setIdprerequis(?string $idprerequis): self
+    public function setIdprerequis(int $idprerequis): self
     {
         $this->idprerequis = $idprerequis;
 
         return $this;
     }
 
-    public function getIdcompetence(): ?string
+    public function getIdcompetence(): ?int
     {
         return $this->idcompetence;
     }
 
-    public function setIdcompetence(?string $idcompetence): self
+    public function setIdcompetence(int $idcompetence): self
     {
         $this->idcompetence = $idcompetence;
 
         return $this;
     }
 
-    public function getIdexamen(): ?string
+    public function getIdexamen(): ?int
     {
         return $this->idexamen;
     }
 
-    public function setIdexamen(?string $idexamen): self
+    public function setIdexamen(int $idexamen): self
     {
         $this->idexamen = $idexamen;
 
         return $this;
     }
 
-    public function getIdcategorie(): ?string
+    public function getIdcategorie(): ?int
     {
         return $this->idcategorie;
     }
 
-    public function setIdcategorie(?string $idcategorie): self
+    public function setIdcategorie(int $idcategorie): self
     {
         $this->idcategorie = $idcategorie;
 

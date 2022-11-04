@@ -2,74 +2,44 @@
 
 namespace App\Entity;
 
+use App\Repository\EvenementRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Evenement
+ * Attestation
  *
- * @ORM\Table(name="evenement", indexes={@ORM\Index(name="id_utilisateur", columns={"id_utilisateur"}), @ORM\Index(name="id_Cat", columns={"id_Cat"})})
+ * @ORM\Table(name="attestation", indexes={@ORM\Index(name="Attestation_fk0", columns={"idparticipation"})})
  * @ORM\Entity
  */
+#[ORM\Entity(repositoryClass: EvenementRepository::class)]
 class Evenement
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_evenement", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idEvenement;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $idEvenement;
+   
+    #[ORM\Column]
+    private ?int $idCat;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_Cat", type="integer", nullable=false)
-     */
-    private $idCat;
+    #[ORM\Column(length: 255)]
+    private ?string $nomEvenement;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nom_evenement", type="string", length=255, nullable=false)
-     */
-    private $nomEvenement;
+    #[ORM\Column(length: 255)]
+    private ?string $description;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text", length=65535, nullable=false)
-     */
-    private $description;
+    #[ORM\Column(length: 255)]
+    private ?string $image;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=255, nullable=false)
-     */
-    private $image;
+    #[ORM\Column]
+    private ?int $idUtilisateur;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_utilisateur", type="integer", nullable=false)
-     */
-    private $idUtilisateur;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $date = null;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date", type="date", nullable=false)
-     */
-    private $date;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="etat_evenement", type="string", length=255, nullable=false)
-     */
-    private $etatEvenement;
+    #[ORM\Column(length: 255)]
+    private ?string $etatEvenement;
 
     public function getIdEvenement(): ?int
     {

@@ -1,42 +1,24 @@
 <?php
 
 namespace App\Entity;
-
-use Doctrine\DBAL\Types\Types;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Category
- *
- * @ORM\Table(name="category")
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="categoryID", type="bigint", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $categoryid;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $categoryid;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="categoryNAME", type="string", length=255, nullable=false)
-     */
-    private $categoryname;
+    #[ORM\Column(length: 255)]
+    private ?string $categoryname;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="categoryIMAGE", type="string", length=255, nullable=true)
-     */
-    private $categoryimage;
+    #[ORM\Column(length: 255)]
+    private ?string $categoryimage;
 
-    public function getCategoryid(): ?string
+    public function getCategoryid(): ?int
     {
         return $this->categoryid;
     }
@@ -58,7 +40,7 @@ class Category
         return $this->categoryimage;
     }
 
-    public function setCategoryimage(?string $categoryimage): self
+    public function setCategoryimage(string $categoryimage): self
     {
         $this->categoryimage = $categoryimage;
 

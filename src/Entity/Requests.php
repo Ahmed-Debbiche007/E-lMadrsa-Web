@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Entity;
 
 use App\Repository\RequestsRepository;
@@ -10,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Requests
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $idrequest;
 
@@ -93,7 +91,6 @@ class Requests
 
         return $this;
     }
-
 
 
 }

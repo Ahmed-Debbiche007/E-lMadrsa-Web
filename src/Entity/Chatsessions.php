@@ -1,31 +1,33 @@
 <?php
 
 namespace App\Entity;
-use App\Repository\SessionsRepository;
+
+use App\Repository\ChatSessionsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: SessionsRepository::class)]
+#[ORM\Entity(repositoryClass: ChatSessionsRepository::class)]
 class Chatsessions
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private $idsession;
+    private ?int $idsession;
+
 
     #[ORM\Column]
-    private $idtutorshipsession;
+    private ?int $idtutorshipsession;
 
-    public function getIdsession(): ?string
+    public function getIdsession(): ?int
     {
         return $this->idsession;
     }
 
-    public function getIdtutorshipsession(): ?string
+    public function getIdtutorshipsession(): ?int
     {
         return $this->idtutorshipsession;
     }
 
-    public function setIdtutorshipsession(string $idtutorshipsession): self
+    public function setIdtutorshipsession(int $idtutorshipsession): self
     {
         $this->idtutorshipsession = $idtutorshipsession;
 

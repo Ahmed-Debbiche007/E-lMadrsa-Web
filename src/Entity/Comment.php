@@ -2,62 +2,35 @@
 
 namespace App\Entity;
 
+use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Comment
- *
- * @ORM\Table(name="comment")
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="CommentID", type="bigint", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $commentid;
+   
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $commentid;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="CommentCONTENT", type="text", length=65535, nullable=false)
-     */
-    private $commentcontent;
+    #[ORM\Column(length: 255)]
+    private ?string $commentcontent;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="userID", type="bigint", nullable=true)
-     */
-    private $userid;
+    #[ORM\Column]
+    private ?int $userid;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="postID", type="bigint", nullable=false)
-     */
-    private $postid;
+    #[ORM\Column]
+    private ?int $postid;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="commentVOTE", type="integer", nullable=false)
-     */
-    private $commentvote = '0';
+    #[ORM\Column]
+    private ?int $commentvote = 0;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="commentDATE", type="datetime", nullable=false)
-     */
-    private $commentdate;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $commentdate = null;
 
-    public function getCommentid(): ?string
+    public function getCommentid(): ?int
     {
         return $this->commentid;
     }
@@ -74,24 +47,24 @@ class Comment
         return $this;
     }
 
-    public function getUserid(): ?string
+    public function getUserid(): ?int
     {
         return $this->userid;
     }
 
-    public function setUserid(?string $userid): self
+    public function setUserid(int $userid): self
     {
         $this->userid = $userid;
 
         return $this;
     }
 
-    public function getPostid(): ?string
+    public function getPostid(): ?int
     {
         return $this->postid;
     }
 
-    public function setPostid(string $postid): self
+    public function setPostid(int $postid): self
     {
         $this->postid = $postid;
 
