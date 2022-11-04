@@ -93,5 +93,9 @@ class Examen
         return $this;
     }
 
+    public function  __toString()
+    {
+        return (String)$this->nomexamen ;
+    }
 
 }
