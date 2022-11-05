@@ -15,8 +15,8 @@ class ExamenType extends AbstractType
             ->add('nomexamen')
             ->add('pourcentage')
             ->add('dureeexamen')
-            ->add('formationid')
-            ->add('idcategorie')
+            ->add('formation')
+            ->add('categorie')
         ;
     }
 

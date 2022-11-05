@@ -17,7 +17,7 @@ class ExamenController extends AbstractController
     public function index(ExamenRepository $examenRepository): Response
     {
         return $this->render('examen/index.html.twig', [
-            'examens' => $examenRepository->findAll(),
+            'examens' => $examenRepository->get(),
         ]);
     }
 

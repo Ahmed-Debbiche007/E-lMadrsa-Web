@@ -22,11 +22,13 @@ class Examen
     #[ORM\Column]
     private ?int $dureeexamen;
 
-    #[ORM\Column]
-    private ?int $formationid;
+    #[ORM\ManyToOne(inversedBy: 'examens')]
+    #[ORM\JoinColumn(name: 'formationid', referencedColumnName: 'idformation')]
+    private ?Formation $formation;
 
-    #[ORM\Column]
-    private ?int $idcategorie;
+    #[ORM\ManyToOne(inversedBy: 'examens')]
+    #[ORM\JoinColumn(name: 'idcategorie', referencedColumnName: 'idcategorie')]
+    private ?Categorie $categorie;
 
     public function getIdexamen(): ?string
     {
@@ -69,29 +71,33 @@ class Examen
         return $this;
     }
 
-    public function getFormationid(): ?int
+
+    public function getFormation(): ?Formation
     {
-        return $this->formationid;
+        return $this->formation;
     }
 
-    public function setFormationid(int $formationid): self
-    {
-        $this->formationid = $formationid;
 
-        return $this;
+    public function setFormation(?Formation $formation): void
+    {
+        $this->formation = $formation;
     }
 
-    public function getIdcategorie(): ?int
+
+    public function getCategorie(): ?Categorie
     {
-        return $this->idcategorie;
+        return $this->categorie;
     }
 
-    public function setIdcategorie(int $idcategorie): self
-    {
-        $this->idcategorie = $idcategorie;
 
-        return $this;
+    public function setCategorie(?Categorie $categorie): void
+    {
+        $this->categorie = $categorie;
     }
+
+
+
+
 
     public function  __toString()
     {
