@@ -1,48 +1,80 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}Log in!{% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Login
+		</title>
+		<link rel="stylesheet" href="back/assets/css/main/app.css">
+		<link rel="stylesheet" href="back/assets/css/pages/auth.css">
+		<link rel="shortcut icon" href="back/assets/images/logo/favicon.svg" type="image/x-icon">
+		<link rel="shortcut icon" href="back/assets/images/logo/favicon.png" type="image/png">
+	</head>
 
-{% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+	<body>
+		<div id="auth">
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-            {% if app.user.isTutor() %}
-            ahla
-            {% endif %}
-            
-           
-        </div>
-    {% endif %}
+			<div class="row h-100">
+				<div class="col-lg-5 col-12">
+					<div id="auth-left">
+						<div class="auth-logo">
+							<a href="index.html">
+								<h1 class="auth-title">E-lMadrsa</h1>
+							</a>
+						</div>
+						<h1>Log in.</h1>
+						<p class="auth-subtitle mb-5">Log in quick to start learning</p>
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputUsername">Username</label>
-    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+						<form method="post">
+							{% if error %}
+								<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+							{% endif %}
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+							{% if app.user %}
+								<div class="mb-3">
+									You are logged in as
+									{{ app.user.userIdentifier }},
+									<a href="{{ path('app_logout') }}">Logout</a>
+									{% if app.user.isTutor() %}
+										ahla
+									{% endif %}
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
+								</div>
+							{% endif %}
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+							<div class="form-group position-relative has-icon-left mb-4">
+								<input class="form-control form-control-xl" placeholder="Username" type="text" value="{{ last_username }}" name="username" id="inputUsername" autocomplete="username" required autofocus>
+								<div class="form-control-icon">
+									<i class="bi bi-person"></i>
+								</div>
+							</div>
+							<div class="form-group position-relative has-icon-left mb-4">
+								<input class="form-control form-control-xl" placeholder="Password" type="password" name="password" id="inputPassword" autocomplete="current-password" required>
+								<div class="form-control-icon">
+									<i class="bi bi-shield-lock"></i>
+								</div>
+							</div>
+							
+							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+							<button class="btn btn-primary btn-block btn-lg shadow-lg mt-5" type="submit">Log in</button>
+						</form>
+						<div class="text-center mt-5 text-lg fs-4">
+							<p class="text-gray-600">Don't have an account?
+								<a href="/register" class="font-bold">Sign
+									                        up</a>.</p>
+							<p>
+								<a class="font-bold" href="#">Forgot password?</a>.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-7 d-none d-lg-block">
+					<div id="auth-right"></div>
+				</div>
+			</div>
 
-{% endblock %}
+		</div>
+	</body>
+
+</html>

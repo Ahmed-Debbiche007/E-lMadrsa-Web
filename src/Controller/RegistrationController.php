@@ -55,7 +55,7 @@ class RegistrationController extends AbstractController
                 $user->setImage($newFilename);
             }
             // do anything else you need here, like send an email
-
+            $user->setApproved(0);
             $entityManager->persist($user);
             $entityManager->flush();
             
