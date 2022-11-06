@@ -207,29 +207,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function isAdmin() :?bool
     {
-    // dd(array_search("ROLE_ADMIN", $this->getRoles()));
-       if (array_search("ROLE_ADMIN", $this->getRoles()) == 0){
-        return true;
-       } 
+        
+        foreach ($this->getRoles() as $role){
+            if ($role == "ROLE_ADMIN"){
+                return true;
+            }
+           }
        return false;
 
     }
 
     public function isTutor() :?bool
     {
-       if (array_search("ROLE_TUTOR", $this->getRoles()) == 0){
-       // dd(array_search("ROLE_TUTOR", $this->getRoles()));
-        return true;
-       } 
+        foreach ($this->getRoles() as $role){
+            if ($role == "ROLE_TUTOR"){
+                return true;
+            }
+           }
        return false;
 
     }
 
     public function isStudent() :?bool
     {
-       if (array_search("ROLE_STUDENT", $this->getRoles())== 0){
-        return true;
-       } 
+       foreach ($this->getRoles as $role){
+        if ($role == "ROLE_STUDENT"){
+            return true;
+        }
+       }
        return false;
 
     }
