@@ -11,6 +11,11 @@
     {% if app.user %}
         <div class="mb-3">
             You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            {% if app.user.isAdmin %}
+            ahla
+            {% endif %}
+            
+           
         </div>
     {% endif %}
 
@@ -39,4 +44,5 @@
         Sign in
     </button>
 </form>
+
 {% endblock %}

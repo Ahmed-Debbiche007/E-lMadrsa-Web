@@ -204,4 +204,43 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function isAdmin() :?bool
+    {
+    // dd(array_search("ROLE_ADMIN", $this->getRoles()));
+       if (array_search("ROLE_ADMIN", $this->getRoles()) == 0){
+        return true;
+       } 
+       return false;
+
+    }
+
+    public function isTutor() :?bool
+    {
+       if (array_search("ROLE_TUTOR", $this->getRoles()) == 0){
+       // dd(array_search("ROLE_TUTOR", $this->getRoles()));
+        return true;
+       } 
+       return false;
+
+    }
+
+    public function isStudent() :?bool
+    {
+       if (array_search("ROLE_STUDENT", $this->getRoles())== 0){
+        return true;
+       } 
+       return false;
+
+    }
+
+    public function getPasswordHasherName(): ?string
+    {
+        if ($this->isAdmin()) {
+            return 'harsh';
+        }
+
+        return null; // use the default hasher
+    }
+    
 }
