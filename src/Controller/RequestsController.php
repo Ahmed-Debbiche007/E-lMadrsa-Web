@@ -24,18 +24,18 @@ class RequestsController extends AbstractController
     #[Route('/new', name: 'app_requests_new', methods: ['GET', 'POST'])]
     public function new(Request $request, RequestsRepository $requestsRepository): Response
     {
-        $request = new Requests();
-        $form = $this->createForm(RequestsType::class, $request);
+        $trequest = new Requests();
+        $form = $this->createForm(RequestsType::class, $trequest);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $requestsRepository->save($request, true);
+            $requestsRepository->save($trequest, true);
 
             return $this->redirectToRoute('app_requests_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back_office/requests/new.html.twig', [
-            'request' => $request,
+            'request' => $trequest,
             'form' => $form,
         ]);
     }
@@ -53,7 +53,7 @@ class RequestsController extends AbstractController
     {
         $form = $this->createForm(RequestsType::class, $trequest);
         $form->handleRequest($request);
-
+       // $form->getWidget('idStudent')->setAttribute('onchange', 'refreshPage(this.form.services)');
         if ($form->isSubmitted() && $form->isValid()) {
             $requestsRepository->save($trequest, true);
 

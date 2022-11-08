@@ -5,9 +5,9 @@
 {% block body %}
     <h1>Edit Requests</h1>
 
-    {{ include('requests/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('back_office/requests/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('app_requests_index') }}">back to list</a>
 
-    {{ include('requests/_delete_form.html.twig') }}
+    {{ include('back_office/requests/_delete_form.html.twig') }}
 {% endblock %}

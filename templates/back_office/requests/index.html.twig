@@ -2,15 +2,17 @@
 
 {% block title %}Requests
 {% endblock %}
-
+{% block pageHeading %}
+	<h1>Tutorship Requests</h1>
+{% endblock %}
 {% block body %}
-	<h1>Requests index</h1>
+
 
 	<div class="card-body">
 		<table class="table table-striped" id="table1">
 			<thead>
 				<tr>
-					<th>Idrequest</th>
+
 					<th>Idtutor</th>
 					<th>Idstudent</th>
 					<th>Type</th>
@@ -22,15 +24,28 @@
 			<tbody>
 				{% for request in requests %}
 					<tr>
-						<td>{{ request.idrequest }}</td>
+
 						<td>{{ request.idtutor }}</td>
 						<td>{{ request.idstudent }}</td>
 						<td>{{ request.type }}</td>
 						<td>{{ request.body }}</td>
 						<td>{{ request.date ? request.date|date('Y-m-d H:i:s') : '' }}</td>
 						<td>
-							<a href="{{ path('app_requests_show', {'idrequest': request.idrequest}) }}">show</a>
-							<a href="{{ path('app_requests_edit', {'idrequest': request.idrequest}) }}">edit</a>
+							<form id="my_form" method="post" action="{{ path('app_requests_delete', {'idrequest': request.idrequest}) }}" >
+								<a href="{{ path('app_requests_show', {'idrequest': request.idrequest}) }}">
+									<span class="badge bg-primary">show</span>
+								</a>
+								<a href="{{ path('app_requests_edit', {'idrequest': request.idrequest}) }}">
+									<span class="badge bg-success">edit</span>
+								</a>
+								
+
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ request.idrequest) }}">
+
+									<a href="#" class="badge bg-danger" onclick="document.getElementById('my_form').submit();">Delete</a>
+								</form>
+							
+
 						</td>
 					</tr>
 				{% else %}
@@ -40,7 +55,7 @@
 				{% endfor %}
 			</tbody>
 		</table>
-        </div>
+	</div>
 
-		<a href="{{ path('app_requests_new') }}">Create new</a>
-	{% endblock %}
+
+{% endblock %}

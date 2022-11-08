@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20221106105316 extends AbstractMigration
+final class Version20221108170545 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -35,9 +35,10 @@ final class Version20221106105316 extends AbstractMigration
         $this->addSql('CREATE TABLE participation (idparticipation INT AUTO_INCREMENT NOT NULL, iduser INT NOT NULL, idformation INT NOT NULL, resultat DOUBLE PRECISION NOT NULL, PRIMARY KEY(idparticipation)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE post (postid INT AUTO_INCREMENT NOT NULL, posttitle VARCHAR(255) NOT NULL, postcontent VARCHAR(255) NOT NULL, userid INT NOT NULL, categoryid INT NOT NULL, postvote INT NOT NULL, postnbcom INT NOT NULL, postdate DATETIME NOT NULL, PRIMARY KEY(postid)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE prerequis (idprerequis INT AUTO_INCREMENT NOT NULL, nomprerequis VARCHAR(100) NOT NULL, PRIMARY KEY(idprerequis)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE question (idquestion INT AUTO_INCREMENT NOT NULL, ennonce VARCHAR(255) NOT NULL, option1 VARCHAR(255) NOT NULL, option2 VARCHAR(255) NOT NULL, option3 VARCHAR(255) NOT NULL, answer VARCHAR(255) NOT NULL, idexamen INT NOT NULL, PRIMARY KEY(idquestion)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE reclamation (idreclamation INT AUTO_INCREMENT NOT NULL, sujet VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, daterec DATE NOT NULL, iduser INT NOT NULL, PRIMARY KEY(idreclamation)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE recup (id INT AUTO_INCREMENT NOT NULL, iduser INT NOT NULL, code VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE requests (idrequest INT NOT NULL, idtutor INT NOT NULL, idstudent INT NOT NULL, type VARCHAR(255) NOT NULL, body VARCHAR(255) NOT NULL, date DATETIME NOT NULL, PRIMARY KEY(idrequest)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE requests (idrequest INT AUTO_INCREMENT NOT NULL, idtutor INT NOT NULL, idstudent INT NOT NULL, type VARCHAR(255) NOT NULL, body VARCHAR(255) NOT NULL, date DATETIME NOT NULL, PRIMARY KEY(idrequest)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE reservation (id_reservation INT AUTO_INCREMENT NOT NULL, date_reservation DATE NOT NULL, id_evenement INT NOT NULL, id_utilisateur INT NOT NULL, PRIMARY KEY(id_reservation)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE tutorshipsessions (idsession INT NOT NULL, idstudent INT NOT NULL, idtutor INT NOT NULL, idrequest INT NOT NULL, url VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, date DATETIME NOT NULL, PRIMARY KEY(idsession)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(180) NOT NULL, prenom VARCHAR(180) NOT NULL, username VARCHAR(180) NOT NULL, email VARCHAR(180) NOT NULL, image VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, date_naissance DATE NOT NULL, approved TINYINT(1) NOT NULL, UNIQUE INDEX UNIQ_8D93D649F85E0677 (username), UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -64,6 +65,7 @@ final class Version20221106105316 extends AbstractMigration
         $this->addSql('DROP TABLE participation');
         $this->addSql('DROP TABLE post');
         $this->addSql('DROP TABLE prerequis');
+        $this->addSql('DROP TABLE question');
         $this->addSql('DROP TABLE reclamation');
         $this->addSql('DROP TABLE recup');
         $this->addSql('DROP TABLE requests');

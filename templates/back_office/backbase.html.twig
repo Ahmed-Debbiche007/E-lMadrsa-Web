@@ -28,29 +28,28 @@
 					</a>
 				</header>
 
-				<div class="page-heading"> {% block pageHeading %}{% endblock %}
-					</div>
-					<div class="page-content">
-						<section class="row">
-							<div class="col-12 col-lg-9">
-								{% include 'back_office/components/stats.html.twig' %}
-								{% block body %}{% endblock %}
-							</div>
-							{% include 'back_office/components/info.html.twig' %}
-							</section>
-							
+				
+				<div class="page-content">
+					<section class="row">
+						<div class="col-12 col-lg-9">
+							{% include 'back_office/components/stats.html.twig' %}
+							<div class="page-heading">{% block pageHeading %}{% endblock %}</div>
+							{% block body %}{% endblock %}
 						</div>
+						{% include 'back_office/components/info.html.twig' %}
+					</section>
 
-						{% include 'back_office/components/footer.html.twig' %}
-
-					</div>
 				</div>
-				<script src={{ asset('back/assets/js/bootstrap.js')}}></script>
-				<script src={{ asset('back/assets/js/app.js')}}></script>
 
-				<!-- Need: Apexcharts -->
-				<script src={{ asset('back/assets/extensions/apexcharts/apexcharts.min.js')}}></script>
-				<script src={{ asset('back/assets/js/pages/dashboard.js')}}></script>
-			</body>
-		</body>
-	</html>
+				{% include 'back_office/components/footer.html.twig' %}
+
+			</div>
+		</div>
+		<script src={{ asset('back/assets/js/bootstrap.js')}}></script>
+		<script src={{ asset('back/assets/js/app.js')}}></script>
+
+		<!-- Need: Apexcharts -->
+		<script src={{ asset('back/assets/extensions/apexcharts/apexcharts.min.js')}}></script>
+		<script src={{ asset('back/assets/js/pages/dashboard.js')}}></script>
+	</body>
+</html></body></html>

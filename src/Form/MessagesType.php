@@ -2,30 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\Requests;
+use App\Entity\Messages;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
-class RequestsType extends AbstractType
+class MessagesType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('idtutor')
-            ->add('idstudent',HiddenType::class)
-            ->add('type')
+            ->add('idsession')
+            ->add('idsender')
             ->add('body')
-            ->add('date')
+            ->add('statusdate')
         ;
-        
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Requests::class,
+            'data_class' => Messages::class,
         ]);
     }
 }
