@@ -10,6 +10,7 @@ class Tutorshipsessions
 {
     #[ORM\Id]
     #[ORM\Column]
+    #[ORM\GeneratedValue]
     private ?int $idsession;
     #[ORM\Column]
     private ?int $idstudent;

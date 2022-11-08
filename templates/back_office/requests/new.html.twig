@@ -1,0 +1,16 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}New Requests
+{% endblock %}
+
+{% block body %}
+	<h1>Create new Requests</h1>
+
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+    {{ form_widget(form.idstudent) }}
+	<button class="btn">{{ button_label|default('Save') }}</button>
+	{{ form_end(form) }}
+
+	<a href="{{ path('app_requests_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Tutorshipsessions{% endblock %}
+
+{% block body %}
+    <h1>Create new Tutorshipsessions</h1>
+
+    {{ include('tutorshipsessions/_form.html.twig') }}
+
+    <a href="{{ path('app_tutorshipsessions_index') }}">back to list</a>
+{% endblock %}

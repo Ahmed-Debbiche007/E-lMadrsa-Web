@@ -5,60 +5,66 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
+#[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $idUtilisateur = null;
+    private ?int $id = null;
+
+    #[ORM\Column(length: 180)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 180)]
+    private ?string $prenom = null;
+
+    #[ORM\Column(length: 180, unique: true)]
+    private ?string $username = null;
 
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
-    #[ORM\Column (length: 255)]
-    private ?string $role ;
-
-    /**
-     * @var string The hashed motDePasse
-     */
-    #[ORM\Column]
-    private ?string $motDePasse = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $nom = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $prenom = null;
-
-    #[ORM\Column(length: 255 ,unique: true)]
-    private ?string $nomUtilisateur = null;
-
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 180)]
     private ?string $image = null;
 
+    #[ORM\Column]
+    private array $roles = [];
+
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
+    private ?string $password = null;
+
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $dateNaissance = null;
+    private ?\DateTimeInterface $date_naissance = null;
 
     #[ORM\Column]
     private ?bool $approved = null;
 
     public function getId(): ?int
     {
-        return $this->idUtilisateur;
+        return $this->id;
     }
 
-    public function getEmail(): ?string
+    /**
+     * @deprecated since Symfony 5.3, use getUserIdentifier instead
+     */
+    public function getUsername(): string
     {
-        return $this->email;
+        return (string) $this->username;
     }
 
-    public function setEmail(string $email): self
+    public function setUsername(string $username): self
     {
-        $this->email = $email;
+        $this->username = $username;
 
         return $this;
     }
@@ -70,28 +76,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
-    }
-
-    /**
-     * @deprecated since Symfony 5.3, use getUserIdentifier instead
-     */
-    public function getUsername(): string
-    {
-        return (string) $this->email;
+        return (string) $this->username;
     }
 
     /**
      * @see UserInterface
      */
-    public function getRoles(): string
+    public function getRoles(): array
     {
-        return $this->role;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
     }
 
-    public function setRoles(string $role): self
+    public function setRoles(array $roles): self
     {
-        $this->role = $role;
+        $this->roles = $roles;
 
         return $this;
     }
@@ -101,12 +103,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getPassword(): string
     {
-        return $this->motDePasse;
+        return $this->password;
     }
 
-    public function setPassword(string $motDePasse): self
+    public function setPassword(string $password): self
     {
-        $this->motDePasse = $motDePasse;
+        $this->password = $password;
 
         return $this;
     }
@@ -131,12 +133,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
+    public function getDateNaissance(): ?\DateTimeInterface
+    {
+        return $this->date_naissance;
+    }
+
+    public function setDateNaissance(\DateTimeInterface $date_naissance): self
+    {
+        $this->date_naissance = $date_naissance;
+
+        return $this;
+    }
+
+    public function isApproved(): ?bool
+    {
+        return $this->approved;
+    }
+
+    public function setApproved(bool $approved): self
+    {
+        $this->approved = $approved;
+
+        return $this;
+    }
+
     public function getNom(): ?string
     {
         return $this->nom;
     }
 
-    public function setNom(?string $nom): self
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
 
@@ -155,14 +181,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getNomUtilisateur(): ?string
+    public function getEmail(): ?string
     {
-        return $this->nomUtilisateur;
+        return $this->email;
     }
 
-    public function setNomUtilisateur(string $nomUtilisateur): self
+    public function setEmail(string $email): self
     {
-        $this->nomUtilisateur = $nomUtilisateur;
+        $this->email = $email;
 
         return $this;
     }
@@ -179,56 +205,47 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDateNaissance(): ?\DateTimeInterface
+    public function isAdmin() :?bool
     {
-        return $this->dateNaissance;
+        
+        foreach ($this->getRoles() as $role){
+            if ($role == "ROLE_ADMIN"){
+                return true;
+            }
+           }
+       return false;
+
     }
 
-    public function setDateNaissance(\DateTimeInterface $dateNaissance): self
+    public function isTutor() :?bool
     {
-        $this->dateNaissance = $dateNaissance;
+        foreach ($this->getRoles() as $role){
+            if ($role == "ROLE_TUTOR"){
+                return true;
+            }
+           }
+       return false;
 
-        return $this;
     }
 
-    public function isApproved(): ?bool
+    public function isStudent() :?bool
     {
-        return $this->approved;
+       foreach ($this->getRoles as $role){
+        if ($role == "ROLE_STUDENT"){
+            return true;
+        }
+       }
+       return false;
+
     }
 
-    public function setApproved(bool $approved): self
+    public function getPasswordHasherName(): ?string
     {
-        $this->approved = $approved;
+        if ($this->isAdmin()) {
+            return 'harsh';
+        }
 
-        return $this;
+        return null; // use the default hasher
     }
-
-    public function getIdUtilisateur(): ?int
-    {
-        return $this->idUtilisateur;
-    }
-
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
-
-    public function setRole(string $role): self
-    {
-        $this->role = $role;
-
-        return $this;
-    }
-
-    public function getMotDePasse(): ?string
-    {
-        return $this->motDePasse;
-    }
-
-    public function setMotDePasse(string $motDePasse): self
-    {
-        $this->motDePasse = $motDePasse;
-
-        return $this;
-    }
+    
 }

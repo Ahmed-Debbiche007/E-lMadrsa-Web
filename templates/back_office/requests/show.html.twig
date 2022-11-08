@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Requests{% endblock %}
+
+{% block body %}
+    <h1>Requests</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idrequest</th>
+                <td>{{ request.idrequest }}</td>
+            </tr>
+            <tr>
+                <th>Idtutor</th>
+                <td>{{ request.idtutor }}</td>
+            </tr>
+            <tr>
+                <th>Idstudent</th>
+                <td>{{ request.idstudent }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ request.type }}</td>
+            </tr>
+            <tr>
+                <th>Body</th>
+                <td>{{ request.body }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ request.date ? request.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_requests_index') }}">back to list</a>
+
+    <a href="{{ path('app_requests_edit', {'idrequest': request.idrequest}) }}">edit</a>
+
+    {{ include('back_office/requests/_delete_form.html.twig') }}
+{% endblock %}

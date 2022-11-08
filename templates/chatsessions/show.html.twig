@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chatsessions{% endblock %}
+
+{% block body %}
+    <h1>Chatsessions</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idsession</th>
+                <td>{{ chatsession.idsession }}</td>
+            </tr>
+            <tr>
+                <th>Idtutorshipsession</th>
+                <td>{{ chatsession.idtutorshipsession }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_chatsessions_index') }}">back to list</a>
+
+    <a href="{{ path('app_chatsessions_edit', {'idsession': chatsession.idsession}) }}">edit</a>
+
+    {{ include('chatsessions/_delete_form.html.twig') }}
+{% endblock %}

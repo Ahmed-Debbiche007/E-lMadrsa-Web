@@ -10,6 +10,7 @@ class Requests
 {
     #[ORM\Id]
     #[ORM\Column]
+    #[ORM\GeneratedValue]
     private ?int $idrequest;
 
     #[ORM\Column]
