@@ -1,0 +1,46 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}Requests
+{% endblock %}
+
+{% block body %}
+	<h1>Requests index</h1>
+
+	<div class="card-body">
+		<table class="table table-striped" id="table1">
+			<thead>
+				<tr>
+					<th>Idrequest</th>
+					<th>Idtutor</th>
+					<th>Idstudent</th>
+					<th>Type</th>
+					<th>Body</th>
+					<th>Date</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for request in requests %}
+					<tr>
+						<td>{{ request.idrequest }}</td>
+						<td>{{ request.idtutor }}</td>
+						<td>{{ request.idstudent }}</td>
+						<td>{{ request.type }}</td>
+						<td>{{ request.body }}</td>
+						<td>{{ request.date ? request.date|date('Y-m-d H:i:s') : '' }}</td>
+						<td>
+							<a href="{{ path('app_requests_show', {'idrequest': request.idrequest}) }}">show</a>
+							<a href="{{ path('app_requests_edit', {'idrequest': request.idrequest}) }}">edit</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="7">no records found</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+        </div>
+
+		<a href="{{ path('app_requests_new') }}">Create new</a>
+	{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Requests{% endblock %}
+
+{% block body %}
+    <h1>Create new Requests</h1>
+
+    {{ include('requests/_form.html.twig') }}
+
+    <a href="{{ path('app_requests_index') }}">back to list</a>
+{% endblock %}
