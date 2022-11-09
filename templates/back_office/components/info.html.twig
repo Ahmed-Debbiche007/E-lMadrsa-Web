@@ -1,0 +1,31 @@
+<div class="col-12 col-lg-3">
+
+	<div class="card">
+		<div class="card-body py-4 px-4">
+			<div class="d-flex justify-content-between">
+				<div class="avatar avatar-xl">
+					{% if app.user.getImage() %}
+						<img src={{ asset('uploads/images/' ~ app.user.getImage()) }} alt="taswira">
+					{% else %}
+						<img src="back/assets/images/faces/2.jpg" alt="taswira">
+					{% endif %}
+
+				</div>
+				<a href="/dashboard/profile">
+					<div class="ms-3 name">
+						<h5 class="font-bold mb-0">{{app.user.getNom}}
+							{{app.user.getPrenom}}</h5>
+						<h6 class="text-muted mb-3">@{{app.user.userIdentifier}}</h6>
+
+					</div>
+				</a>
+				<a href="/logout">
+					<div>
+						<p class="text-right">logout</p>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+
+</div>

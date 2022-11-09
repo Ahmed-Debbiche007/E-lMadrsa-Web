@@ -11,6 +11,7 @@ class Messages
 {
     #[ORM\Id]
     #[ORM\Column]
+    #[ORM\GeneratedValue]
     private ?int $idmessage;
 
     #[ORM\Column]

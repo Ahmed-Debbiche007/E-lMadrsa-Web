@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Chatsessions{% endblock %}
+
+{% block body %}
+    <h1>Create new Chatsessions</h1>
+
+    {{ include('chatsessions/_form.html.twig') }}
+
+    <a href="{{ path('app_chatsessions_index') }}">back to list</a>
+{% endblock %}
