@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
-#[Route('/dashboard/user')]
+#[Route('/dashboard')]
 class UserController extends AbstractController
 {
     #[Route('/users', name: 'app_user_index', methods: ['GET'])]
@@ -21,7 +21,8 @@ class UserController extends AbstractController
     {
         return $this->render('back_office/user/index.html.twig', [
             'users' => $userRepository->findUsers(),
-            'path' => "/dashboard/user/new"
+            'path' => "/dashboard/new",
+            'heading' => "Users"
         ]);
     }
 
@@ -31,7 +32,8 @@ class UserController extends AbstractController
     {
         return $this->render('back_office/user/index.html.twig', [
             'users' => $userRepository->findStudents(),
-            'path' => "/dashboard/user/newStudent"
+            'path' => "/dashboard/newStudent",
+            'heading' => "Students"
         ]);
     }
 
@@ -40,7 +42,8 @@ class UserController extends AbstractController
     {
         return $this->render('back_office/user/index.html.twig', [
             'users' => $userRepository->findTutors(),
-            'path' => "/dashboard/user/newTutor"
+            'path' => "/dashboard/newTutor",
+            'heading' => "Tutors"
         ]);
     }
 
@@ -90,6 +93,8 @@ class UserController extends AbstractController
         return $this->renderForm('back_office/user/new.html.twig', [
             'user' => $user,
             'form' => $form,
+            'path' => "/dashboard/users",
+            'heading' => "User"
         ]);
     }
 
@@ -139,6 +144,8 @@ class UserController extends AbstractController
         return $this->renderForm('back_office/user/new.html.twig', [
             'user' => $user,
             'form' => $form,
+            'path' => "/dashboard/students",
+            'heading' => "Student"
         ]);
     }
 
@@ -188,6 +195,9 @@ class UserController extends AbstractController
         return $this->renderForm('back_office/user/new.html.twig', [
             'user' => $user,
             'form' => $form,
+            'path' => "/dashboard/tutors",
+            'heading' => "Tutor"
+
         ]);
     }
 
@@ -200,12 +210,43 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, UserRepository $userRepository): Response
+    public function edit(Request $request, User $user, UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher, SluggerInterface $slugger) : Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $pass = $form->get('plainPassword')->getData();
+            if ($pass != ""){
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+        }
+            $image = $form->get('image')->getData();
+            if ($image) {
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $image->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $user->setImage($newFilename);
+            }
             $userRepository->save($user, true);
 
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
@@ -214,6 +255,7 @@ class UserController extends AbstractController
         return $this->renderForm('back_office/user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
+            'heading' => $user->getRole()
         ]);
     }
 

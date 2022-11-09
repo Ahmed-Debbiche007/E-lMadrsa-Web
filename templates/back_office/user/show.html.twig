@@ -1,58 +1,60 @@
-{% extends 'base.html.twig' %}
+{% extends 'back_office/backbase.html.twig' %}
 
-{% block title %}User{% endblock %}
-
+{% block title %}
+  Users::Dashboard
+{% endblock %}
+{% block pageHeading %}
+  <h1>Details</h1>
+{% endblock %}
 {% block body %}
-    <h1>User</h1>
+  <div class="card-body">
+    <div class="flex-shrink-0">
+      {% if user.getImage() %}
+         <img style="width: 180px; border-radius: 10px;" src={{ asset('uploads/images/' ~ user.getImage()) }} alt="taswira">
+      {% else %}
+        <img style="width: 180px; border-radius: 10px;" src="back/assets/images/faces/2.jpg" alt="taswira" />
+      {% endif %}
+    </div>
+    <br />
+    <table class="table table-striped" id="table1">
+      <tbody>
+        <tr>
+          <th>Nom</th>
+          <td>{{ user.nom }}</td>
+        </tr>
+        <tr>
+          <th>Prenom</th>
+          <td>{{ user.prenom }}</td>
+        </tr>
+        <tr>
+          <th>Username</th>
+          <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td>{{ user.email }}</td>
+        </tr>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ user.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ user.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Username</th>
-                <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ user.image }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Date_naissance</th>
-                <td>{{ user.dateNaissance ? user.dateNaissance|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Approved</th>
-                <td>{{ user.approved ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
+        <tr>
+          <th>Role</th>
+          <td>{{ user.role }}</td>
+        </tr>
+
+        <tr>
+          <th>Date_naissance</th>
+          <td>{{ user.dateNaissance ? user.dateNaissance|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+          <th>Approved</th>
+          <td>{{ user.approved ? 'Yes' : 'No' }}</td>
+        </tr>
+      </tbody>
     </table>
 
     <a href="{{ path('app_user_index') }}">back to list</a>
 
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+    <a href="{{ path('app_user_edit', { id: user.id }) }}">edit</a>
 
     {{ include('back_office/user/_delete_form.html.twig') }}
+  </div>
 {% endblock %}
