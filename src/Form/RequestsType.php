@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class RequestsType extends AbstractType
 {
@@ -17,7 +18,12 @@ class RequestsType extends AbstractType
             ->add('idstudent',HiddenType::class)
             ->add('type')
             ->add('body')
-            ->add('date')
+            ->add('date', DateTimeType::class, [
+                
+                'widget' => 'single_text',
+                
+               
+            ])
         ;
         
     }
