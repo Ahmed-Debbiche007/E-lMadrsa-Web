@@ -13,8 +13,7 @@ class Requests
     #[ORM\GeneratedValue]
     private ?int $idrequest;
 
-    #[ORM\Column]
-    private ?int $idtutor;
+    
 
     #[ORM\Column]
     private ?int $idstudent;
@@ -28,22 +27,15 @@ class Requests
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
+    #[ORM\ManyToOne(inversedBy: 'requests')]
+    private ?User $idTutor = null;
+
     public function getIdrequest(): ?int
     {
         return $this->idrequest;
     }
 
-    public function getIdtutor(): ?int
-    {
-        return $this->idtutor;
-    }
-
-    public function setIdtutor(int $idtutor): self
-    {
-        $this->idtutor = $idtutor;
-
-        return $this;
-    }
+    
 
     public function getIdstudent(): ?int
     {
@@ -89,6 +81,18 @@ class Requests
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getIdTutor(): ?User
+    {
+        return $this->idTutor;
+    }
+
+    public function setIdTutor(?User $idTutor): self
+    {
+        $this->idTutor = $idTutor;
 
         return $this;
     }

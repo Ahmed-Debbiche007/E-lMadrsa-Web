@@ -27,8 +27,9 @@ class RequestsController extends AbstractController
         $trequest = new Requests();
         $form = $this->createForm(RequestsType::class, $trequest);
         $form->handleRequest($request);
-
+        $user = $this->getUser();
         if ($form->isSubmitted() && $form->isValid()) {
+            $trequest->setIdstudent($user->getId());
             $requestsRepository->save($trequest, true);
 
             return $this->redirectToRoute('app_requests_index', [], Response::HTTP_SEE_OTHER);
@@ -53,7 +54,7 @@ class RequestsController extends AbstractController
     {
         $form = $this->createForm(RequestsType::class, $trequest);
         $form->handleRequest($request);
-       // $form->getWidget('idStudent')->setAttribute('onchange', 'refreshPage(this.form.services)');
+        // $form->getWidget('idStudent')->setAttribute('onchange', 'refreshPage(this.form.services)');
         if ($form->isSubmitted() && $form->isValid()) {
             $requestsRepository->save($trequest, true);
 
@@ -69,10 +70,11 @@ class RequestsController extends AbstractController
     #[Route('/{idrequest}', name: 'app_requests_delete', methods: ['POST'])]
     public function delete(Request $request, Requests $trequest, RequestsRepository $requestsRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$trequest->getIdrequest(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $trequest->getIdrequest(), $request->request->get('_token'))) {
             $requestsRepository->remove($trequest, true);
         }
 
         return $this->redirectToRoute('app_requests_index', [], Response::HTTP_SEE_OTHER);
     }
+    
 }

@@ -1,19 +1,19 @@
-{% extends 'base.html.twig' %}
+{% extends 'back_office/backbase.html.twig' %}
 
-{% block title %}Requests{% endblock %}
-
+{% block title %}
+  Requests
+{% endblock %}
+{% block pageHeading %}
+  <h1>Tutorship Requests</h1>
+{% endblock %}
 {% block body %}
-    <h1>Requests</h1>
-
-    <table class="table">
+  <div class="card-body">
+    <table class="table table-striped" id="table1">
         <tbody>
+            
             <tr>
-                <th>Idrequest</th>
-                <td>{{ request.idrequest }}</td>
-            </tr>
-            <tr>
-                <th>Idtutor</th>
-                <td>{{ request.idtutor }}</td>
+                <th>Tutor</th>
+                <td>{{ request.idtutor.nom }}</td>
             </tr>
             <tr>
                 <th>Idstudent</th>
@@ -33,7 +33,7 @@
             </tr>
         </tbody>
     </table>
-
+  </div>
     <a href="{{ path('app_requests_index') }}">back to list</a>
 
     <a href="{{ path('app_requests_edit', {'idrequest': request.idrequest}) }}">edit</a>
