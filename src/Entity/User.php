@@ -37,6 +37,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
+    #[ORM\Column (length: 255, options: ["default" => "User"])]
+    private ?string $role ;
+
     /**
      * @var string The hashed password
      */
@@ -94,6 +97,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getRole(): string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }
@@ -208,34 +223,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function isAdmin() :?bool
     {
         
-        foreach ($this->getRoles() as $role){
-            if ($role == "ROLE_ADMIN"){
-                return true;
-            }
-           }
-       return false;
+        return $this->role == "Admin";
 
     }
 
     public function isTutor() :?bool
     {
-        foreach ($this->getRoles() as $role){
-            if ($role == "ROLE_TUTOR"){
-                return true;
-            }
-           }
-       return false;
+        return $this->role == "Tutor";
 
     }
 
     public function isStudent() :?bool
     {
-       foreach ($this->getRoles as $role){
-        if ($role == "ROLE_STUDENT"){
-            return true;
-        }
-       }
-       return false;
+        return $this->role == "Student";
 
     }
 

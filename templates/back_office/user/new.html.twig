@@ -1,0 +1,12 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}New User
+{% endblock %}
+
+{% block body %}
+    <h1>Create new {{ heading }}</h1>
+
+    {{ include('back_office/user/_form.html.twig') }}
+
+    <a href="{{ path }}">back to list</a>
+{% endblock %}
