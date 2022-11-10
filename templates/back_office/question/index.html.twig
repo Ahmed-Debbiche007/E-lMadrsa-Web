@@ -1,0 +1,119 @@
+ {#
+{% extends 'base.html.twig' %}
+
+{% block title %}Question index{% endblock %}
+
+{% block body %}
+    <h1>Question index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idquestion</th>
+                <th>Ennonce</th>
+                <th>Option1</th>
+                <th>Option2</th>
+                <th>Option3</th>
+                <th>Answer</th>
+                <th>actions</th>
+                <th>nom examen </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for question in questions %}
+            <tr>
+                <td>{{ question.idquestion }}</td>
+                <td>{{ question.ennonce }}</td>
+                <td>{{ question.option1 }}</td>
+                <td>{{ question.option2 }}</td>
+                <td>{{ question.option3 }}</td>
+                <td>{{ question.answer }}</td>
+
+                <td>
+                    <a href="{{ path('app_question_show', {'idquestion': question.idquestion}) }}">show</a>
+                    <a href="{{ path('app_question_edit', {'idquestion': question.idquestion}) }}">edit</a>
+               // </td> <td>{{ question.examen.getNomexamen()}}</td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_question_new') }}">Create new</a>
+{% endblock %}
+
+
+ #}
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}Examens
+{% endblock %}
+{% block pageHeading %}
+    <h1>Liste des Questions :</h1>
+{% endblock %}
+{% block body %}
+
+
+    <div class="card-body">
+        <table class="table table-striped" id="table1">
+            <thead>
+            <tr>
+                <th>Idquestion</th>
+                <th>Ennonce</th>
+                <th>Option1</th>
+                <th>Option2</th>
+                <th>Option3</th>
+                <th>Answer</th>
+                <th>actions</th>
+                <th>nom examen </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for question in questions %}
+                <tr>
+
+                    <td>{{ question.idquestion }}</td>
+                    <td>{{ question.ennonce }}</td>
+                    <td>{{ question.option1 }}</td>
+                    <td>{{ question.option2 }}</td>
+                    <td>{{ question.option3 }}</td>
+                    <td>{{ question.answer }}</td>
+
+
+
+                    </td> <td>{{ question.examen.getNomexamen()}}</td>
+                    <td>
+                        <form id="my_form" method="post" action="{{ path('app_question_show', {'idquestion': question.idquestion}) }}" >
+                            <a href="{{ path('app_question_show', {'idquestion': question.idquestion}) }}">
+                                <span class="badge bg-primary">show</span>
+                            </a>
+                            <a href="{{ path('app_question_edit', {'idquestion': question.idquestion}) }}">
+                                <span class="badge bg-success">edit</span>
+                            </a>
+
+
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ question.idquestion) }}">
+
+                            <a href="#" class="badge bg-danger" onclick="document.getElementById('my_form').submit();">Delete</a>
+                        </form>
+
+
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}
+
+

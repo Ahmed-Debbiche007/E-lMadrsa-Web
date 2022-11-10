@@ -10,13 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/examen')]
+#[Route('dashboard/examen')]
 class ExamenController extends AbstractController
 {
     #[Route('/', name: 'app_examen_index', methods: ['GET'])]
     public function index(ExamenRepository $examenRepository): Response
     {
-        return $this->render('examen/index.html.twig', [
+        return $this->render('back_office/examen/index.html.twig', [
             'examens' => $examenRepository->get(),
         ]);
     }

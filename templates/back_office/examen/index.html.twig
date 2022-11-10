@@ -1,0 +1,209 @@
+
+
+
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}Examens
+{% endblock %}
+{% block pageHeading %}
+    <h1>Liste des Examens :</h1>
+{% endblock %}
+{% block body %}
+
+
+    <div class="card-body">
+        <table class="table table-striped" id="table1">
+            <thead>
+            <tr>
+
+                <th>Idexamen</th>
+                <th>Nomexamen</th>
+                <th>Pourcentage</th>
+                <th>Dureeexamen</th>
+                <th>Formation</th>
+                <th>categorie</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for examan in examens %}
+                <tr>
+
+                    <td>{{ examan.idexamen }}</td>
+                    <td>{{ examan.nomexamen }}</td>
+                    <td>{{ examan.pourcentage }}</td>
+                    <td>{{ examan.dureeexamen }}</td>
+                    <td>{{ examan.formation.getSujet() }}</td>
+                    <td>{{ examan.categorie.getNomcategorie() }}</td>
+
+
+                    <td>
+                        <form id="my_form" method="post" action="{{ path('app_examen_show', {'idexamen': examan.idexamen}) }}" >
+                            <a href="{{ path('app_examen_show', {'idexamen': examan.idexamen}) }}">
+                                <span class="badge bg-primary">show</span>
+                            </a>
+                            <a href="{{ path('app_examen_edit', {'idexamen': examan.idexamen}) }}">
+                                <span class="badge bg-success">edit</span>
+                            </a>
+
+
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ examan.idexamen) }}">
+
+                            <a href="#" class="badge bg-danger" onclick="document.getElementById('my_form').submit();">Delete</a>
+                        </form>
+
+
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#
+{% block title %}Examen index{% endblock %}
+
+{% block body %}
+    <h1>Examen index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idexamen</th>
+                <th>Nomexamen</th>
+                <th>Pourcentage</th>
+                <th>Dureeexamen</th>
+                <th>Formation</th>
+                <th>categorie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for examan in examens %}
+            <tr>
+                <td>{{ examan.idexamen }}</td>
+                <td>{{ examan.nomexamen }}</td>
+                <td>{{ examan.pourcentage }}</td>
+                <td>{{ examan.dureeexamen }}</td>
+                <td>{{ examan.formation.getSujet() }}</td>
+                <td>{{ examan.categorie.getNomcategorie() }}</td>
+                <td>
+                    <a href="{{ path('app_examen_show', {'idexamen': examan.idexamen}) }}">show</a>
+                    <a href="{{ path('app_examen_edit', {'idexamen': examan.idexamen}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_examen_new') }}">Create new</a>
+{% endblock %}
+
+#}
+
+
+{#
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}Examens
+{% endblock %}
+{% block pageHeading %}
+    <h1>Liste des Examens :</h1>
+{% endblock %}
+{% block body %}
+
+
+    <div class="card-body">
+        <table class="table table-striped" id="table1">
+            <thead>
+            <tr>
+
+                <th>Idexamen</th>
+                <th>Nomexamen</th>
+                <th>Pourcentage</th>
+                <th>Dureeexamen</th>
+                <th>Formation</th>
+                <th>categorie</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for examan in examens %}
+                <tr>
+
+                    <td>{{ examan.idexamen }}</td>
+                    <td>{{ examan.nomexamen }}</td>
+                    <td>{{ examan.pourcentage }}</td>
+                    <td>{{ examan.dureeexamen }}</td>
+                    <td>{{ examan.formation.getSujet() }}</td>
+                    <td>{{ examan.categorie.getNomcategorie() }}</td>
+
+                    <td>
+                        <a href="{{ path('app_examen_show', {'idexamen': 1}) }}">show</a>
+                        <a href="{{ path('app_examen_edit', {'idexamen': 1}) }}">edit</a>
+                    </td>
+
+
+
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}
+#}

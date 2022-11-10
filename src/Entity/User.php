@@ -247,5 +247,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return null; // use the default hasher
     }
+
+    public function  __toString()
+    {
+        return (String)$this->getNom() ;
+    }
     
 }

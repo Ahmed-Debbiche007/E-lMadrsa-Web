@@ -49,15 +49,13 @@
 						<span>Users</span>
 					</a>
 				</li>
-				{% if app.user.isAdmin() %}
-				<li class="sidebar-item  ">
+ 				<li class="sidebar-item  ">
 					<a href="/dashboard" class='sidebar-link'>
 						<i class="bi bi-people-fill"></i>
 						<span>Tutors</span>
 					</a>
 				</li>
-				{% endif %}
-				<li class="sidebar-item  ">
+ 				<li class="sidebar-item  ">
 					<a href="/dashboard" class='sidebar-link'>
 						<i class="bi bi-people-fill"></i>
 						<span>Students</span>
@@ -70,9 +68,21 @@
 					</a>
 				</li>
 				<li class="sidebar-item  ">
-					<a href="/dashboard" class='sidebar-link'>
+					<a href="/dashboard/examen" class='sidebar-link'>
 						<i class="bi bi-nut-fill"></i>
 						<span>Exams</span>
+					</a>
+				</li>
+				<li class="sidebar-item  ">
+					<a href="/dashboard/questions" class='sidebar-link'>
+						<i class="bi bi-patch-check-fill"></i>
+						<span>Questions</span>
+					</a>
+				</li>
+				<li class="sidebar-item  ">
+					<a href="/dashboard/participation" class='sidebar-link'>
+						<i class="bi bi-patch-check-fill"></i>
+						<span>Participations</span>
 					</a>
 				</li>
 				<li class="sidebar-item  ">
