@@ -1,0 +1,27 @@
+
+{% extends 'front_office/base2.html.twig' %}
+
+{% block title %} exams list{% endblock %}
+
+{% block body %}
+
+
+    {% for i in examens %}
+        <div class=" ">
+             <div class="card" style="    flex: auto; box-sizing: border-box; margin: 1rem .25em; ">
+               {#<img class="card-img-top" src="" alt="Card image cap"> #}
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.nomexamen }}</h5>
+                    <p class="card-text"> title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Passer l'examen</a>
+                </div>
+                   </div>
+        </div>
+
+
+
+
+
+    {% endfor %}
+
+{% endblock %}

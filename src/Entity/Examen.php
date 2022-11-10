@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ExamenRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ExamenRepository::class)]
 class Examen
@@ -14,20 +16,25 @@ class Examen
     private $idexamen;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "nom de l'examen est obligatoire")]
     private ?string $nomexamen;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "la pourcentage est obligatoire")]
     private ?float $pourcentage;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "la duree de l'examen  est obligatoire")]
     private ?int $dureeexamen;
 
     #[ORM\ManyToOne(inversedBy: 'examens')]
     #[ORM\JoinColumn(name: 'formationid', referencedColumnName: 'idformation')]
+    #[Assert\NotBlank(message: "la formation   est obligatoire")]
     private ?Formation $formation;
 
     #[ORM\ManyToOne(inversedBy: 'examens')]
     #[ORM\JoinColumn(name: 'idcategorie', referencedColumnName: 'idcategorie')]
+    #[Assert\NotBlank(message: "la catégorie de l'examen  est obligatoire")]
     private ?Categorie $categorie;
 
     public function getIdexamen(): ?string

@@ -13,10 +13,19 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('dashboard/examen')]
 class ExamenController extends AbstractController
 {
+
+    #[Route('/list', name: 'app_examen_listt')]
+    public function listExams(ExamenRepository $examenRepository)
+    {
+        return $this->render('front_office/exams/course.html.twig', [
+            'examens' => $examenRepository->findAll(),
+        ]);
+    }
+
     #[Route('/', name: 'app_examen_index', methods: ['GET'])]
     public function index(ExamenRepository $examenRepository): Response
     {
-        return $this->render('back_office/examen/index.html.twig', [
+        return $this->render('examen/index.html.twig', [
             'examens' => $examenRepository->get(),
         ]);
     }
@@ -75,4 +84,6 @@ class ExamenController extends AbstractController
 
         return $this->redirectToRoute('app_examen_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
 }
