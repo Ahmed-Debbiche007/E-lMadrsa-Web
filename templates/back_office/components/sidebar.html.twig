@@ -43,26 +43,28 @@
 						<span>Dashboard</span>
 					</a>
 				</li>
+				{% if app.user.isAdmin() %}
 				<li class="sidebar-item  ">
-					<a href="/dashboard" class='sidebar-link'>
+					<a href="/dashboard/users" class='sidebar-link'>
 						<i class="bi bi-people-fill"></i>
 						<span>Users</span>
 					</a>
 				</li>
-				{% if app.user.isAdmin() %}
+				
 				<li class="sidebar-item  ">
-					<a href="/dashboard" class='sidebar-link'>
+					<a href="/dashboard/tutors" class='sidebar-link'>
 						<i class="bi bi-people-fill"></i>
 						<span>Tutors</span>
 					</a>
 				</li>
-				{% endif %}
+				
 				<li class="sidebar-item  ">
-					<a href="/dashboard" class='sidebar-link'>
+					<a href="/dashboard/students" class='sidebar-link'>
 						<i class="bi bi-people-fill"></i>
 						<span>Students</span>
 					</a>
 				</li>
+				{% endif %}
 				<li class="sidebar-item  ">
 					<a href="/dashboard" class='sidebar-link'>
 						<i class="bi bi-bag-dash-fill"></i>

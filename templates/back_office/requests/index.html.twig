@@ -1,61 +1,49 @@
 {% extends 'back_office/backbase.html.twig' %}
 
-{% block title %}Requests
+{% block title %}
+  Requests
 {% endblock %}
 {% block pageHeading %}
-	<h1>Tutorship Requests</h1>
+  <h1>Tutorship Requests</h1>
 {% endblock %}
 {% block body %}
+  <div class="card-body">
+    <table class="table table-striped" id="table1">
+      <thead>
+        <tr>
+          <th>Tutor</th>
+          <th>Student</th>
+          <th>Type</th>
+          <th>Body</th>
+          <th>Date</th>
+          <th>actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for request in requests %}
+          <tr>
+            <td>{{ request.idtutor.nom }}</td>
+            <td>{{ request.idstudent }}</td>
+            <td>{{ request.type }}</td>
+            <td>{{ request.body }}</td>
+            <td>{{ request.date ? request.date|date('Y-m-d H:i:s') : '' }}</td>
+            <td>
+              <form id="my_form" method="post" action="{{ path('app_requests_delete', { idrequest: request.idrequest }) }}">
+                <a href="{{ path('app_requests_show', { idrequest: request.idrequest }) }}"><span class="badge bg-primary">show</span></a>
+                <a href=""#""><span class="badge bg-success">Approve</span></a>
+                <a href="{{ path('app_requests_edit', { idrequest: request.idrequest }) }}"><span class="badge bg-success">edit</span></a>
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ request.idrequest) }}" />
 
-
-	<div class="card-body">
-		<table class="table table-striped" id="table1">
-			<thead>
-				<tr>
-
-					<th>Idtutor</th>
-					<th>Idstudent</th>
-					<th>Type</th>
-					<th>Body</th>
-					<th>Date</th>
-					<th>actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for request in requests %}
-					<tr>
-
-						<td>{{ request.idtutor }}</td>
-						<td>{{ request.idstudent }}</td>
-						<td>{{ request.type }}</td>
-						<td>{{ request.body }}</td>
-						<td>{{ request.date ? request.date|date('Y-m-d H:i:s') : '' }}</td>
-						<td>
-							<form id="my_form" method="post" action="{{ path('app_requests_delete', {'idrequest': request.idrequest}) }}" >
-								<a href="{{ path('app_requests_show', {'idrequest': request.idrequest}) }}">
-									<span class="badge bg-primary">show</span>
-								</a>
-								<a href="{{ path('app_requests_edit', {'idrequest': request.idrequest}) }}">
-									<span class="badge bg-success">edit</span>
-								</a>
-								
-
-									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ request.idrequest) }}">
-
-									<a href="#" class="badge bg-danger" onclick="document.getElementById('my_form').submit();">Delete</a>
-								</form>
-							
-
-						</td>
-					</tr>
-				{% else %}
-					<tr>
-						<td colspan="7">no records found</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
-
-
+                <a href="#" class="badge bg-danger" onclick="document.getElementById('my_form').submit();">Delete</a>
+              </form>
+            </td>
+          </tr>
+        {% else %}
+          <tr>
+            <td colspan="7">no records found</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 {% endblock %}

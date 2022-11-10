@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -37,6 +39,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
+    #[ORM\Column (length: 255, options: ["default" => "User"])]
+    private ?string $role ;
+
     /**
      * @var string The hashed password
      */
@@ -48,6 +53,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?bool $approved = null;
+
+    #[ORM\OneToMany(mappedBy: 'idTutor', targetEntity: Requests::class)]
+    private Collection $requests;
+
+    public function __construct()
+    {
+        $this->requests = new ArrayCollection();
+    }
+
+    
 
     public function getId(): ?int
     {
@@ -94,6 +109,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getRole(): string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }
@@ -208,34 +235,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function isAdmin() :?bool
     {
         
-        foreach ($this->getRoles() as $role){
-            if ($role == "ROLE_ADMIN"){
-                return true;
-            }
-           }
-       return false;
+        return $this->role == "Admin";
 
     }
 
     public function isTutor() :?bool
     {
-        foreach ($this->getRoles() as $role){
-            if ($role == "ROLE_TUTOR"){
-                return true;
-            }
-           }
-       return false;
+        return $this->role == "Tutor";
 
     }
 
     public function isStudent() :?bool
     {
-       foreach ($this->getRoles as $role){
-        if ($role == "ROLE_STUDENT"){
-            return true;
-        }
-       }
-       return false;
+        return $this->role == "Student";
 
     }
 
@@ -247,5 +259,37 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return null; // use the default hasher
     }
+
+    /**
+     * @return Collection<int, Requests>
+     */
+    public function getRequests(): Collection
+    {
+        return $this->requests;
+    }
+
+    public function addRequest(Requests $request): self
+    {
+        if (!$this->requests->contains($request)) {
+            $this->requests->add($request);
+            $request->setIdTutor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRequest(Requests $request): self
+    {
+        if ($this->requests->removeElement($request)) {
+            // set the owning side to null (unless already changed)
+            if ($request->getIdTutor() === $this) {
+                $request->setIdTutor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
     
 }
