@@ -7,43 +7,44 @@
   <h1>Tutorship Sessions</h1>
 {% endblock %}
 {% block body %}
-    
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Student</th>
+        <th>Tutor</th>
+        <th>Body</th>
+        <th>Url</th>
+        <th>Type</th>
+        <th>Date</th>
+        <th>actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tutorshipsession in tutorshipsessions %}
+        <tr>
+          <td>{{ tutorshipsession.idstudent.nom }}</td>
+          <td>{{ tutorshipsession.idtutor.nom }}</td>
+          <td>{{ tutorshipsession.body }}</td>
+          <td>{{ tutorshipsession.url }}</td>
+          <td>{{ tutorshipsession.type }}</td>
+          <td>{{ tutorshipsession.date ? tutorshipsession.date|date('Y-m-d H:i') : '' }}</td>
+          <td>
+            <form id="my_form" method="post" action="{{ path('app_tutorshipsessions_delete', { idsession: tutorshipsession.idsession }) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+              <a href="{{ path('app_tutorshipsessions_show', { idsession: tutorshipsession.idsession }) }}"><span class="badge bg-primary">show</span></a>
+              <a href="{{ path('app_tutorshipsessions_edit', { idsession: tutorshipsession.idsession }) }}"><span class="badge bg-success">edit</span></a>
 
-    <table class="table">
-        <thead>
-            <tr>
-                
-                <th>Student</th>
-                <th>Tutor</th>
-                <th>Body</th>
-                <th>Url</th>
-                <th>Type</th>
-                <th>Date</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for tutorshipsession in tutorshipsessions %}
-            <tr>
-                
-                <td>{{ tutorshipsession.idstudent.nom }}</td>
-                <td>{{ tutorshipsession.idtutor.nom }}</td>
-                <td>{{ tutorshipsession.body }}</td>
-                <td>{{ tutorshipsession.url }}</td>
-                <td>{{ tutorshipsession.type }}</td>
-                <td>{{ tutorshipsession.date ? tutorshipsession.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_tutorshipsessions_show', {'idsession': tutorshipsession.idsession}) }}">show</a>
-                    <a href="{{ path('app_tutorshipsessions_edit', {'idsession': tutorshipsession.idsession}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+              <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tutorshipsession.idsession) }}" />
 
-    <a href="{{ path('app_tutorshipsessions_new') }}">Create new</a>
+              <a href="#" class="badge bg-danger" onclick="document.getElementById('my_form').submit();">Delete</a>
+            </form>
+          </td>
+        </tr>
+      {% else %}
+        <tr>
+          <td colspan="8">no records found</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
 {% endblock %}

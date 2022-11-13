@@ -31,7 +31,7 @@
 
             <td>{{ request.type }}</td>
             <td>{{ request.body }}</td>
-            <td>{{ request.date ? request.date|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ request.date ? request.date|date('Y-m-d H:i') : '' }}</td>
             <td>
               <form id="my_form" method="post" action="{{ path('app_requests_delete', { id: request.id }) }}">
                 <a href="{{ path('app_requests_show', { id: request.id }) }}"><span class="badge bg-primary">show</span></a>
