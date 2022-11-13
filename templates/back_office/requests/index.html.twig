@@ -33,13 +33,12 @@
             <td>{{ request.body }}</td>
             <td>{{ request.date ? request.date|date('Y-m-d H:i:s') : '' }}</td>
             <td>
-              <form id="my_form" method="post" action="{{ path('app_requests_delete', { idrequest: request.idrequest }) }}">
-                <a href="{{ path('app_requests_show', { idrequest: request.idrequest }) }}"><span class="badge bg-primary">show</span></a>
+              <form id="my_form" method="post" action="{{ path('app_requests_delete', { id: request.id }) }}">
+                <a href="{{ path('app_requests_show', { id: request.id }) }}"><span class="badge bg-primary">show</span></a>
+                <a href="{{ path('app_requests_approve', { id: request.id }) }}"><span class="badge bg-success">Approve</span></a>
+                <a href="{{ path('app_requests_edit', { id: request.id }) }}"><span class="badge bg-success">edit</span></a>
 
-                <a href=""#""><span class="badge bg-success">Approve</span></a>
-                <a href="{{ path('app_requests_edit', { idrequest: request.idrequest }) }}"><span class="badge bg-success">edit</span></a>
-
-                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ request.idrequest) }}" />
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ request.id) }}" />
 
                 <a href="#" class="badge bg-danger" onclick="document.getElementById('my_form').submit();">Delete</a>
               </form>

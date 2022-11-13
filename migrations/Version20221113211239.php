@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20221109215945 extends AbstractMigration
+final class Version20221113211239 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -38,18 +38,28 @@ final class Version20221109215945 extends AbstractMigration
         $this->addSql('CREATE TABLE question (idquestion INT AUTO_INCREMENT NOT NULL, ennonce VARCHAR(255) NOT NULL, option1 VARCHAR(255) NOT NULL, option2 VARCHAR(255) NOT NULL, option3 VARCHAR(255) NOT NULL, answer VARCHAR(255) NOT NULL, idexamen INT NOT NULL, PRIMARY KEY(idquestion)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE reclamation (idreclamation INT AUTO_INCREMENT NOT NULL, sujet VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, daterec DATE NOT NULL, iduser INT NOT NULL, PRIMARY KEY(idreclamation)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE recup (id INT AUTO_INCREMENT NOT NULL, iduser INT NOT NULL, code VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE requests (idrequest INT AUTO_INCREMENT NOT NULL, idtutor INT NOT NULL, idstudent INT NOT NULL, type VARCHAR(255) NOT NULL, body VARCHAR(255) NOT NULL, date DATETIME NOT NULL, PRIMARY KEY(idrequest)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE requests (id INT AUTO_INCREMENT NOT NULL, id_tutor_id INT DEFAULT NULL, id_student_id INT NOT NULL, type VARCHAR(255) NOT NULL, body VARCHAR(255) NOT NULL, date DATETIME NOT NULL, INDEX IDX_7B85D65170548864 (id_tutor_id), INDEX IDX_7B85D6516E1ECFCD (id_student_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE reservation (id_reservation INT AUTO_INCREMENT NOT NULL, date_reservation DATE NOT NULL, id_evenement INT NOT NULL, id_utilisateur INT NOT NULL, PRIMARY KEY(id_reservation)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE tutorshipsessions (idsession INT AUTO_INCREMENT NOT NULL, idstudent INT NOT NULL, idtutor INT NOT NULL, idrequest INT NOT NULL, url VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, date DATETIME NOT NULL, PRIMARY KEY(idsession)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE tutorshipsessions (idsession INT AUTO_INCREMENT NOT NULL, id_student_id INT DEFAULT NULL, id_tutor_id INT DEFAULT NULL, id_request_id INT DEFAULT NULL, url VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, date DATETIME NOT NULL, INDEX IDX_6C7DB1BD6E1ECFCD (id_student_id), INDEX IDX_6C7DB1BD70548864 (id_tutor_id), UNIQUE INDEX UNIQ_6C7DB1BDE7F43872 (id_request_id), PRIMARY KEY(idsession)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(180) NOT NULL, prenom VARCHAR(180) NOT NULL, username VARCHAR(180) NOT NULL, email VARCHAR(180) NOT NULL, image VARCHAR(180) NOT NULL, roles JSON NOT NULL, role VARCHAR(255) DEFAULT \'User\' NOT NULL, password VARCHAR(255) NOT NULL, date_naissance DATE NOT NULL, approved TINYINT(1) NOT NULL, UNIQUE INDEX UNIQ_8D93D649F85E0677 (username), UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE vote (voteid INT AUTO_INCREMENT NOT NULL, userid INT NOT NULL, postid INT NOT NULL, votenb INT NOT NULL, PRIMARY KEY(voteid)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE votecomment (votecommentid INT AUTO_INCREMENT NOT NULL, userid INT NOT NULL, commentid INT NOT NULL, votenb INT NOT NULL, PRIMARY KEY(votecommentid)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE messenger_messages (id BIGINT AUTO_INCREMENT NOT NULL, body LONGTEXT NOT NULL, headers LONGTEXT NOT NULL, queue_name VARCHAR(190) NOT NULL, created_at DATETIME NOT NULL, available_at DATETIME NOT NULL, delivered_at DATETIME DEFAULT NULL, INDEX IDX_75EA56E0FB7336F0 (queue_name), INDEX IDX_75EA56E0E3BD61CE (available_at), INDEX IDX_75EA56E016BA31DB (delivered_at), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE requests ADD CONSTRAINT FK_7B85D65170548864 FOREIGN KEY (id_tutor_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE requests ADD CONSTRAINT FK_7B85D6516E1ECFCD FOREIGN KEY (id_student_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE tutorshipsessions ADD CONSTRAINT FK_6C7DB1BD6E1ECFCD FOREIGN KEY (id_student_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE tutorshipsessions ADD CONSTRAINT FK_6C7DB1BD70548864 FOREIGN KEY (id_tutor_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE tutorshipsessions ADD CONSTRAINT FK_6C7DB1BDE7F43872 FOREIGN KEY (id_request_id) REFERENCES requests (id)');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql('ALTER TABLE requests DROP FOREIGN KEY FK_7B85D65170548864');
+        $this->addSql('ALTER TABLE requests DROP FOREIGN KEY FK_7B85D6516E1ECFCD');
+        $this->addSql('ALTER TABLE tutorshipsessions DROP FOREIGN KEY FK_6C7DB1BD6E1ECFCD');
+        $this->addSql('ALTER TABLE tutorshipsessions DROP FOREIGN KEY FK_6C7DB1BD70548864');
+        $this->addSql('ALTER TABLE tutorshipsessions DROP FOREIGN KEY FK_6C7DB1BDE7F43872');
         $this->addSql('DROP TABLE attestation');
         $this->addSql('DROP TABLE badge');
         $this->addSql('DROP TABLE categorie');

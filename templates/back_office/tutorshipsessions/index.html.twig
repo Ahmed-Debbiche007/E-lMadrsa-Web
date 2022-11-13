@@ -1,17 +1,21 @@
-{% extends 'base.html.twig' %}
+{% extends 'back_office/backbase.html.twig' %}
 
-{% block title %}Tutorshipsessions index{% endblock %}
-
+{% block title %}
+  Requests
+{% endblock %}
+{% block pageHeading %}
+  <h1>Tutorship Sessions</h1>
+{% endblock %}
 {% block body %}
-    <h1>Tutorshipsessions index</h1>
+    
 
     <table class="table">
         <thead>
             <tr>
-                <th>Idsession</th>
-                <th>Idstudent</th>
-                <th>Idtutor</th>
-                <th>Idrequest</th>
+                
+                <th>Student</th>
+                <th>Tutor</th>
+                <th>Body</th>
                 <th>Url</th>
                 <th>Type</th>
                 <th>Date</th>
@@ -21,10 +25,10 @@
         <tbody>
         {% for tutorshipsession in tutorshipsessions %}
             <tr>
-                <td>{{ tutorshipsession.idsession }}</td>
-                <td>{{ tutorshipsession.idstudent }}</td>
-                <td>{{ tutorshipsession.idtutor }}</td>
-                <td>{{ tutorshipsession.idrequest }}</td>
+                
+                <td>{{ tutorshipsession.idstudent.nom }}</td>
+                <td>{{ tutorshipsession.idtutor.nom }}</td>
+                <td>{{ tutorshipsession.body }}</td>
                 <td>{{ tutorshipsession.url }}</td>
                 <td>{{ tutorshipsession.type }}</td>
                 <td>{{ tutorshipsession.date ? tutorshipsession.date|date('Y-m-d H:i:s') : '' }}</td>

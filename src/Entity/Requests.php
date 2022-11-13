@@ -11,7 +11,7 @@ class Requests
     #[ORM\Id]
     #[ORM\Column]
     #[ORM\GeneratedValue]
-    private ?int $idrequest;
+    private ?int $id;
 
     
 
@@ -33,9 +33,9 @@ class Requests
     #[ORM\JoinColumn(nullable: false)]
     private ?User $idStudent = null;
 
-    public function getIdrequest(): ?int
+    public function getId(): ?int
     {
-        return $this->idrequest;
+        return $this->id;
     }
 
     public function getType(): ?string
