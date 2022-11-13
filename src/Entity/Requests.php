@@ -15,8 +15,7 @@ class Requests
 
     
 
-    #[ORM\Column]
-    private ?int $idstudent;
+  
 
     #[ORM\Column(length: 255)]
     private ?string $type;
@@ -30,23 +29,13 @@ class Requests
     #[ORM\ManyToOne(inversedBy: 'requests')]
     private ?User $idTutor = null;
 
+    #[ORM\ManyToOne(inversedBy: 'studentRequest')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $idStudent = null;
+
     public function getIdrequest(): ?int
     {
         return $this->idrequest;
-    }
-
-    
-
-    public function getIdstudent(): ?int
-    {
-        return $this->idstudent;
-    }
-
-    public function setIdstudent(int $idstudent): self
-    {
-        $this->idstudent = $idstudent;
-
-        return $this;
     }
 
     public function getType(): ?string
@@ -93,6 +82,18 @@ class Requests
     public function setIdTutor(?User $idTutor): self
     {
         $this->idTutor = $idTutor;
+
+        return $this;
+    }
+
+    public function getIdStudent(): ?User
+    {
+        return $this->idStudent;
+    }
+
+    public function setIdStudent(?User $idStudent): self
+    {
+        $this->idStudent = $idStudent;
 
         return $this;
     }

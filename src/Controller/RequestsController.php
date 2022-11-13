@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Requests;
 use App\Form\RequestsType;
 use App\Repository\RequestsRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,11 +26,12 @@ class RequestsController extends AbstractController
     public function new(Request $request, RequestsRepository $requestsRepository): Response
     {
         $trequest = new Requests();
+        $user = $this->getUser();
+        $trequest->setIdstudent($user);
         $form = $this->createForm(RequestsType::class, $trequest);
         $form->handleRequest($request);
-        $user = $this->getUser();
         if ($form->isSubmitted() && $form->isValid()) {
-            $trequest->setIdstudent($user->getId());
+            
             $requestsRepository->save($trequest, true);
 
             return $this->redirectToRoute('app_requests_index', [], Response::HTTP_SEE_OTHER);
@@ -44,8 +46,10 @@ class RequestsController extends AbstractController
     #[Route('/{idrequest}', name: 'app_requests_show', methods: ['GET'])]
     public function show(Requests $request): Response
     {
+        
         return $this->render('back_office/requests/show.html.twig', [
             'request' => $request,
+            
         ]);
     }
 
@@ -55,7 +59,9 @@ class RequestsController extends AbstractController
         $form = $this->createForm(RequestsType::class, $trequest);
         $form->handleRequest($request);
         // $form->getWidget('idStudent')->setAttribute('onchange', 'refreshPage(this.form.services)');
+         
         if ($form->isSubmitted() && $form->isValid()) {
+         
             $requestsRepository->save($trequest, true);
 
             return $this->redirectToRoute('app_requests_index', [], Response::HTTP_SEE_OTHER);

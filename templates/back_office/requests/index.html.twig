@@ -23,7 +23,7 @@
         {% for request in requests %}
           <tr>
             <td>{{ request.idtutor.nom }}</td>
-            <td>{{ request.idstudent }}</td>
+            <td>{{ request.idstudent.nom }}</td>
             <td>{{ request.type }}</td>
             <td>{{ request.body }}</td>
             <td>{{ request.date ? request.date|date('Y-m-d H:i:s') : '' }}</td>

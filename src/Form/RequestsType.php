@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Requests;
 use App\Entity\User;
+use App\Form\DataTransformer\UserTransformer;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -13,9 +14,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use App\Repository\UserRepository;
 
 class RequestsType extends AbstractType
 {
+
+    private $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -42,6 +51,7 @@ class RequestsType extends AbstractType
 
 
             ]);
+        $builder->get('idstudent')->addModelTransformer(new UserTransformer( $this->userRepository ));
     }
 
     public function configureOptions(OptionsResolver $resolver): void

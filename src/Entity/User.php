@@ -57,9 +57,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'idTutor', targetEntity: Requests::class)]
     private Collection $requests;
 
+    #[ORM\OneToMany(mappedBy: 'idStudent', targetEntity: Requests::class)]
+    private Collection $studentRequest;
+
     public function __construct()
     {
         $this->requests = new ArrayCollection();
+        $this->studentRequest = new ArrayCollection();
     }
 
     
@@ -284,6 +288,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($request->getIdTutor() === $this) {
                 $request->setIdTutor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Requests>
+     */
+    public function getStudentRequest(): Collection
+    {
+        return $this->studentRequest;
+    }
+
+    public function addStudentRequest(Requests $studentRequest): self
+    {
+        if (!$this->studentRequest->contains($studentRequest)) {
+            $this->studentRequest->add($studentRequest);
+            $studentRequest->setIdStudent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStudentRequest(Requests $studentRequest): self
+    {
+        if ($this->studentRequest->removeElement($studentRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($studentRequest->getIdStudent() === $this) {
+                $studentRequest->setIdStudent(null);
             }
         }
 
