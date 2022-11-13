@@ -25,7 +25,7 @@ class ExamenController extends AbstractController
     #[Route('/', name: 'app_examen_index', methods: ['GET'])]
     public function index(ExamenRepository $examenRepository): Response
     {
-        return $this->render('examen/index.html.twig', [
+        return $this->render('back_office/examen/index.html.twig', [
             'examens' => $examenRepository->get(),
         ]);
     }
@@ -43,7 +43,7 @@ class ExamenController extends AbstractController
             return $this->redirectToRoute('app_examen_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('examen/new.html.twig', [
+        return $this->renderForm('back_office/examen/new.html.twig', [
             'examan' => $examan,
             'form' => $form,
         ]);
@@ -52,7 +52,7 @@ class ExamenController extends AbstractController
     #[Route('/{idexamen}', name: 'app_examen_show', methods: ['GET'])]
     public function show(Examen $examan): Response
     {
-        return $this->render('examen/show.html.twig', [
+        return $this->render('back_office/examen/show.html.twig', [
             'examan' => $examan,
         ]);
     }
@@ -69,7 +69,7 @@ class ExamenController extends AbstractController
             return $this->redirectToRoute('app_examen_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('examen/edit.html.twig', [
+        return $this->renderForm('back_office/examen/edit.html.twig', [
             'examan' => $examan,
             'form' => $form,
         ]);

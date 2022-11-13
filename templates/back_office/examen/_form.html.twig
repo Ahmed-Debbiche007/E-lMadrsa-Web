@@ -1,17 +1,47 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-<table>
-    <tr>
-        <td>{{ form_label(form.nomexamen"hahha") }}</td>
-        <td>{{ form_widget(form.nomexamen"hahha") }}</td>
-        <td>{{ form_error(form.nomexamen"hahha") }}</td>
-    </tr>
-    <tr>
-        <td>{{ form_label(form.nomexamen"hahha") }}</td>
-        <td>{{ form_widget(form.nomexamen"hahha") }}</td>
-        <td>{{ form_error(form.nomexamen"hahha") }}</td>
-    </tr>
 
-</table>
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+ <table>
+
+     <tr>
+         <div class="form-group position-relative has-icon-left mb-4">
+             {{ form_widget(form.nomexamen, { attr: { class: 'form-control form-control-xl', placeholder: 'nom examen ' } }) }}
+             <td> {{ form_errors(form.nomexamen) }}</td>
+
+         </div>
+     </tr>
+
+     <tr>
+         <div class="form-group position-relative has-icon-left mb-4">
+             {{ form_widget(form.pourcentage, { attr: { class: 'form-control form-control-xl', placeholder: 'pourcentage' } }) }}
+             <td> {{ form_errors(form.pourcentage) }}</td>
+
+         </div>
+     </tr>
+
+     <tr>
+         <div class="form-group position-relative has-icon-left mb-4">
+             {{ form_widget(form.dureeexamen, { attr: { class: 'form-control form-control-xl', placeholder: 'durée examen' } }) }}
+             <td> {{ form_errors(form.dureeexamen) }}</td>
+
+         </div>
+     </tr>
+
+     <tr>
+         <div class="form-group position-relative has-icon-left mb-4">
+             {{ form_widget(form.categorie, { attr: { class: 'form-control form-control-xl', placeholder: 'categorie' } }) }}
+             <td> {{ form_errors(form.categorie) }}</td>
+
+         </div>
+     </tr>
+
+     <tr>
+         <div class="form-group position-relative has-icon-left mb-4">
+             {{ form_widget(form.formation, { attr: { class: 'form-control form-control-xl', placeholder: 'formation' } }) }}
+             <td> {{ form_errors(form.formation) }}</td>
+
+         </div>
+     </tr>
+
+    </table>
+        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">{{ button_label|default('Save') }}</button>
+ {{ form_end(form) }}

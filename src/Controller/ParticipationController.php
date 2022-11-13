@@ -34,7 +34,7 @@ class ParticipationController extends AbstractController
             return $this->redirectToRoute('app_participation_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('participation/new.html.twig', [
+        return $this->renderForm('back_office/participation/new.html.twig', [
             'participation' => $participation,
             'form' => $form,
         ]);
@@ -43,7 +43,7 @@ class ParticipationController extends AbstractController
     #[Route('/{idparticipation}', name: 'app_participation_show', methods: ['GET'])]
     public function show(Participation $participation): Response
     {
-        return $this->render('participation/show.html.twig', [
+        return $this->render('back_office/participation/show.html.twig', [
             'participation' => $participation,
         ]);
     }
@@ -60,7 +60,7 @@ class ParticipationController extends AbstractController
             return $this->redirectToRoute('app_participation_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('participation/edit.html.twig', [
+        return $this->renderForm('back_office/participation/edit.html.twig', [
             'participation' => $participation,
             'form' => $form,
         ]);

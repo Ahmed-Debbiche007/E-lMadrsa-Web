@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'back_office//backbase.html.twig' %}
 
 {% block title %}Edit Examen{% endblock %}
 
 {% block body %}
-    <h1>Edit Examen</h1>
+    <h1>Modifier l'examen : {{ examan.nomexamen }}</h1>
 
     {{ include('examen/_form.html.twig', {'button_label': 'Update'}) }}
 

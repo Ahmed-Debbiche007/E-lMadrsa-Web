@@ -7,8 +7,8 @@
 
 
     {% for i in examens %}
-        <div class=" ">
-             <div class="card" style="    flex: auto; box-sizing: border-box; margin: 1rem .25em; ">
+              <div class="card" style="max-width: 250px ;    margin: 10px;
+">
                {#<img class="card-img-top" src="" alt="Card image cap"> #}
                 <div class="card-body">
                     <h5 class="card-title">{{ i.nomexamen }}</h5>
@@ -16,12 +16,6 @@
                     <a href="#" class="btn btn-primary">Passer l'examen</a>
                 </div>
                    </div>
-        </div>
-
-
-
-
-
-    {% endfor %}
+      {% endfor %}
 
 {% endblock %}

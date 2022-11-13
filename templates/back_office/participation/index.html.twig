@@ -51,6 +51,9 @@
 {% endblock %}
 {% block pageHeading %}
     <h1>Liste des Participations :</h1>
+    <a href="{{ path('app_participation_new') }}">
+        <span class=" btn btn-primary  btn-lg shadow-lg  ">Ajouter une participation </span>
+    </a>
 {% endblock %}
 {% block body %}
 
@@ -82,7 +85,7 @@
                             <a href="{{ path('app_participation_show', {'idparticipation': participation.idparticipation}) }}">
                                 <span class="badge bg-primary">show</span>
                             </a>
-                            <a href="{{ path('app_participation_show', {'idparticipation': participation.idparticipation}) }}">
+                            <a href="{{ path('app_participation_edit', {'idparticipation': participation.idparticipation}) }}">
                                 <span class="badge bg-success">edit</span>
                             </a>
 

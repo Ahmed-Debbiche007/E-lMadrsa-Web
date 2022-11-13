@@ -35,18 +35,18 @@
     </div>
     <div class="page-content bg-white">
         {% include('front_office/components/header.html.twig') %}
-        <div class="content-block">
+
+        <div  style="display: flex ; flex-flow : wrap  ; " >
 
              {% block body %}{% endblock %}
-
-
         </div>
-        {%include('front_office/components/footer.html.twig') %}
+
+
+         {%include('front_office/components/footer.html.twig') %}
 
     </div>
     {% include('front_office/components/scripts.html.twig') %}
 </div>
 </body>
-<script src="{{ asset('front/assets/js/html5shiv.min.js') }}"></script>
-<script src="{{ asset('front/assets/js/respond.min.js') }}"></script>
+
 </html>
