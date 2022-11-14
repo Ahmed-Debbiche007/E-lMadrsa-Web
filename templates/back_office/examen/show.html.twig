@@ -1,0 +1,42 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}Examen{% endblock %}
+
+{% block body %}
+    <h1>{{ examan.nomexamen }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idexamen</th>
+                <td>{{ examan.idexamen }}</td>
+            </tr>
+            <tr>
+                <th>Nomexamen</th>
+                <td>{{ examan.nomexamen }}</td>
+            </tr>
+            <tr>
+                <th>Pourcentage</th>
+                <td>{{ examan.pourcentage }}</td>
+            </tr>
+            <tr>
+                <th>Dureeexamen</th>
+                <td>{{ examan.dureeexamen }}</td>
+            </tr>
+            <tr>
+                <th>Formationid</th>
+                <td>{{ examan.formation.getSujet()}}</td>
+            </tr>
+            <tr>
+                <th>Idcategorie</th>
+                <td>{{ examan.categorie.getNomcategorie() }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_examen_index') }}">back to list</a>
+
+    <a href="{{ path('app_examen_edit', {'idexamen': examan.idexamen}) }}">edit</a>
+
+    {{ include('examen/_delete_form.html.twig') }}
+{% endblock %}

@@ -63,4 +63,16 @@ class ExamenRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function get()
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->join('e.categorie','c')
+            ->join('e.formation','f');
+        return $qb->getQuery()->getResult();
+    }
+
+
+
+
 }
