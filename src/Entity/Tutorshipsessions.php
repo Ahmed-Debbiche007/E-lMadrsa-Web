@@ -12,13 +12,7 @@ class Tutorshipsessions
     #[ORM\Column]
     #[ORM\GeneratedValue]
     private ?int $idsession;
-    #[ORM\Column]
-    private ?int $idstudent;
 
-    #[ORM\Column]
-    private ?int $idtutor;
-    #[ORM\Column]
-    private ?int $idrequest;
     #[ORM\Column(length: 255)]
     private ?string $url;
     #[ORM\Column(length: 255)]
@@ -26,46 +20,25 @@ class Tutorshipsessions
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
+    #[ORM\ManyToOne]
+    private ?User $idStudent = null;
+
+    #[ORM\ManyToOne(inversedBy: 'tutorshipsessions')]
+    private ?User $idTutor = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Requests $idRequest = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $body = null;
+
     public function getIdsession(): ?int
     {
         return $this->idsession;
     }
 
-    public function getIdstudent(): ?int
-    {
-        return $this->idstudent;
-    }
 
-    public function setIdstudent(int $idstudent): self
-    {
-        $this->idstudent = $idstudent;
 
-        return $this;
-    }
-
-    public function getIdtutor(): ?int
-    {
-        return $this->idtutor;
-    }
-
-    public function setIdtutor(int $idtutor): self
-    {
-        $this->idtutor = $idtutor;
-
-        return $this;
-    }
-
-    public function getIdrequest(): ?int
-    {
-        return $this->idrequest;
-    }
-
-    public function setIdrequest(int $idrequest): self
-    {
-        $this->idrequest = $idrequest;
-
-        return $this;
-    }
 
     public function getUrl(): ?string
     {
@@ -99,6 +72,54 @@ class Tutorshipsessions
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getIdStudent(): ?User
+    {
+        return $this->idStudent;
+    }
+
+    public function setIdStudent(?User $idStudent): self
+    {
+        $this->idStudent = $idStudent;
+
+        return $this;
+    }
+
+    public function getIdTutor(): ?User
+    {
+        return $this->idTutor;
+    }
+
+    public function setIdTutor(?User $idTutor): self
+    {
+        $this->idTutor = $idTutor;
+
+        return $this;
+    }
+
+    public function getIdRequest(): ?Requests
+    {
+        return $this->idRequest;
+    }
+
+    public function setIdRequest(?Requests $idRequest): self
+    {
+        $this->idRequest = $idRequest;
+
+        return $this;
+    }
+
+    public function getBody(): ?string
+    {
+        return $this->body;
+    }
+
+    public function setBody(string $body): self
+    {
+        $this->body = $body;
 
         return $this;
     }
