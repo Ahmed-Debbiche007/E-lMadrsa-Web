@@ -1,0 +1,51 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}Formations{% endblock %}
+{% block pageHeading %}
+    <h1>Liste des Formations :</h1>
+{% endblock %}
+{% block body %}
+    <h1>Formation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idformation</th>
+                <th>Sujet</th>
+                <th>Description</th>
+                <th>Difficulte</th>
+                <th>Duree</th>
+                <th>Idprerequis</th>
+                <th>Idcompetence</th>
+                <th>Idexamen</th>
+                <th>Idcategorie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for formation in formations %}
+            <tr>
+                <td>{{ formation.idformation }}</td>
+                <td>{{ formation.sujet }}</td>
+                <td>{{ formation.description }}</td>
+                <td>{{ formation.difficulte }}</td>
+                <td>{{ formation.duree }}</td>
+                <td>{{ formation.idprerequis }}</td>
+                <td>{{ formation.idcompetence }}</td>
+                <td>{{ formation.idexamen }}</td>
+                <td>{{ formation.idcategorie }}</td>
+                <td>
+                    <a href="{{ path('app_formation_show', {'idformation': formation.idformation}) }}">show</a>
+                    <a href="{{ path('app_formation_edit', {'idformation': formation.idformation}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_formation_new') }}">Create new</a>
+{% endblock %}

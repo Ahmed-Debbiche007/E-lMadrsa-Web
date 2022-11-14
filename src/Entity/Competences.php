@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\CategorieRepository;
+use App\Repository\CompetencesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CategorieRepository::class)]
+#[ORM\Entity(repositoryClass: CompetencesRepository::class)]
 class Competences
 {
     #[ORM\Id]
@@ -32,6 +32,11 @@ class Competences
 
         return $this;
     }
+    public function  __toString()
+    {
+        return (String)$this->nomcompetence ;
+    }
+
 
 
 }

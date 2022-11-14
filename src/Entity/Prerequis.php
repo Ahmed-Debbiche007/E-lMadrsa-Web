@@ -32,6 +32,10 @@ class Prerequis
 
         return $this;
     }
+    public  function  __toString()
+    {
+        return (string)$this->nomprerequis;
+    }
 
 
 }

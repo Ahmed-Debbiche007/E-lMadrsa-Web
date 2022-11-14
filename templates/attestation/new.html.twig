@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Attestation{% endblock %}
+
+{% block body %}
+    <h1>Create new Attestation</h1>
+
+    {{ include('attestation/_form.html.twig') }}
+
+    <a href="{{ path('app_attestation_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Attestation index{% endblock %}
+
+{% block body %}
+    <h1>Attestation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idattestation</th>
+                <th>Idparticipation</th>
+                <th>dateAcq</th>
+
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for attestation in attestations %}
+            <tr>
+                <td>{{ attestation.idattestation }}</td>
+                <td>{{ attestation.idparticipation }}</td>
+                <td>{{ attestation.dateAcq ? attestation.dateAcq|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_attestation_show', {'idattestation': attestation.idattestation}) }}">show</a>
+                    <a href="{{ path('app_attestation_edit', {'idattestation': attestation.idattestation}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_attestation_new') }}">Create new</a>
+{% endblock %}
