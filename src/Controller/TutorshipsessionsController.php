@@ -9,10 +9,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\GoogleCalendar;
 
 #[Route('/dashboard/tutorshipSessions')]
 class TutorshipsessionsController extends AbstractController
 {
+
+    private GoogleCalendar $googleServices;
+    public function __construct(GoogleCalendar $googleServices)
+    {
+        $this->googleServices = $googleServices;
+    }
     #[Route('/', name: 'app_tutorshipsessions_index', methods: ['GET'])]
     public function index(TutorshipSessionRepository $tutorshipSessionRepository): Response
     {
@@ -70,6 +77,7 @@ class TutorshipsessionsController extends AbstractController
     public function delete(Request $request, Tutorshipsessions $tutorshipsession, TutorshipSessionRepository $tutorshipSessionRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$tutorshipsession->getIdsession(), $request->request->get('_token'))) {
+            $url = $this->googleServices->removeEvent("session".$tutorshipsession->getIdsession());
             $tutorshipSessionRepository->remove($tutorshipsession, true);
         }
 

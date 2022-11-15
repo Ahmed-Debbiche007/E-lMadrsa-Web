@@ -27,6 +27,7 @@ class Tutorshipsessions
     private ?User $idTutor = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(onDelete:"SET NULL")]
     private ?Requests $idRequest = null;
 
     #[ORM\Column(length: 255)]
