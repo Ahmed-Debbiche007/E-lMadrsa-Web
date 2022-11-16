@@ -1,0 +1,30 @@
+<div class="col-md-1">
+          <div class="card">
+<div id="container">
+  <div id="emojis"></div>
+</div></div></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+<script src={{ asset('back/assets/js/DisMojiPicker.js')}}></script>
+
+<script>
+  container = $("#container").prop('outerHTML');
+  document.getElementById('container').outerHTML = container
+    $('#emojis').disMojiPicker()
+    twemoji.parse(document.body)
+    $('#emojis').picker((emoji) => $('#input').val($('#input').val() + emoji));
+    $("#container").hide();
+    
+  $("#close").bind('click', ()=>{
+    $("#container").toggle();
+    });
+  function openEm(isOpen) {
+    
+  }
+  function closeEm(isOpen) {
+    document.getElementById('container').innerHTML = ''
+    isOpen = !isOpen;
+    console.log("close");
+  }
+</script>

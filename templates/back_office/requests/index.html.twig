@@ -7,14 +7,13 @@
   <h1>Tutorship Requests</h1>
 {% endblock %}
 {% block body %}
-<div class="card-body">
- <a href="{{ path('app_requests_new') }}"><span class="badge bg-success">+</span></a>
-</div>
+  <div class="card-body">
+    <a href="{{ path('app_requests_new') }}"><span class="badge bg-success">+</span></a>
+  </div>
   <div class="card-body">
     <table class="table table-striped" id="table1">
       <thead>
         <tr>
-
           <th>Tutor</th>
           <th>Student</th>
 
@@ -27,7 +26,6 @@
       <tbody>
         {% for request in requests %}
           <tr>
-
             <td>{{ request.idtutor.nom }}</td>
 
             <td>{{ request.idstudent.nom }}</td>
