@@ -1,0 +1,43 @@
+{% extends 'back_office/backbase.html.twig' %}
+{% block title %}Comment index{% endblock %}
+
+{% block body %}
+    <h1>Comment index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Commentid</th>
+                <th>Commentcontent</th>
+                <th>Userid</th>
+                <th>Postid</th>
+                <th>Commentvote</th>
+                <th>Commentdate</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+                <td>{{ comment.commentid }}</td>
+                <td>{{ comment.commentcontent }}</td>
+                <td>{{ comment.user.getNom() }}</td>
+                <td>{{ comment.post.getPosttitle}}</td>
+                <td>{{ comment.commentvote }}</td>
+                <td>{{ comment.commentdate ? comment.commentdate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_comment_show', {'commentid': comment.commentid}) }}">show</a>
+                    <a href="{{ path('app_comment_edit', {'commentid': comment.commentid}) }}">edit</a>
+                    <a href="{{ path('app_comment_delete', {'commentid': comment.commentid}) }}">delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_comment_new') }}">Create new</a>
+{% endblock %}

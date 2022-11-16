@@ -1,0 +1,49 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+
+{% block title %}Post index{% endblock %}
+
+{% block body %}
+    <h1>Post index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Postid</th>
+                <th>Posttitle</th>
+                <th>Postcontent</th>
+                <th>Userid</th>
+                <th>Categoryid</th>
+                <th>Postvote</th>
+                <th>Postnbcom</th>
+                <th>Postdate</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>{{ post.postid }}</td>
+                <td>{{ post.posttitle }}</td>
+                <td>{{ post.postcontent }}</td>
+                <td>{{ post.user.getNom() }}</td>
+                <td>{{ post.category.getCategoryname() }}</td>
+                <td>{{ post.postvote }}</td>
+                <td>{{ post.postnbcom }}</td>
+                <td>{{ post.postdate ? post.postdate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_post_show', {'postid': post.postid}) }}">show</a>
+                    <a href="{{ path('app_post_edit', {'postid': post.postid}) }}">edit</a>
+                    <a href="{{ path('app_post_delete', {'postid': post.postid}) }}">delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_post_new') }}">Create new</a>
+{% endblock %}

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
@@ -16,13 +17,24 @@ class Comment
     private ?int $commentid;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 10,
+        max: 500,
+        minMessage: "comment content must be at least {{ limit }} characters long",
+        maxMessage: "comment content cannot be longer than {{ limit }} characters",
+    )]
     private ?string $commentcontent;
 
-    #[ORM\Column]
-    private ?int $userid;
 
-    #[ORM\Column]
-    private ?int $postid;
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(name: 'userid', referencedColumnName: 'id')]
+    private ?User $user;
+
+
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(name: 'postid', referencedColumnName: 'postid')]
+    private ?Post $post;
 
     #[ORM\Column]
     private ?int $commentvote = 0;
@@ -47,29 +59,7 @@ class Comment
         return $this;
     }
 
-    public function getUserid(): ?int
-    {
-        return $this->userid;
-    }
 
-    public function setUserid(int $userid): self
-    {
-        $this->userid = $userid;
-
-        return $this;
-    }
-
-    public function getPostid(): ?int
-    {
-        return $this->postid;
-    }
-
-    public function setPostid(int $postid): self
-    {
-        $this->postid = $postid;
-
-        return $this;
-    }
 
     public function getCommentvote(): ?int
     {
@@ -94,6 +84,39 @@ class Comment
 
         return $this;
     }
+
+    /**
+     * @return User|null
+     */
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User|null $user
+     */
+    public function setUser(?User $user): void
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return Post|null
+     */
+    public function getPost(): ?Post
+    {
+        return $this->post;
+    }
+
+    /**
+     * @param Post|null $post
+     */
+    public function setPost(?Post $post): void
+    {
+        $this->post = $post;
+    }
+
 
 
 }
