@@ -13,7 +13,7 @@
         <th>Student</th>
         <th>Tutor</th>
         <th>Body</th>
-        <th>Url</th>
+        
         <th>Type</th>
         <th>Date</th>
         <th>actions</th>
@@ -25,7 +25,7 @@
           <td>{{ tutorshipsession.idstudent.nom }}</td>
           <td>{{ tutorshipsession.idtutor.nom }}</td>
           <td>{{ tutorshipsession.body }}</td>
-          <td>{{ tutorshipsession.url }}</td>
+          
           <td>{{ tutorshipsession.type }}</td>
           <td>{{ tutorshipsession.date ? tutorshipsession.date|date('Y-m-d H:i') : '' }}</td>
           <td>
@@ -38,6 +38,11 @@
               <a href="#" class="badge bg-danger" onclick="document.getElementById('my_form').submit();">Delete</a>
             </form>
           </td>
+          <td>
+            {% if tutorshipsession.type is same as("VideoChat") %}
+              <a href="{{ tutorshipsession.url }}"><span class="badge bg-primary">Connect</span></a>
+            {% endif %}
+          </td>
         </tr>
       {% else %}
         <tr>
@@ -46,5 +51,4 @@
       {% endfor %}
     </tbody>
   </table>
-
 {% endblock %}

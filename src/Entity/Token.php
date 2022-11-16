@@ -16,7 +16,7 @@ class Token
     #[ORM\Column(length: 255)]
     private ?string $token = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $refresh = null;
 
     public function getId(): ?int

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/messages')]
+#[Route('/dashboard/messages')]
 class MessagesController extends AbstractController
 {
     #[Route('/', name: 'app_messages_index', methods: ['GET'])]
