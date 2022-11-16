@@ -19,12 +19,8 @@
   $("#close").bind('click', ()=>{
     $("#container").toggle();
     });
-  function openEm(isOpen) {
-    
-  }
-  function closeEm(isOpen) {
-    document.getElementById('container').innerHTML = ''
-    isOpen = !isOpen;
-    console.log("close");
+  
+  function closeEm() {
+    $("#container").hide();
   }
 </script>

@@ -1,0 +1,13 @@
+{% if app.user.getId() == id %}
+<div class="chat chat-left">
+  <div class="chat-body">
+    <div class="chat-message">{{message}}</div>
+  </div>
+</div>
+{% else %}
+<div class="chat">
+  <div class="chat-body">
+    <div class="chat-message">{{message}}</div>
+  </div>
+</div>
+{% endif %}

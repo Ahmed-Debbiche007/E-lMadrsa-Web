@@ -1,48 +1,11 @@
 {% extends 'back_office/backbase.html.twig' %}
 
 {% block title %}
-  Requests
+  Sessions
 {% endblock %}
-{% block pageHeading %}
-  <h1>Tutorship Requests</h1>
-{% endblock %}
+
 {% block body %}
-  <div class="card-body">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Idmessage</th>
-          <th>Idsession</th>
-          <th>Idsender</th>
-          <th>Body</th>
-          <th>Statusdate</th>
-          <th>actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for message in messages %}
-          <tr>
-            <td>{{ message.idmessage }}</td>
-            <td>{{ message.idsession }}</td>
-            <td>{{ message.idsender }}</td>
-            <td>{{ message.body }}</td>
-            <td>{{ message.statusdate ? message.statusdate|date('Y-m-d H:i:s') : '' }}</td>
-            <td>
-              <a href="{{ path('app_messages_show', { idmessage: message.idmessage }) }}">show</a>
-              <a href="{{ path('app_messages_edit', { idmessage: message.idmessage }) }}">edit</a>
-            </td>
-          </tr>
-        {% else %}
-          <tr>
-            <td colspan="6">no records found</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-
-    <a href="{{ path('app_messages_new') }}">Create new</a>
-  </div>
-
+  
   <div class="card-body">
     <section class="section">
       <div class="row">
@@ -50,17 +13,14 @@
           <div class="card">
             <div class="card-header">
               <div class="media d-flex align-items-center">
-                
                 <div class="name flex-grow-1">
                   <h6 class="mb-0">Sessions</h6>
                 </div>
               </div>
             </div>
-            
-            
-            
+
+            {# insert sessions here #}
           </div>
-          
         </div>
         <div class="col-md-7">
           <div class="card">
@@ -78,27 +38,11 @@
             </div>
             <div class="card-body pt-4 bg-grey">
               <div class="chat-content">
-                <div class="chat">
-                  <div class="chat-body">
-                    <div class="chat-message">Hi Alfy, how can i help you?</div>
-                  </div>
-                </div>
-                <div class="chat chat-left">
-                  <div class="chat-body">
-                    <div class="chat-message">I'm looking for the best admin dashboard template</div>
-                    <div class="chat-message">With bootstrap certainly</div>
-                  </div>
-                </div>
-                <div class="chat">
-                  <div class="chat-body">
-                    <div class="chat-message">I recommend you to use Mazer Dashboard</div>
-                  </div>
-                </div>
-                <div class="chat chat-left">
-                  <div class="chat-body">
-                    <div class="chat-message">That"s great! I like it so much :)</div>
-                  </div>
-                </div>
+                {% for message in messages %}
+                  {% set id = message.idsender %}
+                  {% set message = message.body %}
+                  {% include 'back_office/components/message.html.twig' with {id:id, message:message} only %}
+                {% endfor %}
               </div>
             </div>
             <div class="card-footer">
@@ -109,13 +53,10 @@
                 </div>
               </div>
             </div>
-            
           </div>
-          
         </div>
         {% include 'back_office/components/emojiPicker.html.twig' %}
       </div>
     </section>
-    
   </div>
 {% endblock %}
