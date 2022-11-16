@@ -1,0 +1,36 @@
+{{form_start(form,{'attr': {'novalidate': 'novalidate'}} )}}
+
+<div class="card-body">
+              <h5 class="card-title">General Form Elements</h5>
+
+              <!-- General Form Elements -->
+              <form>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">id Utilisateur/label>
+                  <div class="col-sm-10">
+                    {{ form_widget(form.idUtilisateur,{'attr':{'class':'form-controle'}})}}
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputint" class="col-sm-2 col-form-label">id Evenement</label>
+                  <div class="col-sm-10">
+                    {{ form_widget(form.idEvenement,{'attr':{'class':'form-controle'}})}}
+                </div>
+                <div class="row mb-3">
+                  <label for="inputDate" class="col-sm-2 col-form-label">date Reservation</label>
+                  <div class="col-sm-10">
+                    {{ form_widget(form.dateReservation,{'attr':{'class':'form-controle'}})}}
+                    {{ form_errors(form.dateReservation) }}
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">Submit Button</label>
+                  <div class="col-sm-10">
+                    <button class="btn">{{ button_label|default('Save') }}</button>
+                  </div>
+                </div>
+
+              </form><!-- End General Form Elements -->
+
+            </div>
+{{ form_end(form) }}

@@ -16,6 +16,7 @@ class Reservation
 
     
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message:"Veuillez renseigner le champ dateReservation")]
     private ?\DateTimeInterface $dateReservation = null;
 
     #[ORM\Column]
