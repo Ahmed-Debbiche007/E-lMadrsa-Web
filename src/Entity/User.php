@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -51,6 +53,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?bool $approved = null;
+
+    #[ORM\OneToMany(mappedBy: 'idTutor', targetEntity: Requests::class)]
+    private Collection $requests;
+
+    #[ORM\OneToMany(mappedBy: 'idStudent', targetEntity: Requests::class)]
+    private Collection $studentRequest;
+
+    #[ORM\OneToMany(mappedBy: 'idTutor', targetEntity: Tutorshipsessions::class)]
+    private Collection $tutorshipsessions;
+
+    public function __construct()
+    {
+        $this->requests = new ArrayCollection();
+        $this->studentRequest = new ArrayCollection();
+        $this->tutorshipsessions = new ArrayCollection();
+    }
+
+    
 
     public function getId(): ?int
     {
@@ -247,5 +267,103 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return null; // use the default hasher
     }
+
+    /**
+     * @return Collection<int, Requests>
+     */
+    public function getRequests(): Collection
+    {
+        return $this->requests;
+    }
+
+    public function addRequest(Requests $request): self
+    {
+        if (!$this->requests->contains($request)) {
+            $this->requests->add($request);
+            $request->setIdTutor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRequest(Requests $request): self
+    {
+        if ($this->requests->removeElement($request)) {
+            // set the owning side to null (unless already changed)
+            if ($request->getIdTutor() === $this) {
+                $request->setIdTutor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Requests>
+     */
+    public function getStudentRequest(): Collection
+    {
+        return $this->studentRequest;
+    }
+
+    public function addStudentRequest(Requests $studentRequest): self
+    {
+        if (!$this->studentRequest->contains($studentRequest)) {
+            $this->studentRequest->add($studentRequest);
+            $studentRequest->setIdStudent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStudentRequest(Requests $studentRequest): self
+    {
+        if ($this->studentRequest->removeElement($studentRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($studentRequest->getIdStudent() === $this) {
+                $studentRequest->setIdStudent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tutorshipsessions>
+     */
+    public function getTutorshipsessions(): Collection
+    {
+        return $this->tutorshipsessions;
+    }
+
+    public function addTutorshipsession(Tutorshipsessions $tutorshipsession): self
+    {
+        if (!$this->tutorshipsessions->contains($tutorshipsession)) {
+            $this->tutorshipsessions->add($tutorshipsession);
+            $tutorshipsession->setIdTutor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTutorshipsession(Tutorshipsessions $tutorshipsession): self
+    {
+        if ($this->tutorshipsessions->removeElement($tutorshipsession)) {
+            // set the owning side to null (unless already changed)
+            if ($tutorshipsession->getIdTutor() === $this) {
+                $tutorshipsession->setIdTutor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
+
+    public function  __toString()
+    {
+        return (String)$this->getNom() ;
+    }
+
     
 }

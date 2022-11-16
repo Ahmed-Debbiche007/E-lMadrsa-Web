@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Question;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -38,6 +39,29 @@ class QuestionRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function get()
+    {
+        $qb = $this->createQueryBuilder('q')
+            ->join('q.examen','e');
+        return $qb->getQuery()->getResult();
+    }
+
+
+    public function getQbyEId($id) {
+        $qb = $this->createQueryBuilder('q')
+             ->join('q.examen','e');
+
+
+
+
+        return $qb->getQuery()->getResult() ;
+    }
+
+
+
+
+}
+
 
 //    /**
 //     * @return Question[] Returns an array of Question objects
@@ -63,4 +87,19 @@ class QuestionRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+//SELECT q,e FROM App\Entity\Question q INNER JOIN q.App\Entity\Examen e
+/*
+    public function get() :array {
+        $rsm = new ResultSetMapping();
+        $em = $this->getEntityManager();
+        $query = $em->createNativeQuery('SELECT ennonce from question',$rsm);
+
+        return $query->getResult();
+    }
+
+
+
 }
+*/
