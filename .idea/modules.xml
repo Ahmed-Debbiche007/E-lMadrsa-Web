@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ProjectModuleManager">
@@ -5,4 +6,13 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/E-lMadrsa-Web.iml" filepath="$PROJECT_DIR$/.idea/E-lMadrsa-Web.iml" />
     </modules>
   </component>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/E-lMadrsa-Web.iml" filepath="$PROJECT_DIR$/.idea/E-lMadrsa-Web.iml" />
+    </modules>
+  </component>
+>>>>>>> 6afd1e12bd04761a3f021f1487dd179a63bcc4da
 </project>

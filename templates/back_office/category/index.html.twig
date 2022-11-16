@@ -1,0 +1,43 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}CATEGORY LIST{% endblock %}
+{% block pageHeading %}
+    <h1>Liste des categories :</h1>
+    <a href="{{ path('app_category_new')}}">
+        <span class=" btn btn-primary  btn-lg shadow-lg  ">Ajouter une categorie</span>
+    </a>
+{% endblock %}
+
+
+{% block body %}
+
+
+    {% for message in app.flashes('info') %}
+        <div class="alert alert succ">{{ message }}</div>
+    {% endfor %}
+
+    {% for category in categories %}
+        <div class="card">
+            <div>
+                <h1>{{ category.categoryname  }}</h1>
+            </div>
+            <div>
+                <img src={{ asset('uploads/images/' ~ category.getCategoryimage()) }} alt="taswira" width="200" height="100">
+            </div>
+            <div>
+
+                <form id="my_form" method="post" action="{{ path('app_category_delete', {'categoryid': category.categoryid}) }}" >
+                    <a href="{{ path('app_category_show', { categoryid: category.categoryid }) }}"><span class="badge bg-primary">show</span></a>
+
+                    <a href="{{ path('app_category_edit', { categoryid: category.categoryid }) }}"><span class="badge bg-success">edit</span></a>
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.categoryid) }}">
+                    <a href="#" class="badge bg-danger" onclick="document.getElementById('my_form').submit();">Delete</a>
+                </form>
+            </div>
+        </div>
+    {% else %}
+        <h1>No Categories</h1>
+    {% endfor %}
+
+
+{% endblock %}

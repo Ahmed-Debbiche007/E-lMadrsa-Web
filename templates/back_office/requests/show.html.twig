@@ -16,8 +16,8 @@
                 <td>{{ request.idtutor.nom }}</td>
             </tr>
             <tr>
-                <th>Idstudent</th>
-                <td>{{ request.idstudent }}</td>
+                <th>Student</th>
+                <td>{{ request.idstudent.nom }}</td>
             </tr>
             <tr>
                 <th>Type</th>
@@ -29,14 +29,14 @@
             </tr>
             <tr>
                 <th>Date</th>
-                <td>{{ request.date ? request.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ request.date ? request.date|date('Y-m-d H:i') : '' }}</td>
             </tr>
         </tbody>
     </table>
   </div>
     <a href="{{ path('app_requests_index') }}">back to list</a>
 
-    <a href="{{ path('app_requests_edit', {'idrequest': request.idrequest}) }}">edit</a>
+    <a href="{{ path('app_requests_edit', {'id': request.id}) }}">edit</a>
 
     {{ include('back_office/requests/_delete_form.html.twig') }}
 {% endblock %}

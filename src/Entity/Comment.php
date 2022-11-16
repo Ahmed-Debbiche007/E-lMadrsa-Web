@@ -6,6 +6,7 @@ use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity as AcmeAssert;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
@@ -24,6 +25,7 @@ class Comment
         minMessage: "comment content must be at least {{ limit }} characters long",
         maxMessage: "comment content cannot be longer than {{ limit }} characters",
     )]
+    #[AcmeAssert\profanityconstraint]
     private ?string $commentcontent;
 
 

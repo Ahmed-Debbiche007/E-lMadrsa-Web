@@ -6,6 +6,7 @@ use App\Repository\PostRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity as AcmeAssert;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 class Post
@@ -23,6 +24,7 @@ class Post
         minMessage: "post title must be at least {{ limit }} characters long",
         maxMessage: "post title cannot be longer than {{ limit }} characters",
     )]
+    #[AcmeAssert\profanityconstraint]
     private ?string $posttitle;
 
     #[ORM\Column(length: 255)]
@@ -33,6 +35,7 @@ class Post
         minMessage: "post content must be at least {{ limit }} characters long",
         maxMessage: "post content name cannot be longer than {{ limit }} characters",
     )]
+    #[AcmeAssert\profanityconstraint]
     private ?string $postcontent;
 
 

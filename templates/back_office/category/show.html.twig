@@ -1,0 +1,32 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}Category{% endblock %}
+
+
+
+{% block body %}
+    <h1>Category</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Categoryid</th>
+                <td>{{ category.categoryid }}</td>
+            </tr>
+            <tr>
+                <th>Categoryname</th>
+                <td>{{ category.categoryname }}</td>
+            </tr>
+            <tr>
+                <th>Categoryimage</th>
+                <td>{{ category.categoryimage }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_category_index') }}">back to list</a>
+
+    <a href="{{ path('app_category_edit', {'categoryid': category.categoryid}) }}">edit</a>
+
+    {{ include('back_office/category/_delete_form.html.twig') }}
+{% endblock %}
