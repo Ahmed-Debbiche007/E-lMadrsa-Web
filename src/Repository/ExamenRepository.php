@@ -38,7 +38,15 @@ class ExamenRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+    public function findExamsByCategorieId( int $value): array
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.categorie = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 //    /**
 //     * @return Examen[] Returns an array of Examen objects
 //     */

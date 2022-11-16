@@ -3,6 +3,34 @@
 
 {% block title %} exams list{% endblock %}
 
+
+{% block filtrage %}
+
+    <h3> choisir un examen selon un catégorie  :</h3>
+
+    <table>
+
+    </table>
+
+
+    <select class="form-control" id="">
+        {% set selected =0  %}
+
+        {% for i in categories %}
+
+            <option value="{{i.idcategorie}} " {{ selected}} >{{i}}</option>
+
+
+        {% endfor %}
+    </select>
+    <button><a href= "{{ path('app_examen_listtbycategorie',{id:selected}) }}" > chercher par categorie </a></button>
+    <button><a href= "{{ path('app_examen_listt') }}" > tous les examens </a></button>
+{{ selected }}
+
+
+{% endblock %}
+
+
 {% block body %}
 
 

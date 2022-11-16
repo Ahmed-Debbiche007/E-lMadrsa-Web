@@ -41,18 +41,18 @@
                     <td>
                         <form id="my_form" method="post" action="{{ path('app_examen_show', {'idexamen': examan.idexamen}) }}" >
                             <a href="{{ path('app_examen_show', {'idexamen': examan.idexamen}) }}">
-                                <span class="badge bg-primary">show</span>
+                                <span class="badge bg-primary">show    </span>
                             </a>
                             <br>
                             <a href="{{ path('app_examen_edit', {'idexamen': examan.idexamen}) }}">
-                                <span class="badge bg-success">edit</span>
+                                <span class="badge bg-success">edit    </span>
                             </a>
                             <br>
 
 
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ examan.idexamen) }}">
 
-                            <a href="#" class="badge bg-danger" onclick="document.getElementById('my_form').submit();">Delete</a>
+                            <a href="#" class="badge bg-danger" onclick="document.getElementById('my_form').submit();">Delete{{ examan.idexamen}}  </a>
                         </form>
 
 

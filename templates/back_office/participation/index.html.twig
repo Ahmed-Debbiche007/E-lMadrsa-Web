@@ -1,53 +1,7 @@
 
-{#
-{% extends 'base.html.twig' %}
-
-{% block title %}Participation index{% endblock %}
-
-{% block body %}
-    <h1>Participation index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Idparticipation</th>
-                <th>User</th>
-                <th>Formation</th>
-                <th>Resultat</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for participation in participations %}
-            <tr>
-                <td>{{ participation.idparticipation }}</td>
-                <td>{{ participation.user.getNom() }}</td>
-                <td>{{ participation.formation.getSujet() }}</td>
-
-                <td>{{ participation.resultat }}</td>
-                <td>
-                    <a href="{{ path('app_participation_show', {'idparticipation': participation.idparticipation}) }}">show</a>
-                    <a href="{{ path('app_participation_edit', {'idparticipation': participation.idparticipation}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_participation_new') }}">Create new</a>
-{% endblock %}
-
-
-#}
-
-
 {% extends 'back_office/backbase.html.twig' %}
 
-{% block title %}Examens
+{% block title %}Participations
 {% endblock %}
 {% block pageHeading %}
     <h1>Liste des Participations :</h1>
@@ -63,8 +17,7 @@
             <thead>
             <tr>
 
-                <th>Idparticipation</th>
-                <th>User</th>
+                 <th>User</th>
                 <th>Formation</th>
                 <th>Resultat</th>
                 <th>actions</th>
@@ -74,8 +27,7 @@
             {% for participation in participations %}
                 <tr>
 
-                    <td>{{ participation.idparticipation }}</td>
-                    <td>{{ participation.user.getNom() }}</td>
+                     <td>{{ participation.user.getNom() }}</td>
                     <td>{{ participation.formation.getSujet() }}</td>
 
                     <td>{{ participation.resultat }}</td>

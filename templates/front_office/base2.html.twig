@@ -20,13 +20,16 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/revolution/css/layers.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/revolution/css/settings.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/revolution/css/navigation.css') }}">
-    <script src="{{ asset('front/assets/js/html5shiv.min.js') }}"></script>
-    <script src="{{ asset('front/assets/js/respond.min.js') }}"></script>
+
 </head>
 
 
 <body id="bg">
 <div class="page-wraper">
+
+
+
+
 
     {% include('front_office/components/navbar.html.twig') %}
 
@@ -36,8 +39,14 @@
     <div class="page-content bg-white">
         {% include('front_office/components/header.html.twig') %}
 
-        <div  style="display: flex ; flex-flow : wrap  ; " >
+        <!-- filtrage   -->
 
+        {% block filtrage %} {% endblock %}
+
+
+
+        <!-- all exams items  -->
+        <div  style="display: flex ; flex-flow : wrap  ; " >
              {% block body %}{% endblock %}
         </div>
 
@@ -45,8 +54,9 @@
          {%include('front_office/components/footer.html.twig') %}
 
     </div>
-    {% include('front_office/components/scripts.html.twig') %}
+{# {% include('front_office/components/scripts.html.twig') %} #}
 </div>
+
 </body>
 
 </html>

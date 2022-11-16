@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Examen;
 use App\Form\ExamenType;
+use App\Repository\CategorieEvRepository;
+use App\Repository\CategorieRepository;
 use App\Repository\ExamenRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +17,20 @@ class ExamenController extends AbstractController
 {
 
     #[Route('/list', name: 'app_examen_listt')]
-    public function listExams(ExamenRepository $examenRepository)
+    public function listExams(ExamenRepository $examenRepository, CategorieRepository $categorieRepository)
     {
         return $this->render('front_office/exams/course.html.twig', [
             'examens' => $examenRepository->findAll(),
+            'categories'=>$categorieRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/list/categorie/{id}', name: 'app_examen_listtbycategorie')]
+    public function listExamsbyCategrie(ExamenRepository $examenRepository, CategorieRepository $categorieRepository , int $id)
+    {
+        return $this->render('front_office/exams/course.html.twig', [
+            'examens' => $examenRepository->findExamsByCategorieId($id),
+            'categories'=>$categorieRepository->findAll(),
         ]);
     }
 
@@ -80,6 +92,7 @@ class ExamenController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$examan->getIdexamen(), $request->request->get('_token'))) {
             $examenRepository->remove($examan, true);
+            $this->renderForm('back_office/examen/index.html.twig');
         }
 
         return $this->redirectToRoute('app_examen_index', [], Response::HTTP_SEE_OTHER);
