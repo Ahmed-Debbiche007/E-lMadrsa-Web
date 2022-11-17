@@ -17,8 +17,6 @@ class PostType extends AbstractType
         $builder
             ->add('posttitle')
             ->add('postcontent')
-            ->add('user', EntityType::class,array('class'=>User::class,
-                'choice_label'=>'nom'))
             ->add('category', EntityType::class,array('class'=>Category::class,
                 'choice_label'=>'categoryname'))
            // ->add('postvote')

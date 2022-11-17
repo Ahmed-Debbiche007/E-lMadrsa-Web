@@ -28,6 +28,8 @@ class PostController extends AbstractController
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
         $post->setPostdate (new \DateTime()) ;
+        $user = $this->getUser();
+        $post->setUser($user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
