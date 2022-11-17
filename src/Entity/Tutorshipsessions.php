@@ -4,6 +4,8 @@ namespace App\Entity;
 use App\Repository\TutorshipSessionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity as AcmeAssert;
 
 #[ORM\Entity(repositoryClass: TutorshipSessionRepository::class)]
 class Tutorshipsessions
@@ -31,6 +33,14 @@ class Tutorshipsessions
     private ?Requests $idRequest = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 10,
+        max: 100,
+        minMessage: "post title must be at least {{ limit }} characters long",
+        maxMessage: "post title cannot be longer than {{ limit }} characters",
+    )]
+    #[AcmeAssert\profanityconstraint]
     private ?string $body = null;
 
     public function getIdsession(): ?int

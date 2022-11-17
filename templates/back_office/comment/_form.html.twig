@@ -1,0 +1,36 @@
+{{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+
+<table>
+    <tr>
+        <div class="form-group position-relative has-icon-left mb-4">
+            {{ form_widget(form.user, { attr: { class: 'form-control form-control-xl', placeholder: 'user ' } }) }}
+
+
+        </div>
+    </tr>
+
+    <tr>
+        <div class="form-group position-relative has-icon-left mb-4">
+            {{ form_widget(form.post, { attr: { class: 'form-control form-control-xl', placeholder: 'post ' } }) }}
+
+
+        </div>
+    </tr>
+
+
+
+
+    <tr>
+        <div class="form-group position-relative has-icon-left mb-4">
+            {{ form_widget(form.commentcontent, { attr: { class: 'form-control form-control-xl', placeholder: 'content ' } }) }}
+            <td>{{ form_errors(form.commentcontent) }}</td>
+
+        </div>
+    </tr>
+
+
+
+
+</table>
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
