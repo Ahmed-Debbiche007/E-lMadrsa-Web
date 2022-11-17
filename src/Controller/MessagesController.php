@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Messages;
 use App\Form\MessagesType;
+use App\Repository\ChatSessionsRepository;
 use App\Repository\MessagesRepository;
+use App\Repository\TutorshipSessionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,11 +15,25 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/dashboard/messages')]
 class MessagesController extends AbstractController
 {
-    #[Route('/', name: 'app_messages_index', methods: ['GET'])]
-    public function index(MessagesRepository $messagesRepository): Response
+    #[Route('/', name: 'app_messages_index', methods: ['GET', 'POST'])]
+    public function index(Request $request, MessagesRepository $messagesRepository, TutorshipSessionRepository $repo): Response
     {
-        return $this->render('back_office/messages/index.html.twig', [
+        $sessions = $repo->findAll();
+        $message = new Messages();
+        $form = $this->createForm(MessagesType::class, $message);
+        $message->setStatusdate(new \DateTime());
+    
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $messagesRepository->save($message, true);
+
+            return $this->redirectToRoute('app_messages_index', [], Response::HTTP_SEE_OTHER);
+        }
+        return $this->renderForm('back_office/messages/index.html.twig', [
             'messages' => $messagesRepository->findAll(),
+            'form' => $form,
+            'sessions' => $sessions ,
         ]);
     }
 

@@ -18,8 +18,20 @@
                 </div>
               </div>
             </div>
-
-            {# insert sessions here #}
+<div class="card-body pt-4 bg-grey">
+              <div class="chat-content">
+                {% for session in sessions %}
+                  <a href="#">
+                    <div>
+                      <h5 class="font-semibold">{{session.getidTutor().getNom()}}</h5>
+                      <p class="text-muted font-italic">{{session.getBody()}}</p>
+                      <p>{{ session.date ? session.date|date('Y-m-d H:i') : '' }}</p>
+                    </div>
+                  </a>
+                  <hr>
+                {% endfor %}
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-md-7">
@@ -46,11 +58,21 @@
               </div>
             </div>
             <div class="card-footer">
-              <div class="message-form d-flex flex-direction-column align-items-center">
+              <div class="d-flex flex-direction-column align-items-center">
                 <a id="close" href="javascript:void(0)" class="black"><i data-feather="smile"></i></a>
-                <div class="d-flex flex-grow-1 ml-4">
-                  <input id="input" type="text" class="form-control" placeholder="Type your message.." />
+                <div class="d-flex flex-grow-1 ">
+                {% if form_errors(form.body)%}
+                <span class="alert alert-danger">
+                  {{form_errors(form.body)}}
+                </span>
+                {% endif %}
+                {{ form_start(form, {'attr': {'id': 'message'}}) }}
+                {{ form_widget(form.body, { attr: { class: 'form-control form-control-xl', placeholder: 'Type your message, handsome!', style: "width: 125%" }}) }}
+                {{ form_widget(form.idsession, { attr: { value: '1' }}) }}
+                {{ form_widget(form.idsender, { attr: { value: app.user.getId()}}) }}
                 </div>
+                {{ form_end(form) }}
+                <a href="javascript:{}" class="btn btn-primary" onclick="document.getElementById('message').submit()"><i class="bi bi-send-fill"></i></a>
               </div>
             </div>
           </div>
@@ -59,4 +81,5 @@
       </div>
     </section>
   </div>
+  
 {% endblock %}

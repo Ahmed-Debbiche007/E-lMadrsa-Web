@@ -5,7 +5,8 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use App\Repository\MessagesRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity as AcmeAssert;
 #[ORM\Entity(repositoryClass: MessagesRepository::class)]
 class Messages
 {
@@ -20,6 +21,8 @@ class Messages
     #[ORM\Column]
     private ?int $idsender;
 
+    #[Assert\NotBlank]
+    #[AcmeAssert\profanityconstraint]
     #[ORM\Column(length: 255)]
     private ?string $body;
 

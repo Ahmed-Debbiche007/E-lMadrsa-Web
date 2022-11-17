@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Chatsessions;
 use App\Entity\Requests;
 use App\Form\RequestsType;
 use App\Repository\RequestsRepository;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\GoogleCalendar;
 use App\Entity\Token;
+use App\Repository\ChatSessionsRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Repository\TokenRepository;
 
@@ -72,7 +74,7 @@ class RequestsController extends AbstractController
     }
 
     #[Route('/approve/{id}', name: 'app_requests_approve')]
-    public function approve(Request $request, Requests $trequest, TutorshipSessionRepository $tutorshipSessionRepository, RequestsRepository $requestsRepository)
+    public function approve(Request $request, Requests $trequest, TutorshipSessionRepository $tutorshipSessionRepository, ChatSessionsRepository $chatrepo, RequestsRepository $requestsRepository)
     {
         $tutorshipsession = new Tutorshipsessions();
         $tutorshipsession->setIdRequest($trequest);
@@ -83,8 +85,10 @@ class RequestsController extends AbstractController
         $tutorshipsession->setBody($trequest->getBody());
         if (strcmp($trequest->getType(), "MessagesChat") == 0) {
             $tutorshipsession->setUrl("none");
-            $tutorshipSessionRepository->save($tutorshipsession, true);
-            
+            $tutorshipSessionRepository->save($tutorshipsession, true);     
+            $chat = new Chatsessions();
+           $chat->setIdtutorshipsession($tutorshipSessionRepository->findLatest()->getIdsession);
+           $chatrepo->save($chat, true);
             $this->addFlash('success', 'The request has been approved!');
             return $this->redirectToRoute('app_tutorshipsessions_index', [], Response::HTTP_SEE_OTHER);
         } elseif (strcmp($trequest->getType(), "VideoChat") == 0) {

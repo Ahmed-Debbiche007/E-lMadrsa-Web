@@ -37,8 +37,8 @@ class Tutorshipsessions
     #[Assert\Length(
         min: 10,
         max: 100,
-        minMessage: "post title must be at least {{ limit }} characters long",
-        maxMessage: "post title cannot be longer than {{ limit }} characters",
+        minMessage: "Session body must be at least {{ limit }} characters long",
+        maxMessage: "Session body cannot be longer than {{ limit }} characters",
     )]
     #[AcmeAssert\profanityconstraint]
     private ?string $body = null;

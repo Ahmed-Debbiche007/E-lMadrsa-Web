@@ -13,7 +13,8 @@
   document.getElementById('container').outerHTML = container
     $('#emojis').disMojiPicker()
     twemoji.parse(document.body)
-    $('#emojis').picker((emoji) => $('#input').val($('#input').val() + emoji));
+    $('#emojis').picker((emoji) => $('#messages_body').val($('#messages_body').val() +" "+emoji));
+    $('#emojis').picker((emoji) => console.log(emoji));
     $("#container").hide();
     
   $("#close").bind('click', ()=>{
