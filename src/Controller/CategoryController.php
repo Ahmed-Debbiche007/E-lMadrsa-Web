@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
+use App\Repository\PostRepository;
+use Doctrine\ORM\Mapping\PostRemove;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +17,12 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 #[Route('dashboard/category')]
 class CategoryController extends AbstractController
 {
+    private $postrepo ;
+
+    public function __construct(PostRepository $postrepo){
+        $this->postrepo = $postrepo;
+    }
+
     #[Route('/', name: 'app_category_index', methods: ['GET'])]
     public function index(CategoryRepository $categoryRepository): Response
     {
@@ -56,7 +64,7 @@ class CategoryController extends AbstractController
             $categoryRepository->save($category, true);
             /****alert****/
 
-            $this->addFlash('info','added successfully');
+            $this->addFlash('info', 'added successfully');
 
             return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -70,8 +78,10 @@ class CategoryController extends AbstractController
     #[Route('/{categoryid}', name: 'app_category_show', methods: ['GET'])]
     public function show(Category $category): Response
     {
+        $posts = $this->postrepo->findBy(["category" => $category->getCategoryid()]);
         return $this->render('back_office/category/show.html.twig', [
             'category' => $category,
+            'posts' => $posts
         ]);
     }
 
@@ -117,7 +127,7 @@ class CategoryController extends AbstractController
     #[Route('/{categoryid}', name: 'app_category_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, CategoryRepository $categoryRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$category->getCategoryid(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $category->getCategoryid(), $request->request->get('_token'))) {
             $categoryRepository->remove($category, true);
         }
 

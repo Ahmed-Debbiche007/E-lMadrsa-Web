@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PostController extends AbstractController
 {
     #[Route('/', name: 'app_post_index', methods: ['GET'])]
-    public function index(PostRepository $postRepository): Response
+    public function index(PostRepository $postRepository ): Response
     {
         return $this->render('back_office/post/index.html.twig', [
             'posts' => $postRepository->findAll(),
@@ -42,9 +43,10 @@ class PostController extends AbstractController
     }
 
     #[Route('/{postid}', name: 'app_post_show', methods: ['GET'])]
-    public function show(Post $post): Response
+    public function show(Post $post, CommentRepository $commentrepo): Response
     {
         return $this->render('back_office/post/show.html.twig', [
+            'comments' => $commentrepo->findBy(["post"=>$post->getPostid()]),
             'post' => $post,
         ]);
     }

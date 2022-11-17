@@ -1,30 +1,68 @@
 {% extends 'back_office/backbase.html.twig' %}
 
-{% block title %}Category{% endblock %}
-
-
+{% block title %}
+  Category
+{% endblock %}
 
 {% block body %}
-    <h1>Category</h1>
+  <h1>Category</h1>
 
-    <table class="table">
-        <tbody>
-            
-            
-            <tr>
-                
-                <td><img src="{{ asset('uploads/images/' ~ category.getCategoryimage()) }}" alt="taswira" width="200" height="100" /></td>
-            </tr>
-            <tr>
-                
-                <td>{{ category.categoryname }}</td>
-            </tr>
-        </tbody>
-    </table>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>
+          <img src="{{ asset('uploads/images/' ~ category.getCategoryimage()) }}" alt="taswira" width="200" height="100" />
+        </td>
+      </tr>
+      <tr>
+        <td>{{ category.categoryname }}</td>
+        <td>
+          <a href="{{ path('app_category_edit', { categoryid: category.categoryid }) }}"><span class="badge bg-success">edit</span></a>
 
-    <a href="{{ path('app_category_index') }}">back to list</a>
+          {{ include('back_office/category/_delete_form.html.twig') }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br />
+  <div class="row">
+    {% for post in posts %}
+      <div class="col-8 col-lg-4 col-md-7">
+        <div class="card">
+          <div class="card-body px-4 py-4-5">
+            <div class="row">
+              <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start">
+                <div class="mb-2">
+                  <img src="{{ asset('uploads/images/' ~ post.user.getImage()) }}" alt="taswira" height="50" />
+                </div>
+              </div>
+              <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                <h4 class="font-bold">{{ post.posttitle }}</h4>
 
-    <a href="{{ path('app_category_edit', {'categoryid': category.categoryid}) }}">edit</a>
+                <br />
+                <h5 class="font-semibold">{{ (post.postcontent|length) > 20 ? (post.postcontent|slice(0, 35)) ~ '...' : post.postcontent }}</h5>
+                <h6 class="text-muted">
+                  {{ post.postdate ? post.postdate|date('Y-m-d H:i') : '' }} <br /><i class="bi bi-chat-dots-fill"></i>
+                  {{ post.postnbcom }} <br /> <i class="bi bi-arrow-down-up"></i>{{ post.postvote }}
+                </h6>
+              </div>
+              <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                <a href="{{ path('app_post_show', { postid: post.postid }) }}"><span class="badge bg-primary">show</span></a>
 
-    {{ include('back_office/category/_delete_form.html.twig') }}
+                <a href="{{ path('app_post_edit', { postid: post.postid }) }}"><span class="badge bg-success">edit</span></a>
+
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.postid) }}" />
+
+                {{ include('back_office/post/_delete_form.html.twig') }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <tr>
+        <td colspan="9">no records found</td>
+      </tr>
+    {% endfor %}
+  </div>
 {% endblock %}

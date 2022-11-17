@@ -63,7 +63,7 @@ class Category
         return $this;
     }
 
-    public function __toString(){
-        return (string) $this->categoryname;
-    }
+    // public function __toString(){
+    //     return (string) $this->categoryname;
+    // }
 }

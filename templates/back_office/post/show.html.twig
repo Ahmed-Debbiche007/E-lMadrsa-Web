@@ -1,47 +1,103 @@
 {% extends 'back_office/backbase.html.twig' %}
 
-{% block title %}Post{% endblock %}
+{% block title %}
+  Post
+{% endblock %}
 
 {% block body %}
-    <h1>Post</h1>
+  <h1>Post</h1>
+  <div class="row">
+    <div class="col-11 col-lg-11 col-md-11">
+      <div class="card">
+        <div class="card-body px-4 py-4-5">
+          <div class="row">
+            <div class="col-md-2 d-flex justify-content-start">
+              <div class="mb-2">
+                <img src="{{ asset('uploads/images/' ~ post.user.getImage()) }}" alt="taswira" style="width: 150px; height: 150px; border-radius:50%" />
+              </div>
+            </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Posttitle</th>
-                <td>{{ post.posttitle }}</td>
-            </tr>
-            <tr>
-                <th>Postcontent</th>
-                <td>{{ post.postcontent }}</td>
-            </tr>
-            <tr>
-                <th>Userid</th>
-                <td>{{ post.user.getnom() }}</td>
-            </tr>
-            <tr>
-                <th>Categoryid</th>
-                <td>{{ post.category.getCategoryname() }}</td>
-            </tr>
-            <tr>
-                <th>Postvote</th>
-                <td>{{ post.postvote }}</td>
-            </tr>
-            <tr>
-                <th>Postnbcom</th>
-                <td>{{ post.postnbcom }}</td>
-            </tr>
-            <tr>
-                <th>Postdate</th>
-                <td>{{ post.postdate ? post.postdate|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+            <div class="col-md-7 col-lg-7 col-xl-7 col-xxl-7">
+              <h4 class="font-bold">{{ post.posttitle }}</h4>
+              <p class="text-muted font-italic">@{{ post.user.getUserIdentifier() }}</p>
+              <i class="bi bi-calendar-week-fill"></i>
+              <h6 class="text-muted">{{ post.postdate ? post.postdate|date('Y-m-d H:i') : '' }}</h6>
+              <h6 class="text-muted">{{ post.category.getCategoryname() }}</h6>
+            </div>
+            <div class="col-md-3">
+            {% if app.user.getId() == post.user.getId()%}
+              <a href="{{ path('app_post_edit', { postid: post.postid }) }}"><span class="badge bg-success">edit</span></a>
 
-    <a href="{{ path('app_post_index') }}">back to list</a>
-    <br>
+              <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.postid) }}" />
+              {{ include('back_office/post/_delete_form.html.twig') }}
+              {% endif %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start">
+              <div class="mb-2">
+                <h5 class="font-semibold">{{ post.postcontent }}</h5>
+                <i class="bi bi-chat-dots-fill"></i>
+                {{ post.postnbcom }} <br /> <i class="bi bi-arrow-down-up"></i>{{ post.postvote }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <a href="{{ path('app_post_edit', {'postid': post.postid}) }}">edit</a>
-
-    {{ include('back_office/post/_delete_form.html.twig') }}
+      {# ddddddd #}
+      <div class="card">
+        {% for comment in comments %}
+          <div class="card-body px-3 py-3-5">
+            <div class="row">
+              <div class="col-1 d-flex justify-content-start">
+                <div class="mb-3">
+                  <img src="{{ asset('uploads/images/' ~ post.user.getImage()) }}" alt="taswira" style="width: 50px; height: 50px; border-radius:50%" />
+                </div>
+              </div>
+              <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8">
+                <h4 class="font-bold">{{ comment.user.getNom() }}</h4>
+                <p class="text-muted font-italic">@{{ comment.user.getUserIdentifier() }}</p>
+                <i class="bi bi-calendar-week-fill"></i>
+                <h6 class="text-muted">{{ comment.commentdate ? comment.commentdate|date('Y-m-d H:i') : '' }}</h6>
+              </div>
+              <div class="col-md-3">
+                <i class="bi bi-arrow-down-up"></i>{{ comment.commentvote }} <br />
+                {% if app.user.getId() == comment.user.getId()%}
+                <a href="{{ path('app_comment_edit', { commentid: comment.commentid }) }}"><span class="badge bg-success">edit</span></a>
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.commentid) }}" />
+                {{ include('back_office/comment/_delete_form.html.twig') }}
+                {% endif %}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-1 d-flex justify-content-start">
+                <div class="mb-2"></div>
+              </div>
+              <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start">
+                <div class="mb-2">
+                  <h5 class="font-semibold">{{ comment.commentcontent }}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr />
+        {% else %}
+          <div class="card-body px-4 py-4-5">
+            <div class="row">
+              <div class="col-md-5 d-flex justify-content-start">
+                <div class="mb-5">
+                  <h5 class="text-muted">No comments Yet</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      {# lllllllllllllllll #}
+      <div class="mb-2">
+        <a href="{{ path('app_comment_new') }}"><span class="btn btn-primary btn-lg shadow-lg">Ajouter un commentaire</span></a>
+      </div>
+    </div>
+  </div>
 {% endblock %}
