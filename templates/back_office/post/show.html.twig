@@ -8,10 +8,6 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Postid</th>
-                <td>{{ post.postid }}</td>
-            </tr>
-            <tr>
                 <th>Posttitle</th>
                 <td>{{ post.posttitle }}</td>
             </tr>
@@ -21,11 +17,11 @@
             </tr>
             <tr>
                 <th>Userid</th>
-                <td>{{ post.user.getId() }}</td>
+                <td>{{ post.user.getnom() }}</td>
             </tr>
             <tr>
                 <th>Categoryid</th>
-                <td>{{ post.category.getCategoryid() }}</td>
+                <td>{{ post.category.getCategoryname() }}</td>
             </tr>
             <tr>
                 <th>Postvote</th>

@@ -9,17 +9,15 @@
 
     <table class="table">
         <tbody>
+            
+            
             <tr>
-                <th>Categoryid</th>
-                <td>{{ category.categoryid }}</td>
+                
+                <td><img src="{{ asset('uploads/images/' ~ category.getCategoryimage()) }}" alt="taswira" width="200" height="100" /></td>
             </tr>
             <tr>
-                <th>Categoryname</th>
+                
                 <td>{{ category.categoryname }}</td>
-            </tr>
-            <tr>
-                <th>Categoryimage</th>
-                <td>{{ category.categoryimage }}</td>
             </tr>
         </tbody>
     </table>

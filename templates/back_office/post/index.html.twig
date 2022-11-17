@@ -1,81 +1,51 @@
 {% extends 'back_office/backbase.html.twig' %}
 
-
-{% block title %}Post list{% endblock %}
+{% block title %}
+  Post list
+{% endblock %}
 
 {% block pageHeading %}
-    <h1>Liste des publications :</h1>
-    <a href="{{ path('app_post_new')}}">
-        <span class=" btn btn-primary  btn-lg shadow-lg  ">Ajouter une publication</span>
-    </a>
+  <h1>Liste des publications :</h1>
+  <a href="{{ path('app_post_new') }}"><span class="btn btn-primary btn-lg shadow-lg">Ajouter une publication</span></a>
 {% endblock %}
 
 {% block body %}
+  <div class="row">
+    {% for post in posts %}
+      <div class="col-8 col-lg-4 col-md-7">
+        <div class="card">
+          <div class="card-body px-4 py-4-5">
+            <div class="row">
+              <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start">
+                <div class="mb-2">
+                  <img src="{{ asset('uploads/images/' ~ post.user.getImage()) }}" alt="taswira" height="50" />
+                </div>
+              </div>
+              <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                <h4 class="font-bold">{{ post.posttitle }}</h4>
+                <h6 class="text-muted">{{ post.category.getCategoryname() }}</h6>
+                <br />
+                <h5 class="font-semibold">{{ (post.postcontent|length) > 20 ? (post.postcontent|slice(0, 35)) ~ '...' : post.postcontent }}</h5>
+                <h6 class="text-muted">{{ post.postdate ? post.postdate|date('Y-m-d H:i') : '' }} <br><i class="bi bi-chat-dots-fill"></i>
+                {{ post.postnbcom }} <br> <i class="bi bi-arrow-down-up"></i>{{ post.postvote }}</h6>
+              </div>
+              <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                <a href="{{ path('app_post_show', { postid: post.postid }) }}"><span class="badge bg-primary">show</span></a>
 
+                <a href="{{ path('app_post_edit', { postid: post.postid }) }}"><span class="badge bg-success">edit</span></a>
 
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.postid) }}" />
 
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Postid</th>
-                <th>Posttitle</th>
-                <th>Postcontent</th>
-                <th>Userid</th>
-                <th>Categoryid</th>
-                <th>Postvote</th>
-                <th>Postnbcom</th>
-                <th>Postdate</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for post in posts %}
-            <tr>
-                <td>{{ post.postid }}</td>
-                <td>{{ post.posttitle }}</td>
-                <td>{{ post.postcontent }}</td>
-                <td>{{ post.user.getNom() }}</td>
-                <td>{{ post.category.getCategoryname() }}</td>
-                <td>{{ post.postvote }}</td>
-                <td>{{ post.postnbcom }}</td>
-                <td>{{ post.postdate ? post.postdate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-
-
-
-
-
-
-
-                    <form id="my_form" method="post" action="{{ path('app_post_delete', { postid: post.postid }) }}">
-                        <a href="{{ path('app_post_show', { postid: post.postid }) }}"><span class="badge bg-primary">show</span></a>
-
-                        <a href="{{ path('app_post_edit', { postid: post.postid }) }}"><span class="badge bg-success">edit</span></a>
-
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.postid) }}" />
-
-                        <a href="#" class="badge bg-danger" onclick="document.getElementById('my_form').submit();">Delete</a>
-                    </form>
-
-
-
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-
+                {{ include('back_office/post/_delete_form.html.twig') }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <tr>
+        <td colspan="9">no records found</td>
+      </tr>
+    {% endfor %}
+  </div>
 {% endblock %}
-
-
-
-
-
-
-

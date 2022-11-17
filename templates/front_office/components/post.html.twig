@@ -32,7 +32,7 @@
             <p >{{ post.postcontent |length > 35 ? post.postcontent|slice(0, 35) ~ '...' : post.postcontent }}</p>
             <div class="post-extra">
               <a href="#" class="btn-link">READ MORE</a>
-              <a href="#" class="comments-bx"><i class="fa fa-comments-o"></i>20 Comment</a>
+              <a href="#" class="comments-bx"><i class="fa fa-comments-o"></i>{{post.postnbcom}} Comment</a>
             </div>
           </div>
         </div>
