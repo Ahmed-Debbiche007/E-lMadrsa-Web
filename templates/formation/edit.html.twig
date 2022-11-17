@@ -1,4 +1,4 @@
-{% extends 'front_office/base2.html.twig' %}
+{% extends 'back_office/backbase.html.twig' %}
 
 {% block title %}Edit Formation{% endblock %}
 
@@ -7,7 +7,9 @@
 
     {{ include('formation/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_formation_index') }}">back to list</a>
+
 
     {{ include('formation/_delete_form.html.twig') }}
+
+    <a href="{{ path('app_formation_index') }}">Liste Des Formations</a>
 {% endblock %}

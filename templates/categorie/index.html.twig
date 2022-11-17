@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'back_office/backbase.html.twig' %}
 
 {% block title %}Categorie index{% endblock %}
 
@@ -19,8 +19,21 @@
                 <td>{{ categorie.idcategorie }}</td>
                 <td>{{ categorie.nomcategorie }}</td>
                 <td>
-                    <a href="{{ path('app_categorie_show', {'idcategorie': categorie.idcategorie}) }}">show</a>
-                    <a href="{{ path('app_categorie_edit', {'idcategorie': categorie.idcategorie}) }}">edit</a>
+
+
+                    <form id="my_form" method="post" action="{{ path('app_categorie_show', {'idcategorie': categorie.idcategorie}) }}" >
+                        <a href="{{ path('app_categorie_show', {'idcategorie': categorie.idcategorie}) }}">
+                            <span class="badge bg-primary">show</span>
+                        </a>
+                        <a href="{{ path('app_categorie_edit', {'idcategorie': categorie.idcategorie}) }}">
+                            <span class="badge bg-success">edit</span>
+                        </a>
+
+
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~categorie.idcategorie) }}">
+
+                        <a href="#" class="badge bg-danger" onclick="document.getElementById('my_form').submit();">Delete</a>
+                    </form>
                 </td>
             </tr>
         {% else %}

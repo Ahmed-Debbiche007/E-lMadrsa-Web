@@ -15,10 +15,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class FormationController extends AbstractController
 {
 
-    #[Route('/list', name: 'app_examen_listt')]
+    #[Route('/list', name: 'app_formation_listt')]
     public function listExams(FormationRepository $formationRepository)
     {
-        return $this->render('front_office/formations/course.html.twig', [
+        return $this->render('back_office/formations/showForm.html.twig', [
             'formations' => $formationRepository->findAll(),
         ]);
     }
@@ -76,6 +76,7 @@ class FormationController extends AbstractController
             'form' => $form,
         ]);
     }
+
 
     #[Route('/{idformation}', name: 'app_formation_delete', methods: ['POST'])]
     public function delete(Request $request, Formation $formation, FormationRepository $formationRepository): Response

@@ -1,4 +1,18 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+<table>
+
+    <tr>
+        <div class="form-group position-relative has-icon-left mb-4">
+            {{ form_widget(form.nomcompetence, { attr: { class: 'form-control form-control-xl', placeholder: 'Nom de Compétence ' }, size : 5  }) }}
+            <td> {{ form_errors(form.nomcompetence) }}</td>
+
+        </div>
+    </tr>
+
+</table>
+<button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+
+
+
+

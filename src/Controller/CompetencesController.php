@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/competences')]
+#[Route('/dashboard/competences')]
 class CompetencesController extends AbstractController
 {
     #[Route('/', name: 'app_competences_index', methods: ['GET'])]

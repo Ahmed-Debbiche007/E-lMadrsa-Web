@@ -21,6 +21,11 @@ class Attestation
     #[Assert\NotBlank(message: "Le champ idParticipation  est obligatoire")]
     private ?int $idparticipation;
 
+    #[ORM\ManyToOne(inversedBy: 'attestations')]
+    #[ORM\JoinColumn(name: 'idparticipation', referencedColumnName: 'idparticipation')]
+    //#[ORM\JoinColumn(onDelete: "CASCADE",name: 'classroom_ref',referencedColumnName: 'ref')]
+    private ?Participation $participation;
+
 
     
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -55,6 +60,34 @@ class Attestation
 
         return $this;
     }
+
+
+    public function getParticipation(): ?Participation
+    {
+        return $this->participation;
+    }
+
+
+    public function setParticipation(?Participation $participation): void
+    {
+        $this->participation = $participation;
+    }
+    public function getUser(): ?User
+    {
+        return $this->participation.$this->getUser();
+    }
+
+
+    public function setUser(?User $user): void
+    {
+        $this->user = $user;
+    }
+
+
+
+
+
+
 
 
 }

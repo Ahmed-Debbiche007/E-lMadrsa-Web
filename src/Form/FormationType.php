@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\Formation;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class FormationType extends AbstractType
 {
@@ -14,7 +16,16 @@ class FormationType extends AbstractType
         $builder
             ->add('sujet')
             ->add('description')
-            ->add('Difficulte')
+            ->add('Difficulte', ChoiceType::class,array (
+
+                'choices'=>array(
+                    'facile'=>'facile',
+                    'moyen'=>'moyen',
+                    'difficile'=>'difficile',
+
+                )
+            ))
+            //->add('Difficulte')
             ->add('duree')
             ->add('prerequis')
             //->add('idprerequis')

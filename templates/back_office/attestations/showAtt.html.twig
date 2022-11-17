@@ -1,0 +1,26 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %} exams list{% endblock %}
+
+{% block body %}
+
+
+    {% for i in attestations %}
+        <div class=" ">
+            <div class="card" style="    flex: auto; box-sizing: border-box; margin: 1rem .25em; ">
+                {#<img class="card-img-top" src="" alt="Card image cap"> #}
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.idparticipation }}</h5>
+                    <p class="card-text"> {{ i.dateAcq|date('d-m-Y') }}</p>
+                    <a href="#" class="btn btn-primary">Génerer Attestation</a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    {% endfor %}
+
+{% endblock %}

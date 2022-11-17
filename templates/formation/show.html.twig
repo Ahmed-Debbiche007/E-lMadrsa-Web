@@ -1,4 +1,4 @@
-{% extends 'front_office/base2.html.twig' %}
+{% extends 'back_office/backbase.html.twig' %}
 
 {% block title %}Formation{% endblock %}
 
@@ -28,25 +28,25 @@
                 <td>{{ formation.duree }}</td>
             </tr>
             <tr>
-                <th>Idprerequis</th>
-                <td>{{ formation.idprerequis }}</td>
+                <th>prerequis</th>
+                <td>{{ formation.prerequis }}</td>
             </tr>
             <tr>
-                <th>Idcompetence</th>
-                <td>{{ formation.idcompetence }}</td>
+                <th>competence</th>
+                <td>{{ formation.competences }}</td>
             </tr>
             <tr>
-                <th>Idexamen</th>
-                <td>{{ formation.idexamen }}</td>
+                <th>examen</th>
+                <td>{{ formation.examen }}</td>
             </tr>
             <tr>
-                <th>Idcategorie</th>
-                <td>{{ formation.idcategorie }}</td>
+                <th>categorie</th>
+                <td>{{ formation.categorie }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_formation_index') }}">back to list</a>
+
 
     <a href="{{ path('app_formation_edit', {'idformation': formation.idformation}) }}">edit</a>
 

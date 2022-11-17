@@ -12,8 +12,9 @@ class AttestationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('idparticipation')
+            ->add('participation')
             ->add('dateAcq')
+
         ;
     }
 

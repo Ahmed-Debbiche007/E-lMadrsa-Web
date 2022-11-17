@@ -41,8 +41,8 @@ class Formation
     #[Assert\NotBlank(message: "Prerequis Formation est obligatoire")]
     private ?Prerequis $prerequis;
 
-    #[ORM\Column]
-    private ?int $idprerequis;
+    /*#[ORM\Column]
+    private ?int $idprerequis;*/
 
 
 
@@ -58,8 +58,8 @@ class Formation
     #[Assert\NotBlank(message: "nom de l'examen est obligatoire")]
     private ?Examen $examen;
 
-    #[ORM\Column]
-    private ?int $idexamen;
+    /*#[ORM\Column]
+    private ?int $idexamen;*/
 
     #[ORM\Column]
     private ?int $idcategorie;

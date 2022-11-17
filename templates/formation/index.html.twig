@@ -5,7 +5,7 @@
     <h1>Liste des Formations :</h1>
 {% endblock %}
 {% block body %}
-    <h1>Formation index</h1>
+
 
     <table class="table">
         <thead>
@@ -15,10 +15,10 @@
                 <th>Description</th>
                 <th>Difficulte</th>
                 <th>Duree</th>
-                <th>Idprerequis</th>
-                <th>Idcompetence</th>
-                <th>Idexamen</th>
-                <th>Idcategorie</th>
+                <th>NomPrerequis</th>
+                <th>Nomcompetence</th>
+                <th>NomExamen</th>
+                <th>NomCategorie</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -30,13 +30,28 @@
                 <td>{{ formation.description }}</td>
                 <td>{{ formation.difficulte }}</td>
                 <td>{{ formation.duree }}</td>
-                <td>{{ formation.idprerequis }}</td>
-                <td>{{ formation.idcompetence }}</td>
-                <td>{{ formation.idexamen }}</td>
-                <td>{{ formation.idcategorie }}</td>
+                <td>{{ formation.prerequis }}</td>
+                <td>{{ formation.competences }}</td>
+                <td>{{ formation.examen }}</td>
+                <td>{{ formation.categorie }}</td>
                 <td>
-                    <a href="{{ path('app_formation_show', {'idformation': formation.idformation}) }}">show</a>
-                    <a href="{{ path('app_formation_edit', {'idformation': formation.idformation}) }}">edit</a>
+
+
+
+                    <form id="my_form" method="post" action="{{ path('app_formation_show', {'idformation': formation.idformation}) }}" >
+                        <a href="{{ path('app_formation_show', {'idformation': formation.idformation}) }}">
+                            <span class="badge bg-primary">show</span>
+                        </a>
+                        <a href="{{ path('app_formation_edit', {'idformation': formation.idformation}) }}">
+                            <span class="badge bg-success">edit</span>
+                        </a>
+
+
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~formation.idformation) }}">
+
+                        <a href="#" class="badge bg-danger" onclick="document.getElementById('my_form').submit();">Delete</a>
+                    </form>
+
                 </td>
             </tr>
         {% else %}
@@ -47,5 +62,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_formation_new') }}">Create new</a>
+    <a href="{{ path('app_formation_new') }}">Create new Formation</a>
+
+
 {% endblock %}

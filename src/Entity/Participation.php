@@ -13,6 +13,18 @@ class Participation
     #[ORM\Column]
     private ?int $idparticipation;
 
+
+    #[ORM\ManyToOne(inversedBy: 'participations')]
+    #[ORM\JoinColumn(name: 'idUser', referencedColumnName: 'id')]
+    //#[ORM\JoinColumn(onDelete: "CASCADE",name: 'classroom_ref',referencedColumnName: 'ref')]
+    private ?User $user;
+
+    #[ORM\ManyToOne(inversedBy: 'participations')]
+    #[ORM\JoinColumn(name: 'idformation', referencedColumnName: 'idformation')]
+    //#[ORM\JoinColumn(onDelete: "CASCADE",name: 'classroom_ref',referencedColumnName: 'ref')]
+    private ?Formation $formation;
+
+
     #[ORM\Column]
     private ?int $iduser;
 
@@ -62,6 +74,32 @@ class Participation
 
         return $this;
     }
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
 
+
+    public function setUser(?User $user): void
+    {
+        $this->user = $user;
+    }
+
+
+    public function getFormation(): ?Formation
+    {
+        return $this->formation;
+    }
+
+
+    public function setFormation(?Formation $formation): void
+    {
+        $this->formation = $formation;
+    }
+
+    public function  __toString()
+    {
+        return (String)$this->idparticipation ;
+    }
 
 }

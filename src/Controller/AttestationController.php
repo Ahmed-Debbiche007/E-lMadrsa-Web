@@ -21,6 +21,14 @@ class AttestationController extends AbstractController
         ]);
     }
 
+    #[Route('/list', name: 'app_attestation_listt')]
+    public function listExams(AttestationRepository $attestationRepository)
+    {
+        return $this->render('back_office/attestations/showAtt.html.twig', [
+            'attestations' => $attestationRepository->findAll(),
+        ]);
+    }
+
     #[Route('/new', name: 'app_attestation_new', methods: ['GET', 'POST'])]
     public function new(Request $request, AttestationRepository $attestationRepository): Response
     {
