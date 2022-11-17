@@ -21,6 +21,9 @@ services:
             - '../src/Kernel.php'
 parameters:
     images_directory: '%kernel.project_dir%/public/uploads/images'
+    app.email: '%env(EMAIL)%'
+    app.dsn: '%env(MAILER_DSN)%'
+
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

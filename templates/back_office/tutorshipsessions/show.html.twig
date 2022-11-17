@@ -1,28 +1,27 @@
-{% extends 'base.html.twig' %}
+{% extends 'back_office/backbase.html.twig' %}
 
-{% block title %}Tutorshipsessions{% endblock %}
+{% block title %}
+  Tutorship Sessions
+{% endblock %}
+{% block pageHeading %}
+  <h1>Tutorship </h1>
+{% endblock %}
 
 {% block body %}
     <h1>Tutorshipsessions</h1>
 
     <table class="table">
         <tbody>
+
             <tr>
-                <th>Idsession</th>
-                <td>{{ tutorshipsession.idsession }}</td>
+                <th>Student</th>
+                <td>{{ tutorshipsession.idstudent.nom }}</td>
             </tr>
             <tr>
-                <th>Idstudent</th>
-                <td>{{ tutorshipsession.idstudent }}</td>
+                <th>Tutor</th>
+                <td>{{ tutorshipsession.idtutor.nom }}</td>
             </tr>
-            <tr>
-                <th>Idtutor</th>
-                <td>{{ tutorshipsession.idtutor }}</td>
-            </tr>
-            <tr>
-                <th>Idrequest</th>
-                <td>{{ tutorshipsession.idrequest }}</td>
-            </tr>
+
             <tr>
                 <th>Url</th>
                 <td>{{ tutorshipsession.url }}</td>
@@ -32,8 +31,12 @@
                 <td>{{ tutorshipsession.type }}</td>
             </tr>
             <tr>
+                <th>Body</th>
+                <td>{{ tutorshipsession.body }}</td>
+            </tr>
+            <tr>
                 <th>Date</th>
-                <td>{{ tutorshipsession.date ? tutorshipsession.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ tutorshipsession.date ? tutorshipsession.date|date('Y-m-d H:i') : '' }}</td>
             </tr>
         </tbody>
     </table>
@@ -42,5 +45,5 @@
 
     <a href="{{ path('app_tutorshipsessions_edit', {'idsession': tutorshipsession.idsession}) }}">edit</a>
 
-    {{ include('tutorshipsessions/_delete_form.html.twig') }}
+    {{ include('back_office/tutorshipsessions/_delete_form.html.twig') }}
 {% endblock %}

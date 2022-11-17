@@ -1,0 +1,41 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}Reclamation index{% endblock %}
+
+{% block body %}
+    <h1>Reclamation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idreclamation</th>
+                <th>Sujet</th>
+                <th>Description</th>
+                <th>Daterec</th>
+                <th>Iduser</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ reclamation.idreclamation }}</td>
+                <td>{{ reclamation.sujet }}</td>
+                <td>{{ reclamation.description }}</td>
+                <td>{{ reclamation.daterec ? reclamation.daterec|date('Y-m-d') : '' }}</td>
+                <td>{{ reclamation.iduser }}</td>
+                <td>
+                    <a href="{{ path('app_reclamation_show', {'idreclamation': reclamation.idreclamation}) }}">show</a>
+                    <a href="{{ path('app_reclamation_edit', {'idreclamation': reclamation.idreclamation}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reclamation_new') }}">Create new</a>
+{% endblock %}

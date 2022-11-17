@@ -12,6 +12,16 @@ class BackOfficeController extends AbstractController
     public function index(): Response
     {
         
+        $user = $this->getUser();
+        if (!$user){
+
+            return $this->redirect('/login');
+        }
+/*
+        if(!$user->isAdmin()){
+            return $this->redirect('/');
+        }
+*/
         return $this->render('back_office/backbase.html.twig', [
             'controller_name' => 'BackOfficeController',
         ]);
