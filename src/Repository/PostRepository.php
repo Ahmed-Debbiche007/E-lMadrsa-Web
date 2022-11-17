@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+
+use App\Entity\Category;
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -38,7 +40,14 @@ class PostRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+   /* public function getPostsByCategory(Category $entity)  {
+        $id=$entity.getCategoryid();
+        $qb= $this->createQueryBuilder('p')
+            ->where('p.id=:id')
+            ->setParameter('id',$id);
+        return $qb->getQuery()
+            ->getResult();
+    }
 //    /**
 //     * @return Post[] Returns an array of Post objects
 //     */

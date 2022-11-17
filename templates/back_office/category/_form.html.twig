@@ -1,0 +1,25 @@
+{{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+<table>
+    <tr>
+        <div class="form-group position-relative has-icon-left mb-4">
+            {{ form_widget(form.categoryname, { attr: { class: 'form-control form-control-xl', placeholder: 'category name ' } }) }}
+
+            <td>{{ form_errors(form.categoryname) }}</td>
+        </div>
+    </tr>
+    <tr>
+        <div class="form-group position-relative has-icon-left mb-4">
+            {{ form_widget(form.categoryimage, { attr: { class: 'form-control form-control-xl', placeholder: 'image  ' } }) }}
+
+
+        </div>
+    </tr>
+
+
+
+
+
+
+</table>
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
