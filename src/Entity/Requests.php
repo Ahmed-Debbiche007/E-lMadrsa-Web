@@ -32,6 +32,15 @@ class Requests
     #[AcmeAssert\profanityconstraint]
     private ?string $body;
 
+     /**
+     * @var datetime
+     * @Assert\Type(
+     *      type = "\DateTime",
+     *      message = "vacancy.date.valid",
+     * )
+     * @Assert\GreaterThanOrEqual(
+     *      value = "today")
+     * */
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 

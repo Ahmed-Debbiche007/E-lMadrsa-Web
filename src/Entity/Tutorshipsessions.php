@@ -19,6 +19,17 @@ class Tutorshipsessions
     private ?string $url;
     #[ORM\Column(length: 255)]
     private ?string $type;
+
+     /**
+     * @var datetime
+     * @Assert\Type(
+     *      type = "\DateTime",
+     *      message = "vacancy.date.valid",
+     * )
+     * @Assert\GreaterThanOrEqual(
+     *      value = "today")
+     * */
+    
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
