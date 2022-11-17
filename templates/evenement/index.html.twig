@@ -1,49 +1,56 @@
 {% extends 'back_office/backbase.html.twig' %}
 
-
+{% block title %}
+  Event
+{% endblock %}
+{% block pageHeading %}
+  <h1>Event</h1>
+{% endblock %}
 {% block body %}
-   
+  <div class="card-body">
+    <a href="{{ path('app_evenement_new') }}"><span class="badge bg-success">+</span></a>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Evenement</th>
+        <th>Category</th>
+        <th>Organizer</th>
+        <th>Description</th>
 
-    <div class="row">
-              <h5 class="card-title">Evenements</h5>
+        <th>Date</th>
+        <th>Etat Evenement</th>
+        <th>actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for evenement in evenements %}
+        <tr>
+          <td>
+          <div class="avatar avatar-xl">
+                {% if evenement.getImage() %}
+                  <img src={{ asset('uploads/images/' ~ evenement.getImage()) }} alt="taswira">
+                {% endif %}
+              </div>
+          {{ evenement.nomEvenement }}
+          </td>
+          <td>{{ evenement.idcate.getTypeEvenement() }}</td>
+          <td>{{ evenement.idUser }}</td>
+          <td>{{ evenement.description }}</td>
 
-              <!-- Table with stripped rows -->
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Id</th>
-                <th>NomEvenement</th>
-                <th>type category</th>
-                <th>proiertriter</th>
-                <th>Description</th>
-                <th>Image</th>
-                <th>Date</th>
-                <th>EtatEvenement</th>
-                <th>actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for evenement in evenements %}
-            <tr>
-                <td>{{ evenement.nomEvenement }}</td>
-                <td>{{ evenement.idcate.getTypeEvenement() }}</td>
-                
-                <td>{{ evenement.description }}</td>
-                <td>{{ evenement.image }}</td>
-                <td>{{ evenement.date ? evenement.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ evenement.etatEvenement }}</td>
-                <td>
-                    <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}">show</a>
-                    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-                </tbody>
-              </table>
-
-    <a href="{{ path('app_evenement_new') }}">Create new</a>
+          <td>{{ evenement.date ? evenement.date|date('Y-m-d H:i:s') : '' }}</td>
+          <td>{{ evenement.etatEvenement }}</td>
+          <td>
+            <a class="badge bg-primary" href="{{ path('app_evenement_show', { id: evenement.id }) }}">show</a>
+            <a class="badge bg-success" href="{{ path('app_evenement_edit', { id: evenement.id }) }}">edit</a>
+            {{ include('evenement/_delete_form.html.twig') }}
+          </td>
+        </tr>
+      {% else %}
+        <tr>
+          <td colspan="7">no records found</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}

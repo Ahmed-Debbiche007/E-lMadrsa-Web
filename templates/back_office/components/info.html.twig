@@ -11,33 +11,8 @@
 		  
         </div>
 
-	<div class="card">
-		<div class="card-body py-4 px-4">
-			<div class="d-flex justify-content-between">
-				<div class="avatar avatar-xl">
-					
-						
-					
-						<img src="back/assets/images/faces/2.jpg" alt="taswira">
-					
-
-				</div>
-				<a href="/dashboard/profile">
-					<div class="ms-3 name">
-						<h5 class="font-bold mb-0">
-							</h5>
-						<h6 class="text-muted mb-3">@</h6>
-
-					</div>
-				</a>
-				<a href="/logout">
-					<div>
-						<p class="text-right">logout</p>
-					</div>
-				</a>
-			</div>
-		</div>
-	</div>
+        <div class="ms-3 name">
+          <a href="/dashboard/profile"><h6 class="text-muted mb-3">@{{ app.user.userIdentifier }}</h6></a>
 
           <a href="/logout"><p>logout</p></a>
         </div>

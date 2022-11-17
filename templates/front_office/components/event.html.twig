@@ -19,13 +19,12 @@
        
           <div class="event-bx">
             <div class="action-box">
-              <img src={{ evenement.image }} width="110%" height="120%" alt=""/>
+              
             </div>
             <div class="info-bx d-flex">
               <div>
                 <div class="event-time">
-                  <div class="event-date">{{ evenement.date ? evenement.date|date('d') : '' }}</div>
-                  <div class="event-month">{{ evenement.date ? evenement.date|date('m') : '' }}</div>
+                  <img style="width:70px ;" src={{ asset('uploads/images/' ~ evenement.getImage()) }} alt="taswira">
                 </div>
               </div>
               <div class="event-info">
@@ -37,12 +36,7 @@
                       {{ evenement.date ? evenement.date|date('H:i:s') : '' }}
                     </a>
                   </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-map-marker"></i>
-                      {{ evenement.idcate.getTypeEvenement() }}
-                    </a>
-                  </li>
+                  
                 </ul>
                 <p>{{ evenement.description }}</p>
               </div>

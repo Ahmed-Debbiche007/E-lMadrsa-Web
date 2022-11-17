@@ -64,7 +64,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->tutorshipsessions = new ArrayCollection();
     }
 
-    #[ORM\OneToMany(mappedBy: 'idTutor', targetEntity: Requests::class)]
+    
 
     #[ORM\OneToMany(mappedBy: 'idStudent', targetEntity: Requests::class)]
     private Collection $studentRequest;
@@ -74,8 +74,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
        
 
-    public function getId(): ?int
+    public function getId(): int
     {
+        return $this->id;
     }
 
     /**
