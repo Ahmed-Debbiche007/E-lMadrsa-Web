@@ -6,7 +6,7 @@
     <link rel="icon" href="{{ asset('front/assets/images/favicon.ico') }}" type="image/x-icon"/>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('front/assets/images/favicon.png') }}"/>
 
-    <title>
+     <title>
         {% block title %}Dashboard {% endblock %}
     </title>
 
@@ -35,18 +35,18 @@
     </div>
     <div class="page-content bg-white">
         {% include('front_office/components/header.html.twig') %}
-        <div class="content-block">
 
-            {% block body %}{% endblock %}
+        <div  style="display: flex ; flex-flow : wrap  ; " >
 
-
+             {% block body %}{% endblock %}
         </div>
-        {%include('front_office/components/footer.html.twig') %}
+
+
+         {%include('front_office/components/footer.html.twig') %}
 
     </div>
     {% include('front_office/components/scripts.html.twig') %}
 </div>
 </body>
-<script src="{{ asset('front/assets/js/html5shiv.min.js') }}"></script>
-<script src="{{ asset('front/assets/js/respond.min.js') }}"></script>
+
 </html>

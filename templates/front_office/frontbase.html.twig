@@ -1,119 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
+<head>
 
-		<!-- META ============================================= -->
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="keywords" content=""/>
-		<meta name="author" content=""/>
-		<meta
-		name="robots" content=""/>
+	<link rel="icon" href="{{ asset('front/assets/images/favicon.ico') }}" type="image/x-icon"/>
+	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('front/assets/images/favicon.png') }}"/>
 
-		<!-- DESCRIPTION -->
-		<meta
-		name="description" content="EduChamp : Education HTML Template"/>
+	<!-- PAGE TITLE  ============================================= -->
+	<title>
+		{% block title %}Dashboard {% endblock %}
+	</title>
 
-		<!-- OG -->
-		<meta property="og:title" content="EduChamp : Education HTML Template"/>
-		<meta property="og:description" content="EduChamp : Education HTML Template"/>
-		<meta property="og:image" content=""/>
-		<meta
-		name="format-detection" content="telephone=no">
+	{% block body %}{% endblock %}
 
-		<!-- FAVICONS ICON ============================================= -->
-		<link rel="icon" href="{{ asset('front/assets/images/favicon.ico')}}" type="image/x-icon"/>
-		<link
-		rel="shortcut icon" type="image/x-icon" href="{{ asset('front/assets/images/favicon.png')}}"/>
+	<link rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/assets.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/bootstrap/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/typography.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{   asset('front/assets/css/shortcodes/shortcodes.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/style.css') }}">
+	<link class="skin" rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/color/color-1.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/revolution/css/layers.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/revolution/css/settings.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/revolution/css/navigation.css') }}">
+	<script src="{{ asset('front/assets/js/html5shiv.min.js') }}"></script>
+	<script src="{{ asset('front/assets/js/respond.min.js') }}"></script>
+</head>
 
-		<!-- PAGE TITLE HERE ============================================= -->
-		<title>EduChamp : Education HTML Template
-		</title>
 
-		<!-- MOBILE SPECIFIC ============================================= -->
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+<body id="bg">
+<div class="page-wraper">
 
-		<!--[if lt IE 9]>
-			<script src="front/assets/js/html5shiv.min.js"></script>
-			<script src="front/assets/js/respond.min.js"></script>
-			<![endif]-->
+	{% include('front_office/components/navbar.html.twig') %}
 
-		<!-- All PLUGINS CSS ============================================= -->
-		<link
-		rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/assets.css')}}"> <!-- TYPOGRAPHY ============================================= -->
-		<link
-		rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/typography.css')}}">
+	<div class="page-content bg-white">
+		{% include('front_office/components/header.html.twig') %}
+		<div class="content-block">
+			{% include('front_office/components/carroussel.html.twig') %}
+			{#  {%include('front_office/components/course.html.twig') %} #}
+			{% include('front_office/components/form.html.twig') %}
+			{% include('front_office/components/event.html.twig') %}
+			{%  include('front_office/components/testimonial.html.twig') %}
+			{%  include('front_office/components/post.html.twig') %}
 
-		<!-- SHORTCODES ============================================= -->
-		<link
-		rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/shortcodes/shortcodes.css')}}">
-
-		<!-- STYLESHEETS ============================================= -->
-		<link rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/style.css')}}">
-		<link
-		class="skin" rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/color/color-1.css')}}">
-
-		<!-- REVOLUTION SLIDER CSS ============================================= -->
-		<link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/revolution/css/layers.css')}}">
-		<link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/revolution/css/settings.css')}}">
-		<link
-		rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/revolution/css/navigation.css')}}">
-	<!-- REVOLUTION SLIDER END -->
-	</head>
-	<body id="bg">
-		<div class="page-wraper">
-			<div id="loading-icon-bx"></div>
-			<!-- Header Top ==== -->
-           {{ include('front_office/components/navbar.html.twig') }}
-			<!-- Header Top END ==== -->
-			<!-- Content -->
-			<div class="page-content bg-white">
-				<!-- Main Slider -->
-				{{ include('front_office/components/header.html.twig') }}
-				<!-- Main Slider -->
-				<div class="content-block">
-
-					<!-- Our Services -->
-					{{ include('front_office/components/carroussel.html.twig') }}
-					<!-- Our Services END -->
-
-					<!-- Popular Courses -->
-					
-					{{ include('front_office/components/course.html.twig') }}
-								
-					<!-- Popular Courses END -->
-
-					<!-- Form -->
-					{{ include('front_office/components/form.html.twig') }}
-					<!-- Form END -->
-					
-					{{ include('front_office/components/event.html.twig') }}
-						
-
-					<!-- Testimonials -->
-					
-					{{ include('front_office/components/testimonial.html.twig') }}
-						
-					<!-- Testimonials END -->
-
-					<!-- Recent News -->
-					
-					{{ include('front_office/components/post.html.twig') }}
-						
-					<!-- Recent News End -->
-
-				</div>
-				<!-- contact area END -->
-			</div>
-			<!-- Content END-->
-			<!-- Footer ==== -->
-			{{ include('front_office/components/footer.html.twig') }}
-			<!-- Footer END ==== -->
-			
 		</div>
-{{ include('front_office/components/scripts.html.twig') }}
+		{%include('front_office/components/footer.html.twig') %}
 
-	</body>
-
+	</div>
+	{% include('front_office/components/scripts.html.twig') %}
+</div>
+</body>
+<script src="{{ asset('front/assets/js/html5shiv.min.js') }}"></script>
+<script src="{{ asset('front/assets/js/respond.min.js') }}"></script>
 </html>

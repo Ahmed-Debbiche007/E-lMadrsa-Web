@@ -15,10 +15,10 @@
                 <th>Description</th>
                 <th>Difficulte</th>
                 <th>Duree</th>
-                <th>NomPrerequis</th>
-                <th>Nomcompetence</th>
-                <th>NomExamen</th>
-                <th>NomCategorie</th>
+                <th>NomPre</th>
+                <th>Nomcomp</th>
+                <th>NomExam</th>
+                <th>NomCat</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -26,11 +26,11 @@
         {% for formation in formations %}
             <tr>
                 <td>{{ formation.idformation }}</td>
-                <td>{{ formation.sujet }}</td>
-                <td>{{ formation.description }}</td>
+                <td>{{ formation.sujet |length > 7 ? formation.sujet|slice(0, 35) ~ '...' : formation.sujet }}</td>
+                <td>{{ formation.description |length > 7 ? formation.description|slice(0, 35) ~ '...' : formation.description }}</td>
                 <td>{{ formation.difficulte }}</td>
                 <td>{{ formation.duree }}</td>
-                <td>{{ formation.prerequis }}</td>
+                <td>{{ formation.prerequis |length > 7 ? formation.prerequis|slice(0, 35) ~ '...' : formation.prerequis }}</td>
                 <td>{{ formation.competences }}</td>
                 <td>{{ formation.examen }}</td>
                 <td>{{ formation.categorie }}</td>

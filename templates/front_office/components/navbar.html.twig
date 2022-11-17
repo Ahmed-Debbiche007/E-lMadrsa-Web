@@ -15,7 +15,7 @@
         <div class="topbar-right">
           <ul>
             <li>
-              <a href="/login">Login</a>
+              <a href="{{ path('app_login') }}">Login</a>
             </li>
             <li>
               <a href="/register">Register</a>
@@ -86,6 +86,11 @@
                 </li>
               </ul>
             </li>
+
+
+
+
+
             <li>
               <a href="javascript:;">
                 Pages
@@ -188,20 +193,13 @@
               </a>
               <ul class="sub-menu">
                 <li>
-                  <a href="blog-classic-grid.html">Blog Classic</a>
+                  <a href="/dashboard/category">Blog Category</a>
                 </li>
                 <li>
-                  <a href="blog-classic-sidebar.html">Blog Classic Sidebar</a>
+                  <a href="blog-classic-sidebar.html">Blog Posts</a>
                 </li>
-                <li>
-                  <a href="blog-list-sidebar.html">Blog List Sidebar</a>
-                </li>
-                <li>
-                  <a href="blog-standard-sidebar.html">Blog Standard Sidebar</a>
-                </li>
-                <li>
-                  <a href="blog-details.html">Blog Details</a>
-                </li>
+
+
               </ul>
             </li>
             <li class="nav-dashboard">
@@ -255,6 +253,21 @@
                       <a href="admin/mailbox-read.html">Mail Read</a>
                     </li>
                   </ul>
+                </li>
+              </ul>
+            </li>
+
+            <li class="active">
+              <a href="javascript:;">
+                Examens
+                <i class="fa fa-chevron-down"></i>
+              </a>
+              <ul class="sub-menu">
+                <li>
+                  <a href="dashboard/examen/list">Examen 1</a>
+                </li>
+                <li>
+                  <a href="index-2.html">Examen 2</a>
                 </li>
               </ul>
             </li>
