@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Question;
 use App\Form\QuestionType;
+use App\Repository\CategorieRepository;
+use App\Repository\ExamenRepository;
 use App\Repository\QuestionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +15,19 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/dashboard/questions')]
 class QuestionController extends AbstractController
 {
+
+
+    #[Route('/list/questions', name: 'app_questions_listt')]
+    public function listQuestions(QuestionRepository $questionRepository, CategorieRepository $categorieRepository)
+    {
+        return $this->render('front_office/questions/questions.html.twig', [
+            'questions' => $questionRepository->findAll(),
+            'categories'=>$categorieRepository->findAll(),
+        ]);
+    }
+
+
+
     #[Route('/', name: 'app_question_index', methods: ['GET'])]
     public function index(QuestionRepository $questionRepository): Response
     {

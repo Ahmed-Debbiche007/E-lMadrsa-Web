@@ -3,12 +3,10 @@
 {% block title %}Reclamation index{% endblock %}
  {% block pageHeading %}
 <h1>Liste des Réclamations :</h1>
-<a href="{{ path('app_reclamation_new') }}">
-    <span class=" btn btn-primary  btn-lg shadow-lg  ">Ajouter une réclamation </span>
-</a>
+
 {% endblock %}
 {% block body %}
-    <table class="table">
+    <table class="table" id="table1">
         <thead>
             <tr>
                 <th>Idreclamation</th>
@@ -51,4 +49,18 @@
         </tbody>
     </table>
 
+    <script
+            src="https://code.jquery.com/jquery-1.12.4.js"
+            integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ asset('https://cdn.datatables.net/v/bs4/jqc-1.12.4/dt-1.13.1/datatables.min.js') }}"></script>
+    <script type="application/javascript">
+        {}
+        console.log(jQuery().jquery);
+
+        $(document).ready(function () {
+            $('#table1').DataTable();
+        });
+
+    </script>
 {% endblock %}

@@ -5,15 +5,13 @@
 {% endblock %}
 {% block pageHeading %}
     <h1>Liste des Participations :</h1>
-    <a href="{{ path('app_participation_new') }}">
-        <span class=" btn btn-primary  btn-lg shadow-lg  ">Ajouter une participation </span>
-    </a>
+
 {% endblock %}
 {% block body %}
 
 
     <div class="card-body">
-        <table class="table table-striped" id="table1">
+        <table class="table " id="table1">
             <thead>
             <tr>
 
@@ -52,13 +50,28 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="7">no records found</td>
+                    <td colspan="7">aucune participation trouvée </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
 
+
+    <script
+            src="https://code.jquery.com/jquery-1.12.4.js"
+            integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ asset('https://cdn.datatables.net/v/bs4/jqc-1.12.4/dt-1.13.1/datatables.min.js') }}"></script>
+    <script type="application/javascript">
+        {}
+        console.log(jQuery().jquery);
+
+        $(document).ready(function () {
+            $('#table1').DataTable();
+        });
+
+    </script>
 
 {% endblock %}
 

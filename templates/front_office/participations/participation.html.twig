@@ -1,0 +1,61 @@
+
+{% extends 'front_office/base2.html.twig' %}
+
+{% block title %}  liste des réclamation {% endblock %}
+
+
+{% block filtrage %}
+
+
+
+
+
+
+{% endblock %}
+
+
+{% block body %}
+
+
+
+    <table class="table table-striped" id="table1" style="margin: 40px;">
+        <thead>
+        <tr>
+
+            <th>User</th>
+            <th>Formation</th>
+            <th>Resultat</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for participation in participations %}
+            <tr>
+
+                <td>{{ participation.user.getNom() }}</td>
+                <td>{{ participation.formation.getSujet() }}</td>
+
+                <td>{{ participation.resultat }}</td>
+
+                <td>
+                    <form id="my_form" method="post" action="{{ path('app_participation_show', {'idparticipation': participation.idparticipation})}}" >
+                        <a href="{{ path('app_participation_show', {'idparticipation': participation.idparticipation}) }}">
+                            <span class="">afficher</span>
+                        </a>
+
+                    </form>
+
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </table>
+
+
+{% endblock %}

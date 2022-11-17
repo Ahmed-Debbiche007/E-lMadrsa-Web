@@ -30,7 +30,7 @@
       <div class="container clearfix">
         <!-- Header Logo ==== -->
         <div class="menu-logo">
-          <a href="/"><h1>E-lMadrsa</h1></a>
+          <a href="/"><h3>E-lMadrsa</h3></a>
         </div>
         <!-- Mobile Nav Button ==== -->
         <button class="navbar-toggler collapsed menuicon justify-content-end" type="button" data-toggle="collapse" data-target="#menuDropdown" aria-controls="menuDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -271,13 +271,32 @@
               </a>
               <ul class="sub-menu">
                 <li>
-                  <a href="dashboard/examen/list">Examen 1</a>
+                  <a href="{{ path('app_examen_listt')}}">Examen </a>
                 </li>
                 <li>
-                  <a href="index-2.html">Examen 2</a>
+                  <a href="{{ path('app_participations_listt')}}">participations</a>
+                </li>
+                <li>
+                  <a href="{{ path('app_reclamations_add')}}">Ajouter une reclamation</a>
+                </li>
+                <li>
+                  <a href="{{ path('app_questions_listt')}}">questions</a>
                 </li>
               </ul>
             </li>
+            <li class="active">
+              <a href="javascript:;">
+                Passer un examen
+                <i class="fa fa-chevron-down"></i>
+              </a>
+              <ul class="sub-menu">
+                <li>
+                  <a href="{{ path('app_examen_listt')}}">Passer Examen </a>
+                </li>
+
+              </ul>
+            </li>
+
           </ul>
           <div class="nav-social-link">
             <a href="javascript:;"><i class="fa fa-facebook"></i></a>

@@ -30,8 +30,7 @@
             {% for examan in examens %}
                 <tr>
 
-                    {# <td>{{ examan.idexamen }}</td> #}
-                    <td>{{ examan.nomexamen }}</td>
+                     <td>{{ examan.nomexamen }}</td>
                     <td>{{ examan.pourcentage }}</td>
                     <td>{{ examan.dureeexamen }}</td>
                     <td>{{ examan.formation.getSujet() }}</td>
@@ -39,7 +38,6 @@
 
 
                     <td>
-                        <form id="my_form" method="post" action="{{ path('app_examen_show', {'idexamen': examan.idexamen}) }}" >
                             <a href="{{ path('app_examen_show', {'idexamen': examan.idexamen}) }}">
                                 <span class="badge bg-primary">show    </span>
                             </a>
@@ -51,9 +49,8 @@
 
 
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ examan.idexamen) }}">
+                       {{ include('back_office/examen/_delete_form.html.twig') }}
 
-                            <a href="#" class="badge bg-danger" onclick="document.getElementById('my_form').submit();">Delete{{ examan.idexamen}}  </a>
-                        </form>
 
 
                     </td>
@@ -67,7 +64,20 @@
         </table>
     </div>
 
+    <script
+            src="https://code.jquery.com/jquery-1.12.4.js"
+            integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ asset('https://cdn.datatables.net/v/bs4/jqc-1.12.4/dt-1.13.1/datatables.min.js') }}"></script>
+    <script type="application/javascript">
+        {}
+        console.log(jQuery().jquery);
 
+        $(document).ready(function () {
+            $('#table1').DataTable();
+        });
+
+    </script>
 {% endblock %}
 
 

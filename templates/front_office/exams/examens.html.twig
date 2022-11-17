@@ -1,0 +1,52 @@
+
+{% extends 'front_office/base2.html.twig' %}
+
+{% block title %} exams list{% endblock %}
+
+
+
+{% block filtrage %}
+   <div style="margin: 50px;">
+    <h3> choisir un examen selon un catégorie  :</h3>
+
+<select class="">
+    <div class="form-control" id="">
+        {% set selected =0  %}
+
+        {% for i in categories %}
+
+            <option value="{{i.idcategorie}} >{{i}}</option>
+
+        {% endfor %}
+    </div>
+</select>
+
+     <button class="btn" >   <a href= "{{ path('app_examen_listtbycategorie',{id:2}) }}" /> chercher par categorie </a></button>
+    <button class="btn" ><a href= "{{ path('app_examen_listt') }}" > tous les examens </a></button>
+
+
+
+{% endblock %}
+
+
+{% block body %}
+
+
+    {% for i in examens %}
+
+              <div class="card" style="max-width: 250px ;    margin: 10px">
+              <img class="card-img-top" src="{{ asset('/uploads/images/picexam.jpg') }}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.nomexamen }}</h5>
+                    <p>Pourcentage : {{ i.pourcentage }} %</p>
+                    <p>Durée : {{ i.dureeexamen }} min</p>
+                     <a href="#" class="btn btn-primary">Afficher l'examen</a>
+                </div>
+                </div>
+
+
+
+
+      {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,65 @@
+
+{% extends 'front_office/base2.html.twig' %}
+
+{% block title %}  liste des réclamation {% endblock %}
+
+
+{% block filtrage %}
+<div style="margin: 50px;">
+
+    <h1>Liste des Réclamations :</h1>
+    <a href="{{ path('app_reclamations_add') }}">
+        <span class=" btn btn-primary  btn-lg shadow-lg  ">Ajouter une réclamation </span>
+    </a>
+
+</div>
+
+
+{% endblock %}
+
+
+{% block body %}
+
+
+    <div style="margin: 50px;">
+
+<table class="table">
+        <thead>
+        <tr>
+            <th>Sujet</th>
+            <th>Description</th>
+            <th>Date réclamation</th>
+            <th>Utilisateur</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ reclamation.sujet }}</td>
+                <td>{{ reclamation.description }}</td>
+                <td>{{ reclamation.daterec ? reclamation.daterec|date('Y-m-d') : '' }}</td>
+                <td>{{ reclamation.iduser }}</td>
+                <td>
+                    <form id="my_form" method="post" action="{{ path('app_reclamation_show', {'idreclamation': reclamation.idreclamation }) }}" >
+                        <a href="{{ path('app_reclamation_show', {'idreclamation': reclamation.idreclamation }) }}">
+                            <span class="">afficher </span>
+                        </a>
+
+
+
+
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+
+{% endblock %}

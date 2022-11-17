@@ -19,7 +19,7 @@ class ExamenController extends AbstractController
     #[Route('/list', name: 'app_examen_listt')]
     public function listExams(ExamenRepository $examenRepository, CategorieRepository $categorieRepository)
     {
-        return $this->render('front_office/exams/course.html.twig', [
+        return $this->render('front_office/exams/examens.html.twig', [
             'examens' => $examenRepository->findAll(),
             'categories'=>$categorieRepository->findAll(),
         ]);
@@ -28,11 +28,24 @@ class ExamenController extends AbstractController
     #[Route('/list/categorie/{id}', name: 'app_examen_listtbycategorie')]
     public function listExamsbyCategrie(ExamenRepository $examenRepository, CategorieRepository $categorieRepository , int $id)
     {
-        return $this->render('front_office/exams/course.html.twig', [
+        return $this->render('front_office/exams/examens.html.twig', [
             'examens' => $examenRepository->findExamsByCategorieId($id),
             'categories'=>$categorieRepository->findAll(),
         ]);
     }
+
+    #[Route('/pass', name: 'app_examen_pass')]
+    public function passExam(ExamenRepository $examenRepository, CategorieRepository $categorieRepository)
+    {
+        return $this->render('front_office/exams/passExam.html.twig', [
+
+        ]);
+    }
+
+
+
+
+
 
     #[Route('/', name: 'app_examen_index', methods: ['GET'])]
     public function index(ExamenRepository $examenRepository): Response
@@ -92,7 +105,7 @@ class ExamenController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$examan->getIdexamen(), $request->request->get('_token'))) {
             $examenRepository->remove($examan, true);
-            $this->renderForm('back_office/examen/index.html.twig');
+            return $this->redirectToRoute('app_examen_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->redirectToRoute('app_examen_index', [], Response::HTTP_SEE_OTHER);

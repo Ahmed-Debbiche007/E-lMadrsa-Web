@@ -13,9 +13,9 @@
 		<link rel="stylesheet" href={{ asset('back/assets/css/main/app-dark.css')}}>
 		<link rel="shortcut icon" href={{ asset('back/assets/images/logo/favicon.svg')}} type="image/x-icon">
 		<link rel="shortcut icon" href={{ asset('back/assets/images/logo/favicon.png')}} type="image/png">
-
+		<link rel="stylesheet" type="text/css" href="{{ asset('https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css') }}"/>
 		<link rel="stylesheet" href={{ asset('back/assets/css/shared/iconly.css')}}>
-
+		<link rel="stylesheet" type="text/css" href="{{ asset('https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css') }}"/>
 	</head>
 
 	<body>
@@ -32,7 +32,7 @@
 				<div class="page-content">
 					<section class="row">
 						<div class="col-12 col-lg-9">
-							{% include 'back_office/components/stats.html.twig' %}
+							{# {{% include 'back_office/components/stats.html.twig' %} #}
 							<div class="page-heading">{% block pageHeading %}{% endblock %}</div>
 							{% block body %}{% endblock %}
 						</div>
@@ -52,5 +52,7 @@
 		
 		
 		<script src={{ asset('back/assets/js/pages/dashboard.js')}}></script>
+
+
 	</body>
 </html></body></html>
