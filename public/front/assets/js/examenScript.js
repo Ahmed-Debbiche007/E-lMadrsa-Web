@@ -1,6 +1,6 @@
 /* Created and coded by Abhilash Narayan */
 /* Quiz source: w3schools.com */
-
+/*
 var quiz = { "JS" : [
         {
             "id" : 1,
@@ -42,6 +42,41 @@ var quiz = { "JS" : [
 
     ]
 }
+*/
+
+
+
+    // to do ::
+
+
+    // lezemni njib el objet mtaaa el examen w les question mteou :
+
+
+    var quiz = { JS: []}
+    for (let i=0;i<5;i++)
+    quiz.JS.push({            "id" : i,
+        "question" : "Inside which HTML element do we put the JavaScript?",
+        "options" : [
+            {"a": "&lt;script&gt;",
+                "b":"&lt;javascript&gt;",
+                "c":"&lt;scripting&gt;"
+            }
+        ],
+        "answer":"&lt;script&gt;",
+        "score":0,
+        "status": ""})
+    console.log(quiz);
+
+
+
+
+
+
+
+
+
+
+
 
 
 
