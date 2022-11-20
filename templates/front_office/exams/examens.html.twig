@@ -1,10 +1,9 @@
 
-{% extends 'front_office/base2.html.twig' %}
-
-{% block title %} exams list{% endblock %}
+{% extends 'front_office/ExamsBase.html.twig' %}
 
 
 
+{#
 {% block filtrage %}
    <div style="margin: 50px;">
     <h3> choisir un examen selon un catégorie  :</h3>
@@ -27,26 +26,50 @@
 
 
 {% endblock %}
+#}
+{% block slidestitle %} Nos exames {% endblock %}
 
+            {% block leftslide %}
+                 {% include('front_office/exams/leftsidebar.html.twig') %}
+
+            {% endblock %}
 
 {% block body %}
 
 
-    {% for i in examens %}
 
-              <div class="card" style="max-width: 250px ;    margin: 10px">
-              <img class="card-img-top" src="{{ asset('/uploads/images/picexam.jpg') }}" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">{{ i.nomexamen }}</h5>
-                    <p>Pourcentage : {{ i.pourcentage }} %</p>
-                    <p>Durée : {{ i.dureeexamen }} min</p>
-                     <a href="#" class="btn btn-primary">Afficher l'examen</a>
-                </div>
-                </div>
+                                {% for i in examens %}
 
+                                <div class="col-md-6 col-lg-4 col-sm-6 m-b30">
+                                    <div class="cours-bx">
+                                        <div class="action-box">
+                                            <img src="{{ asset('front/assets/images/courses/pic1.jpg') }}" alt="">
+                                            <a href="#" class="btn">Voir Examen</a>
+                                        </div>
+                                        <div class="info-bx text-center">
+                                            <h5><a href="#">{{ i.nomexamen }}</a></h5>
+                                            <span>{{i.categorie}}</span>
+                                        </div>
+                                        <div class="cours-more-info">
+                                            <div class="review">
+                                                <span>3 Review</span>
+                                                <ul class="cours-star">
+                                                    <li class="active"><i class="fa fa-star"></i></li>
+                                                    <li class="active"><i class="fa fa-star"></i></li>
+                                                    <li class="active"><i class="fa fa-star"></i></li>
+                                                    <li><i class="fa fa-star"></i></li>
+                                                    <li><i class="fa fa-star"></i></li>
+                                                </ul>
+                                            </div>
+                                            <div class="price">
 
+                                                <h5 style="margin-top: 17px;">{{i.dureeexamen}} min</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                {% endfor %}
 
-      {% endfor %}
 </div>
 {% endblock %}

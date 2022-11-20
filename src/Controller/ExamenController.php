@@ -7,6 +7,7 @@ use App\Form\ExamenType;
 use App\Repository\CategorieEvRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\ExamenRepository;
+use App\Repository\QuestionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +27,7 @@ class ExamenController extends AbstractController
     }
 
     #[Route('/list/categorie/{id}', name: 'app_examen_listtbycategorie')]
-    public function listExamsbyCategrie(ExamenRepository $examenRepository, CategorieRepository $categorieRepository , int $id)
+    public function listExamsbyCategrie( ExamenRepository $examenRepository, CategorieRepository $categorieRepository , int $id)
     {
         return $this->render('front_office/exams/examens.html.twig', [
             'examens' => $examenRepository->findExamsByCategorieId($id),
@@ -35,12 +36,10 @@ class ExamenController extends AbstractController
     }
 
     #[Route('/pass', name: 'app_examen_pass')]
-    public function passExam(ExamenRepository $examenRepository, CategorieRepository $categorieRepository)
+    public function passExam(QuestionRepository $qrepo,ExamenRepository $examenRepository, CategorieRepository $categorieRepository)
     {
-        return $this->render('front_office/exams/passExam.html.twig', [
-
-        ]);
-    }
+         return $this->render('front_office/exams/passExam.html.twig',['questions'=>$qrepo->findByExamsId(8)]);
+     }
 
 
 
