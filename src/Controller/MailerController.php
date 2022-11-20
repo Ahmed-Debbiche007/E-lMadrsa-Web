@@ -21,12 +21,14 @@ class MailerController extends AbstractController
 
 
 
-    #[Route('/email')]
+    #[Route('/email',name: "app_sendReclamation_mail")]
     public function sendEmail(MailerInterface $mailer): Response
     {
+        $user=$this->getUser();
+        $emaiiil = $user->getEmail();
         $email = (new Email())
             ->from('springforfever@gmail.com')
-            ->to('springforfever@gmail.com')
+            ->to($emaiiil)
             ->subject('Time for Symfony Mailer!')
             ->text('Sending emails is fun again!');
 

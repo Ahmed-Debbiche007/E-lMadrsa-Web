@@ -12,6 +12,8 @@ use http\Client\Curl\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -20,8 +22,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class ReclamationController extends AbstractController
 {
 
-    #[Route('/add/', name: 'app_reclamations_add')]
-    public function addrec(Request $request, ReclamationRepository $reclamationRepository, Security $security): Response
+    #[Route('/add', name: 'app_reclamations_add')]
+    public function addrec(MailerInterface $mailer,Request $request, ReclamationRepository $reclamationRepository, Security $security): Response
     {
         $reclamation = new Reclamation();
         $form = $this->createForm(ReclamationType1::class, $reclamation);
@@ -30,8 +32,17 @@ class ReclamationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $reclamation->setDaterec(new \DateTime('now'));
 
-             $reclamation->setIduser( 1);
+          $reclamation->setIduser( $this->getUser());
             $reclamationRepository->save($reclamation, true);
+            $user=$this->getUser();
+            $emaiiil = $user->getEmail();
+            $email = (new Email())
+                ->from('springforfever@gmail.com')
+                ->to($emaiiil)
+                ->subject($reclamation->getSujet())
+                ->text($reclamation->getDescription());
+
+            $mailer->send($email);
 
             return $this->redirectToRoute('app_reclamations_add', [], Response::HTTP_SEE_OTHER);
         }
