@@ -35,10 +35,10 @@ class ExamenController extends AbstractController
         ]);
     }
 
-    #[Route('/pass', name: 'app_examen_pass')]
-    public function passExam(QuestionRepository $qrepo,ExamenRepository $examenRepository, CategorieRepository $categorieRepository)
+    #[Route('/pass/{id}', name: 'app_examen_pass')]
+    public function passExam(int $id,QuestionRepository $qrepo,ExamenRepository $examenRepository, CategorieRepository $categorieRepository)
     {
-         return $this->render('front_office/exams/passExam.html.twig',['questions'=>$qrepo->findByExamsId(8)]);
+         return $this->render('front_office/exams/passExam.html.twig',['questions'=>$qrepo->findByExamsId($id)]);
      }
 
 
@@ -78,6 +78,14 @@ class ExamenController extends AbstractController
     {
         return $this->render('back_office/examen/show.html.twig', [
             'examan' => $examan,
+        ]);
+    }
+
+    #[Route('showfront/{idexamen}', name: 'app_examen_show_front')]
+    public function showfrontexam(int $idexamen,ExamenRepository $repo): Response
+    {
+        return $this->render('front_office/exams/show.html.twig', [
+            'examen' => $repo->find($idexamen),
         ]);
     }
 

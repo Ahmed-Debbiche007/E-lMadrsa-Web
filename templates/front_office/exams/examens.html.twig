@@ -44,7 +44,7 @@
                                     <div class="cours-bx">
                                         <div class="action-box">
                                             <img src="{{ asset('front/assets/images/courses/pic1.jpg') }}" alt="">
-                                            <a href="#" class="btn">Voir Examen</a>
+                                            <a href="{{path('app_examen_show_front' , {idexamen:i.idexamen}) }}" class="btn">Voir Examen</a>
                                         </div>
                                         <div class="info-bx text-center">
                                             <h5><a href="#">{{ i.nomexamen }}</a></h5>

@@ -29,4 +29,13 @@ class AuthController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
+
+
+
+    #[Route(path: '/profil', name: 'app_profil')]
+    public function profil()
+    {
+        return $this->render('front_office/exams/profil.html.twig');
+
+    }
 }
