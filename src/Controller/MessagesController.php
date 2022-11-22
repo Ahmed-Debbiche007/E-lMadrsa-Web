@@ -8,6 +8,7 @@ use App\Repository\ChatSessionsRepository;
 use App\Repository\MessagesRepository;
 use App\Repository\TutorshipSessionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,6 +36,15 @@ class MessagesController extends AbstractController
             'form' => $form,
             'sessions' => $sessions ,
         ]);
+    }
+
+    #[Route('/api/messages', name: 'api_messages', methods: ['GET'])]
+    public function indexApi(MessagesRepository $messagesRepository, TutorshipSessionRepository $repo, SerializerInterface $serializer)
+    {
+        $messages = $messagesRepository->findAll();
+        $sessions = $repo->findAll();
+        $json = $serializer->serialize($messages, 'json');
+        return $this->json($json);
     }
 
     #[Route('/new', name: 'app_messages_new', methods: ['GET', 'POST'])]
@@ -91,4 +101,6 @@ class MessagesController extends AbstractController
 
         return $this->redirectToRoute('app_messages_index', [], Response::HTTP_SEE_OTHER);
     }
+
+   
 }
