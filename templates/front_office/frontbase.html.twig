@@ -50,7 +50,7 @@
           {% include 'front_office/components/post.html.twig' with { postss: postss } only %}
         </div>
         {% include 'front_office/components/footer.html.twig' %}
-        {% include 'front_office/components/chat.html.twig' %}
+         {{ render(path('api_messages')) }}
       </div>
       {% include 'front_office/components/scripts.html.twig' %}
     </div>

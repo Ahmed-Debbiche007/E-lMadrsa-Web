@@ -23,9 +23,9 @@ class MessagesController extends AbstractController
         $message = new Messages();
         $form = $this->createForm(MessagesType::class, $message);
         $message->setStatusdate(new \DateTime());
-    
+
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $messagesRepository->save($message, true);
 
@@ -34,17 +34,43 @@ class MessagesController extends AbstractController
         return $this->renderForm('back_office/messages/index.html.twig', [
             'messages' => $messagesRepository->findAll(),
             'form' => $form,
-            'sessions' => $sessions ,
+            'sessions' => $sessions,
         ]);
     }
 
-    #[Route('/api/messages', name: 'api_messages', methods: ['GET'])]
-    public function indexApi(MessagesRepository $messagesRepository, TutorshipSessionRepository $repo, SerializerInterface $serializer)
+    #[Route('/api/messages', name: 'api_messages', methods: ['GET', 'POST'])]
+    public function indexApi(Request $request, MessagesRepository $messagesRepository, TutorshipSessionRepository $repo, SerializerInterface $serializer)
     {
-        $messages = $messagesRepository->findAll();
         $sessions = $repo->findAll();
-        $json = $serializer->serialize($messages, 'json');
-        return $this->json($json);
+        $message = new Messages();
+        $form = $this->createForm(MessagesType::class, $message);
+        $message->setStatusdate(new \DateTime());
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $messagesRepository->save($message, true);
+
+            // return $this->redirectToRoute('app_messages_index', [], Response::HTTP_SEE_OTHER);
+        }
+        return  $this->renderForm('front_office/components/chat.html.twig', [
+            'messages' => $messagesRepository->findAll(),
+            'form' => $form,
+            'sessions' => $sessions,
+        ]);
+    }
+
+    #[Route('/api/post', name: 'api_post', methods: ['POST'])]
+    public function postApi(Request $request, MessagesRepository $messagesRepository)
+    {
+        $msg = new Messages();
+        $msg->setIdsender($this->getUser()->getId());
+        $msg->setBody($request->request->get('body'));
+        $msg->setIdsession(1);
+        $msg->setStatusdate(new \DateTime());
+        $messagesRepository->save($msg, true);
+        return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/new', name: 'app_messages_new', methods: ['GET', 'POST'])]
@@ -95,12 +121,10 @@ class MessagesController extends AbstractController
     #[Route('/{idmessage}', name: 'app_messages_delete', methods: ['POST'])]
     public function delete(Request $request, Messages $message, MessagesRepository $messagesRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$message->getIdmessage(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $message->getIdmessage(), $request->request->get('_token'))) {
             $messagesRepository->remove($message, true);
         }
 
         return $this->redirectToRoute('app_messages_index', [], Response::HTTP_SEE_OTHER);
     }
-
-   
 }

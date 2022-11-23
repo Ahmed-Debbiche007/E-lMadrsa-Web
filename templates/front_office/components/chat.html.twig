@@ -1,4 +1,8 @@
-<button class="chat fa fa-comments fa-2x"></button>
+<button class="chat">
+  <span class="notification"></span>
+  <i class="fa fa-comments fa-2x"></i>
+</button>
+
 <div class="chatbox">
   {% if app.user %}
     <div class="row">
@@ -17,12 +21,12 @@
           </div>
         </div>
       </div>
-      <div class="col-7 h-100 d-inline-block mr-2 mt-4">
+      <div class="col-7 h-100 d-inline-block mr-2 mt-4 ">
         <div class="card" id="chat2" style="max-height: 350px; height: 350px; overflow-y: auto;">
           <div class="card-header d-flex justify-content-between align-items-center" style="position: sticky ; top:0%; z-index:88; background:#fff">
             <h5 class="font-semi-bold"><i class="fa fa-circle" style="color:green ;"></i> Jhon Doe</h5>
             <button type="button" class="btn" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false" style="background: #435ebe ; color:#fff;"><i class="fa fa-ellipsis-v"></i></button>
-            
+
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" href="#">Action</a>
               <a class="dropdown-item" href="#">Another action</a>
@@ -30,22 +34,27 @@
             </div>
           </div>
           <div class="card-body" id="messages-card" data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px">
-            <div class="d-flex flex-row justify-content-start">
-              <div class="message message-received">
-                <p class="small p-2 ms-3 mb-1 rounded-3">Hi</p>
-              </div>
-            </div>
-
-            <div class="d-flex flex-row justify-content-end pt-1">
-              <div class="message message-sent">
-                <p class="small p-2 me-3 mb-1 text-white rounded-3">Hiii, I'm good.</p>
-              </div>
-            </div>
+            {% for message in messages %}
+              {% if app.user.getId() == message.idsender %}
+                <div class="d-flex flex-row justify-content-end pt-1">
+                  <div class="message message-sent">
+                    <p class="small p-2 me-3 mb-1 text-white rounded-3">{{ message.body }}</p>
+                  </div>
+                </div>
+              {% else %}
+                <div class="d-flex flex-row justify-content-start">
+                  <div class="message message-received">
+                    <p class="small p-2 ms-3 mb-1 rounded-3">{{ message.body }}</p>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
           </div>
-          <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3" id="chat-footer" style="position: sticky ; bottom:0%; z-index:88; background:#fff ">
-            <input type="text" id="input-default" class="emojiable-option form-control form-control-lg" placeholder="Type message" />
-         
-            <button type="button" class="btn" style="color: #435ebe ; background:#fff;"><i class="fa fa-paper-plane"></i></button>
+          <div class="card-footer d-flex justify-content-between align-items-center" id="chat-footer" style="position: sticky ; bottom:0%; z-index:88; background:#fff ">
+            <form action="/dashboard/messages/api/post" method="POST">
+              <input name="body" type="text" id="input-default" class="emojiable-option form-control form-control-lg" placeholder="Type message" style="width:350% ;" />
+              <button type="submit" class="btn" style="color: #435ebe ; background:#fff;"><i class="fa fa-paper-plane"></i></button>
+            </form>
           </div>
         </div>
       </div>
@@ -65,59 +74,6 @@
     </div>
   {% endif %}
 </div>
-<script>
-  function ajaxCall() {
-    $.ajax({
-      // Our sample url to make request
-      url: "{{ path('api_messages') }}",
-  
-      // Type of Request
-      type: 'GET',
-  
-      // Function to call when to
-      // request is ok
-      success: function (data) {
-        var x = JSON.parse(data)
-        //console.log(data)
-        appendMessages(x)
-      },
-  
-      // Error handling
-      error: function (error) {
-        console.log(`Error ${error}`)
-      }
-    })
-  }
-  ajaxCall()
-  
-  function appendMessages(messages) {
-    {% if app.user %}
-    messages.forEach((message) => {
-      if (message.idsender == '{{app.user.getId() }}') {
-        $('#messages-card').append(
-          `              <div class="d-flex flex-row justify-content-end pt-1">
-                                          <div class="message message-sent">
-                                            <p class="small p-2 me-3 mb-1 text-white rounded-3">` +
-            message.body +
-            `</p>
-                                          </div>
-                                        </div>`
-        )
-      } else {
-        $('#messages-card').append(
-          `              <div class="d-flex flex-row justify-content-start">
-                                      <div class="message message-received">
-                                        <p class="small p-2 ms-3 mb-1 rounded-3">` +
-            message.body +
-            `</p>
-                                      </div>
-                                    </div>`
-        )
-      }
-    })
-  {% endif %}
-  }
-</script>
 <script>
   text = ''
   $('.chatbox').hover(

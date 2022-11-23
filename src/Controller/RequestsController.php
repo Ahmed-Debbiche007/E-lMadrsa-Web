@@ -86,9 +86,6 @@ class RequestsController extends AbstractController
         if (strcmp($trequest->getType(), "MessagesChat") == 0) {
             $tutorshipsession->setUrl("none");
             $tutorshipSessionRepository->save($tutorshipsession, true);     
-            $chat = new Chatsessions();
-           $chat->setIdtutorshipsession($tutorshipSessionRepository->findLatest()->getIdsession());
-           $chatrepo->save($chat, true);
             $this->addFlash('success', 'The request has been approved!');
             return $this->redirectToRoute('app_tutorshipsessions_index', [], Response::HTTP_SEE_OTHER);
         } elseif (strcmp($trequest->getType(), "VideoChat") == 0) {

@@ -45,7 +45,7 @@ class TutorshipSessionRepository extends ServiceEntityRepository
    public function findLatest(): ?Tutorshipsessions
    {
        return $this->createQueryBuilder('t')
-           ->orderBy('t.idsession', 'DESC')
+           ->orderBy('t.id', 'DESC')
            ->setMaxResults(1)
            ->getQuery()
            ->getOneOrNullResult()

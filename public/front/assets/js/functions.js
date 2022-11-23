@@ -13,7 +13,7 @@ Theme Version:	1.0.0
 		'use strict';
 		
 			var BasicFunction = function(){
-				//jQuery("div.chatbox").hide();
+				jQuery("div.chatbox").hide();
 				var checkSelectorExistence = function(selectorName) {
 				  if(jQuery(selectorName).length > 0){return true;}else{return false;}
 				};
@@ -248,7 +248,8 @@ Theme Version:	1.0.0
 
 					jQuery("button.chat").on('click',function() { 
 						jQuery("div.chatbox").toggle();
-						
+						jQuery('div#chat2')[0].scrollTop = jQuery('div#chat2')[0].scrollHeight;
+
 					})
 
 					jQuery("button.close-chat").on('click',function() { 

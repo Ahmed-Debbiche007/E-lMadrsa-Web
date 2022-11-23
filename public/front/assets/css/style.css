@@ -4255,11 +4255,13 @@ div.chat {
 	border-radius: 50px;
 
 }
+
 .message-sent {
 
 	background-color: #435ebe;
 
 }
+
 .message-received {
 
 	background-color: #f5f6f7;
@@ -4283,3 +4285,13 @@ div.chat {
 	background: #eee;
 }
 
+.notification {
+	position: absolute;
+	top: -5px;
+	left: -3px;
+	border-radius: 50%;
+	background: red;
+	color: white;
+	height: 15px;
+	width: 15px;
+}

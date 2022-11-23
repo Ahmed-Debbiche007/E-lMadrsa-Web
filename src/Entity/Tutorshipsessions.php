@@ -2,6 +2,8 @@
 namespace App\Entity;
 
 use App\Repository\TutorshipSessionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -13,7 +15,7 @@ class Tutorshipsessions
     #[ORM\Id]
     #[ORM\Column]
     #[ORM\GeneratedValue]
-    private ?int $idsession;
+    private ?int $id;
 
     #[ORM\Column(length: 255)]
     private ?string $url;
@@ -54,9 +56,17 @@ class Tutorshipsessions
     #[AcmeAssert\profanityconstraint]
     private ?string $body = null;
 
+    #[ORM\OneToMany(mappedBy: 'idsession', targetEntity: Messages::class, orphanRemoval: true)]
+    private Collection $messages;
+
+    public function __construct()
+    {
+        $this->messages = new ArrayCollection();
+    }
+
     public function getIdsession(): ?int
     {
-        return $this->idsession;
+        return $this->id;
     }
 
 
@@ -142,6 +152,36 @@ class Tutorshipsessions
     public function setBody(string $body): self
     {
         $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Messages>
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Messages $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages->add($message);
+            $message->setIdsession($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Messages $message): self
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getIdsession() === $this) {
+                $message->setIdsession(null);
+            }
+        }
 
         return $this;
     }

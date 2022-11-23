@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20221116234457 extends AbstractMigration
+final class Version20221123131557 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -41,7 +41,7 @@ final class Version20221116234457 extends AbstractMigration
         $this->addSql('CREATE TABLE requests (id INT AUTO_INCREMENT NOT NULL, id_tutor_id INT DEFAULT NULL, id_student_id INT NOT NULL, type VARCHAR(255) NOT NULL, body VARCHAR(255) NOT NULL, date DATETIME NOT NULL, INDEX IDX_7B85D65170548864 (id_tutor_id), INDEX IDX_7B85D6516E1ECFCD (id_student_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE reservation (id_reservation INT AUTO_INCREMENT NOT NULL, date_reservation DATE NOT NULL, id_evenement INT NOT NULL, id_utilisateur INT NOT NULL, PRIMARY KEY(id_reservation)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE token (id INT AUTO_INCREMENT NOT NULL, token VARCHAR(255) NOT NULL, refresh VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE tutorshipsessions (idsession INT AUTO_INCREMENT NOT NULL, id_student_id INT DEFAULT NULL, id_tutor_id INT DEFAULT NULL, id_request_id INT DEFAULT NULL, url VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, date DATETIME NOT NULL, body VARCHAR(255) NOT NULL, INDEX IDX_6C7DB1BD6E1ECFCD (id_student_id), INDEX IDX_6C7DB1BD70548864 (id_tutor_id), UNIQUE INDEX UNIQ_6C7DB1BDE7F43872 (id_request_id), PRIMARY KEY(idsession)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE tutorshipsessions (id INT AUTO_INCREMENT NOT NULL, id_student_id INT DEFAULT NULL, id_tutor_id INT DEFAULT NULL, id_request_id INT DEFAULT NULL, url VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, date DATETIME NOT NULL, body VARCHAR(255) NOT NULL, INDEX IDX_6C7DB1BD6E1ECFCD (id_student_id), INDEX IDX_6C7DB1BD70548864 (id_tutor_id), UNIQUE INDEX UNIQ_6C7DB1BDE7F43872 (id_request_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(180) NOT NULL, prenom VARCHAR(180) NOT NULL, username VARCHAR(180) NOT NULL, email VARCHAR(180) NOT NULL, image VARCHAR(180) NOT NULL, roles JSON NOT NULL, role VARCHAR(255) DEFAULT \'User\' NOT NULL, password VARCHAR(255) NOT NULL, date_naissance DATE NOT NULL, approved TINYINT(1) NOT NULL, UNIQUE INDEX UNIQ_8D93D649F85E0677 (username), UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE vote (voteid INT AUTO_INCREMENT NOT NULL, userid INT NOT NULL, postid INT NOT NULL, votenb INT NOT NULL, PRIMARY KEY(voteid)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE votecomment (votecommentid INT AUTO_INCREMENT NOT NULL, userid INT NOT NULL, commentid INT NOT NULL, votenb INT NOT NULL, PRIMARY KEY(votecommentid)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
