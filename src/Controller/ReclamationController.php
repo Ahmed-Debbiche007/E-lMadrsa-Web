@@ -21,7 +21,16 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 #[Route('/reclamation')]
 class ReclamationController extends AbstractController
 {
+    #[Route('/rec', name: 'app_reclamationsss_show', methods: ['GET'])]
+    public function showreclmations(ReclamationRepository $reclamationRepository)
+    {
+        $user = $this->getUser();
+        if (!$user){
+            return $this->redirect('/login');
+        }
+        return $this->render('front_office/reclamation/mesreclamations.html.twig',["reclamations"=>$reclamationRepository->findByUserId($user->getId())]);
 
+    }
     #[Route('/add', name: 'app_reclamations_add')]
     public function addrec(MailerInterface $mailer,Request $request, ReclamationRepository $reclamationRepository, Security $security): Response
     {
@@ -97,6 +106,8 @@ class ReclamationController extends AbstractController
             'reclamation' => $reclamation,
         ]);
     }
+
+
 /*
 
     #[Route('/list/{idreclamation}', name: 'app_reclamation_show_front', methods: ['GET'])]
@@ -136,4 +147,8 @@ class ReclamationController extends AbstractController
 
         return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
+
 }

@@ -1,0 +1,75 @@
+
+
+
+
+
+{% extends 'front_office/ExamsBase.html.twig' %}
+
+ {% block slidestitle %} Profile de {{ app.user.getNom()  }} {{ app.user.getPrenom()}} {% endblock %}
+
+            {% block leftslide %}
+
+
+            {% endblock %}
+
+
+
+{% block body1 %}
+    <div style=" width: 70%; margin: 10%;">
+        <!-- Add icon library -->
+        <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css') }}">
+        <table class="table" id="table1">
+            <thead>
+            <tr>
+                 <th>Sujet</th>
+                <th>Description</th>
+                <th>Daterec</th>
+                 <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for reclamation in reclamations %}
+                <tr>
+                     <td>{{ reclamation.sujet }}</td>
+                    <td>{{ reclamation.description }}</td>
+                    <td  style="width: 200px;">{{ reclamation.daterec ? reclamation.daterec|date('Y-m-d') : '' }}</td>
+                     <td style="width: 200px;">
+                        <form id="my_form" method="post" action="{{ path('app_reclamation_show', {'idreclamation': reclamation.idreclamation }) }}" >
+
+                            <a href="{{ path('app_reclamation_show', {'idreclamation': reclamation.idreclamation }) }}"><button class="btn"><i class="fa fa-search fa-sm"></i></button></a>
+
+                            <a href="{{ path('app_reclamation_edit', {'idreclamation': reclamation.idreclamation}) }}"><button class="btn"><i class="fa fa-edit fa-sm"></i></button></a>
+
+                            <a href="{{ path('app_reclamation_delete', {'idreclamation': reclamation.idreclamation }) }}"><button class="btn "><i class="fa fa-close fa-sm"></i></button></a>
+
+
+                         </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <script
+                src="https://code.jquery.com/jquery-1.12.4.js"
+                integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+                crossorigin="anonymous"></script>
+        <script type="text/javascript" src="{{ asset('https://cdn.datatables.net/v/bs4/jqc-1.12.4/dt-1.13.1/datatables.min.js') }}"></script>
+        <script type="application/javascript">
+            {}
+            console.log(jQuery().jquery);
+
+            $(document).ready(function () {
+                $('#table1').DataTable();
+            });
+
+        </script>
+    </div>
+        {% block info %}
+        {% endblock %}
+    </div>
+{% endblock %}

@@ -31,13 +31,24 @@
 
 
 
-    {% include('front_office/components/navbar.html.twig') %}
+    {% include('front_office/exams/navExams.html.twig') %}
+    <!-- inner page banner -->
+    <div class="page-banner ovbl-dark" style="background-image:url({{ asset('front/assets/images/banner/banner3.jpg') }});">
+        <div class="container">
+            <div class="page-banner-entry">
+                <h1 class="text-white">
+                    {% block slidestitle %}  {% endblock %}
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!-- inner page banner END -->
+    <div class="content-block">
 
-    <div style="height: 200px;background-color: #4d0a91">
+
 
     </div>
     <div class="page-content bg-white">
-        {% include('front_office/components/header.html.twig') %}
 
         <!-- filtrage   -->
 

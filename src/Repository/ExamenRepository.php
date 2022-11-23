@@ -47,6 +47,62 @@ class ExamenRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
+    public function countexams()
+    {
+        return intval($this->createQueryBuilder('e')
+            ->select('COUNT(e)')
+            ->getQuery()->getSingleScalarResult());
+    }
+
+
+/*
+    public function countexamsincategorie()
+    {
+        return intval($this->createQueryBuilder('e')
+            ->Select('COUNT(e) ')->groupBy('e.nomexamen')
+            ->getQuery()->getArrayResult());
+    }
+*/
+    public function countexamsincategorie()
+    {
+        $dql = 'SELECT count(e) FROM App\Entity\Examen e Group BY e.categorie ';
+        $query = $this->getEntityManager()->createQuery($dql);
+        return ($query->execute());
+    }
+
+
+    public function examsbyCategorie(CategorieRepository $categorieRepository)
+    {
+        $sommeexams = $this->countexams();
+        $listeCategorie = $this->countexamsincategorie() ;
+
+
+        foreach($listeCategorie  as $count)
+        {
+           // $count /= $sommeexams ;
+
+        }
+
+
+
+
+
+
+
+
+
+
+        return $listeCategorie ;
+
+
+
+
+    }
+
+
+
+
 //    /**
 //     * @return Examen[] Returns an array of Examen objects
 //     */
