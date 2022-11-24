@@ -1,0 +1,35 @@
+
+{% extends 'front_office/base2.html.twig' %}
+
+{% block title %}  liste des questions {% endblock %}
+
+
+{% block filtrage %}
+
+
+    <table>
+
+    </table>
+
+
+
+
+
+{% endblock %}
+
+
+{% block body %}
+
+
+    {% for i in questions %}
+              <div class="card" style="max-width: 250px ;    margin: 10px;
+">
+               {#<img class="card-img-top" src="" alt="Card image cap"> #}
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.ennonce }}</h5>
+                    <a href="#" class="btn btn-primary">afficher questions</a>
+                </div>
+                   </div>
+      {% endfor %}
+
+{% endblock %}

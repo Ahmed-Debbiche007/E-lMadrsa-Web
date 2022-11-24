@@ -15,6 +15,89 @@
       <ul class="menu">
         <li class="sidebar-title">Menu</li>
 
+ 
+				
+				<li class="sidebar-item  ">
+					<a href="/dashboard/tutors" class='sidebar-link'>
+
+						<i class="bi bi-people-fill"></i>
+						<span>Tutors</span>
+					</a>
+				</li>
+
+				<li class="sidebar-item  ">
+					<a href="/dashboard/students" class='sidebar-link'>
+
+						<i class="bi bi-people-fill"></i>
+						<span>Students</span>
+					</a>
+				</li>
+				{% endif %}
+				<li class="sidebar-item  ">
+					<a href="/dashboard" class='sidebar-link'>
+						<i class="bi bi-bag-dash-fill"></i>
+						<span>Courses</span>
+					</a>
+				</li>
+				<li class="sidebar-item  ">
+					<a href="/dashboard/examen" class='sidebar-link'>
+						<i class="bi bi-nut-fill"></i>
+						<span>Exams</span>
+					</a>
+				</li>
+				<li class="sidebar-item  ">
+					<a href="/dashboard/questions" class='sidebar-link'>
+						<i class="bi bi-patch-check-fill"></i>
+						<span>Questions</span>
+					</a>
+				</li>
+				<li class="sidebar-item  ">
+					<a href="/dashboard/participation" class='sidebar-link'>
+						<i class="bi bi-patch-check-fill"></i>
+						<span>Participations</span>
+					</a>
+				</li>
+				<li class="sidebar-item  ">
+					<a href="/reclamation" class='sidebar-link'>
+						<i class="bi bi-patch-check-fill"></i>
+						<span>Réclamation</span>
+					</a>
+				</li>
+				<li class="sidebar-item  ">
+					<a href="{{ path('app_examen_piechart') }}" class='sidebar-link'>
+						<i class="bi bi-patch-check-fill"></i>
+						<span>pie chart</span>
+					</a>
+				</li>
+				<li class="sidebar-item  ">
+					<a href="/dashboard" class='sidebar-link'>
+						<i class="bi bi-calendar-week-fill"></i>
+						<span>Events</span>
+					</a>
+				</li>
+				<li class="sidebar-item  ">
+					<a href="/dashboard" class='sidebar-link'>
+						<i class="bi bi-blockquote-left"></i>
+						<span>Blog</span>
+					</a>
+				</li>
+			
+
+				<li
+                class="sidebar-item  has-sub">
+                <a href="#" class='sidebar-link'>
+                    <i class="bi bi-chat-left-dots-fill"></i>
+                    <span>Tutorship Sessions</span>
+                </a>
+                <ul class="submenu ">
+                    <li class="submenu-item ">
+                        <a href="/dashboard/requests">Requests</a>
+                    </li>
+                    <li class="submenu-item ">
+                        <a href="/dashboard/tutorshipSessions">Sessions</a>
+                    </li>
+                </ul>
+ 
         <li class="sidebar-item active">
           <a href="/dashboard" class="sidebar-link">
             <i class="bi bi-grid-fill"></i>
@@ -54,6 +137,7 @@
           <ul class="submenu">
             <li class="submenu-item">
               <a href="/dashboard/examen" class="sidebar-link">Exams</a>
+ 
             </li>
             <li class="submenu-item">
               <a href="/dashboard/participation" class="sidebar-link">Participations</a>

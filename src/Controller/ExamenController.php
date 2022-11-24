@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Examen;
 use App\Form\ExamenType;
+use App\Repository\CategorieEvRepository;
+use App\Repository\CategorieRepository;
 use App\Repository\ExamenRepository;
+use App\Repository\QuestionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,12 +18,34 @@ class ExamenController extends AbstractController
 {
 
     #[Route('/list', name: 'app_examen_listt')]
-    public function listExams(ExamenRepository $examenRepository)
+    public function listExams(ExamenRepository $examenRepository, CategorieRepository $categorieRepository)
     {
-        return $this->render('front_office/exams/course.html.twig', [
+
+        return $this->render('front_office/exams/examens.html.twig', [
             'examens' => $examenRepository->findAll(),
+            'categories'=>$categorieRepository->findAll(),
         ]);
     }
+
+    #[Route('/list/categorie/{id}', name: 'app_examen_listtbycategorie')]
+    public function listExamsbyCategrie( ExamenRepository $examenRepository, CategorieRepository $categorieRepository , int $id)
+    {
+        return $this->render('front_office/exams/examens.html.twig', [
+            'examens' => $examenRepository->findExamsByCategorieId($id),
+            'categories'=>$categorieRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/pass/{id}', name: 'app_examen_pass')]
+    public function passExam(int $id,QuestionRepository $qrepo,ExamenRepository $examenRepository, CategorieRepository $categorieRepository)
+    {
+         return $this->render('front_office/exams/passExam.html.twig',['questions'=>$qrepo->findByExamsId($id)]);
+     }
+
+
+
+
+
 
     #[Route('/', name: 'app_examen_index', methods: ['GET'])]
     public function index(ExamenRepository $examenRepository): Response
@@ -57,6 +82,14 @@ class ExamenController extends AbstractController
         ]);
     }
 
+    #[Route('showfront/{idexamen}', name: 'app_examen_show_front')]
+    public function showfrontexam(int $idexamen,ExamenRepository $repo): Response
+    {
+        return $this->render('front_office/exams/show.html.twig', [
+            'examen' => $repo->find($idexamen),
+        ]);
+    }
+
     #[Route('/{idexamen}/edit', name: 'app_examen_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Examen $examan, ExamenRepository $examenRepository): Response
     {
@@ -80,6 +113,7 @@ class ExamenController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$examan->getIdexamen(), $request->request->get('_token'))) {
             $examenRepository->remove($examan, true);
+            return $this->redirectToRoute('app_examen_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->redirectToRoute('app_examen_index', [], Response::HTTP_SEE_OTHER);

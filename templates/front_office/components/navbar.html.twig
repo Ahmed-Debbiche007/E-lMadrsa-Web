@@ -30,7 +30,7 @@
       <div class="container clearfix">
         <!-- Header Logo ==== -->
         <div class="menu-logo">
-          <a href="/"><h1>E-lMadrsa</h1></a>
+          <a href="/"><h3>E-lMadrsa</h3></a>
         </div>
         <!-- Mobile Nav Button ==== -->
         <button class="navbar-toggler collapsed menuicon justify-content-end" type="button" data-toggle="collapse" data-target="#menuDropdown" aria-controls="menuDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,7 @@
         <!-- Navigation Menu ==== -->
         <div class="menu-links navbar-collapse collapse justify-content-start" id="menuDropdown">
           <div class="menu-logo">
-            <a href="index.html"><img src="front/assets/images/logo.png" alt="" /></a>
+            <a href="index.html"><img src="{{ asset('front/assets/images/logo.png') }}" alt="" /></a>
           </div>
           <ul class="nav navbar-nav">
             <li class="active">
@@ -182,7 +182,7 @@
                   </ul>
                 </li>
                 <li class="add-menu-right">
-                  <img src="front/assets/images/adv/adv.jpg" alt="" />
+                  <img src="{{ asset('front/assets/images/adv/adv.jpg') }}" alt="" />
                 </li>
               </ul>
             </li>
@@ -264,13 +264,19 @@
               </a>
               <ul class="sub-menu">
                 <li>
-                  <a href="dashboard/examen/list">Examen 1</a>
+                  <a href="{{ path('app_examen_listt')}}">Examen </a>
                 </li>
+
                 <li>
-                  <a href="index-2.html">Examen 2</a>
+                  <a href="{{ path('app_reclamations_add')}}">Ajouter une reclamation</a>
+                </li>
+
+                <li>
+                  <a href="{{ path('app_profil')}}">mon profil </a>
                 </li>
               </ul>
             </li>
+
           </ul>
           <div class="nav-social-link">
             <a href="javascript:;"><i class="fa fa-facebook"></i></a>
