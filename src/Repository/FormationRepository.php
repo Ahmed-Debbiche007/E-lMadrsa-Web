@@ -38,6 +38,23 @@ class FormationRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function getFormationByCat($id)  {
+        $qb= $this->createQueryBuilder('s')
+             ->where('s.idcategorie=:id')
+            ->setParameter('id',$id);
+        return $qb->getQuery()
+            ->getResult();
+    }
+
+    public function getId( ParticipationRepository $participationRepository){
+        $Participation = $participationRepository->getFormByParticipation();
+        $id=$Participation[2] ?? null;
+        $qb= $this->createQueryBuilder('s')
+            ->where('s.idformation=:id')
+            ->setParameter('id',$id);
+        return  ($qb->getQuery()
+            ->getResult());
+    }
 
 //    /**
 //     * @return Formation[] Returns an array of Formation objects

@@ -1,0 +1,26 @@
+{% extends 'front_office/base2.html.twig' %}
+
+{% block title %} Categories  list{% endblock %}
+
+{% block body %}
+
+
+    {% for i in categories %}
+        <div class=" ">
+            <div class="card" style="    flex: auto; box-sizing: border-box; margin: 1rem .25em; ">
+                {#<img class="card-img-top" src="" alt="Card image cap"> #}
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.nomcategorie }}</h5>
+
+                    <a href="{{ path('show_Formation1',{id:i.idcategorie})}}" class="btn btn-primary">Voir Formations</a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    {% endfor %}
+
+{% endblock %}

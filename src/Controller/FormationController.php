@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Formation;
- use App\Entity\Prerequis;
+use App\Entity\Participation;
+use App\Entity\Prerequis;
 use App\Form\FormationType;
+use App\Repository\CategorieRepository;
 use App\Repository\FormationRepository;
+use App\Repository\ParticipationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,10 +18,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class FormationController extends AbstractController
 {
 
+
+
+    #[Route('/list/ahmed', name: 'ahmed_test')]
+    public function about()
+    {
+        return new Response("This is About page", Response::HTTP_OK,
+            ['content-type' => 'text/plain']);
+    }
+
+
+
     #[Route('/list', name: 'app_formation_listt')]
     public function listExams(FormationRepository $formationRepository)
     {
-        return $this->render('back_office/formations/showForm.html.twig', [
+        return $this->render('front_office/formations/course.html.twig', [
             'formations' => $formationRepository->findAll(),
         ]);
     }
@@ -87,4 +101,19 @@ class FormationController extends AbstractController
 
         return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
     }
+    #[Route('/show/{id}', name: 'show_Formation1')]
+    public function showFormationByCat(FormationRepository $repo,$id,CategorieRepository $categorieRepository)
+    {
+        $categorie = $categorieRepository->find($id);
+        $formations= $repo->getFormationByCat($id);
+        return $this->render("front_office/formations/course.html.twig",
+            array('categorie'=>$categorie,
+                'formations'=>$formations)
+        );
+
+    }
+
+
+
+
 }
