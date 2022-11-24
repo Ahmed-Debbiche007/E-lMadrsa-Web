@@ -14,6 +14,7 @@ Theme Version:	1.0.0
 		
 			var BasicFunction = function(){
 				jQuery("div.chatbox").hide();
+				jQuery("span.notification").hide();
 				var checkSelectorExistence = function(selectorName) {
 				  if(jQuery(selectorName).length > 0){return true;}else{return false;}
 				};
@@ -248,6 +249,7 @@ Theme Version:	1.0.0
 
 					jQuery("button.chat").on('click',function() { 
 						jQuery("div.chatbox").toggle();
+						jQuery("span.notification").hide();
 						jQuery('div#chat2')[0].scrollTop = jQuery('div#chat2')[0].scrollHeight;
 
 					})

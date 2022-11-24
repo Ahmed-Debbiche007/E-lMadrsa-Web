@@ -21,15 +21,3 @@ services:
       - 8081:8081
       
 
-
-###> symfony/mercure-bundle ###
-  #< symfony/mercure-bundle ###
-
-volumes:
-###> doctrine/doctrine-bundle ###
-  db-data:
-###< doctrine/doctrine-bundle ###
-###> symfony/mercure-bundle ###
-  mercure_data:
-  mercure_config:
-###< symfony/mercure-bundle ###

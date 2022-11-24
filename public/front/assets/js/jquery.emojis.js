@@ -243,9 +243,9 @@
 
     iconClicked: function () {
       if (this.$picker.is(':hidden')) {
-        this.show()
+        this.$picker.show()
       } else {
-        this.hide()
+        this.$picker.hide()
       }
     },
 

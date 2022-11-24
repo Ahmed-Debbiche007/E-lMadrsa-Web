@@ -38,9 +38,10 @@ class MessagesController extends AbstractController
         ]);
     }
 
-    #[Route('/api/messages', name: 'api_messages', methods: ['GET', 'POST'])]
+    #[Route('/api/messages/{idSession}', name: 'api_messages', methods: ['GET', 'POST'])]
     public function indexApi(Request $request, MessagesRepository $messagesRepository, TutorshipSessionRepository $repo, SerializerInterface $serializer)
     {
+
         $sessions = $repo->findAll();
         $message = new Messages();
         $form = $this->createForm(MessagesType::class, $message);
@@ -61,17 +62,6 @@ class MessagesController extends AbstractController
         ]);
     }
 
-    #[Route('/api/post', name: 'api_post', methods: ['POST'])]
-    public function postApi(Request $request, MessagesRepository $messagesRepository)
-    {
-        $msg = new Messages();
-        $msg->setIdsender($this->getUser()->getId());
-        $msg->setBody($request->request->get('body'));
-        $msg->setIdsession(1);
-        $msg->setStatusdate(new \DateTime());
-        $messagesRepository->save($msg, true);
-        return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
-    }
 
     #[Route('/new', name: 'app_messages_new', methods: ['GET', 'POST'])]
     public function new(Request $request, MessagesRepository $messagesRepository): Response

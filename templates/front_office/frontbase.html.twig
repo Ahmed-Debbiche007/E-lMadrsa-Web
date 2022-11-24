@@ -11,9 +11,9 @@
       {% endblock %}
     </title>
 
-    {% block body %}
+    
 
-    {% endblock %}
+    
 
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/assets.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/bootstrap/css/bootstrap.min.css') }}" />
@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/revolution/css/layers.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/revolution/css/settings.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/revolution/css/navigation.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/calendar/fullcalendar.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/jquery.emojipicker.css') }}" />
     
@@ -39,19 +40,13 @@
       {% include 'front_office/components/navbar.html.twig' %}
 
       <div class="page-content bg-white">
-        {% include 'front_office/components/header.html.twig' %}
-        <div class="content-block">
-          {% include 'front_office/components/carroussel.html.twig' %}
-          {# {%include('front_office/components/course.html.twig') %} #}
-          {% include 'front_office/components/form.html.twig' %}
-          {% include 'front_office/components/event.html.twig' %}
-          {% include 'front_office/components/testimonial.html.twig' %}
-          {% set postss = posts %}
-          {% include 'front_office/components/post.html.twig' with { postss: postss } only %}
-        </div>
+      {% block body %}
+        
+        {% endblock %}
         {% include 'front_office/components/footer.html.twig' %}
-         {{ render(path('api_messages')) }}
+         
       </div>
+      {{ render(path('api_messages', {'idSession': 1})) }}
       {% include 'front_office/components/scripts.html.twig' %}
     </div>
   </body>

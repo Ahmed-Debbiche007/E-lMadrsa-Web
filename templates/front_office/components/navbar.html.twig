@@ -87,10 +87,6 @@
               </ul>
             </li>
 
-
-
-
-
             <li>
               <a href="javascript:;">
                 Pages
@@ -198,10 +194,9 @@
                 <li>
                   <a href="blog-classic-sidebar.html">Blog Posts</a>
                 </li>
-
-
               </ul>
             </li>
+
             <li class="nav-dashboard">
               <a href="javascript:;">
                 Dashboard
@@ -214,6 +209,13 @@
                 <li>
                   <a href="admin/add-listing.html">Add Listing</a>
                 </li>
+                {% if app.user %}
+                  <li>
+                    <a href="javascript:;">
+                      Tutorship Sessions
+                    </a>
+                  </li>
+                {% endif %}
                 <li>
                   <a href="admin/bookmark.html">Bookmark</a>
                 </li>

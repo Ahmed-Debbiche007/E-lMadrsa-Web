@@ -4268,11 +4268,11 @@ div.chat {
 
 }
 
-#chat2 .form-control {
+#messages-card .form-control {
 	border-color: transparent;
 }
 
-#chat2 .form-control:focus {
+#messages-card .form-control:focus {
 	border-color: transparent;
 	box-shadow: inset 0px 0px 0px 1px transparent;
 }

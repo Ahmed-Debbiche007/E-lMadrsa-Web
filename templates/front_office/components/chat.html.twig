@@ -1,5 +1,5 @@
 <button class="chat">
-  <span class="notification"></span>
+  <span class="notification" id="notification"></span>
   <i class="fa fa-comments fa-2x"></i>
 </button>
 
@@ -21,8 +21,8 @@
           </div>
         </div>
       </div>
-      <div class="col-7 h-100 d-inline-block mr-2 mt-4 ">
-        <div class="card" id="chat2" style="max-height: 350px; height: 350px; overflow-y: auto;">
+      <div class="col-7 h-100 d-inline-block mr-2 mt-4">
+        <div class="card" id="chat2" style="max-height: 350px; height: 350px; ">
           <div class="card-header d-flex justify-content-between align-items-center" style="position: sticky ; top:0%; z-index:88; background:#fff">
             <h5 class="font-semi-bold"><i class="fa fa-circle" style="color:green ;"></i> Jhon Doe</h5>
             <button type="button" class="btn" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false" style="background: #435ebe ; color:#fff;"><i class="fa fa-ellipsis-v"></i></button>
@@ -33,7 +33,7 @@
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </div>
-          <div class="card-body" id="messages-card" data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px">
+          <div class="card-body" id="messages-card" data-mdb-perfect-scrollbar="true" style="position: relative; height: 300px; overflow-y: auto;">
             {% for message in messages %}
               {% if app.user.getId() == message.idsender %}
                 <div class="d-flex flex-row justify-content-end pt-1">
@@ -50,11 +50,12 @@
               {% endif %}
             {% endfor %}
           </div>
-          <div class="card-footer d-flex justify-content-between align-items-center" id="chat-footer" style="position: sticky ; bottom:0%; z-index:88; background:#fff ">
-            <form action="/dashboard/messages/api/post" method="POST">
-              <input name="body" type="text" id="input-default" class="emojiable-option form-control form-control-lg" placeholder="Type message" style="width:350% ;" />
-              <button type="submit" class="btn" style="color: #435ebe ; background:#fff;"><i class="fa fa-paper-plane"></i></button>
-            </form>
+          <div class="card-footer d-flex justify-content-between align-items-center" id="chat-footer" style="position: sticky ; bottom:0%; background:#fff ">
+            <input id="send" type="hidden" name="secret" value="{{ app.user.getId() }}" />
+            <input id="receive" type="hidden" name="secret" value="{{ app.user.getId() }}" />
+            {# <input id="idSession" type="hidden" name="secret" value="{{ sessions[0].getId() }}" /> #}
+            <input name="body" type="text" id="input-default" class="emojiable-option form-control form-control-lg" placeholder="Type message" style="width:350% ;" />
+            <button id="sendbtn" type="submit" class="btn" style="color: #435ebe ; background:#fff;"><i class="fa fa-paper-plane"></i></button>
           </div>
         </div>
       </div>
@@ -62,7 +63,7 @@
   {% else %}
     <div class="login-box">
       <form>
-        <h2>You have to login to be mentored, you dumb fuck!</h2>
+        <h2>You have to login to be mentored!</h2>
         <a href="/login">
           <span></span>
           <span></span>
@@ -130,3 +131,4 @@
     })
   })
 </script>
+

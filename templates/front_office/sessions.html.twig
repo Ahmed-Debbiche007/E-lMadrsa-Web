@@ -1,0 +1,63 @@
+{% extends 'front_office/frontbase.html.twig' %}
+
+{% block title %}Hello{% endblock %}
+
+
+{% block body %}
+<div class="content-block">
+{% include 'front_office/components/form.html.twig' %}
+        <div class="content-block">
+	<main class="ttr-wrapper">
+		<div class="container-fluid">
+			
+			<div class="row">
+				<!-- Your Profile Views Chart -->
+				<div class="col-lg-12 m-b30">
+					<div class="widget-box">
+						<div class="wc-title">
+						</div>
+						<div class="widget-inner">
+							<div id="calendar"></div>
+						</div>
+					</div>
+				</div>
+				<!-- Your Profile Views Chart END-->
+			</div>
+		</div>
+	</main>
+	<div class="ttr-overlay"></div>
+</div>
+<script>
+
+  $(document).ready(function() {
+
+    $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay,listWeek'
+      },
+      
+      navLinks: true, // can click day/week names to navigate views
+
+      weekNumbers: true,
+      weekNumbersWithinDays: true,
+      weekNumberCalculation: 'ISO',
+
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      events: [
+
+        {% for session in sessions %}
+        {
+          title: '{{session.getType()}}',
+          start: '{{session.getDate()? session.date|date('Y-m-d H:i') : ''}}'
+        },
+        {% endfor %}
+      ]
+    });
+
+  });
+
+</script>
+{% endblock %}
