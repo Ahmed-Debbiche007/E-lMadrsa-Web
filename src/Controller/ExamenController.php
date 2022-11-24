@@ -27,6 +27,19 @@ class ExamenController extends AbstractController
         ]);
     }
 
+
+    #[Route('/top3', name: 'app_examen_top')]
+    public function resultstop(ExamenRepository $examenRepository, CategorieRepository $categorieRepository)
+    {
+
+        return $this->render('back_office/examen/resultat.html.twig', [
+            'examens' => $examenRepository->findAll(),
+            'categories'=>$categorieRepository->findAll(),
+        ]);
+    }
+
+
+
     #[Route('/list/categorie/{id}', name: 'app_examen_listtbycategorie')]
     public function listExamsbyCategrie( ExamenRepository $examenRepository, CategorieRepository $categorieRepository , int $id)
     {
