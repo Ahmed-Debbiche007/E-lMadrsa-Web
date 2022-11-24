@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 use App\Repository\CategoryRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity as AcmeAssert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -13,6 +16,19 @@ class Category
     private ?int $categoryid;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Regex(
+        pattern: '/\d/',
+        match: false,
+        message: "Your name cannot contain a number",
+    )]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: "Your first name must be at least {{ limit }} characters long",
+        maxMessage: "Your first name cannot be longer than {{ limit }} characters",
+    )]
+    #[AcmeAssert\profanityconstraint]
     private ?string $categoryname;
 
     #[ORM\Column(length: 255)]
@@ -47,5 +63,7 @@ class Category
         return $this;
     }
 
-
+    // public function __toString(){
+    //     return (string) $this->categoryname;
+    // }
 }

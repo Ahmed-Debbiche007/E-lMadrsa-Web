@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Service;
 
 
@@ -73,7 +74,7 @@ class GoogleCalendar
      * @param Events $events
      * @throws \Google\Exception
      */
-    public function addEvent(Tutorshipsessions $session) : String
+    public function addEvent(Tutorshipsessions $session): String
     {
         $client = $this->getClientForRequest();
         $service = new \Google_Service_Calendar($client);
@@ -85,8 +86,11 @@ class GoogleCalendar
         $start->setDateTime($session->getDate()->format('c'));
         $start->setTimeZone('Africa/Addis_Ababa');
         $event->setStart($start);
-
-        $end = $start;
+        $event->setId("session" . $session->getIdsession());
+        $duration = new \DateInterval('PT2H');
+        $theory =  date_add($session->getDate(), $duration);
+        $end = new \Google_Service_Calendar_EventDateTime();
+        $end->setDateTime($theory->format('c'));    
         $event->setEnd($end);
         $attendee1 = new Google_Service_Calendar_EventAttendee();
         $attendee1->setEmail($session->getIdStudent()->getEmail());
@@ -105,12 +109,12 @@ class GoogleCalendar
         $conferenceData = new \Google_Service_Calendar_ConferenceData();
         $conferenceData->setCreateRequest($createConfReq);
         $event->setConferenceData($conferenceData);
-        
-        try{
-          // $event = $service->events->setConferenceData($conferenceData)->insert('primary', $event);
-            $event = $service->events->insert('primary', $event,["conferenceDataVersion"=> ["type"=>1]]);
+
+        try {
+            // $event = $service->events->setConferenceData($conferenceData)->insert('primary', $event);
+            $event = $service->events->insert('primary', $event, ["conferenceDataVersion" => ["type" => 1]]);
             return $event->getHangoutLink();
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             dd($e);
         }
         return "url";
@@ -127,7 +131,7 @@ class GoogleCalendar
         $client = $this->getClientForRequest();
         $service = new \Google_Service_Calendar($client);
 
-        if($service->events->delete('primary', $id)){
+        if ($service->events->delete('primary', $id)) {
             return true;
         }
 
