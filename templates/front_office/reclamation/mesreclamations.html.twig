@@ -31,7 +31,7 @@
             {% for reclamation in reclamations %}
                 <tr>
                      <td>{{ reclamation.sujet }}</td>
-                    <td>{{ reclamation.description }}</td>
+                    <td>{{ reclamation.description|raw }}</td>
                     <td  style="width: 200px;">{{ reclamation.daterec ? reclamation.daterec|date('Y-m-d') : '' }}</td>
                      <td style="width: 200px;">
                         <form id="my_form" method="post" action="{{ path('app_reclamation_show', {'idreclamation': reclamation.idreclamation }) }}" >

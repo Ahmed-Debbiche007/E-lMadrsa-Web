@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Reclamation;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,7 +14,7 @@ class ReclamationType1 extends AbstractType
     {
         $builder
             ->add('sujet')
-            ->add('description')
+            ->add('description',CKEditorType::class)
 
 
         ;
