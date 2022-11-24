@@ -20,6 +20,7 @@ class ExamenController extends AbstractController
     #[Route('/list', name: 'app_examen_listt')]
     public function listExams(ExamenRepository $examenRepository, CategorieRepository $categorieRepository)
     {
+
         return $this->render('front_office/exams/examens.html.twig', [
             'examens' => $examenRepository->findAll(),
             'categories'=>$categorieRepository->findAll(),
