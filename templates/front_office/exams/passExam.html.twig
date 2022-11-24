@@ -1,4 +1,4 @@
-{% extends '../SecondBase.html.twig' %}
+{% extends 'front_office/SecondBase.html.twig' %}
 
 
 {% block title %} exams list{% endblock %}
@@ -30,7 +30,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <div id="result" class="quiz-body">
+                <div id="result" class="quiz-body col-8" >
                     <form name="quizForm" onSubmit="">
                         <fieldset class="form-group">
                             <h4><span id="qid">1.</span> <span id="question"></span></h4>
@@ -41,6 +41,10 @@
                         &nbsp;
                         <button name="next" id="next" class="btn btn-success">Next</button>
                     </form>
+                </div>
+
+                <div id="pod" class="col-4">
+
                 </div>
             </div> <!-- End of col-sm-12 -->
         </div> <!-- End of row -->
@@ -102,7 +106,7 @@
                 $("#tque").html(totalque);
                 $("#previous").attr("disabled", false);
                 $("#next").attr("disabled", false);
-                $("#qid").html(quiz.JS[this.currentque].id + '.');
+                $("#qid").html(quiz.JS[this.currentque].id+1 + '.');
 
 
                 $("#question").html(quiz.JS[this.currentque].question);
@@ -143,7 +147,7 @@
                     res = '<span class="correct">' + quiz.JS[j].score + '</span><i class="fa fa-check c-correct"></i>';
                 }
                 $("#result").append(
-                    '<div class="result-question"><span>Q ' + quiz.JS[j].id + '</span> &nbsp;' + quiz.JS[j].question + '</div>' +
+                    '<div class="result-question"><span>Q ' + ((quiz.JS[j].id)+1) + '</span> &nbsp;' + quiz.JS[j].question + '</div>' +
                     '<div><b>Correct answer:</b> &nbsp;' + quiz.JS[j].answer + '</div>' +
                     '<div class="last-row"><b>Score:</b> &nbsp;' + res +
 
@@ -152,6 +156,9 @@
                 );
 
             }
+            $("#pod").addClass('podd');
+            $("#pod").html(' <div class="container podium"> <div class="podium__item"> <p class="podium__city">Annecy</p>  <div class="podium__rank second">2</div> </div> <div class="podium__item"> <p class="podium__city">Saint-Gervais</p> <div class="podium__rank first"> <svg class="podium__number"   > <g transform="matrix(1, 0, 0, 1, 214.957736, -43.117417)"> <path   d="m -198.928 43.419 C -200.528 47.919 -203.528 51.819 -207.828 55.219 C -210.528 57.319 -213.028 58.819 -215.428 60.019 L -215.428 72.819 C -210.328 70.619 -205.628 67.819 -201.628 64.119 L -201.628 117.219 L -187.528 117.219 L -187.528 43.419 L -198.928 43.419 L -198.928 43.419 Z" style="fill: #000;"/> </g> </svg></div> </div> <div class="podium__item"> <p class="podium__city">Clermont-Ferrand Essentielle</p> <div class="podium__rank third">3</div> </div> </div> <style>body {font-family: sans-serif;}.container {display: flex;align-items: flex-end;}.podium__item {width: 75px;}.podium__rank { display: flex;justify-content: center;align-items: center;font-size: 35px;color: #fff;}.podium__city {text-align: center;padding: 0 .5rem;}.podium__number {width: 27px;height: 75px;}.podium .first {min-height: 300px;background: rgb(255,172,37);border-radius: 25px 25px 0px 0px;background:linear-gradient(333deg,rgba(255,172,37,1) 0%,rgba(254,207,51,1) 13%,rgba(254,224,51,1) 53%,rgba(255,172,37,1) 100%);}.podium .second {min-height: 200px;background: #6f6ff3;border-radius: 25px 25px 0px 0px;}.podium .third {min-height: 100px;background: #4bb74b;border-radius: 25px 25px 0px 0px;} </style>');
+
         }
 
         this.checkAnswer = function(option) {
