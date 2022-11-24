@@ -7,6 +7,11 @@ use App\Repository\ParticipationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
+
+
 
 class TestController extends AbstractController
 {
@@ -30,6 +35,21 @@ class TestController extends AbstractController
 
 
 
+
+    }
+    #[Route('/pdf', name: 'GenererPDF_app')]
+    public function genererPdf()
+    {
+        $html = $this->render('attestation/mypdf.html.twig',[
+            'title' => 'aaaaaaaaaaaaaaa'
+        ]);
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4');
+        $dompdf->render();
+       // $name = 'attestation'
+        ob_get_clean();
+        $dompdf->stream('name.pdf');
 
     }
 }

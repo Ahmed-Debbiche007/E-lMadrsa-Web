@@ -30,10 +30,11 @@ class FormationController extends AbstractController
 
 
     #[Route('/list', name: 'app_formation_listt')]
-    public function listExams(FormationRepository $formationRepository)
+    public function listExams(FormationRepository $formationRepository,CategorieRepository $categorieRepository)
     {
         return $this->render('front_office/formations/course.html.twig', [
             'formations' => $formationRepository->findAll(),
+            'categories' => $categorieRepository->findAll()
         ]);
     }
 
@@ -101,13 +102,14 @@ class FormationController extends AbstractController
 
         return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
     }
-    #[Route('/show/{id}', name: 'show_Formation1')]
+    #[Route('/showByCategory/{id}', name: 'show_FormationByCatagory')]
     public function showFormationByCat(FormationRepository $repo,$id,CategorieRepository $categorieRepository)
     {
         $categorie = $categorieRepository->find($id);
         $formations= $repo->getFormationByCat($id);
         return $this->render("front_office/formations/course.html.twig",
             array('categorie'=>$categorie,
+                'categories' => $categorieRepository->findAll(),
                 'formations'=>$formations)
         );
 
