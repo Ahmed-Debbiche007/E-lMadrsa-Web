@@ -21,7 +21,13 @@ class CategorieEv
     
 
     #[ORM\Column(length: 255)]  
-    #[Assert\NotBlank(message: "Veuillez renseigner le champ typeEvenement" )]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 3,
+        max: 10,
+        minMessage: "category content must be at least {{ limit }} characters long",
+        maxMessage: "category content name cannot be longer than {{ limit }} characters",
+    )]
     private ?string $typeEvenement;
 
     #[ORM\OneToMany(mappedBy: 'IdCate', targetEntity: Evenement::class)]

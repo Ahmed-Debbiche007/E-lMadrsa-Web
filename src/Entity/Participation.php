@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ParticipationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Form\Form;
 
 #[ORM\Entity(repositoryClass: ParticipationRepository::class)]
 class Participation
@@ -13,11 +14,15 @@ class Participation
     #[ORM\Column]
     private ?int $idparticipation;
 
-    #[ORM\Column]
-    private ?int $iduser;
+    #[ORM\ManyToOne(inversedBy: 'participations')]
+    #[ORM\JoinColumn(name: 'idUser', referencedColumnName: 'id')]
+    //#[ORM\JoinColumn(onDelete: "CASCADE",name: 'classroom_ref',referencedColumnName: 'ref')]
+    private ?User $user;
 
-    #[ORM\Column]
-    private ?int $idformation;
+    #[ORM\ManyToOne(inversedBy: 'participations')]
+    #[ORM\JoinColumn(name: 'idformation', referencedColumnName: 'idformation')]
+    //#[ORM\JoinColumn(onDelete: "CASCADE",name: 'classroom_ref',referencedColumnName: 'ref')]
+    private ?Formation $formation;
 
     #[ORM\Column]
     private ?float $resultat;
@@ -27,29 +32,34 @@ class Participation
         return $this->idparticipation;
     }
 
-    public function getIduser(): ?int
+
+    public function getUser(): ?User
     {
-        return $this->iduser;
+        return $this->user;
     }
 
-    public function setIduser(int $iduser): self
-    {
-        $this->iduser = $iduser;
 
-        return $this;
+    public function setUser(?User $user): void
+    {
+        $this->user = $user;
     }
 
-    public function getIdformation(): ?int
+
+    public function getFormation(): ?Formation
     {
-        return $this->idformation;
+        return $this->formation;
     }
 
-    public function setIdformation(int $idformation): self
-    {
-        $this->idformation = $idformation;
 
-        return $this;
+    public function setFormation(?Formation $formation): void
+    {
+        $this->formation = $formation;
     }
+
+
+
+
+
 
     public function getResultat(): ?float
     {

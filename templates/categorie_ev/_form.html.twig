@@ -1,26 +1,17 @@
-{{form_start(form,{'attr': {'novalidate': 'novalidate'}} )}}
-<div class="card-body">
-              <h5 class="card-title">General Form Elements</h5>
+{{ form_start(form) }}
+<div class="col-sm-10">
+{% if form_errors(form.typeEvenement) %}
+<div class="alert alert-danger">
+        {{ form_errors(form.typeEvenement) }}
+    </div>
+    {% endif %}
+{{ form_widget(form.typeEvenement, { attr: { class: 'form-control form-control-xl', placeholder: 'Event Categoty' }}) }}
+      
+      </div>
 
-              <!-- General Form Elements -->
-            
-                <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">Type evenement</label>
-                  <div class="col-sm-10">
-                    
-                   {{ form_widget(form.typeEvenement,{'attr':{'class':'form-controle'}})}}
-                    {{ form_errors(form.typeEvenement) }}
-                    
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  
-                  <div class="col-sm-10">
-                    <button type="submit" class="btn">{{ button_label|default('Save')}}</button>
-                  </div>
-                </div>
-
-
-            </div>
-
+<button class="btn btn-primary shadow-lg mt-5">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+
+
+
+

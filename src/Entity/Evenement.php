@@ -48,7 +48,6 @@ class Evenement
      *      value = "today")
      * */
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Assert\NotBlank(message:"Veuillez renseigner le champ date")]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 255)]
@@ -59,7 +58,7 @@ class Evenement
 
     #[ORM\ManyToOne(inversedBy: 'evenements')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $IdUser = null;
+    private ?User $idUser = null;
 
 
     public function getId(): ?int
@@ -117,12 +116,12 @@ class Evenement
 
     public function getIdUser(): ?User
     {
-        return $this->IdUser;
+        return $this->idUser;
     }
 
-    public function setIdUser(?User $IdUser): self
+    public function setIdUser(?User $idUser): self
     {
-        $this->IdUser = $IdUser;
+        $this->idUser = $idUser;
 
         
         return $this;

@@ -39,6 +39,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
+    #[ORM\Column (length: 255, options: ["default" => "User"])]
+    private ?string $role ;
+
     /**
      * @var string The hashed password
      */
@@ -51,15 +54,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $approved = null;
 
-    #[ORM\OneToMany(mappedBy: 'IdUser', targetEntity: Evenement::class)]
     private Collection $evenements;
 
     public function __construct()
     {
         $this->evenements = new ArrayCollection();
+        $this->requests = new ArrayCollection();
+        $this->studentRequest = new ArrayCollection();
+        $this->tutorshipsessions = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    
+
+    #[ORM\OneToMany(mappedBy: 'idStudent', targetEntity: Requests::class)]
+    private Collection $studentRequest;
+
+    #[ORM\OneToMany(mappedBy: 'idTutor', targetEntity: Tutorshipsessions::class)]
+    private Collection $tutorshipsessions;
+
+       
+
+    public function getId(): int
     {
         return $this->id;
     }
@@ -104,6 +119,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getRole(): string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }
@@ -218,34 +245,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function isAdmin() :?bool
     {
         
-        foreach ($this->getRoles() as $role){
-            if ($role == "ROLE_ADMIN"){
-                return true;
-            }
-           }
-       return false;
+        return $this->role == "Admin";
 
     }
 
     public function isTutor() :?bool
     {
-        foreach ($this->getRoles() as $role){
-            if ($role == "ROLE_TUTOR"){
-                return true;
-            }
-           }
-       return false;
+        return $this->role == "Tutor";
 
     }
 
     public function isStudent() :?bool
     {
-       foreach ($this->getRoles as $role){
-        if ($role == "ROLE_STUDENT"){
-            return true;
-        }
-       }
-       return false;
+        return $this->role == "Student";
 
     }
 
@@ -275,6 +287,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+/**
+     * @return Collection<int, Requests>
+     */
+    public function getRequests(): Collection
+    {
+        return $this->requests;
+    }
+
+    public function addRequest(Requests $request): self
+    {
+        if (!$this->requests->contains($request)) {
+            $this->requests->add($request);
+            $request->setIdTutor($this);
+        }
+
+        return $this;
+    }
+
 
     public function removeEvenement(Evenement $evenement): self
     {
@@ -287,5 +317,86 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function removeRequest(Requests $request): self
+    {
+        if ($this->requests->removeElement($request)) {
+            // set the owning side to null (unless already changed)
+            if ($request->getIdTutor() === $this) {
+                $request->setIdTutor(null);
+
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Requests>
+     */
+    public function getStudentRequest(): Collection
+    {
+        return $this->studentRequest;
+    }
+
+    public function addStudentRequest(Requests $studentRequest): self
+    {
+        if (!$this->studentRequest->contains($studentRequest)) {
+            $this->studentRequest->add($studentRequest);
+            $studentRequest->setIdStudent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStudentRequest(Requests $studentRequest): self
+    {
+        if ($this->studentRequest->removeElement($studentRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($studentRequest->getIdStudent() === $this) {
+                $studentRequest->setIdStudent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tutorshipsessions>
+     */
+    public function getTutorshipsessions(): Collection
+    {
+        return $this->tutorshipsessions;
+    }
+
+    public function addTutorshipsession(Tutorshipsessions $tutorshipsession): self
+    {
+        if (!$this->tutorshipsessions->contains($tutorshipsession)) {
+            $this->tutorshipsessions->add($tutorshipsession);
+            $tutorshipsession->setIdTutor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTutorshipsession(Tutorshipsessions $tutorshipsession): self
+    {
+        if ($this->tutorshipsessions->removeElement($tutorshipsession)) {
+            // set the owning side to null (unless already changed)
+            if ($tutorshipsession->getIdTutor() === $this) {
+                $tutorshipsession->setIdTutor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
+
+    public function  __toString()
+    {
+        return (String)$this->getNom() ;
+    }
+
     
 }

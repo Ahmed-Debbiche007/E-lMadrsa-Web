@@ -13,23 +13,26 @@ class Question
     #[ORM\Column]
     private ?int $idquestion;
 
-   #[ORM\Column(length: 255)]
+   #[ORM\Column(length: 500)]
     private ?string $ennonce;
 
-   #[ORM\Column(length: 255)]
+   #[ORM\Column(length: 500)]
     private ?string $option1;
 
-   #[ORM\Column(length: 255)]
+   #[ORM\Column(length: 500)]
     private ?string $option2;
 
-   #[ORM\Column(length: 255)]
+   #[ORM\Column(length: 500)]
     private ?string $option3;
 
-   #[ORM\Column(length: 255)]
+   #[ORM\Column(length: 500)]
     private ?string $answer;
     
-    #[ORM\Column]
-    private ?int $idexamen;
+
+    #[ORM\ManyToOne(inversedBy: 'questions')]
+    #[ORM\JoinColumn(name: 'idexamen', referencedColumnName: 'idexamen')]
+    //#[ORM\JoinColumn(onDelete: "CASCADE",name: 'classroom_ref',referencedColumnName: 'ref')]
+    private ?Examen $examen;
 
     public function getIdquestion(): ?int
     {
@@ -96,17 +99,19 @@ class Question
         return $this;
     }
 
-    public function getIdexamen(): ?int
+
+    public function getExamen(): ?Examen
     {
-        return $this->idexamen;
+        return $this->examen;
     }
 
-    public function setIdexamen(int $idexamen): self
-    {
-        $this->idexamen = $idexamen;
 
-        return $this;
+    public function setExamen(?Examen $examen): void
+    {
+        $this->examen = $examen;
     }
+
+
 
 
 }
