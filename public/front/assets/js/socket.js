@@ -1,20 +1,4 @@
-let blackBackground = [
-    "font-size: 50px",
-    "background-color: black",
-    "color: white",
-].join(" ;");
 
-let whiteBackground = [
-    "font-size: 50px",
-    "background-color: white",
-    "color: black",
-].join(" ;");
-
-console.log(
-    "%cWelcome to %cSpringFever 👉👌 ",
-    blackBackground,
-    whiteBackground
-);
 
 const socket = new WebSocket('ws://localhost:3001')
 
@@ -80,19 +64,11 @@ document.getElementById('sendbtn').addEventListener('click', function () {
 
     if (message.message != "") {
         addMessage(message.idSender, message.message)
-        fetch('/dashboard/messages/api/post', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "idSession": message.idSession,
-                    "body": message.message 
-                })
-            })
-            .then(response => response.json())
-            .then(response => console.log(JSON.stringify(response)))
+        try {
+            return axios.post("/dashboard/messages/api/post",{idSession: message.idSession, body: message.message});
+          } catch (error) {
+            console.log(error);
+          }
     }
 
 })

@@ -39,37 +39,41 @@ class MessagesController extends AbstractController
         ]);
     }
 
-    #[Route('/api/messages/{idSession}', name: 'api_messages', methods: ['GET', 'POST'])]
-    public function indexApi(Request $request, MessagesRepository $messagesRepository, TutorshipSessionRepository $repo, SerializerInterface $serializer)
+    #[Route('/api/messages', name: 'api_messages', methods: ['GET'])]
+    public function indexApi(Request $request,  LoggerInterface $logger, MessagesRepository $messagesRepository, TutorshipSessionRepository $repo, SerializerInterface $serializer)
     {
-
+        $logger->critical($request->get('idSession'));
         $sessions = $repo->getSessions($this->getUser());
         // foreach ($sessions as $session){
         //     dd($session->getMessages()->isEmpty());
         // }
+        $refresh = 0;
         $message = new Messages();
         $message->setStatusdate(new \DateTime());
 
         return  $this->renderForm('front_office/components/chat.html.twig', [
-            'messages' => $messagesRepository->findAll(),
+            'messages' => $messagesRepository->findBy(["idsession" => $request->get('idSession')]),
             'sessions' => $sessions,
+            'refresh' => $refresh,
+            'id' => $request->get('idSession'),
         ]);
     }
 
     #[Route('/api/post', name: 'api_messages_post', methods: ['POST'])]
     public function postApi(Request $request, LoggerInterface $logger, MessagesRepository $messagesRepository, TutorshipSessionRepository $repo): Response
     {
-        $postData = json_decode($request->getContent());
-        $logger->info($postData);
+        $msg = json_decode($request->getContent());
+        $logger->info($msg->idSession);
 
         $message = new Messages();
         $user = $this->getUser();
         $message->setIdsender($user->getId());
-        $message->setIdsession($repo->findLatest());
-        $message->setBody($request->request->get('body'));
+        $session = $repo->find($msg->idSession);
+        $message->setIdsession($session);
+        $message->setBody($msg->body);
         $message->setStatusdate(new \DateTime());
         $messagesRepository->save($message, true);
-        return $this->json('Created new project successfully');
+        return $this->json("success");
     }
 
 

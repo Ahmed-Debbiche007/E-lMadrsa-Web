@@ -46,8 +46,15 @@
         {% include 'front_office/components/footer.html.twig' %}
          
       </div>
-      {{ render(path('api_messages', {'idSession': 1})) }}
+      <button class="chat">
+        <span class="notification" id="notification"></span>
+        <i class="fa fa-comments fa-2x"></i>
+      </button>
+      <div id="chatbox">
+      {{ render(path('api_messages')) }}
+      </div>
       {% include 'front_office/components/scripts.html.twig' %}
     </div>
+
   </body>
 </html>
