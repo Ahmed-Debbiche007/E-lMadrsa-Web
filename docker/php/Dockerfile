@@ -16,6 +16,8 @@ WORKDIR /var/www/html
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
+RUN composer update
+
 RUN chmod +x ./docker/php/entrypoint.sh
 
 ENTRYPOINT ["./docker/php/entrypoint.sh"]

@@ -24,4 +24,6 @@ services:
       - 3001:3001
     volumes:
       - ./:/var/www/html
+    depends_on:
+      - mysql
     

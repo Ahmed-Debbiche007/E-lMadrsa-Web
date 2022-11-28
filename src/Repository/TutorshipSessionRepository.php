@@ -52,6 +52,17 @@ class TutorshipSessionRepository extends ServiceEntityRepository
        ;
    }
 
+   public function getSessions($id): array
+   {
+       return $this->createQueryBuilder('t')
+            ->where('t.idStudent = :val')
+            ->orWhere('t.idTutor = :val')
+           ->setParameter('val', $id)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
+
 //    public function findOneBySomeField($value): ?Tutorshipsessions
 //    {
 //        return $this->createQueryBuilder('t')

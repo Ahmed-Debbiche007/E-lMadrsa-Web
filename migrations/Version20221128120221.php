@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20221123131557 extends AbstractMigration
+final class Version20221128120221 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -31,7 +31,7 @@ final class Version20221123131557 extends AbstractMigration
         $this->addSql('CREATE TABLE evenement (id_evenement INT AUTO_INCREMENT NOT NULL, id_cat INT NOT NULL, nom_evenement VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, image VARCHAR(255) NOT NULL, id_utilisateur INT NOT NULL, date DATETIME NOT NULL, etat_evenement VARCHAR(255) NOT NULL, PRIMARY KEY(id_evenement)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE examen (idexamen VARCHAR(255) NOT NULL, formationid VARCHAR(255) DEFAULT NULL, idcategorie INT DEFAULT NULL, nomexamen VARCHAR(255) NOT NULL, pourcentage DOUBLE PRECISION NOT NULL, dureeexamen INT NOT NULL, INDEX IDX_514C8FEC900D8539 (formationid), INDEX IDX_514C8FEC37667FC1 (idcategorie), PRIMARY KEY(idexamen)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE formation (idformation VARCHAR(255) NOT NULL, sujet VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, difficulté VARCHAR(255) NOT NULL, durée INT NOT NULL, idprerequis INT NOT NULL, idcompetence INT NOT NULL, idexamen INT NOT NULL, idcategorie INT NOT NULL, PRIMARY KEY(idformation)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE messages (idmessage INT AUTO_INCREMENT NOT NULL, idsession INT NOT NULL, idsender INT NOT NULL, body VARCHAR(255) NOT NULL, statusdate DATETIME NOT NULL, PRIMARY KEY(idmessage)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE messages (idmessage INT AUTO_INCREMENT NOT NULL, idsession_id INT NOT NULL, idsender INT NOT NULL, body VARCHAR(255) NOT NULL, statusdate DATETIME NOT NULL, INDEX IDX_DB021E96AC96F1E5 (idsession_id), PRIMARY KEY(idmessage)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE participation (idparticipation INT AUTO_INCREMENT NOT NULL, idformation VARCHAR(255) DEFAULT NULL, resultat DOUBLE PRECISION NOT NULL, idUser INT DEFAULT NULL, INDEX IDX_AB55E24FFE6E88D7 (idUser), INDEX IDX_AB55E24F3E5B884A (idformation), PRIMARY KEY(idparticipation)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE post (postid INT AUTO_INCREMENT NOT NULL, categoryid INT DEFAULT NULL, posttitle VARCHAR(255) NOT NULL, postcontent VARCHAR(255) NOT NULL, postvote INT NOT NULL, postnbcom INT NOT NULL, postdate DATETIME NOT NULL, UserID INT DEFAULT NULL, INDEX IDX_5A8A6C8D58746832 (UserID), INDEX IDX_5A8A6C8D9B32FD3 (categoryid), PRIMARY KEY(postid)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE prerequis (idprerequis INT AUTO_INCREMENT NOT NULL, nomprerequis VARCHAR(100) NOT NULL, PRIMARY KEY(idprerequis)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -50,6 +50,7 @@ final class Version20221123131557 extends AbstractMigration
         $this->addSql('ALTER TABLE comment ADD CONSTRAINT FK_9474526C7510F6AF FOREIGN KEY (postid) REFERENCES post (postid)');
         $this->addSql('ALTER TABLE examen ADD CONSTRAINT FK_514C8FEC900D8539 FOREIGN KEY (formationid) REFERENCES formation (idformation)');
         $this->addSql('ALTER TABLE examen ADD CONSTRAINT FK_514C8FEC37667FC1 FOREIGN KEY (idcategorie) REFERENCES categorie (idcategorie)');
+        $this->addSql('ALTER TABLE messages ADD CONSTRAINT FK_DB021E96AC96F1E5 FOREIGN KEY (idsession_id) REFERENCES tutorshipsessions (id)');
         $this->addSql('ALTER TABLE participation ADD CONSTRAINT FK_AB55E24FFE6E88D7 FOREIGN KEY (idUser) REFERENCES user (id)');
         $this->addSql('ALTER TABLE participation ADD CONSTRAINT FK_AB55E24F3E5B884A FOREIGN KEY (idformation) REFERENCES formation (idformation)');
         $this->addSql('ALTER TABLE post ADD CONSTRAINT FK_5A8A6C8D58746832 FOREIGN KEY (UserID) REFERENCES user (id)');
@@ -69,6 +70,7 @@ final class Version20221123131557 extends AbstractMigration
         $this->addSql('ALTER TABLE comment DROP FOREIGN KEY FK_9474526C7510F6AF');
         $this->addSql('ALTER TABLE examen DROP FOREIGN KEY FK_514C8FEC900D8539');
         $this->addSql('ALTER TABLE examen DROP FOREIGN KEY FK_514C8FEC37667FC1');
+        $this->addSql('ALTER TABLE messages DROP FOREIGN KEY FK_DB021E96AC96F1E5');
         $this->addSql('ALTER TABLE participation DROP FOREIGN KEY FK_AB55E24FFE6E88D7');
         $this->addSql('ALTER TABLE participation DROP FOREIGN KEY FK_AB55E24F3E5B884A');
         $this->addSql('ALTER TABLE post DROP FOREIGN KEY FK_5A8A6C8D58746832');

@@ -9,15 +9,21 @@
       <div class="col-4 h-100 d-inline-block ml-4 mt-4">
         <div class="card" style="max-height: 350px; height: 350px; overflow-y: auto; background:#fff">
           <div class="card-body px-4 py-4-5 h-100 d-inline-block">
-            <div class="row">
-              <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 h-100 d-inline-block">
-                <a href="#">
-                  <h4 class="font-semi-bold text-left">John Doe</h4>
-                  <p class="font-semi-bold text-muted text-left">Welcome bro!</p>
-                </a>
-                <hr />
+            {% for session in sessions %}
+              <div class="row">
+                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 h-100 d-inline-block">
+                  <a href="#">
+                    <h4 class="font-semi-bold text-left">{{ session.getIdTutor().getNom() }} {{ session.getIdTutor().getPrenom() }}</h4>
+                    {% if session.getMessages() is empty %}
+                      <p class="font-semi-bold text-muted text-left">No messages yet ! ..</p>
+                    {% else %}
+                      <p class="font-semi-bold text-muted text-left">{{ session.getMessages()|last }}</p>
+                    {% endif %}
+                  </a>
+                  <hr />
+                </div>
               </div>
-            </div>
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -36,9 +42,9 @@
           <div class="card-body" id="messages-card" data-mdb-perfect-scrollbar="true" style="position: relative; height: 300px; overflow-y: auto;">
             {% for message in messages %}
               {% if app.user.getId() == message.idsender %}
-                <div class="d-flex flex-row justify-content-end pt-1">
+                <div class="d-flex flex-row justify-content-end">
                   <div class="message message-sent">
-                    <p class="small p-2 me-3 mb-1 text-white rounded-3">{{ message.body }}</p>
+                    <p class="small p-2 ms-3 mb-1 text-white rounded-3">{{ message.body }}</p>
                   </div>
                 </div>
               {% else %}
@@ -53,8 +59,8 @@
           <div class="card-footer d-flex justify-content-between align-items-center" id="chat-footer" style="position: sticky ; bottom:0%; background:#fff ">
             <input id="send" type="hidden" name="secret" value="{{ app.user.getId() }}" />
             <input id="receive" type="hidden" name="secret" value="{{ app.user.getId() }}" />
-            {# <input id="idSession" type="hidden" name="secret" value="{{ sessions[0].getId() }}" /> #}
-            <input name="body" type="text" id="input-default" class="emojiable-option form-control form-control-lg" placeholder="Type message" style="width:350% ;" />
+            <input id="idSession" type="hidden" name="secret" value="{{ sessions[0].getIdsession() }}" />
+            <input name="body" type="text" id="input-default" class="emojiable-option form-control" placeholder="Type message" style="width:350% ;" />
             <button id="sendbtn" type="submit" class="btn" style="color: #435ebe ; background:#fff;"><i class="fa fa-paper-plane"></i></button>
           </div>
         </div>
@@ -131,4 +137,3 @@
     })
   })
 </script>
-

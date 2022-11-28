@@ -1,20 +1,25 @@
+let blackBackground = [
+    "font-size: 50px",
+    "background-color: black",
+    "color: white",
+].join(" ;");
+
+let whiteBackground = [
+    "font-size: 50px",
+    "background-color: white",
+    "color: black",
+].join(" ;");
+
+console.log(
+    "%cWelcome to %cSpringFever 👉👌 ",
+    blackBackground,
+    whiteBackground
+);
+
 const socket = new WebSocket('ws://localhost:3001')
 
 socket.addEventListener('open', function () {
-    console.log('CONNECTED');
-    url = "http://localhost:5000/front/assets/js/notification.mp3"
-    $.get(url)
-    .done(function() { 
-        audio = new Audio(url);
-        audio.loop = false;
-        audio.play();
-        console.log("ahla")
-    }).fail(function() { 
-        console.log("aasba")
-    })
-    // audio = new Audio("http://localhost/front/assets/js/notification.mp3");
-    // audio.loop = false;
-    // audio.play();
+
 })
 
 function addMessage(id, message) {
@@ -22,9 +27,8 @@ function addMessage(id, message) {
     const msg = document.createElement('div')
     const p = document.createElement('p')
     var user = document.getElementById('receive').value;
-    var audio = new Audio('notification.mp3');
-    audio.play();
-    
+
+
     if (id == user) {
         justify.className = 'd-flex flex-row justify-content-end pt-1'
         msg.className = 'message message-sent'
@@ -46,7 +50,20 @@ function addMessage(id, message) {
 socket.addEventListener('message', function (e) {
     try {
         const message = JSON.parse(e.data)
-        addMessage(message.name, message.message)
+        if (message.message != "") {
+            url = "http://localhost:5000/front/assets/js/notification.mp3"
+            $.get(url)
+                .done(function () {
+                    audio = new Audio(url);
+                    audio.loop = false;
+                    audio.play();
+                }).fail(function () {
+                    console.log("uuuuuuup")
+                })
+
+            addMessage(message.name, message.message)
+        }
+
     } catch (e) {
         // Catch any errors
     }
@@ -55,9 +72,27 @@ socket.addEventListener('message', function (e) {
 document.getElementById('sendbtn').addEventListener('click', function () {
     const message = {
         idSender: document.getElementById('send').value,
-        message: document.getElementById('input-default').value
+        message: document.getElementById('input-default').value,
+        idSession: document.getElementById('idSession').value,
     }
     document.getElementById('input-default').value = ""
     socket.send(JSON.stringify(message))
-    addMessage(message.idSender, message.message)
+
+    if (message.message != "") {
+        addMessage(message.idSender, message.message)
+        fetch('/dashboard/messages/api/post', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "idSession": message.idSession,
+                    "body": message.message 
+                })
+            })
+            .then(response => response.json())
+            .then(response => console.log(JSON.stringify(response)))
+    }
+
 })

@@ -59,6 +59,8 @@ class Tutorshipsessions
     #[ORM\OneToMany(mappedBy: 'idsession', targetEntity: Messages::class, orphanRemoval: true)]
     private Collection $messages;
 
+    
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
@@ -159,7 +161,11 @@ class Tutorshipsessions
     /**
      * @return Collection<int, Messages>
      */
-    public function getMessages(): Collection
+
+    /**
+     * @return Collection<int, Messages>
+     */
+    public function getMessages()
     {
         return $this->messages;
     }
@@ -185,4 +191,5 @@ class Tutorshipsessions
 
         return $this;
     }
+    
 }
