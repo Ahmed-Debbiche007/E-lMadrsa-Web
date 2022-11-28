@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Form\CategoriersearchType;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
@@ -133,4 +134,30 @@ class CategoryController extends AbstractController
 
         return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
+
+/*
+    #[Route('/search', name: 'app_category_search', methods: ['GET', 'POST'])]
+    public function search(Request $request, CategoryRepository $categoryRepository, SluggerInterface $slugger): Response
+    {
+        $category = new Category();
+        $form = $this->createForm(CategoriersearchType::class, $category);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+            return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('back_office/category/.html.twig', [
+            'category' => $category,
+            'form' => $form,
+        ]);
+    }
+*/
+
+
 }

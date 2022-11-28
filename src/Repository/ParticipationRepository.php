@@ -63,4 +63,28 @@ class ParticipationRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+//SELECT  u.nom FROM participation p join user u   order by p.resultat DESC  limit 3 ;
+//$qry = $this->manager()->createQueryBuilder()
+//        ->select(array('e', 's', 'a'))
+//        ->from($this->entity, 'e')
+//        ->leftJoin('e.sources', 's')
+//        ->leftJoin('s.node', 'a');
+
+
+    public function topstudentsresults($val): array
+    {
+        return $this->createQueryBuilder('e')
+            ->join('e.user','u')
+            ->join('e.formation','f')
+            ->join('f.examen','ex')
+            ->select('u.nom')
+            ->orderBy('e.resultat', 'ASC')
+            ->where('ex=:val')
+            ->setParameter('val',$val)
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 }

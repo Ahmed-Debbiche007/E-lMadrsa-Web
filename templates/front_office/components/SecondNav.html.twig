@@ -13,14 +13,23 @@
                     </ul>
                 </div>
                 <div class="topbar-right">
-                    <ul>
-                        <li>
-                            <a href="/login">Login</a>
-                        </li>
-                        <li>
-                            <a href="/register">Register</a>
-                        </li>
-                    </ul>
+                    {% if app.user %}
+                        <ul>
+                            <li>Welcome {{ app.user.getNom() }} {{ app.user.getPrenom() }}</li>
+                            <li>
+                                <a href="{{ path('app_logout') }}">Logout</a>
+                            </li>
+                        </ul>
+                    {% else %}
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_login') }}">Login</a>
+                            </li>
+                            <li>
+                                <a href="/register">Register</a>
+                            </li>
+                        </ul>
+                    {% endif %}
                 </div>
             </div>
         </div>

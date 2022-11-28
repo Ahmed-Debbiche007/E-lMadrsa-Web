@@ -16,10 +16,25 @@
 
     <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css') }}">
+{#     {% set names={} %}
 
 
+{% for i in topstudents %}
+
+{{ i.nom}}
+ {% set names = (names)|merge({
+ })
 
 
+{%  endfor %}
+#}
+
+    {% set names={} %}
+{% for i in topstudents %}
+     {% set names = (names)|merge([{
+         name: i.nom
+     }]) %}
+ {%  endfor %}
 
 
 
@@ -29,7 +44,7 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-12" style="margin: 1% 20%;">
                 <div id="result" class="quiz-body col-8" >
                     <form name="quizForm" onSubmit="">
                         <fieldset class="form-group">
@@ -83,6 +98,10 @@
 <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js') }}"></script>
 <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js') }}"></script>
 <script>
+
+    names = "{{names|json_encode()|escape()}}"
+    console.log((names.replace(/&quot;/g,'"')))
+
 
 
     window.exampleArray = "{{dataArrayQuestions|json_encode()|escape('js')}}"
@@ -157,9 +176,32 @@
 
             }
             $("#pod").addClass('podd');
-            $("#pod").html(' <div class="container podium"> <div class="podium__item"> <p class="podium__city">Annecy</p>  <div class="podium__rank second">2</div> </div> <div class="podium__item"> <p class="podium__city">Saint-Gervais</p> <div class="podium__rank first"> <svg class="podium__number"   > <g transform="matrix(1, 0, 0, 1, 214.957736, -43.117417)"> <path   d="m -198.928 43.419 C -200.528 47.919 -203.528 51.819 -207.828 55.219 C -210.528 57.319 -213.028 58.819 -215.428 60.019 L -215.428 72.819 C -210.328 70.619 -205.628 67.819 -201.628 64.119 L -201.628 117.219 L -187.528 117.219 L -187.528 43.419 L -198.928 43.419 L -198.928 43.419 Z" style="fill: #000;"/> </g> </svg></div> </div> <div class="podium__item"> <p class="podium__city">Clermont-Ferrand Essentielle</p> <div class="podium__rank third">3</div> </div> </div> <style>body {font-family: sans-serif;}.container {display: flex;align-items: flex-end;}.podium__item {width: 75px;}.podium__rank { display: flex;justify-content: center;align-items: center;font-size: 35px;color: #fff;}.podium__city {text-align: center;padding: 0 .5rem;}.podium__number {width: 27px;height: 75px;}.podium .first {min-height: 300px;background: rgb(255,172,37);border-radius: 25px 25px 0px 0px;background:linear-gradient(333deg,rgba(255,172,37,1) 0%,rgba(254,207,51,1) 13%,rgba(254,224,51,1) 53%,rgba(255,172,37,1) 100%);}.podium .second {min-height: 200px;background: #6f6ff3;border-radius: 25px 25px 0px 0px;}.podium .third {min-height: 100px;background: #4bb74b;border-radius: 25px 25px 0px 0px;} </style>');
+
+            $("#pod").html('' +
+
+
+                '<div class="container podium"> <div class="podium__item"> <p class="podium__city" >Annecy</p>' +
+
+                '<div class="podium__rank second">2</div> </div> <div class="podium__item"> <p class="podium__city">' +
+                'Saint-Gervais</p>' +
+                ' <div class="podium__rank first"> <svg class="podium__number"   >' +
+                ' <g transform="matrix(1, 0, 0, 1, 214.957736, -43.117417)"> <path   d="m -198.928 43.419 C -200.528 47.919 -203.528 51.819 -207.828 55.219 C -210.528 57.319 -213.028 58.819 -215.428 60.019 L -215.428 72.819 C -210.328 70.619 -205.628 67.819 -201.628 64.119 L -201.628 117.219 L -187.528 117.219 L -187.528 43.419 L -198.928 43.419 L -198.928 43.419 Z" style="fill: #000;"/> </g> </svg></div>' +
+                ' </div> <div class="podium__item"> <p class="podium__city">Clermont-Ferrand Essentielle</p> ' +
+                '<div class="podium__rank third">3</div> </div> ' +
+                '</div>' +
+                ' <style>body {font-family: sans-serif;}.container {display: flex;align-items: flex-end;}.podium__item {width: 75px;}.podium__rank { display: flex;justify-content: center;align-items: center;font-size: 35px;color: #fff;}.podium__city {text-align: center;padding: 0 .5rem;}.podium__number {width: 27px;height: 75px;}.podium .first {min-height: 300px;background: rgb(255,172,37);border-radius: 25px 25px 0px 0px;background:linear-gradient(333deg,rgba(255,172,37,1) 0%,rgba(254,207,51,1) 13%,rgba(254,224,51,1) 53%,rgba(255,172,37,1) 100%);}.podium .second {min-height: 200px;background: #6f6ff3;border-radius: 25px 25px 0px 0px;}.podium .third {min-height: 100px;background: #4bb74b;border-radius: 25px 25px 0px 0px;} </style>');
+
+
+
+            $("#pod").html('<a href="{{ path('app_category_index' )    }}"> <span class="badge bg-warning">Génerer Attestation </span> </a>' );
+
 
         }
+
+
+
+
+
 
         this.checkAnswer = function(option) {
             var answer = quiz.JS[this.currentque].answer;

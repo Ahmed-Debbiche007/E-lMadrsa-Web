@@ -174,9 +174,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/sendgrid-mailer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/google-mailer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/friendsofsymfony/ckeditor-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/tattali/calendar-bundle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
- 
 </module>
