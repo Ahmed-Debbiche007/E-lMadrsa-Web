@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\AttestationRepository;
+use App\Repository\CategorieRepository;
 use App\Repository\FormationRepository;
 use App\Repository\ParticipationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,19 +39,23 @@ class TestController extends AbstractController
 
 
     }
-    #[Route('/pdf', name: 'GenererPDF_app')]
-    public function genererPdf()
+
+
+    public function showFormationByCat(FormationRepository $repo,$id,CategorieRepository $categorieRepository)
     {
-        $html = $this->render('attestation/mypdf.html.twig',[
-            'title' => 'aaaaaaaaaaaaaaa'
-        ]);
-        $dompdf = new Dompdf();
-        $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4');
-        $dompdf->render();
-       // $name = 'attestation'
-        ob_get_clean();
-        $dompdf->stream('name.pdf');
+        $categorie = $categorieRepository->find($id);
+        $formations= $repo->getFormationByCat($id);
+        return $this->render("front_office/formations/course.html.twig",
+            array('categorie'=>$categorie,
+                'categories' => $categorieRepository->findAll(),
+                'formations'=>$formations)
+        );
 
     }
+
+
+
+
+
+
 }

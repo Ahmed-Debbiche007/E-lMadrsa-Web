@@ -1,3 +1,33 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Codespaces
+Marketplace
+Explore
+
+@chaimadammak
+Ahmed-Debbiche007
+/
+E-lMadrsa-Web
+Public
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+E-lMadrsa-Web/templates/front_office/components/navbar.html.twig
+
+ahmedg99 organisation des fichiers
+Latest commit 50a726c 4 days ago
+History
+4 contributors
+@NourYahyaoui@AymenEssid1@Ahmed-Debbiche007@ahmedg99
+291 lines (280 sloc)  9.93 KB
+
 <header class="header rs-nav header-transparent">
   <div class="top-bar">
     <div class="container">
@@ -15,7 +45,7 @@
         <div class="topbar-right">
           <ul>
             <li>
-              <a href="/login">Login</a>
+              <a href="{{ path('app_login') }}">Login</a>
             </li>
             <li>
               <a href="/register">Register</a>
@@ -30,7 +60,7 @@
       <div class="container clearfix">
         <!-- Header Logo ==== -->
         <div class="menu-logo">
-          <a href="/"><h1>E-lMadrsa</h1></a>
+          <a href="/"><h3>E-lMadrsa</h3></a>
         </div>
         <!-- Mobile Nav Button ==== -->
         <button class="navbar-toggler collapsed menuicon justify-content-end" type="button" data-toggle="collapse" data-target="#menuDropdown" aria-controls="menuDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +99,7 @@
         <!-- Navigation Menu ==== -->
         <div class="menu-links navbar-collapse collapse justify-content-start" id="menuDropdown">
           <div class="menu-logo">
-            <a href="index.html"><img src="front/assets/images/logo.png" alt="" /></a>
+            <a href="index.html"><img src="{{ asset('front/assets/images/logo.png') }}" alt="" /></a>
           </div>
           <ul class="nav navbar-nav">
             <li class="active">
@@ -86,6 +116,10 @@
                 </li>
               </ul>
             </li>
+
+
+
+
 
             <li>
               <a href="javascript:;">
@@ -161,14 +195,10 @@
                   <h5 class="menu-adv-title">Our Courses</h5>
                   <ul>
                     <li>
-                      <a href="{{ path('app_formation_listt')}}" >Formations</a>
+                      <a href="courses.html">Courses</a>
                     </li>
                     <li>
-                      <a href="{{ path('app_categorie_index')}}" >Cat</a>
-                    </li>
-                    <li>
-
-                      <a href="{{ path('BestForm_app')}}" >Meilleur Formation</a>
+                      <a href="courses-details.html">Courses Details</a>
                     </li>
                     <li>
                       <a href="profile.html">Instructor Profile</a>
@@ -182,7 +212,7 @@
                   </ul>
                 </li>
                 <li class="add-menu-right">
-                  <img src="front/assets/images/adv/adv.jpg" alt="" />
+                  <img src="{{ asset('front/assets/images/adv/adv.jpg') }}" alt="" />
                 </li>
               </ul>
             </li>
@@ -193,30 +223,23 @@
               </a>
               <ul class="sub-menu">
                 <li>
-                  <a href="blog-classic-grid.html">Blog Classic</a>
+                  <a href="/dashboard/category">Blog Category</a>
                 </li>
                 <li>
-                  <a href="blog-classic-sidebar.html">Blog Classic Sidebar</a>
+                  <a href="blog-classic-sidebar.html">Blog Posts</a>
                 </li>
-                <li>
-                  <a href="blog-list-sidebar.html">Blog List Sidebar</a>
-                </li>
-                <li>
-                  <a href="blog-standard-sidebar.html">Blog Standard Sidebar</a>
-                </li>
-                <li>
-                  <a href="blog-details.html">Blog Details</a>
-                </li>
+
+
               </ul>
             </li>
             <li class="nav-dashboard">
-              <a href="javascript:;">
+              <a href="{{ path('app_back_office') }}">
                 Dashboard
                 <i class="fa fa-chevron-down"></i>
               </a>
               <ul class="sub-menu">
                 <li>
-                  <a href="admin/index.html">Dashboard</a>
+                  <a href="{{ path('app_back_office') }}">Dashboard</a>
                 </li>
                 <li>
                   <a href="admin/add-listing.html">Add Listing</a>
@@ -263,6 +286,28 @@
                 </li>
               </ul>
             </li>
+
+            <li class="active">
+              <a href="javascript:;">
+                Formations
+                <i class="fa fa-chevron-down"></i>
+              </a>
+              <ul class="sub-menu">
+                <li>
+                  <a href="{{ path('app_formation_listt')}}">Formations </a>
+                </li>
+
+                <li>
+
+                  <a href="{{ path('BestForm_app')}}" >Meilleur Formation</a>
+                </li>
+
+
+
+
+              </ul>
+            </li>
+
           </ul>
           <div class="nav-social-link">
             <a href="javascript:;"><i class="fa fa-facebook"></i></a>

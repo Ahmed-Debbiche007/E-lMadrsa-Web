@@ -10,6 +10,8 @@
             <tr>
                 <th>Idattestation</th>
                 <th>NomEtudiant</th>
+                <th>NomFormation</th>
+                <th>Resultat</th>
                 <th>dateAcq</th>
 
 
@@ -21,6 +23,8 @@
             <tr>
                 <td>{{ attestation.idattestation }}</td>
                 <td>{{ attestation.participation.user.getUsername() }}</td>
+                <td>{{ attestation.participation.formation.getSujet() }}</td>
+                <td>{{ attestation.participation.resultat }}</td>
                 <td>{{ attestation.dateAcq ? attestation.dateAcq|date('Y-m-d') : '' }}</td>
 
                 <td>
@@ -38,6 +42,11 @@
                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~attestation.idattestation) }}">
 
                         <a href="#" class="badge bg-danger" onclick="document.getElementById('my_form').submit();">Delete</a>
+
+                        <a href="{{ path('GenererPDF_app' , {'idattestation': attestation.idattestation }) }}">
+                            <span class="badge bg-warning">Génerer Attestation </span>
+                        </a>
+
                     </form>
                 </td>
             </tr>

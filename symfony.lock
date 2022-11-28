@@ -38,6 +38,9 @@
             "migrations/.gitignore"
         ]
     },
+    "endroid/qr-code-bundle": {
+        "version": "4.1.1"
+    },
     "omines/datatables-bundle": {
         "version": "0.7",
         "recipe": {

@@ -82,6 +82,8 @@ class Attestation
     {
         $this->user = $user;
     }
+    public function __toString() { return 'I CAUSE THIS ISSUE';}
+
 
 
 
