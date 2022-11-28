@@ -25,6 +25,18 @@
             "src/Repository/.gitignore"
         ]
     },
+    "doctrine/doctrine-fixtures-bundle": {
+        "version": "3.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "3.0",
+            "ref": "1f5514cfa15b947298df4d771e694e578d4c204d"
+        },
+        "files": [
+            "./src/DataFixtures/AppFixtures.php"
+        ]
+    },
     "doctrine/doctrine-migrations-bundle": {
         "version": "3.2",
         "recipe": {
@@ -36,6 +48,21 @@
         "files": [
             "config/packages/doctrine_migrations.yaml",
             "migrations/.gitignore"
+        ]
+    },
+    "endroid/qr-code-bundle": {
+        "version": "4.1.1"
+    },
+    "google/apiclient": {
+        "version": "2.12",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "2.0",
+            "ref": "49c5d7a66d863d28513979bf0666dc77599100c0"
+        },
+        "files": [
+            "./config/packages/google_apiclient.yaml"
         ]
     },
     "phpunit/phpunit": {
@@ -118,6 +145,15 @@
             "src/Controller/.gitignore",
             "src/Kernel.php"
         ]
+    },
+    "symfony/google-mailer": {
+        "version": "5.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "4.4",
+            "ref": "f8fd4ddb9b477510f8f4bce2b9c054ab428c0120"
+        }
     },
     "symfony/mailer": {
         "version": "5.4",
@@ -215,6 +251,15 @@
         "files": [
             "config/packages/security.yaml"
         ]
+    },
+    "symfony/sendgrid-mailer": {
+        "version": "5.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "4.4",
+            "ref": "b46e4f8f1adb2864f0aa9c0ff57aea3324a07199"
+        }
     },
     "symfony/translation": {
         "version": "5.4",

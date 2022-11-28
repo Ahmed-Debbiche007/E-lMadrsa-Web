@@ -20,7 +20,6 @@ class EvenementType extends AbstractType
             ->add('description')
             ->add('image',FileType::class, array('data_class' => null))
             ->add('date')
-            ->add('etatEvenement')
             ->add('IdCate',EntityType::class,[
                 'class'=>CategorieEv::class,
                 'choice_label'=>'typeEvenement'
