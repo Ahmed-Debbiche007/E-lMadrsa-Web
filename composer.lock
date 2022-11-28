@@ -5752,7 +5752,6 @@
             "time": "2019-03-08T08:55:37+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "ratchet/rfc6455",
             "version": "v0.3.1",
             "source": {
@@ -6369,8 +6368,6 @@
             "time": "2021-07-11T12:37:55+00:00"
         },
         {
-=======
->>>>>>> 76ba1672fde9bf80788ba762207ed50db183583e
             "name": "sensio/framework-extra-bundle",
             "version": "v6.2.9",
             "source": {
