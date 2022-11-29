@@ -13,24 +13,23 @@ use Symfony\Component\Mailer\Transport;
 
 class SendMailController extends AbstractController
 {
-    #[Route('/send/mail', name: 'app_send_mail')]
+    #[Route('/send/mail', name: 'app.app')]
     public function index(): Response
     {
         return $this->render('send_mail/index.html.twig', [
             'controller_name' => 'SendMailController',
         ]);
     }
-    #[Route('/send/mail', name: 'app_send_mail')]
-    public function send(Email $email): Response
+
+    public function send(Email $email)
     {
         $email->getHeaders()->addTextHeader('X-Auto-Response-Suppress', 'OOF, DR, RN, NRN, AutoReply');
-        $transport = Transport::fromDsn($this->getParameter('app.dsn'));
+        $transport = Transport::fromDsn('gmail://springforfever@gmail.com:kmcovmkdwmxwscsz@default?verify_peer=0');
         $mailer = new Mailer($transport);
         try{
             $mailer->send($email);
         }catch(TransportExceptionInterface $e){
             dd($e);
         };
-        return new Response($this->getParameter('app.dsn'));
     }
 }

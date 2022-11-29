@@ -2,8 +2,7 @@ framework:
     mailer:
         dsn: '%env(MAILER_DSN)%'
         envelope:
-            sender: 'ahmed.debbiche@esprit.tn'
+            sender: '%env(EMAIL)%'
         headers:
-            From: 'Ahmed <ahmed.debbiche@esprit.tn>'
-            Bcc: 'hmddebbiche@gmail.com'
+            From: 'E-lMadrsa <%env(EMAIL)%>'
             X-Custom-Header: 'foobar'

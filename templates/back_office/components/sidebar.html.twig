@@ -20,14 +20,16 @@
 				<li class="sidebar-title">Menu</li>
 
 				<li class="sidebar-item active ">
-					<a href="/dashboard" class='sidebar-link'>
+
+					<a href="{{ path('app_back_office') }}" class='sidebar-link'>
 						<i class="bi bi-grid-fill"></i>
 						<span>Dashboard</span>
 					</a>
 				</li>
 				{% if app.user.isAdmin() %}
 				<li class="sidebar-item  ">
-					<a href="/dashboard/users" class='sidebar-link'>
+
+					<a href="{{ path('app_user_index') }}" class='sidebar-link'>
 						<i class="bi bi-people-fill"></i>
 						<span>Users</span>
 					</a>
@@ -35,7 +37,8 @@
 
 				
 				<li class="sidebar-item  ">
-					<a href="/dashboard/tutors" class='sidebar-link'>
+
+					<a href="{{ path('app_user_indexTutor') }}" class='sidebar-link'>
 
 						<i class="bi bi-people-fill"></i>
 						<span>Tutors</span>
@@ -43,12 +46,21 @@
 				</li>
 
 				<li class="sidebar-item  ">
-					<a href="/dashboard/students" class='sidebar-link'>
+					<a href="{{ path('app_user_indexStudent') }}" class='sidebar-link'>
 
 						<i class="bi bi-people-fill"></i>
 						<span>Students</span>
 					</a>
 				</li>
+
+					<li class="sidebar-item  ">
+						<a href="{{ path('app_badge_index') }}" class='sidebar-link'>
+
+							<i class="bi bi-people-fill"></i>
+							<span>Badges</span>
+						</a>
+					</li>
+
 				{% endif %}
 				<li class="sidebar-item  ">
 					<a href="/dashboard" class='sidebar-link'>
@@ -57,25 +69,29 @@
 					</a>
 				</li>
 				<li class="sidebar-item  ">
-					<a href="/dashboard/examen" class='sidebar-link'>
+
+					<a href="{{ path('app_examen_index') }}" class='sidebar-link'>
 						<i class="bi bi-nut-fill"></i>
 						<span>Exams</span>
 					</a>
 				</li>
 				<li class="sidebar-item  ">
-					<a href="/dashboard/questions" class='sidebar-link'>
+
+					<a href="{{ path('app_question_index') }}" class='sidebar-link'>
 						<i class="bi bi-patch-check-fill"></i>
 						<span>Questions</span>
 					</a>
 				</li>
 				<li class="sidebar-item  ">
-					<a href="/dashboard/participation" class='sidebar-link'>
+
+					<a href="{{ path('app_participation_index') }}" class='sidebar-link'>
 						<i class="bi bi-patch-check-fill"></i>
 						<span>Participations</span>
 					</a>
 				</li>
 				<li class="sidebar-item  ">
-					<a href="/reclamation" class='sidebar-link'>
+
+					<a href="{{ path('app_reclamation_index') }}" class='sidebar-link'>
 						<i class="bi bi-patch-check-fill"></i>
 						<span>Réclamation</span>
 					</a>
@@ -108,13 +124,16 @@
                 </a>
                 <ul class="submenu ">
                     <li class="submenu-item ">
-                        <a href="/dashboard/requests">Requests</a>
+
+                        <a href="{{ path('app_requests_index') }}">Requests</a>
                     </li>
                     <li class="submenu-item ">
-                        <a href="/dashboard/tutorshipSessions">Sessions</a>
+
+                        <a href="{{ path('app_tutorshipsessions_index') }}">Sessions</a>
                     </li>
 					<li class="submenu-item ">
-                        <a href="/dashboard/messages">messages</a>
+
+                        <a href="{{ path('app_messages_index') }}">messages</a>
                     </li>
                 </ul>
             </li>

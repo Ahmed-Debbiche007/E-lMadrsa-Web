@@ -15,10 +15,10 @@
         <div class="topbar-right">
           <ul>
             <li>
-              <a href="/login">Login</a>
+              <a href=" {{path( 'app_login') }}">Login</a>
             </li>
             <li>
-              <a href="/register">Register</a>
+              <a href="{{path('app_register')}}">Register</a>
             </li>
           </ul>
         </div>
@@ -145,7 +145,7 @@
                   <a href="portfolio.html">Portfolio</a>
                 </li>
                 <li>
-                  <a href="profile.html">Profile</a>
+                  <a href="{{ path('app_profil')}}">Profile</a>
                 </li>
                 <li>
                   <a href="membership.html">Membership</a>
@@ -171,7 +171,7 @@
                       <a href="courses-details.html">Courses Details</a>
                     </li>
                     <li>
-                      <a href="profile.html">Instructor Profile</a>
+                      <a href="{{ path('app_profil')}}">Instructor Profile</a>
                     </li>
                     <li>
                       <a href="event.html">Upcoming Event</a>
@@ -216,6 +216,7 @@
               </a>
               <ul class="sub-menu">
                 <li>
+
                   <a href="admin/index.html">Dashboard</a>
                 </li>
                 <li>
@@ -231,10 +232,10 @@
                   <a href="admin/review.html">Review</a>
                 </li>
                 <li>
-                  <a href="admin/teacher-profile.html">Teacher Profile</a>
+                  <a href="{{ path('app_profil')}}">Teacher Profile</a>
                 </li>
                 <li>
-                  <a href="admin/user-profile.html">User Profile</a>
+                  <a href="{{ path('app_profil')}}">User Profile</a>
                 </li>
                 <li>
                   <a href="javascript:;">Calendar<i class="fa fa-angle-right"></i></a>
@@ -276,6 +277,11 @@
                 <li>
                   <a href="index-2.html">Examen 2</a>
                 </li>
+
+                <li>
+                  <a href="{{ path('app_profil')}}">mon profil </a>
+                </li>
+
               </ul>
             </li>
           </ul>
