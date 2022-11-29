@@ -1,32 +1,4 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
 
-@chaimadammak
-Ahmed-Debbiche007
-/
-E-lMadrsa-Web
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-E-lMadrsa-Web/templates/front_office/components/navbar.html.twig
-
-ahmedg99 organisation des fichiers
-Latest commit 50a726c 4 days ago
-History
-4 contributors
-@NourYahyaoui@AymenEssid1@Ahmed-Debbiche007@ahmedg99
-291 lines (280 sloc)  9.93 KB
 
 <header class="header rs-nav header-transparent">
   <div class="top-bar">
@@ -289,11 +261,14 @@ History
 
             <li class="active">
               <a href="javascript:;">
+
                 Formations
+
                 <i class="fa fa-chevron-down"></i>
               </a>
               <ul class="sub-menu">
                 <li>
+
                   <a href="{{ path('app_formation_listt')}}">Formations </a>
                 </li>
 
@@ -302,13 +277,54 @@ History
                   <a href="{{ path('BestForm_app')}}" >Meilleur Formation</a>
                 </li>
 
+                <li>
+
+                  <a href="{{ path('app_formation_Chart')}}" >Statistiques Des Participations Par Formation</a>
+                </li>
+
+
 
 
 
               </ul>
             </li>
 
+            <li class="active">
+              <a href="javascript:;">
+                Examens
+                <i class="fa fa-chevron-down"></i>
+              </a>
+              <ul class="sub-menu">
+                <li>
+                  <a href="{{ path('app_examen_listt')}}">Examen </a>
+                </li>
+
+                <li>
+                  <a href="{{ path('app_reclamations_add')}}">Ajouter une reclamation</a>
+                </li>
+
+                <li>
+                  <a href="{{ path('app_profil')}}">mon profil </a>
+                </li>
+              </ul>
+            </li>
+
+
           </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <div class="nav-social-link">
             <a href="javascript:;"><i class="fa fa-facebook"></i></a>
             <a href="javascript:;"><i class="fa fa-google-plus"></i></a>

@@ -1,0 +1,11 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}New Reclamation{% endblock %}
+
+{% block body %}
+    <h1>Ajouter une  Reclamation</h1>
+
+    {{ include('back_office/reclamation/_form.html.twig') }}
+
+    <a href="{{ path('app_reclamation_index') }}">back to list</a>
+{% endblock %}

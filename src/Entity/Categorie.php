@@ -16,13 +16,11 @@ class Categorie
     private ?int $idcategorie;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le nom de Catégorie est obligatoire"),Assert\Length(min: 2,
+    #[Assert\NotBlank(message: "Le nom de Catégorie est obligatoire"), Assert\Length(min: 2,
         max: 50,
         minMessage: 'Le nom de Catégorie doit avoir au moins {{ limit }} characters de Longeur ',
         maxMessage: 'Le nom de catégorie ne peut pas avoir plus que  {{ limit }} characters de Longeur ',)]
-
     private ?string $nomcategorie;
-
 
 
     public function getIdcategorie(): ?int
@@ -41,11 +39,11 @@ class Categorie
 
         return $this;
     }
-    public function  __toString()
-    {
-        return (String)$this->nomcategorie ;
-    }
 
+    public function __toString()
+    {
+        return (string)$this->nomcategorie;
+    }
 
 
 }

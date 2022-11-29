@@ -1,0 +1,66 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}Reclamation index{% endblock %}
+ {% block pageHeading %}
+<h1>Liste des Réclamations :</h1>
+
+{% endblock %}
+{% block body %}
+    <table class="table" id="table1">
+        <thead>
+            <tr>
+                <th>Idreclamation</th>
+                <th>Sujet</th>
+                <th>Description</th>
+                <th>Daterec</th>
+                <th>Iduser</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ reclamation.idreclamation }}</td>
+                <td>{{ reclamation.sujet }}</td>
+                <td>{{ reclamation.description }}</td>
+                <td>{{ reclamation.daterec ? reclamation.daterec|date('Y-m-d') : '' }}</td>
+                <td>{{ reclamation.iduser }}</td>
+                <td>
+                    <form id="my_form" method="post" action="{{ path('app_reclamation_show', {'idreclamation': reclamation.idreclamation }) }}" >
+                        <a href="{{ path('app_reclamation_show', {'idreclamation': reclamation.idreclamation }) }}">
+                            <span class="badge bg-primary">show</span>
+                        </a>
+                        <a href="{{ path('app_reclamation_edit', {'idreclamation': reclamation.idreclamation}) }}">
+                            <span class="badge bg-success">edit</span>
+                        </a>
+
+
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reclamation.idreclamation) }}">
+
+                        <a href="#" class="badge bg-danger" onclick="document.getElementById('my_form').submit();">Delete</a>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <script
+            src="https://code.jquery.com/jquery-1.12.4.js"
+            integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ asset('https://cdn.datatables.net/v/bs4/jqc-1.12.4/dt-1.13.1/datatables.min.js') }}"></script>
+    <script type="application/javascript">
+        {}
+        console.log(jQuery().jquery);
+
+        $(document).ready(function () {
+            $('#table1').DataTable();
+        });
+
+    </script>
+{% endblock %}

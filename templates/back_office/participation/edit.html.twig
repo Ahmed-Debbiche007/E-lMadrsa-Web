@@ -1,0 +1,14 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}Edit Participation{% endblock %}
+
+{% block body %}
+    <h1>Edit Participation</h1>
+
+    {{ include('back_office/participation/_form.html.twig', {'button_label': 'Update'}) }}
+<!--
+    <a href="{{ path('app_participation_index') }}">back to list</a>
+
+    {{ include('back_office/participation/_delete_form.html.twig') }}
+    -->
+{% endblock %}

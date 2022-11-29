@@ -1,0 +1,32 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}Participation{% endblock %}
+
+{% block body %}
+    <h1>Participation</h1>
+
+    <table class="table">
+        <tbody>
+
+            <tr>
+                <th>Resultat</th>
+                <td>{{ participation.resultat }}</td>
+            </tr>
+            <tr>
+                <th>nom fromation </th>
+                <td>{{ participation.formation }}</td>
+            </tr>
+            <tr>
+                <th>nom user </th>
+                <td>{{ participation.user }}</td>
+            </tr>
+        </tbody>
+    </table>
+<!--
+    <a href="{{ path('app_participation_index') }}">back to list</a>
+
+    <a href="{{ path('app_participation_edit', {'idparticipation': participation.idparticipation}) }}">edit</a>
+
+    {{ include('back_office/participation/_delete_form.html.twig') }}
+    -->
+{% endblock %}

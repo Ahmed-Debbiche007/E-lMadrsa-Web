@@ -1,0 +1,36 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}Reclamation{% endblock %}
+
+{% block body %}
+    <h1>Reclamation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idreclamation</th>
+                <td>{{ reclamation.idreclamation }}</td>
+            </tr>
+            <tr>
+                <th>Sujet</th>
+                <td>{{ reclamation.sujet }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ reclamation.description }}</td>
+            </tr>
+            <tr>
+                <th>Daterec</th>
+                <td>{{ reclamation.daterec ? reclamation.daterec|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Iduser</th>
+                <td>{{ reclamation.iduser }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+ {% endblock %}

@@ -1,0 +1,85 @@
+
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}Questions{% endblock %}
+{% block pageHeading %}
+    <h1>Liste des Questions :</h1>
+    <a href="{{ path('app_question_new') }}">
+        <span class=" btn btn-primary  btn-lg shadow-lg  ">Ajouter une question </span>
+    </a>
+{% endblock %}
+{% block body %}
+
+
+    <div class="card-body">
+        <table class="table table-striped" id="table1">
+            <thead>
+            <tr>
+
+                <th>Ennonce</th>
+                <th>Option1</th>
+                <th>Option2</th>
+                <th>Option3</th>
+                <th>Answer</th>
+                <th>nom examen </th>
+                <th>actions</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for question in questions %}
+                <tr>
+
+                     <td>{{ question.ennonce }}</td>
+                    <td>{{ question.option1 }}</td>
+                    <td>{{ question.option2 }}</td>
+                    <td>{{ question.option3 }}</td>
+                    <td>{{ question.answer }}</td>
+
+
+
+                    </td> <td>{{ question.examen.getNomexamen()}}</td>
+                    <td>
+                        <form id="my_form" method="post" action="{{ path('app_question_show', {'idquestion': question.idquestion}) }}" >
+                            <a href="{{ path('app_question_show', {'idquestion': question.idquestion}) }}">
+                                <span class="badge bg-primary">show</span>
+                            </a>
+                            <a href="{{ path('app_question_edit', {'idquestion': question.idquestion}) }}">
+                                <span class="badge bg-success">edit</span>
+                            </a>
+
+
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ question.idquestion) }}">
+
+                            <a href="#" class="badge bg-danger" onclick="document.getElementById('my_form').submit();">Delete</a>
+                        </form>
+
+
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script
+            src="https://code.jquery.com/jquery-1.12.4.js"
+            integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ asset('https://cdn.datatables.net/v/bs4/jqc-1.12.4/dt-1.13.1/datatables.min.js') }}"></script>
+    <script type="application/javascript">
+        {}
+        console.log(jQuery().jquery);
+
+        $(document).ready(function () {
+            $('#table1').DataTable();
+        });
+
+    </script>
+{% endblock %}
+
+

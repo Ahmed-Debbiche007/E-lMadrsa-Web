@@ -15,17 +15,21 @@ class Reclamation
     private ?int $idreclamation;
 
      #[ORM\Column(length: 255)]
+     #[Assert\NotBlank(message: "le sujet est obligatoire")]
     private ?string $sujet;
 
      #[ORM\Column(length: 255)]
-    private ?string $description;
+     #[Assert\NotBlank(message: "la description est obligatoire")]
+     private ?string $description;
 
     
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $daterec = null;
 
-    #[ORM\Column]
-    private ?int $iduser;
+     #[ORM\ManyToOne(inversedBy: 'reclamations')]
+    #[ORM\JoinColumn(name: 'idUser', referencedColumnName: 'id')]
+    #[Assert\NotBlank(message: "l'utilisateur est obligatoire")]
+    private ?User $iduser;
 
     public function getIdreclamation(): ?int
     {
@@ -68,12 +72,12 @@ class Reclamation
         return $this;
     }
 
-    public function getIduser(): ?int
+    public function getIduser(): ?User
     {
         return $this->iduser;
     }
 
-    public function setIduser(int $iduser): self
+    public function setIduser(User $iduser): self
     {
         $this->iduser = $iduser;
 

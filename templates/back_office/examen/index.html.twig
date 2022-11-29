@@ -1,0 +1,94 @@
+
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}Examens
+{% endblock %}
+{% block pageHeading %}
+    <h1>Liste des Examens :</h1>
+    <a href="{{ path('app_examen_new') }}">
+        <span class=" btn btn-primary  btn-lg shadow-lg  ">Ajouter un examen</span>
+    </a>
+{% endblock %}
+{% block body %}
+
+
+    <div class="card-body">
+        <table class="table table-striped" id="table1">
+            <thead>
+            <tr>
+
+               {# <th>Idexamen</th>#}
+                <th>Nomexamen</th>
+                <th>Pourcentage</th>
+                <th>Dureeexamen</th>
+                <th>Formation</th>
+                <th>categorie</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for examan in examens %}
+                <tr>
+
+                     <td>{{ examan.nomexamen }}</td>
+                    <td>{{ examan.pourcentage }}</td>
+                    <td>{{ examan.dureeexamen }}</td>
+                    <td>{{ examan.formation.getSujet() }}</td>
+                    <td>{{ examan.categorie.getNomcategorie() }}</td>
+
+
+                    <td>
+                            <a href="{{ path('app_examen_show', {'idexamen': examan.idexamen}) }}">
+                                <span class="badge bg-primary">show    </span>
+                            </a>
+                            <br>
+                            <a href="{{ path('app_examen_edit', {'idexamen': examan.idexamen}) }}">
+                                <span class="badge bg-success">edit    </span>
+                            </a>
+                            <br>
+
+
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ examan.idexamen) }}">
+                       {{ include('back_office/examen/_delete_form.html.twig') }}
+
+
+
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script
+            src="https://code.jquery.com/jquery-1.12.4.js"
+            integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ asset('https://cdn.datatables.net/v/bs4/jqc-1.12.4/dt-1.13.1/datatables.min.js') }}"></script>
+    <script type="application/javascript">
+        {}
+        console.log(jQuery().jquery);
+
+        $(document).ready(function () {
+            $('#table1').DataTable();
+        });
+
+    </script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

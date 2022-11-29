@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ExamenRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ExamenRepository::class)]
 class Examen
@@ -14,19 +16,28 @@ class Examen
     private $idexamen;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "nom de l'examen est obligatoire")]
     private ?string $nomexamen;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "la pourcentage est obligatoire")]
+    #[Assert\Positive(message: "la pourcentage de l'examen doit être positif")]
     private ?float $pourcentage;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "la duree de l'examen  est obligatoire")]
+    #[Assert\Positive(message: "la durée de l'examen doit être positif")]
     private ?int $dureeexamen;
 
-    #[ORM\Column]
-    private ?int $formationid;
+    #[ORM\ManyToOne(inversedBy: 'examens')]
+    #[ORM\JoinColumn(name: 'formationid', referencedColumnName: 'idformation')]
+    #[Assert\NotBlank(message: "la formation   est obligatoire")]
+    private ?Formation $formation;
 
-    #[ORM\Column]
-    private ?int $idcategorie;
+    #[ORM\ManyToOne(inversedBy: 'examens')]
+    #[ORM\JoinColumn(name: 'idcategorie', referencedColumnName: 'idcategorie')]
+    #[Assert\NotBlank(message: "la catégorie de l'examen  est obligatoire")]
+    private ?Categorie $categorie;
 
     public function getIdexamen(): ?string
     {
@@ -69,33 +80,38 @@ class Examen
         return $this;
     }
 
-    public function getFormationid(): ?int
+
+    public function getFormation(): ?Formation
     {
-        return $this->formationid;
+        return $this->formation;
     }
 
-    public function setFormationid(int $formationid): self
-    {
-        $this->formationid = $formationid;
 
-        return $this;
+    public function setFormation(?Formation $formation): void
+    {
+        $this->formation = $formation;
     }
 
-    public function getIdcategorie(): ?int
+
+    public function getCategorie(): ?Categorie
     {
-        return $this->idcategorie;
+        return $this->categorie;
     }
 
-    public function setIdcategorie(int $idcategorie): self
-    {
-        $this->idcategorie = $idcategorie;
 
-        return $this;
+    public function setCategorie(?Categorie $categorie): void
+    {
+        $this->categorie = $categorie;
     }
     public  function  __toString()
     {
         return (String)$this->nomexamen ;
     }
+
+
+
+
+
 
 
 }

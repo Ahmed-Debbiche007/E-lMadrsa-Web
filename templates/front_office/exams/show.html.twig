@@ -1,0 +1,115 @@
+
+
+{% extends 'front_office/SecondBase.html.twig' %}
+
+ {% block slidestitle %} Nos exames {% endblock %}
+
+            {% block leftslide %}
+
+
+            {% endblock %}
+
+{% block body %}
+
+
+    <!-- Breadcrumb row -->
+        <div class="breadcrumb-row" style="position: center;">
+            <div class="container">
+                <ul class="list-inline">
+                    <li><a href="#">Home</a></li>
+                    <li>Courses Details</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Breadcrumb row END -->
+        <!-- inner page banner END -->
+
+                    <div class="row d-flex flex-row-reverse" style="margin: 40px;">
+                        <div class="col-lg-4 col-md-4 col-sm-12 m-b30">
+                            <div class="course-detail-bx">
+                                <div class="course-price">
+                                    <del>$190</del>
+                                    <h4 class="price">$120</h4>
+                                </div>
+                                <div class="course-buy-now text-center">
+                                     <a href= "{{ path('app_examen_pass',{id:examen? examen.idexamen}) }}" class="btn radius-xl text-uppercase">Passer l'examen</a>
+                                </div>
+                                <div class="teacher-bx">
+                                    <div class="teacher-info">
+                                        <div class="teacher-thumb">
+                                            <img src="assets/images/testimonials/pic1.jpg" alt=""/>
+                                        </div>
+                                        <div class="teacher-name">
+                                            <h5>Hinata Hyuga</h5>
+                                            <span>Science Teacher</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cours-more-info">
+                                    <div class="review">
+                                        <span>3 Review</span>
+                                        <ul class="cours-star">
+                                            <li class="active"><i class="fa fa-star"></i></li>
+                                            <li class="active"><i class="fa fa-star"></i></li>
+                                            <li class="active"><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="price categories">
+                                        <span>Categories</span>
+                                        <h5 class="text-primary">Frontend</h5>
+                                    </div>
+                                </div>
+                                <div class="course-info-list scroll-page">
+                                    <ul class="navbar">
+                                        <li><a class="nav-link" href="#overview"><i class="ti-zip"></i>Overview</a></li>
+                                        <li><a class="nav-link" href="#curriculum"><i class="ti-bookmark-alt"></i>Curriculum</a></li>
+                                        <li><a class="nav-link" href="#instructor"><i class="ti-user"></i>Instructor</a></li>
+                                        <li><a class="nav-link" href="#reviews"><i class="ti-comments"></i>Reviews</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-8 col-md-8 col-sm-12">
+                            <div class="courses-post">
+                                <div class="ttr-post-media media-effect">
+                                    <a href="#"><img src="assets/images/blog/default/thum1.jpg" alt=""></a>
+                                </div>
+                                <div class="ttr-post-info">
+                                    <div class="ttr-post-title ">
+                                        <h2 class="post-title">{{ examen? examen.nomexamen }}
+                                        </h2>
+                                    </div>
+                                    <div class="ttr-post-text">
+<p>Ce test mesure votre connaissance, avec un niveau de débutant(e), en ce qui concerne le framework Hibernate (la version 5).
+    Sujets : concepts de base, Eager Loading, Session, SessionFactory, HQL, Criteria, etc.</p>                                    </div>
+                                </div>
+                            </div>
+
+                              <div class="courese-overview" id="overview">
+                                <h4>Overview</h4>
+                                     <div class="col-md-12 col-lg-4">
+                                        <ul class="course-features">
+                                            <li><i class="ti-book"></i> <span class="label">Lectures</span> <span class="value">8</span></li>
+                                            <li><i class="ti-help-alt"></i> <span class="label">Quizzes</span> <span class="value">1</span></li>
+                                            <li><i class="ti-time"></i> <span class="label">Duration</span> <span class="value">60 hours</span></li>
+                                            <li><i class="ti-stats-up"></i> <span class="label">Skill level</span> <span class="value">Beginner</span></li>
+                                            <li><i class="ti-smallcap"></i> <span class="label">Language</span> <span class="value">English</span></li>
+                                            <li><i class="ti-user"></i> <span class="label">Students</span> <span class="value">32</span></li>
+                                            <li><i class="ti-check-box"></i> <span class="label">Assessments</span> <span class="value">Yes</span></li>
+                                        </ul>
+                                    </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+        </div>
+        <!-- contact area END -->
+
+    </div>
+{% endblock %}
+

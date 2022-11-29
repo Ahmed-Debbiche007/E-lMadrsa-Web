@@ -108,12 +108,30 @@ GROUP BY sujet ORDER BY COUNT(participation.idFormation) DESC*/
     }
 
 
-
-    /*public function getFormByParticipation()
+    public function countParticipationForm()
     {
-        $dql = 'SELECT count(e) FROM App\Entity\Participation e group by e.idformation order by DESC limit 1';
+        $dql = 'SELECT count(p) from App\Entity\Participation p  Group BY p.idformation ';
         $query = $this->getEntityManager()->createQuery($dql);
         return ($query->execute());
-    }*/
+    }
 
+
+    public function ParticipationByForm(FormationRepository $formationRepository)
+    {
+
+        $nbParticipation = $this->countParticipationForm();
+
+
+
+
+
+        /*public function getFormByParticipation()
+        {
+            $dql = 'SELECT count(e) FROM App\Entity\Participation e group by e.idformation order by DESC limit 1';
+            $query = $this->getEntityManager()->createQuery($dql);
+            return ($query->execute());
+        }*/
+        return $nbParticipation;
+
+    }
 }
