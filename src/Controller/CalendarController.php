@@ -10,13 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CalendarController extends AbstractController
 {
-    #[Route('/calendar', name: 'app_calendar')]
-    public function index(): Response
-    {
-        return $this->render('back_office/calendar/calendar.html.twig', [
-            'controller_name' => 'CalendarController',
-        ]);
-    }
+
 
 
     #[Route('/calendar1', name: 'app_calendar')]
@@ -28,10 +22,10 @@ class CalendarController extends AbstractController
 
         foreach($events as $event){
             $rdvs[] = [
-                'title' => $event->getFormation()->getSujet(),
+                'title' => $event->getUser()->getNom()." / ".$event->getFormation()->getSujet(),
                 'resultat' => $event->getResultat(),
-                'start' =>(new DateTime())->format('Y-m-d'),
-                'end' =>(new DateTime())->format('Y-m-d'),
+                'start' =>($event->getDatePart())?->format('Y-m-d') ?? '',
+                'end' =>($event->getDatePart())?->format('Y-m-d') ?? '',
 
             ];
         }

@@ -74,7 +74,25 @@
         console.log(jQuery().jquery);
 
         $(document).ready(function () {
-            $('#table1').DataTable();
+            $('#table1').DataTable({
+                "language": {
+
+                    "lengthMenu": "Display _MENU_ records per page",
+                    "search":"chercher",
+                    "zeroRecords": "Pas d'examens",
+                    "info": "afficher page _PAGE_ of _PAGES_",
+                    "infoEmpty": "pas d'examens",
+                    "infoFiltered": "(filtered from _MAX_ total records)",
+                    "paginate": {
+                        "first": "Première",
+                        "last": "Dernière",
+                        "next": "Suivante",
+                        "previous": "Précédente"
+                    },
+
+
+                }
+             });
         });
 
     </script>

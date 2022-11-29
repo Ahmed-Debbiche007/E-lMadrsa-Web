@@ -1,5 +1,16 @@
-<!DOCTYPE html>
-<html lang='en'>
+
+
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}pie chart
+{% endblock %}
+{% block pageHeading %}
+    <h1>Calendrier des Participations </h1>
+
+{% endblock %}
+{% block body %}
+
+
 <head>
     <meta charset='utf-8' />
     <link href='{{ asset('https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.11.3/main.min.css')}}' rel='stylesheet' />
@@ -48,4 +59,5 @@
 <body>
 <div id='calendar'></div>
 </body>
-</html>
+
+{% endblock %}

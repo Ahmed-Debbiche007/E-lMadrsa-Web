@@ -16,25 +16,14 @@
 
     <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css') }}">
-{#     {% set names={} %}
 
-
-{% for i in topstudents %}
-
-{{ i.nom}}
- {% set names = (names)|merge({
- })
-
-
-{%  endfor %}
-#}
 
     {% set names={} %}
-{% for i in topstudents %}
+    {% for i in topstudents %}
      {% set names = (names)|merge([{
          name: i.nom
      }]) %}
- {%  endfor %}
+    {%  endfor %}
 
 
 
@@ -90,7 +79,6 @@
     %}
 
 {% endfor %}
-
 
 
 
@@ -178,6 +166,7 @@
             $("#pod").addClass('podd');
 
             $("#pod").html('' +
+                ' <div class="modal fade" id="myModal" role="dialog"> <div class="modal-dialog"> <div class="card"> <div class="text-right cross"> <i class="fa fa-times"></i> </div> <div class="card-body text-center"> <img src="https://img.icons8.com/bubbles/200/000000/trophy.png"> <h4>CONGRATULATIONS!</h4><p>You have been personally selected to take part in our 2017 annual visitors survey!</p> <button class="btn btn-out btn-square continue">CONTINUE</button></div></div></div></div>'+
 
 
                 '<div class="container podium"> <div class="podium__item"> <p class="podium__city" >Annecy</p>' +

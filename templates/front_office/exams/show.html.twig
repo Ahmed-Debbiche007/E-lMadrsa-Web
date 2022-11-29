@@ -11,132 +11,18 @@
 
 {% block body %}
 
-    {% set names={} %}
+
+     {% set names={} %}
     {% for i in topstudents %}
+
+
         {% set names = (names)|merge([{
             name: i.nom
         }]) %}
     {%  endfor %}
 
 
-
-
-
-    <style>
-        body {
-            font-family: sans-serif;
-        }
-
-        .container {
-            display: flex;
-            align-items: flex-end;
-        }
-
-        .podium__item {
-            width: 75px;
-        }
-
-        .podium__rank {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 35px;
-            color: #fff;
-        }
-
-        .podium__city {
-            text-align: center;
-            padding: 0 .5rem;
-        }
-
-        .podium__number {
-            width: 27px;
-            height: 75px;
-        }
-
-        .podium .first {
-            min-height: 300px;
-            background: rgb(255,172,37);
-            border-radius: 25px 25px 0px 0px;
-
-            background:
-                    linear-gradient(333deg,
-                    rgba(255,172,37,1) 0%,
-                    rgba(254,207,51,1) 13%,
-                    rgba(254,224,51,1) 53%,
-                    rgba(255,172,37,1) 100%);
-        }
-
-        .podium .second {
-            min-height: 200px;
-            background: #6f6ff3;
-            border-radius: 25px 25px 0px 0px;
-
-        }
-
-        .podium .third {
-            min-height: 100px;
-            background: #4bb74b;
-            border-radius: 25px 25px 0px 0px;
-
-        }
-
-    </style>
-
-
-        <!-- Breadcrumb row END -->
-        <!-- inner page banner END -->
-{#
-                    <div class="row d-flex flex-row-reverse" style="margin: 40px;">
-                        <div class="col-lg-4 col-md-4 col-sm-12 m-b30">
-                            <div class="course-detail-bx">
-                                <div class="course-price">
-                                    <del>$190</del>
-                                    <h4 class="price">$120</h4>
-                                </div>
-                                <div class="course-buy-now text-center">
-                                     <a href= "{{ path('app_examen_pass',{id:examen? examen.idexamen}) }}" class="btn radius-xl text-uppercase">Passer l'examen</a>
-                                </div>
-                                <div class="teacher-bx">
-                                    <div class="teacher-info">
-                                        <div class="teacher-thumb">
-                                            <img src="assets/images/testimonials/pic1.jpg" alt=""/>
-                                        </div>
-                                        <div class="teacher-name">
-                                            <h5>Hinata Hyuga</h5>
-                                            <span>Science Teacher</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cours-more-info">
-                                    <div class="review">
-                                        <span>3 Review</span>
-                                        <ul class="cours-star">
-                                            <li class="active"><i class="fa fa-star"></i></li>
-                                            <li class="active"><i class="fa fa-star"></i></li>
-                                            <li class="active"><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                        </ul>
-                                    </div>
-                                    <div class="price categories">
-                                        <span>Categories</span>
-                                        <h5 class="text-primary">Frontend</h5>
-                                    </div>
-                                </div>
-                                <div class="course-info-list scroll-page">
-                                    <ul class="navbar">
-                                        <li><a class="nav-link" href="#overview"><i class="ti-zip"></i>Overview</a></li>
-                                        <li><a class="nav-link" href="#curriculum"><i class="ti-bookmark-alt"></i>Curriculum</a></li>
-                                        <li><a class="nav-link" href="#instructor"><i class="ti-user"></i>Instructor</a></li>
-                                        <li><a class="nav-link" href="#reviews"><i class="ti-comments"></i>Reviews</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        #}
-
-
+    <link rel="stylesheet" type="text/css" href="{{ asset("front/assets/css/poduim.css") }}">
 
                         <div class="col-lg6 col-md-8 col-sm-12" style="margin: 10px">
                             <div class="courses-post">
@@ -180,15 +66,17 @@
 
 
                     <div class="col-lg-3 col-md-8 col-sm-12" style="margin-top: 140px;">
-                        <div class="container podium ">
+                        <div class="containerPoduim podium ">
                             <div class="podium__item">
-                                <p class="podium__city">
-                                    {{ names[0].name }}
-                                </p>
+                                {% if names[0].name is defined   %}
+                                    <p class="podium__city">  {{ names[0].name }}</p>
+                                {%  endif %}
                                 <div class="podium__rank second">2</div>
                             </div>
                             <div class="podium__item">
-                                <p class="podium__city"> {{ names[1].name }}</p>
+                                {% if names[1].name is defined   %}
+                                    <p class="podium__city">  {{ names[1].name }}</p>
+                                {%  endif %}
                                 <div class="podium__rank first">
                                     <svg class="podium__number"   >
                                         <g transform="matrix(1, 0, 0, 1, 214.957736, -43.117417)">
@@ -198,7 +86,9 @@
                                 </div>
                             </div>
                             <div class="podium__item">
-                                <p class="podium__city"> {{ names[2].name }}</p>
+                                {% if names[2].name is defined   %}
+                                <p class="podium__city">  {{ names[2].name }}</p>
+                                {%  endif %}
                                 <div class="podium__rank third">3</div>
                             </div>
                         </div>

@@ -87,4 +87,25 @@ class ParticipationRepository extends ServiceEntityRepository
             ;
     }
 
+/*
+    public function PartByMonths(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('SUM(CASE Month(p.datePart) WHEN 1 THEN 1 ELSE 0 END) AS February')
+            ->where('p.date_part BETWEEN :date1 AND :date2')
+            ->setParameter('date1','2022/01/01')-
+            ->setParameter('date2','2022/12/12')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+*/
+/*
+    public function PartByMonths()
+    {
+        $dql = 'SELECT SUM(CASE Month(p.datePart) WHEN 1 THEN 1 ELSE 0 END) AS February FROM App\Entity\Participation p WHERE p.datePart BETWEEN 2022/01/01 AND 2022/12/12  ';
+        $query = $this->getEntityManager()->createQuery($dql);
+        return ($query->execute());
+    }
+*/
 }
