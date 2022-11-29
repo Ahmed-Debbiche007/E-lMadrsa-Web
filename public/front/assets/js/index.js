@@ -9,9 +9,10 @@ let whiteBackground = [
     "background-color: white",
     "color: black",
 ].join(" ;");
-
+console.clear();
 console.log(
-    "%cWelcome to %cSpringFever 👉👌 ",
+    "%cWelcome to %cSpringFever ",
     blackBackground,
     whiteBackground
 );
+

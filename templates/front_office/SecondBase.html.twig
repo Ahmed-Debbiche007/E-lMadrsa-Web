@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- FAVICONS ICON ============================================= -->
     <link rel="icon" href="{{ asset('front/assets/images/favicon.ico') }}" type="image/x-icon" />
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('front/assets/images/favicon.png') }}" />
 
-    <!-- PAGE TITLE ============================================= -->
+    <!-- PAGE TITLE HERE ============================================= -->
+
     <title>
       {% block title %}
-        Dashboard
+        E-lmadrsa : examens
       {% endblock %}
     </title>
-
-    
-
-    
+   
 
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/assets.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/bootstrap/css/bootstrap.min.css') }}" />
@@ -27,35 +26,63 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/calendar/fullcalendar.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/jquery.emojipicker.css') }}" />
-    
-    
-
-    <!-- Emoji Data -->
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/jquery.emojipicker.tw.css') }}" />
-
-	
   </head>
-
   <body id="bg">
     <div class="page-wraper">
-      {% include 'front_office/components/navbar.html.twig' %}
+      {% include 'front_office/components/SecondNav.html.twig' %}
 
+      <!-- Content -->
       <div class="page-content bg-white">
-      {% block body %}
-        
-        {% endblock %}
-        {% include 'front_office/components/footer.html.twig' %}
-         
+        <!-- inner page banner -->
+        <div class="page-banner ovbl-dark" style="background-image:url({{ asset('front/assets/images/banner/banner3.jpg') }});">
+          <div class="container">
+            <div class="page-banner-entry">
+              <h1 class="text-white">
+                {% block slidestitle %}
+                    Tutorship Sessions
+                {% endblock %}
+              </h1>
+            </div>
+          </div>
+        </div>
+        <!-- inner page banner END -->
+        <div class="content-block">
+          {% block leftslide %}
+
+          {% endblock %}
+
+          {% block body1 %}
+
+          {% endblock %}
+
+          
+            <div class="row">
+              {% block body %}
+
+              {% endblock %}
+            </div>
+          
+        </div>
       </div>
-      <button class="chat">
+    </div>
+
+    <!-- contact area END -->
+
+    <!-- Content END -->
+    <!-- Footer ==== -->
+    {% include 'front_office/components/footer.html.twig' %}
+   {% if app.request.get('_route') != 'app.session'%}
+    <button class="chat" id="popupBtn">
         <span class="notification" id="notification"></span>
         <i class="fa fa-comments fa-2x"></i>
       </button>
       <div id="chatbox">
       {{ render(path('api_messages')) }}
       </div>
+   {% endif %}
       {% include 'front_office/components/scripts.html.twig' %}
-    </div>
+
 
   </body>
 </html>

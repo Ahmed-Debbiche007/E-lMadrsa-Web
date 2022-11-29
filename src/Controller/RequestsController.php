@@ -25,11 +25,11 @@ class RequestsController extends AbstractController
 {
     private GoogleCalendar $googleServices;
     private TokenRepository $em;
-    
+
     public function __construct(GoogleCalendar $googleServices, TokenRepository $em)
     {
         $this->googleServices = $googleServices;
-        $this->em = $em;       
+        $this->em = $em;
     }
     #[Route('/', name: 'app_requests_index', methods: ['GET'])]
     public function index(RequestsRepository $requestsRepository, Request $request): Response
@@ -83,17 +83,13 @@ class RequestsController extends AbstractController
         $tutorshipsession->setDate($trequest->getDate());
         $tutorshipsession->setType($trequest->getType());
         $tutorshipsession->setBody($trequest->getBody());
-        if (strcmp($trequest->getType(), "MessagesChat") == 0) {
-            $tutorshipsession->setUrl("none");
-            $tutorshipSessionRepository->save($tutorshipsession, true);     
-            $this->addFlash('success', 'The request has been approved!');
-            return $this->redirectToRoute('app_tutorshipsessions_index', [], Response::HTTP_SEE_OTHER);
-        } elseif (strcmp($trequest->getType(), "VideoChat") == 0) {
-            return $this->generateLink($tutorshipsession, $tutorshipSessionRepository, $trequest, $requestsRepository);
-        }
+        $tutorshipsession->setUrl("none");
+        $tutorshipSessionRepository->save($tutorshipsession, true);
+        $this->addFlash('success', 'The request has been approved!');
+        return $this->redirectToRoute('app_tutorshipsessions_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    public function generateLink(TutorshipSessions $tutorshipsession, TutorshipSessionRepository $tutorshipSessionRepository, Requests $trequest ,RequestsRepository $requestsRepository)
+    public function generateLink(TutorshipSessions $tutorshipsession, TutorshipSessionRepository $tutorshipSessionRepository, Requests $trequest, RequestsRepository $requestsRepository)
     {
         $allToken = $this->em->findAll();
         /** @var Token $token */

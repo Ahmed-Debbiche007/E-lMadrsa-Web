@@ -1,4 +1,4 @@
-<header class="header rs-nav header-transparent">
+<header class="header rs-nav">
   <div class="top-bar">
     <div class="container">
       <div class="row d-flex justify-content-between">
@@ -14,24 +14,21 @@
         </div>
         <div class="topbar-right">
           {% if app.user %}
-          <ul>
-            <li>
-              Welcome {{app.user.getNom()}} {{app.user.getPrenom()}} 
-            </li>
-            <li>
-              <a href="{{ path('app_logout') }}">Logout</a>
-            </li>
-           
-          </ul>
+            <ul>
+              <li>Welcome {{ app.user.getNom() }} {{ app.user.getPrenom() }}</li>
+              <li>
+                <a href="{{ path('app_logout') }}">Logout</a>
+              </li>
+            </ul>
           {% else %}
-          <ul>
-            <li>
-              <a href="{{ path('app_login') }}">Login</a>
-            </li>
-            <li>
-              <a href="/register">Register</a>
-            </li>
-          </ul>
+            <ul>
+              <li>
+                <a href="{{ path('app_login') }}">Login</a>
+              </li>
+              <li>
+                <a href="/register">Register</a>
+              </li>
+            </ul>
           {% endif %}
         </div>
       </div>
@@ -42,7 +39,7 @@
       <div class="container clearfix">
         <!-- Header Logo ==== -->
         <div class="menu-logo">
-          <a href="/"><h1>E-lMadrsa</h1></a>
+          <a href="/"><h3>E-lMadrsa</h3></a>
         </div>
         <!-- Mobile Nav Button ==== -->
         <button class="navbar-toggler collapsed menuicon justify-content-end" type="button" data-toggle="collapse" data-target="#menuDropdown" aria-controls="menuDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,7 +78,7 @@
         <!-- Navigation Menu ==== -->
         <div class="menu-links navbar-collapse collapse justify-content-start" id="menuDropdown">
           <div class="menu-logo">
-            <a href="index.html"><img src="front/assets/images/logo.png" alt="" /></a>
+            <a href="index.html"><img src="{{ asset('front/assets/images/logo.png') }}" alt="" /></a>
           </div>
           <ul class="nav navbar-nav">
             <li class="active">
@@ -190,7 +187,7 @@
                   </ul>
                 </li>
                 <li class="add-menu-right">
-                  <img src="front/assets/images/adv/adv.jpg" alt="" />
+                  <img src="{{ asset('front/assets/images/adv/adv.jpg') }}" alt="" />
                 </li>
               </ul>
             </li>
@@ -201,14 +198,22 @@
               </a>
               <ul class="sub-menu">
                 <li>
-                  <a href="/dashboard/category">Blog Category</a>
+                  <a href="blog-classic-grid.html">Blog Classic</a>
                 </li>
                 <li>
-                  <a href="blog-classic-sidebar.html">Blog Posts</a>
+                  <a href="blog-classic-sidebar.html">Blog Classic Sidebar</a>
+                </li>
+                <li>
+                  <a href="blog-list-sidebar.html">Blog List Sidebar</a>
+                </li>
+                <li>
+                  <a href="blog-standard-sidebar.html">Blog Standard Sidebar</a>
+                </li>
+                <li>
+                  <a href="blog-details.html">Blog Details</a>
                 </li>
               </ul>
             </li>
-
             <li class="nav-dashboard">
               <a href="javascript:;">
                 Dashboard
@@ -221,13 +226,6 @@
                 <li>
                   <a href="admin/add-listing.html">Add Listing</a>
                 </li>
-                {% if app.user %}
-                  <li>
-                    <a href="/sessions">
-                      Tutorship Sessions
-                    </a>
-                  </li>
-                {% endif %}
                 <li>
                   <a href="admin/bookmark.html">Bookmark</a>
                 </li>
@@ -278,10 +276,15 @@
               </a>
               <ul class="sub-menu">
                 <li>
-                  <a href="dashboard/examen/list">Examen 1</a>
+                  <a href="{{ path('app_examen_listt') }}">Examen</a>
                 </li>
+
                 <li>
-                  <a href="index-2.html">Examen 2</a>
+                  {# <a href="{{ path('app_reclamations_add')}}">Ajouter une reclamation</a> #}
+                </li>
+
+                <li>
+                  {# <a href="{{ path('app_profil')}}">mon profil </a> #}
                 </li>
               </ul>
             </li>

@@ -7,7 +7,7 @@
             {% for session in sessions %}
               <div class="row">
                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 h-100 d-inline-block">
-                  <a href="#" class="link" data-attribute="{{ session.idsession }}">
+                  <a href="#" class="link" data-attribute="{{ session.idsession }}" data-url="{{session.getUrl()}}">
                     <h4 class="font-semi-bold text-left">{{ session.getIdTutor().getNom() }} {{ session.getIdTutor().getPrenom() }}</h4>
                     {% if session.getMessages() is empty %}
                       <p class="font-semi-bold text-muted text-left" style="font-size: 12px; ">No messages yet ! ..</p>
@@ -30,14 +30,14 @@
                 <i class="fa fa-circle" style="color:green ;"></i>
               </div>
               <div class="mt-1 mr-1">
-                <h5 class="font-semi-bold" id="openchatid">Jhon Doe</h5>
+                <h5 class="font-semi-bold" id="openchatid"></h5>
               </div>
             </div>
             <button type="button" class="btn" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false" style="background: #435ebe ; color:#fff;"><i class="fa fa-ellipsis-v"></i></button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="/dashboard/deleteAll">Delete Session</a>
+              <a class="dropdown-item" href="" id="switchToVideo">Switch to Video Chat</a>
+              <a class="dropdown-item" href="#">🥚🐇</a>
             </div>
           </div>
           <div class="card-body" id="messages-card" data-mdb-perfect-scrollbar="true" style="position: relative; height: 300px; overflow-y: auto;">
@@ -155,6 +155,7 @@
           var objDiv = document.getElementById('messages-card')
           objDiv.scrollTop = objDiv.scrollHeight
           document.getElementById('openchatid').innerHTML = element.firstElementChild.innerHTML;
+          document.getElementById('switchToVideo').href = element.getAttribute('data-url');
           
         })
       } catch (error) {

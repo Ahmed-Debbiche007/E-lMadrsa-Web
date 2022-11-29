@@ -81,18 +81,9 @@ body .fc {
   borrowed from twitter bootstrap (http://twitter.github.com/bootstrap/)
 */
 .fc-state-default {
-  background-color: #f5f5f5;
-  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
-  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
-  background-repeat: repeat-x;
-  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  color: #333;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); }
+  
+  color: white;
+   }
 
 .fc-state-hover,
 .fc-state-down,
@@ -125,7 +116,28 @@ body .fc {
 /* Buttons Groups
 --------------------------------------------------------------------------------------------------*/
 .fc-button-group {
-  display: inline-block; }
+  display: inline-block; 
+background-color: #8fdf82;
+}
+
+.fc-button {
+  background-color: #6610f2 !important;
+	/* Green */
+	border: none !important;
+	text-align: center !important;
+	text-decoration: none !important;
+	display: inline-block !important;
+	font-size: 16px !important
+}
+
+.fc-state-active{
+  background-color: #26006c !important;
+  color: white;
+}
+
+.fc-state-disabled{
+  background-color: white !important;
+}
 
 /*
 every button that is not first in a button group should scootch over one pixel and cover the
@@ -1136,6 +1148,10 @@ be a descendant of the grid when it is being dragged.
   /* make the title text the same size as the time */
   padding: 0;
   /* undo padding from above */ }
+
+  .fc-title, .fc-time{
+    color: white;
+  }
 
 /* resizer (cursor device) */
 .fc-time-grid-event.fc-allow-mouse-resize .fc-resizer {
