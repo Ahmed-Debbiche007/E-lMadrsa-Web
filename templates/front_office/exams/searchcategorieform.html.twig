@@ -1,0 +1,25 @@
+ <script
+        src="https://code.jquery.com/jquery-1.12.4.js"
+        integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+        crossorigin="anonymous"></script>
+<link href="{{ asset('https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css')}}" rel="stylesheet" />
+<script src="{{ asset('https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js')}}"></script>
+ <select id="ahha" class="js-example-basic-multiple" name="states[]" multiple="multiple"  style="width: 60%;     margin: 14px 38px;">
+
+{%  for i in categories %}
+    <option value="{{ i.idcategorie }}">{{ i.nomcategorie }}</option>
+    {% endfor %}
+</select>
+
+ <button class="btn-primary " onclick="printt()"> chercher</button>
+
+ <script>
+     $(document).ready(function() {
+         $('.js-example-basic-multiple').select2();
+
+     });
+     function printt() {
+
+         console.log($("#ahha").val());
+     }
+ </script>

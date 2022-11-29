@@ -90,10 +90,16 @@ class ParticipationRepository extends ServiceEntityRepository
 /*
     public function PartByMonths(): array
     {
+        $em = partici->getDoctrine()->getManager();
+        $emConfig = $em->getConfiguration();
+        $emConfig->addCustomDatetimeFunction('YEAR', 'DoctrineExtensions\Query\Mysql\Year');
+
+        $emConfig->addCustomDatetimeFunction('MONTH', 'DoctrineExtensions\Query\Mysql\Month');
+        $emConfig->addCustomDatetimeFunction('DAY', 'DoctrineExtensions\Query\Mysql\Day');
         return $this->createQueryBuilder('p')
-            ->addSelect('SUM(CASE Month(p.datePart) WHEN 1 THEN 1 ELSE 0 END) AS February')
-            ->where('p.date_part BETWEEN :date1 AND :date2')
-            ->setParameter('date1','2022/01/01')-
+            ->addSelect('SUM( Month(p.datePart) ) AS February')
+            ->where('p.datePart BETWEEN :date1 AND :date2')
+            ->setParameter('date1','2022/01/01')
             ->setParameter('date2','2022/12/12')
             ->getQuery()
             ->getResult()
@@ -103,9 +109,9 @@ class ParticipationRepository extends ServiceEntityRepository
 /*
     public function PartByMonths()
     {
-        $dql = 'SELECT SUM(CASE Month(p.datePart) WHEN 1 THEN 1 ELSE 0 END) AS February FROM App\Entity\Participation p WHERE p.datePart BETWEEN 2022/01/01 AND 2022/12/12  ';
+        $dql = "SELECT SUM(CASE Month(p.datePart) WHEN 1 THEN 1 ELSE 0 END) AS February FROM App\Entity\Participation p WHERE p.datePart BETWEEN '2022/01/01' AND '2022/12/12'  ";
         $query = $this->getEntityManager()->createQuery($dql);
-        return ($query->execute());
+        return ($query->getResult());
     }
 */
 }
