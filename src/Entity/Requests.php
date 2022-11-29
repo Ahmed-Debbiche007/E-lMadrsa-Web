@@ -4,7 +4,8 @@ namespace App\Entity;
 use App\Repository\RequestsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity as AcmeAssert;
 #[ORM\Entity(repositoryClass: RequestsRepository::class)]
 class Requests
 {
@@ -21,8 +22,25 @@ class Requests
     private ?string $type;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 10,
+        max: 100,
+        minMessage: "Request body must be at least {{ limit }} characters long",
+        maxMessage: "Request body cannot be longer than {{ limit }} characters",
+    )]
+    #[AcmeAssert\profanityconstraint]
     private ?string $body;
 
+     /**
+     * @var datetime
+     * @Assert\Type(
+     *      type = "\DateTime",
+     *      message = "vacancy.date.valid",
+     * )
+     * @Assert\GreaterThanOrEqual(
+     *      value = "today")
+     * */
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 

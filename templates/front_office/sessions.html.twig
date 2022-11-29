@@ -1,0 +1,76 @@
+{% extends 'front_office/SecondBase.html.twig' %}
+
+{% block title %}
+  Hello
+{% endblock %}
+
+{% block body %}
+  <div class="content-block" style="background-color:black ;">
+    <div class="content-block">
+      <main class="ttr-wrapper">
+        <div class="container-fluid d-flex justify-content-center">
+          <div class="col-8 d-flex mt-3 justify-content-center">
+            <div class="row">
+              <!-- Your Profile Views Chart -->
+              <div class="col-lg-12 m-b30">
+                <div class="d-flex justify-content-end mb-3">
+                  {% if app.user.isStudent() %}
+                    <a href="none" class="btn btn-lg btn-success mb-3">Request a new session</a>
+                  {% else %}
+                    <a href="none" class="btn btn-lg btn-success mb-3">See Requests</a>
+                  {% endif %}
+                </div>
+                <div class="widget-box">
+                  <div class="wc-title"></div>
+                  <div class="widget-inner">
+                    <div id="calendar"></div>
+                  </div>
+                </div>
+              </div>
+              <!-- Your Profile Views Chart END -->
+            </div>
+          </div>
+        </div>
+      </main>
+      <div class="ttr-overlay"></div>
+    </div>
+    <script>
+      $(document).ready(function () {
+        $('#calendar').fullCalendar({
+          header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay,listWeek'
+          },
+      
+          navLinks: true, // can click day/week names to navigate views
+      
+          weekNumbers: true,
+          weekNumbersWithinDays: true,
+          weekNumberCalculation: 'ISO',
+      
+          editable: true,
+          eventLimit: true, // allow "more" link when too many events
+          events: [
+            {% for session in sessions %}
+        {
+          title: '{{session.getType()}}',
+          start: '{{session.getDate()? session.date|date('Y-m-d H:i') : ''}}',
+          {% if session.getType() == "MessagesChat" %}
+          url: '/session'
+          {% else %}
+          url: '{{session.getUrl()}}'
+          {% endif %}
+        },
+        {% endfor %}
+          ]
+        })
+      })
+      
+      var cas = document.getElementsByClassName('fc-day')
+      Array.from(cas).forEach((element) => {
+        console.log(element.getAttribute('data-date'))
+      })
+    </script>
+  </div>
+{% endblock %}

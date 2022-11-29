@@ -64,7 +64,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->tutorshipsessions = new ArrayCollection();
     }
 
-    
+
 
     #[ORM\OneToMany(mappedBy: 'idStudent', targetEntity: Requests::class)]
     private Collection $studentRequest;
@@ -244,7 +244,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function isAdmin() :?bool
     {
-        
+
         return $this->role == "Admin";
 
     }
@@ -391,12 +391,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    
+
 
     public function  __toString()
     {
         return (String)$this->getNom() ;
     }
 
-    
+
 }

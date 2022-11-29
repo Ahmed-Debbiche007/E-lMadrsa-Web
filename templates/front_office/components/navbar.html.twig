@@ -13,6 +13,17 @@
           </ul>
         </div>
         <div class="topbar-right">
+          {% if app.user %}
+          <ul>
+            <li>
+              Welcome {{app.user.getNom()}} {{app.user.getPrenom()}} 
+            </li>
+            <li>
+              <a href="{{ path('app_logout') }}">Logout</a>
+            </li>
+           
+          </ul>
+          {% else %}
           <ul>
             <li>
               <a href="{{ path('app_login') }}">Login</a>
@@ -21,6 +32,7 @@
               <a href="/register">Register</a>
             </li>
           </ul>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -86,10 +98,6 @@
                 </li>
               </ul>
             </li>
-
-
-
-
 
             <li>
               <a href="javascript:;">
@@ -193,22 +201,14 @@
               </a>
               <ul class="sub-menu">
                 <li>
-                  <a href="blog-classic-grid.html">Blog Classic</a>
+                  <a href="/dashboard/category">Blog Category</a>
                 </li>
                 <li>
-                  <a href="blog-classic-sidebar.html">Blog Classic Sidebar</a>
-                </li>
-                <li>
-                  <a href="blog-list-sidebar.html">Blog List Sidebar</a>
-                </li>
-                <li>
-                  <a href="blog-standard-sidebar.html">Blog Standard Sidebar</a>
-                </li>
-                <li>
-                  <a href="blog-details.html">Blog Details</a>
+                  <a href="blog-classic-sidebar.html">Blog Posts</a>
                 </li>
               </ul>
             </li>
+
             <li class="nav-dashboard">
               <a href="javascript:;">
                 Dashboard
@@ -221,6 +221,13 @@
                 <li>
                   <a href="admin/add-listing.html">Add Listing</a>
                 </li>
+                {% if app.user %}
+                  <li>
+                    <a href="/sessions">
+                      Tutorship Sessions
+                    </a>
+                  </li>
+                {% endif %}
                 <li>
                   <a href="admin/bookmark.html">Bookmark</a>
                 </li>
@@ -263,29 +270,12 @@
                 </li>
               </ul>
             </li>
-<<<<<<< HEAD
             <li class="active">
               <a href="{{ path('app_reservation_index') }}">
                 Reservation
                 <i class="fa fa-chevron-down"></i>
               </a>
               
-=======
-
-            <li class="active">
-              <a href="javascript:;">
-                Examens
-                <i class="fa fa-chevron-down"></i>
-              </a>
-              <ul class="sub-menu">
-                <li>
-                  <a href="dashboard/examen/list">Examen 1</a>
-                </li>
-                <li>
-                  <a href="index-2.html">Examen 2</a>
-                </li>
-              </ul>
->>>>>>> 76ba1672fde9bf80788ba762207ed50db183583e
             </li>
           </ul>
           <div class="nav-social-link">

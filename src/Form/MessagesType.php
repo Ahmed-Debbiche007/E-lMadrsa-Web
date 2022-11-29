@@ -6,16 +6,16 @@ use App\Entity\Messages;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class MessagesType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('idsession')
-            ->add('idsender')
+            ->add('idsession', HiddenType::class)
+            ->add('idsender', HiddenType::class)
             ->add('body')
-            ->add('statusdate')
         ;
     }
 

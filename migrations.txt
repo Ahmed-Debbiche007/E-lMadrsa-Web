@@ -1,0 +1,14 @@
+
+ [WARNING] You have 1 available migrations to execute.                          
+
+ [WARNING] You have 1 previously executed migrations in the database that are   
+           not registered migrations.                                           
+
+ Are you sure you wish to continue? (yes/no) [yes]:
+ > 
+ Generated new migration class to "/var/www/html/migrations/Version20221128105008.php"
+ 
+ To run just this migration for testing purposes, you can use migrations:execute --up 'DoctrineMigrations\\Version20221128105008'
+ 
+ To revert the migration you can use migrations:execute --down 'DoctrineMigrations\\Version20221128105008'
+ 

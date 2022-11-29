@@ -9,7 +9,9 @@
         <p>It is a long established fact that a reader will be distracted by the readable content of a page</p>
       </div>
     </div>
+
     <div class="recent-news-carousel owl-carousel owl-btn-1 col-12 p-lr0">
+      {% for post in postss %}
       <div class="item">
         <div class="recent-news">
           <div class="action-box">
@@ -18,21 +20,25 @@
           <div class="info-bx">
             <ul class="media-post">
               <li>
-                <a href="#"><i class="fa fa-calendar"></i>Jan 02 2019</a>
+                 <a href="#"><i class="fa fa-calendar"></i>{{ post.postdate ? post.postdate|date('Y-m-d ') : '' }}  </a>
+
               </li>
               <li>
-                <a href="#"><i class="fa fa-user"></i>By William</a>
+                <a href="#"><i class="fa fa-user"></i>{{ post.user.nom }} {{ post.user.prenom }}</a>
+
               </li>
             </ul>
-            <h5 class="post-title"><a href="blog-details.html">This Story Behind Education Will Haunt You Forever.</a></h5>
-            <p>Knowing that, you’ve optimised your pages countless amount of times, written tons.</p>
+            <h5 class="post-title"><a href="blog-details.html">{{ post.posttitle }}</a></h5>
+            <p >{{ post.postcontent |length > 35 ? post.postcontent|slice(0, 35) ~ '...' : post.postcontent }}</p>
             <div class="post-extra">
               <a href="#" class="btn-link">READ MORE</a>
-              <a href="#" class="comments-bx"><i class="fa fa-comments-o"></i>20 Comment</a>
+              <a href="#" class="comments-bx"><i class="fa fa-comments-o"></i>{{post.postnbcom}} Comment</a>
             </div>
           </div>
         </div>
       </div>
+      {% endfor %}
     </div>
+
   </div>
 </div>

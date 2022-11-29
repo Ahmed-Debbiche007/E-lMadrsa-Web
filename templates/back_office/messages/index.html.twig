@@ -1,41 +1,85 @@
-{% extends 'base.html.twig' %}
+{% extends 'back_office/backbase.html.twig' %}
 
-{% block title %}Messages index{% endblock %}
+{% block title %}
+  Sessions
+{% endblock %}
 
 {% block body %}
-    <h1>Messages index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Idmessage</th>
-                <th>Idsession</th>
-                <th>Idsender</th>
-                <th>Body</th>
-                <th>Statusdate</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for message in messages %}
-            <tr>
-                <td>{{ message.idmessage }}</td>
-                <td>{{ message.idsession }}</td>
-                <td>{{ message.idsender }}</td>
-                <td>{{ message.body }}</td>
-                <td>{{ message.statusdate ? message.statusdate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_messages_show', {'idmessage': message.idmessage}) }}">show</a>
-                    <a href="{{ path('app_messages_edit', {'idmessage': message.idmessage}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_messages_new') }}">Create new</a>
+  
+  <div class="card-body">
+    <section class="section">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-header">
+              <div class="media d-flex align-items-center">
+                <div class="name flex-grow-1">
+                  <h6 class="mb-0">Sessions</h6>
+                </div>
+              </div>
+            </div>
+<div class="card-body pt-4 bg-grey">
+              <div class="chat-content">
+                {% for session in sessions %}
+                  <a href="#">
+                    <div>
+                      <h5 class="font-semibold">{{session.getidTutor().getNom()}}</h5>
+                      <p class="text-muted font-italic">{{session.getBody()}}</p>
+                      <p>{{ session.date ? session.date|date('Y-m-d H:i') : '' }}</p>
+                    </div>
+                  </a>
+                  <hr>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div class="card">
+            <div class="card-header">
+              <div class="media d-flex align-items-center">
+                <div class="avatar me-3">
+                  <img src="assets/images/faces/1.jpg" alt="" srcset="" />
+                  <span class="avatar-status bg-success"></span>
+                </div>
+                <div class="name flex-grow-1">
+                  <h6 class="mb-0">Fred</h6>
+                  <span class="text-xs">Online</span>
+                </div>
+              </div>
+            </div>
+            <div class="card-body pt-4 bg-grey">
+              <div class="chat-content">
+                {% for message in messages %}
+                  {% set id = message.idsender %}
+                  {% set message = message.body %}
+                  {% include 'back_office/components/message.html.twig' with {id:id, message:message} only %}
+                {% endfor %}
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="d-flex flex-direction-column align-items-center">
+                <a id="close" href="javascript:void(0)" class="black"><i data-feather="smile"></i></a>
+                <div class="d-flex flex-grow-1 ">
+                {% if form_errors(form.body)%}
+                <span class="alert alert-danger">
+                  {{form_errors(form.body)}}
+                </span>
+                {% endif %}
+                {{ form_start(form, {'attr': {'id': 'message'}}) }}
+                {{ form_widget(form.body, { attr: { class: 'form-control form-control-xl', placeholder: 'Type your message, handsome!', style: "width: 125%" }}) }}
+                {{ form_widget(form.idsession, { attr: { value: '1' }}) }}
+                {{ form_widget(form.idsender, { attr: { value: app.user.getId()}}) }}
+                </div>
+                {{ form_end(form) }}
+                <a href="javascript:{}" class="btn btn-primary" onclick="document.getElementById('message').submit()"><i class="bi bi-send-fill"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% include 'back_office/components/emojiPicker.html.twig' %}
+      </div>
+    </section>
+  </div>
+  
 {% endblock %}

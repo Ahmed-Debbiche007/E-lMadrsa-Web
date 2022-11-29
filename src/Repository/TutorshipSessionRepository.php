@@ -42,17 +42,26 @@ class TutorshipSessionRepository extends ServiceEntityRepository
 //    /**
 //     * @return Tutorshipsessions[] Returns an array of Tutorshipsessions objects
 //     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('t.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   public function findLatest(): ?Tutorshipsessions
+   {
+       return $this->createQueryBuilder('t')
+           ->orderBy('t.id', 'DESC')
+           ->setMaxResults(1)
+           ->getQuery()
+           ->getOneOrNullResult()
+       ;
+   }
+
+   public function getSessions($id): array
+   {
+       return $this->createQueryBuilder('t')
+            ->where('t.idStudent = :val')
+            ->orWhere('t.idTutor = :val')
+           ->setParameter('val', $id)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
 
 //    public function findOneBySomeField($value): ?Tutorshipsessions
 //    {

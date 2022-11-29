@@ -1,7 +1,16 @@
 {% extends 'front_office/frontbase.html.twig' %}
 
-{% block title %}Hello FrontOfficeController!{% endblock %}
+{% block title %}Hello{% endblock %}
 
 {% block body %}
-
+{% include 'front_office/components/header.html.twig' %}
+        <div class="content-block">
+          {% include 'front_office/components/carroussel.html.twig' %}
+          {# {%include('front_office/components/course.html.twig') %} #}
+          {% include 'front_office/components/form.html.twig' %}
+          {% include 'front_office/components/event.html.twig' %}
+          {% include 'front_office/components/testimonial.html.twig' %}
+          {% set postss = posts %}
+          {% include 'front_office/components/post.html.twig' with { postss: postss } only %}
+        </div>
 {% endblock %}

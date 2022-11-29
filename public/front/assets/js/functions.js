@@ -7,12 +7,14 @@ Theme Version:	1.0.0
 ***
 ***
 */
+
 (function($) {
 	
 		'use strict';
-	
+		
 			var BasicFunction = function(){
-				
+				jQuery("div.chatbox").hide();
+				jQuery("span.notification").hide();
 				var checkSelectorExistence = function(selectorName) {
 				  if(jQuery(selectorName).length > 0){return true;}else{return false;}
 				};
@@ -243,6 +245,17 @@ Theme Version:	1.0.0
 					jQuery("button.back-to-top").on('click',function() { 
 						jQuery('html').animate({ scrollTop: 0 }, 500);
 						return false;
+					})
+
+					jQuery("button.chat").on('click',function() { 
+						jQuery("div.chatbox").toggle();
+						jQuery("span.notification").hide();
+						jQuery('div#chat2')[0].scrollTop = jQuery('div#chat2')[0].scrollHeight;
+
+					})
+
+					jQuery("button.close-chat").on('click',function() { 
+						jQuery("div.chatbox").hide();
 					})
 
 					jQuery(window).on("scroll", function() {
