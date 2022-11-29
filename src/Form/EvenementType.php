@@ -20,19 +20,6 @@ class EvenementType extends AbstractType
         $builder
             ->add('nomEvenement')
             ->add('description')
-<<<<<<< HEAD
-            ->add('image',FileType::class, array('data_class' => null))
-            ->add('date')
-            ->add('IdCate',EntityType::class,[
-                'class'=>CategorieEv::class,
-                'choice_label'=>'typeEvenement'
-            ]) 
-            ->add('IdUser',EntityType::class,[
-                'class'=>User::class,
-                'choice_label'=>'prenom'
-            ]) 
-        ;
-=======
             ->add('image')
             ->add('date', DateTimeType::class, [
 
@@ -60,7 +47,6 @@ class EvenementType extends AbstractType
 
 
             ->add('IdUser', HiddenType::class);
->>>>>>> 76ba1672fde9bf80788ba762207ed50db183583e
     }
 
     public function configureOptions(OptionsResolver $resolver): void
