@@ -1,8 +1,9 @@
-{% extends 'front_office/frontbase.html.twig' %}
+{% extends 'front_office/SecondBase.html.twig' %}
 
 {% block body %}
+<div class="col">
 
-       {{form_start(form,{'attr': {'novalidate': 'novalidate'}} )}}
+       {{form_start(form,{'attr': {'novalidate': 'novalidate',}} )}}
 <div class="card-body">
               <h5 class="card-title">General Form Elements</h5>
 
@@ -62,6 +63,7 @@
 
             </div>
 {{ form_end(form) }}
+</div>
     <a href="http://localhost:8000/">back to list</a>
 
 

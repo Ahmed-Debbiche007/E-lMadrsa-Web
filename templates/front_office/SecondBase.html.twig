@@ -73,13 +73,7 @@
     <!-- Footer ==== -->
     {% include 'front_office/components/footer.html.twig' %}
    {% if app.request.get('_route') != 'app.session'%}
-    <button class="chat" id="popupBtn">
-        <span class="notification" id="notification"></span>
-        <i class="fa fa-comments fa-2x"></i>
-      </button>
-      <div id="chatbox">
-      {{ render(path('api_messages')) }}
-      </div>
+  
    {% endif %}
       {% include 'front_office/components/scripts.html.twig' %}
 

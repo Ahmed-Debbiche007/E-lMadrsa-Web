@@ -34,6 +34,7 @@ class EvenementController extends AbstractController
         $evenement->setEtatEvenement('en cours');
         $form = $this->createForm(EvenementType::class, $evenement);
         $evenement->setEtatEvenement("En cours");
+        $user = $this->getUSer();
         $evenement->setIdUser($user);
         //dd($evenement);
         $form->handleRequest($request);
