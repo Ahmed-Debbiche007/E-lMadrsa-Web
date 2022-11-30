@@ -26,7 +26,9 @@ class CommentController extends AbstractController
     {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
+        $user = $this->getUser();
         $comment->setCommentdate (new \DateTime()) ;
+        $comment->setUser($user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -76,4 +78,17 @@ class CommentController extends AbstractController
 
         return $this->redirectToRoute('app_comment_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -39,6 +39,107 @@ class VotecommentRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function isliked($userid,$commentid): int
+    {
+
+
+        return $this->createQueryBuilder('v')
+
+            ->select('COUNT(v)')
+            ->andWhere('v.votenb = :val')
+            ->setParameter('val', 1)
+            ->andWhere('v.userid = :userid')
+            ->setParameter('userid', $userid)
+            ->andWhere('v.commentid = :commentid')
+            ->setParameter('commentid', $commentid)
+
+            ->getQuery()
+
+            ->getSingleScalarResult();
+
+
+
+    }
+
+    public function isdisliked($userid,$commentid): int
+    {
+        return $this->createQueryBuilder('v')
+
+            ->select('COUNT(v)')
+            ->andWhere('v.votenb = :val')
+            ->setParameter('val', -1)
+            ->andWhere('v.userid = :userid')
+            ->setParameter('userid', $userid)
+            ->andWhere('v.commentid = :commentid')
+            ->setParameter('commentid', $commentid)
+
+            ->getQuery()
+
+            ->getSingleScalarResult();
+
+
+
+
+
+    }
+
+
+    public function changetolike($userid,$commentid):void
+    {
+
+
+        $this->createQueryBuilder('u')
+            ->update('App\Entity\Votecomment','u')
+            ->set('u.votenb', '1')
+            ->Where('u.userid = :userid')
+            ->andwhere('u.commentid = :commentid')
+            ->setParameter('userid', $userid)
+            ->setParameter('commentid', $commentid)->getQuery()->execute()
+
+        ;
+
+
+
+
+
+    }
+
+    public function changetodislike($userid,$commentid):void
+    {
+
+
+        $this->createQueryBuilder('u')
+            ->update('App\Entity\Votecomment','u')
+            ->set('u.votenb', '-1')
+            ->Where('u.userid = :userid')
+            ->andwhere('u.commentid = :commentid')
+            ->setParameter('userid', $userid)->setParameter('commentid', $commentid)->getQuery()->execute()
+
+        ;
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //    /**
 //     * @return Votecomment[] Returns an array of Votecomment objects
 //     */

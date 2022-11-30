@@ -21,10 +21,9 @@ class CommentType extends AbstractType
            // ->add('postid')
           //  ->add('commentvote')
           //  ->add('commentdate')
-            ->add('user', EntityType::class,array('class'=>User::class,
-                'choice_label'=>'nom'))
-            ->add('post', EntityType::class,array('class'=>Post::class,
-                'choice_label'=>'posttitle'))
+
+            //->add('post', EntityType::class,array('class'=>Post::class,
+                //'choice_label'=>'posttitle'))
         ;
     }
 

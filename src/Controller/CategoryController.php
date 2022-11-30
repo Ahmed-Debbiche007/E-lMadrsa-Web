@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
+use App\Quote\Quote;
 use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
 use Doctrine\ORM\Mapping\PostRemove;
@@ -18,15 +19,27 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class CategoryController extends AbstractController
 {
     private $postrepo ;
+    private $qouteService;
 
-    public function __construct(PostRepository $postrepo){
+    public function __construct(PostRepository $postrepo,Quote $quoteService){
         $this->postrepo = $postrepo;
+        $this->qouteService = $quoteService;
+
     }
 
     #[Route('/', name: 'app_category_index', methods: ['GET'])]
     public function index(CategoryRepository $categoryRepository): Response
     {
         return $this->render('back_office/category/index.html.twig', [
+            'categories' => $categoryRepository->findAll(),
+        ]);
+    }
+
+
+    #[Route('/list/front', name: 'app_category_frontlist', methods: ['GET'])]
+    public function indexfront(CategoryRepository $categoryRepository): Response
+    {
+        return $this->render('front_office/category/index.html.twig', [
             'categories' => $categoryRepository->findAll(),
         ]);
     }
@@ -75,6 +88,7 @@ class CategoryController extends AbstractController
         ]);
     }
 
+
     #[Route('/{categoryid}', name: 'app_category_show', methods: ['GET'])]
     public function show(Category $category): Response
     {
@@ -84,7 +98,19 @@ class CategoryController extends AbstractController
             'posts' => $posts
         ]);
     }
+    #[Route('/front/show/{categoryid}', name: 'app_category_showfront', methods: ['GET'])]
+    public function showfront(Category $category): Response
+    {
+        $HallOfFame=$this->postrepo->mostlikedusers();
+        $posts = $this->postrepo->findBy(["category" => $category->getCategoryid()]);
 
+        return $this->render('front_office/category/show.html.twig', [
+            'category' => $category,
+            'posts' => $posts,
+            'top'=>$HallOfFame,
+            'quote'=>$this->qouteService->getQuote()
+        ]);
+    }
     #[Route('/{categoryid}/edit', name: 'app_category_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Category $category, CategoryRepository $categoryRepository, SluggerInterface $slugger): Response
     {

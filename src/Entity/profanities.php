@@ -136,6 +136,8 @@ return [
     'bitchtits',
     'bitchy',
     'biteme',
+    'blood',
+    'death',
     'blow job',
     'blowjob',
     'boffing',

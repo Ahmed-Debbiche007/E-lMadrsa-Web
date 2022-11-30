@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Vote;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\Boolean;
+use function PHPUnit\Framework\isNull;
 
 /**
  * @extends ServiceEntityRepository<Vote>
@@ -38,7 +40,89 @@ class VoteRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function isliked($userid,$postid): int
+    {
 
+
+        return $this->createQueryBuilder('v')
+
+            ->select('COUNT(v)')
+            ->andWhere('v.votenb = :val')
+            ->setParameter('val', 1)
+            ->andWhere('v.userid = :userid')
+            ->setParameter('userid', $userid)
+            ->andWhere('v.postid = :postid')
+            ->setParameter('postid', $postid)
+
+            ->getQuery()
+
+            ->getSingleScalarResult();
+
+
+
+    }
+
+    public function isdisliked($userid,$postid): int
+    {
+        return $this->createQueryBuilder('v')
+
+            ->select('COUNT(v)')
+            ->andWhere('v.votenb = :val')
+            ->setParameter('val', -1)
+            ->andWhere('v.userid = :userid')
+            ->setParameter('userid', $userid)
+            ->andWhere('v.postid = :postid')
+            ->setParameter('postid', $postid)
+
+            ->getQuery()
+
+            ->getSingleScalarResult();
+
+
+
+
+
+    }
+
+
+    public function changetolike($userid,$postid):void
+    {
+
+
+        $this->createQueryBuilder('u')->update('App\Entity\Vote','u')->set('u.votenb', '1')->Where('u.userid = :userid')->andwhere('u.postid = :postid')->setParameter('userid', $userid)->setParameter('postid', $postid)->getQuery()->execute()
+
+
+
+
+
+
+    ;
+
+
+
+
+
+    }
+
+
+    public function changetodislike($userid,$postid):void
+    {
+
+
+        $this->createQueryBuilder('u')
+            ->update('App\Entity\Vote','u')
+            ->set('u.votenb', '-1')
+            ->Where('u.userid = :userid')
+            ->andwhere('u.postid = :postid')
+            ->setParameter('userid', $userid)->setParameter('postid', $postid)->getQuery()->execute()
+
+        ;
+
+
+
+
+
+    }
 //    /**
 //     * @return Vote[] Returns an array of Vote objects
 //     */

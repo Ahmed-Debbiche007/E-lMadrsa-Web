@@ -1,4 +1,4 @@
-{% extends 'back_office/backbase.html.twig' %}
+{% extends 'front_office/blogbase.html.twig' %}
 
 {% block title %}
   Post list
@@ -28,10 +28,7 @@
                 <h4 class="font-bold">{{ post.posttitle }}</h4>
                 <h6 class="text-muted">{{ post.category.getCategoryname() }}</h6>
                 <br />
-                {# using the ckeditor #}
-                {{ post.postcontent|raw  }}
-               {#{{ (post.postcontent|length) > 20 ? (post.postcontent|slice(0, 35)) ~ '...' : post.postcontent|raw }} #}
-
+                <h5 class="font-semibold">{{ (post.postcontent|length) > 20 ? (post.postcontent|slice(0, 35)) ~ '...' : post.postcontent }}</h5>
                 <i class="bi bi-calendar2-week-fill"></i><h6 class="text-muted">
                   {{ post.postdate ? post.postdate|date('Y-m-d H:i') : '' }} <br /><i class="bi bi-chat-dots-fill"></i>
                   {{ post.postnbcom }} <br /> <i class="bi bi-arrow-down-up"></i>{{ post.postvote }}
