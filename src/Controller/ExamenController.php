@@ -9,6 +9,7 @@ use App\Repository\CategorieRepository;
 use App\Repository\ExamenRepository;
 use App\Repository\ParticipationRepository;
 use App\Repository\QuestionRepository;
+use phpDocumentor\Reflection\Types\Array_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,6 +50,31 @@ class ExamenController extends AbstractController
             'categories'=>$categorieRepository->findAll(),
         ]);
     }
+
+
+    #[Route('/list/examenbymanygategories', name: 'app_examen_examenbymanygategories')]
+    public function examenbymanygategories( Request $request,  ExamenRepository $examenRepository, CategorieRepository $categorieRepository)
+    {
+
+     // $catid[] = [1,2,3];
+        $catidd= (urldecode($request->getQueryString())) ;
+        $catid = array_map('intval', explode(',', $catidd));
+        // print_r($catid[1]) ;
+
+     $arrayexams=$examenRepository->findExamsByCategorieId(3);
+        for($i = 0, $size =  count($catid); $i < $size; ++$i) {
+            $arrayexams =  array_merge($arrayexams , $examenRepository->findExamsByCategorieId(($catid[$i] ) ));
+          }
+
+
+        return $this->render('front_office/exams/examens.html.twig', [
+            'examens' =>  $arrayexams,
+            'categories'=>$categorieRepository->findAll(),
+        ]);
+    }
+
+
+
 
     #[Route('/pass/{id}', name: 'app_examen_pass')]
     public function passExam(int $id,QuestionRepository $qrepo,ExamenRepository $examenRepository, CategorieRepository $categorieRepository,ParticipationRepository $participationRepository)
