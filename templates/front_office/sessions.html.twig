@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-  <div class="content-block" style="background-color:black ;">
+  <div class="content-block">
     <div class="content-block">
       <main class="ttr-wrapper">
         <div class="container-fluid d-flex justify-content-center">
@@ -56,11 +56,7 @@
         {
           title: '{{session.getType()}}',
           start: '{{session.getDate()? session.date|date('Y-m-d H:i') : ''}}',
-          {% if session.getType() == "MessagesChat" %}
-          url: '/session'
-          {% else %}
-          url: '{{session.getUrl()}}'
-          {% endif %}
+       
         },
         {% endfor %}
           ]
@@ -71,6 +67,15 @@
       Array.from(cas).forEach((element) => {
         console.log(element.getAttribute('data-date'))
       })
+    </script>
+    <script>
+    console.log("aaa");
+    const events =  document.getElementsByClassName("fc-content");
+    console.log(events);
+    console.log(Array.from(events))
+    {# Array.from(events).forEach((event)=>{
+   console.log(event);
+    }) #}
     </script>
   </div>
 {% endblock %}

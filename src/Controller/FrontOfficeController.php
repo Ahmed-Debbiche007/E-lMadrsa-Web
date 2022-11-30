@@ -32,10 +32,10 @@ class FrontOfficeController extends AbstractController
     #[Route('/sessions', name: 'app.sessions')]
     public function sessions(TutorshipSessionRepository $repo): Response
     {
-        $sessions = array_merge($repo-> findBy(["idTutor"=> $this->getUser()]), $repo-> findBy(["idStudent"=> $this->getUser()]));
-        
-        
-        return $this->render('front_office/sessions.html.twig',[
+        $sessions = array_merge($repo->findBy(["idTutor" => $this->getUser()]), $repo->findBy(["idStudent" => $this->getUser()]));
+
+
+        return $this->render('front_office/sessions.html.twig', [
             'sessions' => $sessions
         ]);
     }
@@ -45,15 +45,21 @@ class FrontOfficeController extends AbstractController
     {
         $logger->critical($request->get('idSession'));
         $sessions = $repo->getSessions($this->getUser());
+        if (is_null($request->get('idSession'))) {
+            $lastSession = $repo->findLatest($this->getUser()->getId());
+            $messages = $messagesRepository->findBy(["idsession" => $lastSession->getIdsession()]);
+        } else {
+            $lastSession= $repo->find($request->get('idSession'));
+            $messages = $messagesRepository->findBy(["idsession" => $request->get('idSession')]);
+        }
         // foreach ($sessions as $session){
         //     dd($session->getMessages()->isEmpty());
         // }
         $refresh = 0;
-        $message = new Messages();
-        $message->setStatusdate(new \DateTime());
 
         return  $this->renderForm('front_office/session.html.twig', [
-            'messages' => $messagesRepository->findBy(["idsession" => $request->get('idSession')]),
+            'messages' => $messages,
+            'currentSession'=>$lastSession,
             'sessions' => $sessions,
             'refresh' => $refresh,
             'id' => $request->get('idSession'),
@@ -63,19 +69,15 @@ class FrontOfficeController extends AbstractController
     #[Route('/api/messages', name: 'app.messages', methods: ['GET'])]
     public function showMessages(Request $request,  LoggerInterface $logger, MessagesRepository $messagesRepository, TutorshipSessionRepository $repo, SerializerInterface $serializer)
     {
-        $logger->critical($request->get('idSession'));
+
         $sessions = $repo->getSessions($this->getUser());
-        // foreach ($sessions as $session){
-        //     dd($session->getMessages()->isEmpty());
-        // }
-        $refresh = 0;
-        $message = new Messages();
-        $message->setStatusdate(new \DateTime());
+   
+
 
         return  $this->renderForm('front_office/msg.html.twig', [
             'messages' => $messagesRepository->findBy(["idsession" => $request->get('idSession')]),
             'sessions' => $sessions,
-            'refresh' => $refresh,
+            
             'id' => $request->get('idSession'),
         ]);
     }

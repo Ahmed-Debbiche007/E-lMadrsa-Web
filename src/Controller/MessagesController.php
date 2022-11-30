@@ -42,17 +42,27 @@ class MessagesController extends AbstractController
     #[Route('/api/messages', name: 'api_messages', methods: ['GET'])]
     public function indexApi(Request $request,  LoggerInterface $logger, MessagesRepository $messagesRepository, TutorshipSessionRepository $repo, SerializerInterface $serializer)
     {
-        $logger->critical($request->get('idSession'));
+        
         $sessions = $repo->getSessions($this->getUser());
         // foreach ($sessions as $session){
         //     dd($session->getMessages()->isEmpty());
         // }
         $refresh = 0;
-        $message = new Messages();
-        $message->setStatusdate(new \DateTime());
+        if (is_null($request->get('idSession'))) {
+            if ($this->getUser()){
+            $lastSession = $repo->findLatest($this->getUser()->getId());
+        }else{
+            $lastSession = $repo->find(1); 
+        }
+            $messages = $messagesRepository->findBy(["idsession" => $lastSession->getIdsession()]);
+        } else {
+            $lastSession= $repo->find($request->get('idSession'));
+            $messages = $messagesRepository->findBy(["idsession" => $request->get('idSession')]);
+        }
 
         return  $this->renderForm('front_office/components/chat.html.twig', [
-            'messages' => $messagesRepository->findBy(["idsession" => $request->get('idSession')]),
+            'messages' => $messages,
+            'currentSession'=>$lastSession,
             'sessions' => $sessions,
             'refresh' => $refresh,
             'id' => $request->get('idSession'),

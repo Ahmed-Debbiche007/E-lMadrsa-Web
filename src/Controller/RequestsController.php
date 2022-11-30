@@ -84,7 +84,9 @@ class RequestsController extends AbstractController
         $tutorshipsession->setType($trequest->getType());
         $tutorshipsession->setBody($trequest->getBody());
         $tutorshipsession->setUrl("none");
-        $tutorshipSessionRepository->save($tutorshipsession, true);
+        $tutorshipSessionRepository->save($tutorshipsession, false);
+        
+        return $this->generateLink($tutorshipsession, $tutorshipSessionRepository, $trequest, $requestsRepository);
         $this->addFlash('success', 'The request has been approved!');
         return $this->redirectToRoute('app_tutorshipsessions_index', [], Response::HTTP_SEE_OTHER);
     }
