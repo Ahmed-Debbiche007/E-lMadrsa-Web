@@ -32,7 +32,7 @@ class ReclamationController extends AbstractController
 
     }
     #[Route('/add', name: 'app_reclamations_add')]
-    public function addrec(MailerInterface $mailer,Request $request, ReclamationRepository $reclamationRepository, Security $security): Response
+    public function addrec(CategorieRepository $categorieRepository,MailerInterface $mailer,Request $request, ReclamationRepository $reclamationRepository, Security $security): Response
     {
         $reclamation = new Reclamation();
         $form = $this->createForm(ReclamationType1::class, $reclamation);
@@ -58,6 +58,7 @@ class ReclamationController extends AbstractController
         return $this->renderForm('front_office/reclamation/addrec.html.twig', [
             'reclamation' => $reclamation,
             'form' => $form,
+            'categories'=>$categorieRepository->findAll()
         ]);
 
     }
@@ -98,6 +99,13 @@ class ReclamationController extends AbstractController
             'form' => $form,
         ]);
     }
+
+
+
+
+
+
+
 
     #[Route('/{idreclamation}', name: 'app_reclamation_show', methods: ['GET'])]
     public function show(Reclamation $reclamation): Response

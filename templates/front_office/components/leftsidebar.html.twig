@@ -5,22 +5,19 @@
             <div class="col-lg-3 col-md-4 col-sm-12 m-b30">
                 <div class="widget courses-search-bx placeani">
                     <div class="form-group">
-                        <div class="input-group">
-                            <label>Search Courses</label>
-                            <input name="dzName" type="text" required class="form-control">
-                        </div>
+
                     </div>
                 </div>
                 <div class="widget widget_archive">
-                    <h5 class="widget-title style-1">All Courses</h5>
+                    <h5 class="widget-title style-1"><a href=" {{ path('app_examen_listt') }}">toutes les catégories</a></h5>
                     <ul>
                            {% for i in categories %}
-                         <li><a href="#">{{ i.nomcategorie }}</a></li>
+                         <li><a href="{{ path('app_examen_listtbycategorie'  , {id:i.idcategorie}) }}">{{ i.nomcategorie }}</a></li>
                            {% endfor %}
                     </ul>
                 </div>
                 <div class="widget">
-                    <a href="#"><img src="{{ asset('front/assets/images/adv/adv.jpg"')}}" alt=""/></a>
+                    <a href="#"><img src="{{ asset("/front/assets/images/adv/adv.jpg")}}" alt=""/></a>
                 </div>
                 <div class="widget recent-posts-entry widget-courses">
 

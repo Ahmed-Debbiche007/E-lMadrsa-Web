@@ -38,7 +38,6 @@ class EvenementRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
 //    /**
 //     * @return Evenement[] Returns an array of Evenement objects
 //     */

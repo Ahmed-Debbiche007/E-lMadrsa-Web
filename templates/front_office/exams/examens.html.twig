@@ -29,8 +29,9 @@
 {% block slidestitle %} Nos examens {% endblock %}
 
             {% block leftslide %}
-
-
+                <div style=" width: 50% ; margin-left: 500px ; margin-top: 50px">
+                 {% include('front_office/exams/searchcategorieform.html.twig') %}
+                </div>
                 {% include('front_office/components/leftsidebar.html.twig') %}
 
             {% endblock %}

@@ -55,6 +55,7 @@ class ExamenRepository extends ServiceEntityRepository
             ->getQuery()->getSingleScalarResult());
     }
 
+//SELECT  u.nom FROM participation p join user u   order by p.resultat DESC  limit 3 ;
 
 /*
     public function countexamsincategorie()
