@@ -93,6 +93,7 @@
   const data = response;
   popupSession.innerHTML = response.data;
   $("body")[0].append(p);
+
 }).catch(error => console.error(error));
      return popupSession;
 
@@ -140,6 +141,8 @@
       Array.from(cas).forEach((element) => {
         console.log(element.getAttribute('data-date'))
       })
+
+     
     </script>
 
   

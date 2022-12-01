@@ -1,6 +1,6 @@
-<div class="row">
+<div class="row" >
   <div class="col h-100 d-inline-block">
-    <div class="card">
+    <div class="card text-bg-info">
       <div class="d-flex justify-content-end mt-1 mr-1">
         <button onclick="rm()" class="btn">X</button>
       </div>
@@ -8,6 +8,7 @@
         <div class="row">
           <div class="d-flex flex-column">
             <h5 class="font-semi-bold text-left ml-2">{{ session.getType() }}</h5>
+            <h6 class="text-muted ml-2">{{session.getDate()? session.date|date('Y/m/d H:i') : ''}}</h6>
             <a class="btn" id="connect">connect</a>
           </div>
         </div>
