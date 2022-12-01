@@ -2182,6 +2182,19 @@ div.chatbox {
 	backdrop-filter: blur(1.5rem);
 }
 
+div.popupSession {
+	border-style: solid;
+	border-width: 0;
+	border-radius: 1em;
+	height: 250px;
+	margin: 0;
+	position: fixed;
+	text-align: center;
+	width: 250px;
+	z-index: 988;
+	background-color: red;
+}
+
 button.back-to-top {
 	border-radius: 4px;
 	border-style: solid;

@@ -39,14 +39,19 @@ class MessagesController extends AbstractController
         ]);
     }
 
+    #[Route('/test', name: 'app_messages_test', methods: ['GET', 'POST'])]
+    public function test(Request $request, MessagesRepository $messagesRepository, TutorshipSessionRepository $repo): Response
+    {
+       
+        return $this->renderForm('front_office/test.html.twig');
+    }
+
     #[Route('/api/messages', name: 'api_messages', methods: ['GET'])]
     public function indexApi(Request $request,  LoggerInterface $logger, MessagesRepository $messagesRepository, TutorshipSessionRepository $repo, SerializerInterface $serializer)
     {
         
         $sessions = $repo->getSessions($this->getUser());
-        // foreach ($sessions as $session){
-        //     dd($session->getMessages()->isEmpty());
-        // }
+        //dd($request);
         $refresh = 0;
         if (is_null($request->get('idSession'))) {
             if ($this->getUser()){

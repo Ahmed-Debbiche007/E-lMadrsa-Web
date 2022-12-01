@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col h-100 d-inline-block">
+    <div class="card">
+      <div class="d-flex justify-content-end mt-1 mr-1">
+        <button onclick="rm()" class="btn">X</button>
+      </div>
+      <div class="card-body px-4 py-4-5 h-100 d-inline-block">
+        <div class="row">
+          <div class="d-flex flex-column">
+            <h5 class="font-semi-bold text-left ml-2">{{ session.getType() }}</h5>
+            <a class="btn" id="connect">connect</a>
+          </div>
+        </div>
+        <hr />
+        {{ form_start(form) }}
+
+        <div class="form-group position-relative has-icon-left mb-4">{{ form_widget(form.type, { attr: { class: 'form-control form-control-xl', placeholder: 'Type' } }) }}</div>
+        <div class="form-group position-relative has-icon-left mb-4">{{ form_widget(form.date, { attr: { class: 'form-control form-control-xl' } }) }}</div>
+        <div class="form-group position-relative has-icon-left mb-4">{{ form_widget(form.body, { attr: { class: 'form-control form-control-xl', placeholder: "What's on your mind, baby boy?", required: 'false' } }) }}</div>
+          <input type="hidden" id="tutorshipid" value="{{ session.getIdsession()}}">
+        {{ form_end(form) }}
+        <button id="submitFormSession" type="button" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">{{ button_label|default('Save') }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 

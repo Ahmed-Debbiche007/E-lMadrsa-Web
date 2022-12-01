@@ -1,0 +1,30 @@
+{% extends 'front_office/SecondBase.html.twig' %}
+
+{% block title %}
+  Hello
+{% endblock %}
+
+{% block body %}
+  <div class="row">
+    <div class="col h-100 d-inline-block">
+      <div class="card">
+        <div class="d-flex justify-content-end mt-1 mr-1">
+          <button class="btn">X</button>
+        </div>
+        <div class="card-body px-4 py-4-5 h-100 d-inline-block">
+          <div class="row">
+            <div class="d-flex flex-column">
+              <h5 class="font-semi-bold text-left ml-2">`+info.title+`</h5>
+              <a class="btn">connect</a>
+            </div>
+            <hr />
+            <div class="d-flex flex-column">
+              <h5 class="font-semi-bold text-left ml-2">`+info.title+`</h5>
+              <a class="btn">connect</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -226,6 +226,13 @@
                 <li>
                   <a href="admin/add-listing.html">Add Listing</a>
                 </li>
+                 {% if app.user %}
+                  <li>
+                    <a href="/sessions">
+                      Tutorship Sessions
+                    </a>
+                  </li>
+                {% endif %}
                 <li>
                   <a href="admin/bookmark.html">Bookmark</a>
                 </li>

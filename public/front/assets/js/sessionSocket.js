@@ -70,3 +70,25 @@ document.getElementById('sendbtn').addEventListener('click', function () {
     }
 
 })
+
+document.getElementById("input-default").addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        const message = {
+            idSender: document.getElementById('send').value,
+            message: document.getElementById('input-default').value,
+            idSession: document.getElementById('idSession').value,
+        }
+        document.getElementById('input-default').value = ""
+        socket.send(JSON.stringify(message))
+    
+        if (message.message != "") {
+            addMessage(message.idSender, message.message)
+            try {
+                return axios.post("/dashboard/messages/api/post",{idSession: message.idSession, body: message.message});
+              } catch (error) {
+                console.log(error);
+              }
+        }
+    
+    }
+});

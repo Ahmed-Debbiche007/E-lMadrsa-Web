@@ -56,8 +56,10 @@ class TutorshipsessionsController extends AbstractController
     }
 
     #[Route('/{idsession}/edit', name: 'app_tutorshipsessions_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Tutorshipsessions $tutorshipsession, TutorshipSessionRepository $tutorshipSessionRepository): Response
+    public function edit(Request $request,  TutorshipSessionRepository $tutorshipSessionRepository): Response
     {
+        
+        $tutorshipsession=$tutorshipSessionRepository->find($request->get('idsession'));
         $form = $this->createForm(TutorshipsessionsType::class, $tutorshipsession);
                
         $form->handleRequest($request);
