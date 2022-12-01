@@ -1,9 +1,9 @@
-{% extends 'back_office/backbase.html.twig' %}
 
-{% block title %}Reservation index{% endblock %}
+{% extends 'back_office/backbase.html.twig' %}
+{% block title %}Reservation {% endblock %}
 
 {% block body %}
-    <h1>Reservation index</h1>
+   
 
      <div class="row">
               <h5 class="card-title">Reservation</h5>
@@ -29,8 +29,11 @@
                 <td>
                     <a href="{{ path('app_reservation_show', {'idReservation': reservation.idReservation}) }}">show</a>
                     <a href="{{ path('app_reservation_edit', {'idReservation': reservation.idReservation}) }}">edit</a>
+
                 </td>
             </tr>
+
+        
         {% else %}
             <tr>
                 <td colspan="5">no records found</td>

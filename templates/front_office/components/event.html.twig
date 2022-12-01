@@ -1,4 +1,4 @@
-       
+
 
 <div class="section-area section-sp2">
   <div class="container">
@@ -28,6 +28,9 @@
                   <div class="event-month">{{ evenement.date ? evenement.date|date('m') : '' }}</div>
                 </div>
               </div>
+              <div class="text-center">
+      <a href="{{ path('app_reservation_newRes', {'idEv': evenement.id}) }}" class="btn">Reserver</a>
+    </div>
               <div class="event-info">
                 <h4 class="event-title"><a href="#">{{ evenement.nomEvenement }}</a></h4>
                 <ul class="media-post">
@@ -68,7 +71,7 @@
     </div>
  
     <div class="text-center">
-      <a href="#" class="btn">View All Event</a>
+      <a href="{{ path('app_evenement_new') }}" class="btn">Add Event</a>
     </div>
      
   </div>
