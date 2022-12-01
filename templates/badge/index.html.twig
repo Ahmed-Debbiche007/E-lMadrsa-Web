@@ -1,0 +1,44 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}Badge index{% endblock %}
+
+{% block body %}
+    <h1>Badge</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Badgeid</th>
+                <th>Badgetype</th>
+                <th>Badgeimage</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for badge in badges %}
+            <tr>
+                <td>{{ badge.badgeid }}</td>
+                <td>{{ badge.badgetype }}</td>
+                <td>{{ badge.badgeimage }}</td>
+                <td>
+
+                </td>
+
+                <td>
+
+                    <a href="{{ path('app_badge_showw', { badgeid: badge.badgeid }) }}"><span class="badge bg-primary">show</span></a>
+                    <a href="{{ path('app_badge_editt', { badgeid: badge.badgeid }) }}"><span class="badge bg-success">edit</span></a>
+                    {{ include('badge/_delete_form.html.twig') }}
+                </td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_badge_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'front_office/SecondBase.html.twig' %}
+
+
+
+{% block title %}Edit User
+{% endblock %}
+
+{% block body %}
+    <h1>Edit {{ heading }}</h1>
+
+    {{ include('front_office/user/_form.html.twig', {'button_label': 'Update'}) }}
+
+    
+
+    {{ include('front_office/user/_delete_form.html.twig') }}
+{% endblock %}

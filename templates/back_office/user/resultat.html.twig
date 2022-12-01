@@ -1,0 +1,21 @@
+<!Doctype html>
+<html lang="en">
+<head>
+    <link  rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/pd.css') }}">
+</head>
+<body>
+<center>
+
+    <div id="title" class="slide header">
+        <h1>TOP 3</h1>
+    </div>
+
+    <ol class="podium">
+        <li>Gold  🥇  {{ top[0].nom }}:    {{ top[0].r }}   </li>
+        <li>Silver  🥈  {{ top[1].nom }}:    {{ top[1].r }}</li>
+        <li>Bronz  🥉 {{ top[2].nom }}:    {{ top[2].r }} </li>
+    </ol>
+
+</center>
+</body>
+</html>

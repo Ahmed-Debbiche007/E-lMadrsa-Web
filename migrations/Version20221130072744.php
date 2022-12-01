@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20221115163800 extends AbstractMigration
+final class Version20221130072744 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -21,7 +21,8 @@ final class Version20221115163800 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE attestation (idattestation INT AUTO_INCREMENT NOT NULL, idparticipation INT NOT NULL, datecq DATE NOT NULL, PRIMARY KEY(idattestation)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE badge (badgeid INT AUTO_INCREMENT NOT NULL, badgetype VARCHAR(255) NOT NULL, badgeimage VARCHAR(255) NOT NULL, PRIMARY KEY(badgeid)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE badge (id INT AUTO_INCREMENT NOT NULL, badgetype VARCHAR(255) NOT NULL, badgeimage VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE badge_user (badge_id INT NOT NULL, user_id INT NOT NULL, INDEX IDX_299D3A50F7A2C2FC (badge_id), INDEX IDX_299D3A50A76ED395 (user_id), PRIMARY KEY(badge_id, user_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE categorie (idcategorie INT AUTO_INCREMENT NOT NULL, nomcategorie VARCHAR(255) NOT NULL, PRIMARY KEY(idcategorie)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE categorie_ev (id_cat VARCHAR(255) NOT NULL, type_evenement VARCHAR(255) NOT NULL, PRIMARY KEY(id_cat)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE category (categoryid INT AUTO_INCREMENT NOT NULL, categoryname VARCHAR(255) NOT NULL, categoryimage VARCHAR(255) NOT NULL, PRIMARY KEY(categoryid)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -42,10 +43,12 @@ final class Version20221115163800 extends AbstractMigration
         $this->addSql('CREATE TABLE reservation (id_reservation INT AUTO_INCREMENT NOT NULL, date_reservation DATE NOT NULL, id_evenement INT NOT NULL, id_utilisateur INT NOT NULL, PRIMARY KEY(id_reservation)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE token (id INT AUTO_INCREMENT NOT NULL, token VARCHAR(255) NOT NULL, refresh VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE tutorshipsessions (idsession INT AUTO_INCREMENT NOT NULL, id_student_id INT DEFAULT NULL, id_tutor_id INT DEFAULT NULL, id_request_id INT DEFAULT NULL, url VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, date DATETIME NOT NULL, body VARCHAR(255) NOT NULL, INDEX IDX_6C7DB1BD6E1ECFCD (id_student_id), INDEX IDX_6C7DB1BD70548864 (id_tutor_id), UNIQUE INDEX UNIQ_6C7DB1BDE7F43872 (id_request_id), PRIMARY KEY(idsession)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(180) NOT NULL, prenom VARCHAR(180) NOT NULL, username VARCHAR(180) NOT NULL, email VARCHAR(180) NOT NULL, image VARCHAR(180) NOT NULL, roles JSON NOT NULL, role VARCHAR(255) DEFAULT \'User\' NOT NULL, password VARCHAR(255) NOT NULL, date_naissance DATE NOT NULL, approved TINYINT(1) NOT NULL, UNIQUE INDEX UNIQ_8D93D649F85E0677 (username), UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(180) NOT NULL, prenom VARCHAR(180) NOT NULL, username VARCHAR(180) NOT NULL, email VARCHAR(180) NOT NULL, image VARCHAR(180) NOT NULL, roles LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\', role VARCHAR(255) DEFAULT \'User\' NOT NULL, password VARCHAR(255) NOT NULL, date_naissance DATE NOT NULL, approved TINYINT(1) NOT NULL, UNIQUE INDEX UNIQ_8D93D649F85E0677 (username), UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE vote (voteid INT AUTO_INCREMENT NOT NULL, userid INT NOT NULL, postid INT NOT NULL, votenb INT NOT NULL, PRIMARY KEY(voteid)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE votecomment (votecommentid INT AUTO_INCREMENT NOT NULL, userid INT NOT NULL, commentid INT NOT NULL, votenb INT NOT NULL, PRIMARY KEY(votecommentid)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE messenger_messages (id BIGINT AUTO_INCREMENT NOT NULL, body LONGTEXT NOT NULL, headers LONGTEXT NOT NULL, queue_name VARCHAR(190) NOT NULL, created_at DATETIME NOT NULL, available_at DATETIME NOT NULL, delivered_at DATETIME DEFAULT NULL, INDEX IDX_75EA56E0FB7336F0 (queue_name), INDEX IDX_75EA56E0E3BD61CE (available_at), INDEX IDX_75EA56E016BA31DB (delivered_at), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE badge_user ADD CONSTRAINT FK_299D3A50F7A2C2FC FOREIGN KEY (badge_id) REFERENCES badge (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE badge_user ADD CONSTRAINT FK_299D3A50A76ED395 FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE examen ADD CONSTRAINT FK_514C8FEC900D8539 FOREIGN KEY (formationid) REFERENCES formation (idformation)');
         $this->addSql('ALTER TABLE examen ADD CONSTRAINT FK_514C8FEC37667FC1 FOREIGN KEY (idcategorie) REFERENCES categorie (idcategorie)');
         $this->addSql('ALTER TABLE participation ADD CONSTRAINT FK_AB55E24FFE6E88D7 FOREIGN KEY (idUser) REFERENCES user (id)');
@@ -54,13 +57,15 @@ final class Version20221115163800 extends AbstractMigration
         $this->addSql('ALTER TABLE requests ADD CONSTRAINT FK_7B85D65170548864 FOREIGN KEY (id_tutor_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE requests ADD CONSTRAINT FK_7B85D6516E1ECFCD FOREIGN KEY (id_student_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE tutorshipsessions ADD CONSTRAINT FK_6C7DB1BD6E1ECFCD FOREIGN KEY (id_student_id) REFERENCES user (id)');
-        $this->addSql('ALTER TABLE tutorshipsessions ADD CONSTRAINT FK_6C7DB1BD70548864 FOREIGN KEY (id_tutor_id) REFERENCES user (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE tutorshipsessions ADD CONSTRAINT FK_6C7DB1BDE7F43872 FOREIGN KEY (id_request_id) REFERENCES requests (id)');
+        $this->addSql('ALTER TABLE tutorshipsessions ADD CONSTRAINT FK_6C7DB1BD70548864 FOREIGN KEY (id_tutor_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE tutorshipsessions ADD CONSTRAINT FK_6C7DB1BDE7F43872 FOREIGN KEY (id_request_id) REFERENCES requests (id) ON DELETE SET NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql('ALTER TABLE badge_user DROP FOREIGN KEY FK_299D3A50F7A2C2FC');
+        $this->addSql('ALTER TABLE badge_user DROP FOREIGN KEY FK_299D3A50A76ED395');
         $this->addSql('ALTER TABLE examen DROP FOREIGN KEY FK_514C8FEC900D8539');
         $this->addSql('ALTER TABLE examen DROP FOREIGN KEY FK_514C8FEC37667FC1');
         $this->addSql('ALTER TABLE participation DROP FOREIGN KEY FK_AB55E24FFE6E88D7');
@@ -73,6 +78,7 @@ final class Version20221115163800 extends AbstractMigration
         $this->addSql('ALTER TABLE tutorshipsessions DROP FOREIGN KEY FK_6C7DB1BDE7F43872');
         $this->addSql('DROP TABLE attestation');
         $this->addSql('DROP TABLE badge');
+        $this->addSql('DROP TABLE badge_user');
         $this->addSql('DROP TABLE categorie');
         $this->addSql('DROP TABLE categorie_ev');
         $this->addSql('DROP TABLE category');

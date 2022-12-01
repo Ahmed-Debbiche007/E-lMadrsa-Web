@@ -1,0 +1,65 @@
+{% extends 'front_office/SecondBase.html.twig' %}
+
+ {% block slidestitle %} Profile de {{ app.user.getNom()  }} {{ app.user.getPrenom()}} {% endblock %}
+
+            {% block leftslide %}
+
+
+            {% endblock %}
+
+
+
+{% block body1 %}
+    <center>
+    <div style=" width: 30%;">
+        <div class="profile-bx text-center">
+            <div class="user-profile-thumb">
+                {% if app.user.getImage() %}
+                    <img src={{ asset('uploads/images/' ~ app.user.getImage()) }} alt="taswira">
+                {% else %}
+                    <img src="{{ asset('back/assets/images/faces/2.jpg') }}" alt="taswiraa">
+                {% endif %}
+            </div>
+            <div class="profile-info">
+                <h4>
+                    {{ app.user.getNom() }}
+                    {{ app.user.getPrenom()  }}
+                </h4>
+                <span>{{ app.user.getEmail() }}</span>
+            </div>
+            <div class="profile-social">
+                <ul class="list-inline m-a0">
+                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                </ul>
+            </div>
+            <div class="profile-tabnav">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a href="{{ path('app_user_top') }}"><i class="ti-bookmark-alt"></i>Badges</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  href="/dashbord " ><i class="ti-book"></i>Mes Réclamations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  href="#quiz-results"><i class="ti-bookmark-alt"></i>Mes participations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  href="{{ path('app_user_edit', { id: app.user.id }) }}"><i class="ti-pencil-alt"></i>Edit Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  href="{{ path('app_forget_password') }}"><i class="ti-lock"></i>Change Password</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div style="   ">
+        {% block info %}
+        {% endblock %}
+    </div>
+
+{% endblock %}

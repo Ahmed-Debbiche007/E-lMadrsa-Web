@@ -4,10 +4,12 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Select;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+use Twilio\Rest\Client ;
 
 /**
  * @extends ServiceEntityRepository<User>
@@ -108,12 +110,35 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getResult();
     }
 
+    public function sendsms(): void
+    {
+        $sid = "ACf5932234ee7104417d4aa27eeb82027d" ;
+        $token = "bb12ea37aa223ac260c7754a708ba2d6" ;
+        $client = new Client ($sid, $token);
+
+        $message = $client->messages
+            ->create("+21623583310", // to
+                ["body" => "votre inscription est validée , veuillez connecter sur notre site E-Lmadrsa et bienvenue ", "from" => "+15627848345"]
+            );
+
+    }
+
     public function findStudents(): array
     {
         return $this->createQueryBuilder('u')
             ->andWhere('u.role = :val')
             ->setParameter('val', "Student")
             ->getQuery()
+            ->getResult();
+    }
+
+
+
+    public function findresultat(): array
+    {
+        $em = $this->getEntityManager();
+        return $em->createQuery('SELECT u.nom,p.resultat as r FROM App\Entity\User u JOIN App\Entity\Participation p WITH u.id=p.user  GROUP BY u.username ORDER BY r DESC')
+            ->setMaxResults(3)
             ->getResult();
     }
 

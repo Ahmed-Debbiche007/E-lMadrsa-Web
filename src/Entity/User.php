@@ -77,11 +77,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'idTutor', targetEntity: Tutorshipsessions::class)]
     private Collection $tutorshipsessions;
 
+    #[ORM\ManyToMany(targetEntity: Badge::class, mappedBy: 'userid')]
+    private Collection $badges;
+
     public function __construct()
     {
         $this->requests = new ArrayCollection();
         $this->studentRequest = new ArrayCollection();
         $this->tutorshipsessions = new ArrayCollection();
+        $this->badges = new ArrayCollection();
     }
 
     
@@ -377,6 +381,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function  __toString()
     {
         return (String)$this->getNom() ;
+    }
+
+    /**
+     * @return Collection<int, Badge>
+     */
+    public function getBadges(): Collection
+    {
+        return $this->badges;
+    }
+
+    public function addBadge(Badge $badge): self
+    {
+        if (!$this->badges->contains($badge)) {
+            $this->badges->add($badge);
+            $badge->addUserid($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBadge(Badge $badge): self
+    {
+        if ($this->badges->removeElement($badge)) {
+            $badge->removeUserid($this);
+        }
+
+        return $this;
     }
 
     

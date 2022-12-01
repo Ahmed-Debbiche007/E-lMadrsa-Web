@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Badge;
 use App\Entity\Recup;
 use App\Entity\User;
+use App\Entity\Participation;
 use App\Form\UserType;
 use App\Repository\BadgeRepository;
 use App\Repository\ParticipationRepository;
@@ -23,7 +24,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class UserController extends AbstractController
 {
     #[Route('/users', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
+    public function indexd(UserRepository $userRepository): Response
     {
         return $this->render('back_office/user/index.html.twig', [
             'users' => $userRepository->findUsers(),
@@ -42,6 +43,50 @@ class UserController extends AbstractController
             'heading' => "Students"
         ]);
     }
+
+
+    #[Route('/profil', name: 'app_profil_index', methods: ['GET'])]
+    public function indexe(UserRepository $userRepository): Response
+    {
+        return $this->render('back_office/user/showProfiles.html.twig', [
+            'users' => $userRepository->findAll(),
+
+        ]);
+    }
+
+    #[Route('/top3', name: 'app_user_top')]
+    public function resultstop(UserRepository $userRepository ,ParticipationRepository $participationRepository, BadgeRepository $badgeRepository)
+    {
+
+
+
+    $participation=$participationRepository->findBySomeUser(50,$this->getUser());
+    if(!is_null($participation)){
+        $this->getUser()->addBadge($badgeRepository->findOneBy(['badgetype'=>'BRONZ']));
+        $userRepository->save($this->getUser(),true);
+    }
+
+        $participation=$participationRepository->findBySomeUser(70,$this->getUser());
+        if(!is_null($participation)){
+            $this->getUser()->addBadge($badgeRepository->findOneBy(['badgetype'=>'SILVER']));
+            $userRepository->save($this->getUser(),true);
+        }
+        $participation=$participationRepository->findBySomeUser(90,$this->getUser());
+        if(!is_null($participation)){
+            $this->getUser()->addBadge($badgeRepository->findOneBy(['badgetype'=>'GOLD']));
+            $userRepository->save($this->getUser(),true);
+        }
+
+
+
+         return $this->render('back_office/user/resultat.html.twig', [
+            'users' => $userRepository->findAll(),
+            'part' => $participationRepository->findAll(),
+             'top' => $userRepository->findresultat()
+        ]);
+    }
+
+
 
     #[Route('/tutors', name: 'app_user_indexTutor', methods: ['GET'])]
     public function indexTutors(UserRepository $userRepository): Response
@@ -94,6 +139,7 @@ class UserController extends AbstractController
             $user->setApproved(1);
             $user->setRole("Admin");
             $userRepository->save($user, true);
+           # $userRepository->sendsms();
 
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -424,33 +470,7 @@ class UserController extends AbstractController
     }
 
 
-    #[Route('/top3', name: 'app_user_top')]
-    public function resultstop(UserRepository $userRepository ,ExamenRepository $examenRepository, BadgeRepository $badgeRepository)
-    {
 
-        return $this->render('back_office/user/resultat.html.twig', [
-            'users' => $userRepository->findAll(),
-            'examens' => $examenRepository->findAll(),
-            'badges'=>$badgeRepository->findAll(),
-        ]);
-    }
 
-/*
-    #[Route('/badge/{id}', name: 'app_user_badge')]
-    public function badgeuser(UserRepository $userRepository ,ParticipationRepository $participationRepository, BadgeRepository $badgeRepository):Response
-    {
-        $part = $participationRepository->findBy(['user' => $userRepository]);
-        $resutat = $form->get('resultat')->getResultat();
 
-        if ($resultat < 40) {
-            $badgeRepository->remove($user, true);
-        }
-
-        return $this->render('back_office/user/resultat.html.twig', [
-            'users' => $userRepository->findAll(),
-            'resultat' => $participationRepository->findAll(),
-            'badgess'=>$badgeRepository->findAll(),
-        ]);
-    }
-*/
 }
