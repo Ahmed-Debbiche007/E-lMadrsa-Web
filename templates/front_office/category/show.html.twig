@@ -67,6 +67,7 @@
 
 
         {% for post in posts %}
+
             <div class="card mb-3">
                 <div class="card-body px-4 py-4-5">
                     <div class="row">
@@ -118,10 +119,10 @@
                                     {% if post.user.getId()==app.user.getId() %}
 
                                         <form id='my_form' method="post"
-                                              action="{{ path('app_post_delete', {'postid': post.postid}) }}"
+                                              action="{{ path('app_post_delete_front', {'postid': post.postid}) }}"
                                               onsubmit="return confirm('Are you sure you want to delete this item?');">
                                             <div class="d-inline">
-                                                <a href="{{ path('app_post_edit', { postid: post.postid }) }}"><i
+                                                <a href="{{ path('app_post_edit_front', { postid: post.postid }) }}"><i
                                                             class="fa fa-pencil" aria-hidden="true"></i></a>
                                                 <input type="hidden" name="_token"
                                                        value="{{ csrf_token('delete' ~ post.postid) }}">
@@ -158,6 +159,9 @@
                 <td colspan="9">no records found</td>
             </tr>
         {% endfor %}
+        {% do posts.setPageRange(4) %}
+        {{ knp_pagination_render(posts) }}
+
     </div>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

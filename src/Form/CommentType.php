@@ -17,6 +17,8 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('commentcontent')
+            ->add('post', EntityType::class,array('class'=>Post::class,
+                'choice_label'=>'posttitle'))
           //  ->add('userid')
            // ->add('postid')
           //  ->add('commentvote')

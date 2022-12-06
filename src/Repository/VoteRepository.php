@@ -123,6 +123,25 @@ class VoteRepository extends ServiceEntityRepository
 
 
     }
+
+    public function changetoNull($userid,$postid):void
+    {
+
+
+        $this->createQueryBuilder('u')
+            ->update('App\Entity\Vote','u')
+            ->set('u.votenb', '0')
+            ->Where('u.userid = :userid')
+            ->andwhere('u.postid = :postid')
+            ->setParameter('userid', $userid)->setParameter('postid', $postid)->getQuery()->execute()
+
+        ;
+
+
+
+
+
+    }
 //    /**
 //     * @return Vote[] Returns an array of Vote objects
 //     */

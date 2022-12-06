@@ -5,7 +5,8 @@
 {% endblock %}
 
 {% block body %}
-  <h1>Post</h1>
+
+  <br>
   <div class="row">
     <div class="col-11 col-lg-11 col-md-11">
       <div class="card">
@@ -26,10 +27,10 @@
             </div>
             <div class="col-md-3">
             {% if app.user.getId() == post.user.getId()%}
-              <a href="{{ path('app_post_edit', { postid: post.postid }) }}"><span class="badge bg-success">edit</span></a>
+              <a href="{{ path('app_post_edit_front', { postid: post.postid }) }}"><span class="badge bg-success">edit</span></a>
 
               <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.postid) }}" />
-              {{ include('back_office/post/_delete_form.html.twig') }}
+              {{ include('front_office/post/_delete_form.html.twig') }}
               {% endif %}
             </div>
           </div>
@@ -74,10 +75,13 @@
 
                     <div class="ml-auto p-2">
                       <div class="d-flex flex-column">
-                        <div><a href="{{ path('app_comment_like',{ commentid: comment.commentid})}}"><i
+                        <div><a class="likeBtn" href="javascript:;"
+                                data-attribute="{{ comment.commentid }}"><i
                                     class="fa fa-arrow-up" aria-hidden="true"></i></a></div>
-                        <div style="margin-bottom: -13px"><h4>{{ comment.commentvote }}</h4></div>
-                        <div><a href="{{ path('app_comment_dislike', { commentid: comment.commentid }) }}"><i
+                        <div style="margin-bottom: -13px"><h4
+                                  id="nbvote{{ comment.commentid }}">{{ comment.commentvote }}</h4></div>
+                        <div><a class="dislikeBtn" href="javascript:;"
+                                data-attribute="{{ comment.commentid }}"><i
                                     class="fa fa-arrow-down" aria-hidden="true"></i></a></div>
                       </div>
                     </div>
@@ -165,8 +169,97 @@
 
 
       <div class="mb-2">
-        <a href="{{ path('app_comment_new') }}"><span class="btn btn-primary btn-lg shadow-lg">Ajouter un commentaire</span></a>
+        <a href="{{ path('app_comment_new_front') }}"><span class="btn btn-primary btn-lg shadow-lg">Ajouter un commentaire</span></a>
       </div>
     </div>
   </div>
+
+
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script>
+
+
+    const likeBtn = document.getElementsByClassName('likeBtn');
+    const dislikeBtn = document.getElementsByClassName('dislikeBtn');
+    Array.from(likeBtn).forEach((element) => {
+      element.addEventListener('click', function () {
+
+
+        const like = () => {
+          axios.post("/dashboard/comment/api/like", {commentid: element.getAttribute('data-attribute')})
+                  .then((response) => {
+
+                    const nbvote = document.getElementById("nbvote" + element.getAttribute('data-attribute'));
+
+                    nbvote.innerHTML = parseInt(response.data) + parseInt(nbvote.innerHTML);
+                    if (parseInt(response.data) == 0) {
+                      Toastify({
+                        text: "You already liked this comment",
+                        duration: 3000,
+                        destination: "https://github.com/apvarun/toastify-js",
+                        newWindow: true,
+                        close: true,
+                        gravity: "bottom", // top or bottom
+                        position: "right", // left, center or right
+                        stopOnFocus: true, // Prevents dismissing of toast on hover
+
+                        onClick: function () {
+                        } // Callback after click
+                      }).showToast();
+                    }
+                  }).catch(error => console.log(error))
+        }
+
+        like();
+
+
+      })
+
+    })
+    Array.from(dislikeBtn).forEach((element) => {
+      element.addEventListener('click', function () {
+
+
+        const dislike = () => {
+          axios.post("/dashboard/comment/api/dislike", {commentid: element.getAttribute('data-attribute')})
+                  .then((response) => {
+
+                    const nbvote = document.getElementById("nbvote" + element.getAttribute('data-attribute'));
+
+                    nbvote.innerHTML = parseInt(response.data) + parseInt(nbvote.innerHTML);
+
+                    if (parseInt(response.data) == 0) {
+                      Toastify({
+                        text: "You already disliked this comment",
+                        duration: 3000,
+                        destination: "https://github.com/apvarun/toastify-js",
+                        newWindow: true,
+                        close: true,
+                        gravity: "bottom", // top or bottom
+                        position: "right", // left, center or right
+                        stopOnFocus: true, // Prevents dismissing of toast on hover
+
+                        onClick: function () {
+                        } // Callback after click
+                      }).showToast();
+                    }
+                  }).catch(error => console.log(error))
+        }
+
+        dislike();
+
+
+      })
+
+    })
+
+
+  </script>
+
+
+
+
+
 {% endblock %}

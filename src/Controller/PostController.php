@@ -57,7 +57,7 @@ class PostController extends AbstractController
         $postid=$post->getPostid();
         $postvote=$post->getPostvote();
         if(($voteRepository->isliked($userid,$postid))===1)
-        { $this->addFlash('info', 'already liked');
+        {
 
             return $this->json("0");
         }
@@ -195,16 +195,46 @@ class PostController extends AbstractController
         ]);
     }
 
+    #[Route('/front/{postid}/edit', name: 'app_post_edit_front', methods: ['GET', 'POST'])]
+    public function frontedit(Request $request, Post $post, PostRepository $postRepository): Response
+    {
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $postRepository->save($post, true);
+            $cat=$post->getCategory()->getCategoryid();
+            return $this->redirectToRoute('app_category_showfront', ['categoryid' => $cat], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('front_office/post/edit.html.twig', [
+            'post' => $post,
+            'form' => $form,
+        ]);
+    }
+
     #[Route('/{postid}', name: 'app_post_delete', methods: ['POST'])]
     public function delete(Request $request, Post $post, PostRepository $postRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$post->getPostid(), $request->request->get('_token'))) {
             $postRepository->remove($post, true);
+
         }
 
         return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    #[Route('/front/{postid}', name: 'app_post_delete_front', methods: ['POST'])]
+    public function deletefront(Request $request, Post $post, PostRepository $postRepository): Response
+    {
+        $cat=$post->getCategory()->getCategoryid();
+
+        if ($this->isCsrfTokenValid('delete'.$post->getPostid(), $request->request->get('_token'))) {
+            $postRepository->remove($post, true);
+        }
+
+        return $this->redirectToRoute('app_category_showfront', ['categoryid' => $cat], Response::HTTP_SEE_OTHER);
+    }
 
 
 

@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 #[Route('dashboard/category')]
 class CategoryController extends AbstractController
@@ -99,10 +100,15 @@ class CategoryController extends AbstractController
         ]);
     }
     #[Route('/front/show/{categoryid}', name: 'app_category_showfront', methods: ['GET'])]
-    public function showfront(Category $category): Response
+    public function showfront(Category $category,PaginatorInterface $paginator,Request $request): Response
     {
         $HallOfFame=$this->postrepo->mostlikedusers();
         $posts = $this->postrepo->findBy(["category" => $category->getCategoryid()]);
+        $posts = $paginator->paginate(
+            $posts, /* query NOT result */
+            $request->query->getInt('page', 1),
+            2
+        );
 
         return $this->render('front_office/category/show.html.twig', [
             'category' => $category,
