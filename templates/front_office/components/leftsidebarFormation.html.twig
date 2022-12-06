@@ -11,14 +11,16 @@
                 <div class="widget widget_archive">
 
 
-
-                    <h5 class="widget-title style-1"><a href=" {{ path('app_examen_listt') }}">toutes les catégories</a></h5>
+                    <h5 class="widget-title style-1">toutes les catégories</h5>
                     <ul>
-                           {% for i in categories %}
-                         <li><a href="{{ path('app_examen_listtbycategorie'  , {id:i.idcategorie}) }}">{{ i.nomcategorie }}</a></li>
-                           {% endfor %}
+                        {% for i in categories %}
+                            <li><a href="{{ path('show_FormationByCatagory',{id:i.idcategorie})}}">{{ i.nomcategorie }}</a></li>
+                        {% endfor %}
 
-                    </ul>
+
+
+
+                        </ul>
                 </div>
                 <div class="widget">
                     <a href="#"><img src="{{ asset("/front/assets/images/adv/adv.jpg")}}" alt=""/></a>

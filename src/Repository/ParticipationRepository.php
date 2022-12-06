@@ -129,7 +129,7 @@ GROUP BY sujet ORDER BY COUNT(participation.idFormation) DESC*/
 
     public function countParticipationForm()
     {
-        $dql = 'SELECT count(p.idformation) from App\Entity\Participation p  Group BY p.idformation ';
+        $dql = 'SELECT count(p.idformation) from App\Entity\Participation p  Group BY p.idformation  ';
         $query = $this->getEntityManager()->createQuery($dql);
         return ($query->execute());
     }
