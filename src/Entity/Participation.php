@@ -47,8 +47,8 @@ class Participation
     private ?float $resultat;
 
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $datePart = null;
+    //#[ORM\Column(type: Types::DATE_MUTABLE)]
+    //private ?\DateTimeInterface $datePart = null;
 
 
 
@@ -81,21 +81,21 @@ class Participation
         $this->formation = $formation;
     }
 
-    /**
-     * @return \DateTimeInterface|null
-     */
-    public function getDatePart(): ?\DateTimeInterface
+    ///**
+    // * @return \DateTimeInterface|null
+     //*/
+    /*public function getDatePart(): ?\DateTimeInterface
     {
         return $this->datePart;
-    }
+    }*/
 
-    /**
-     * @param \DateTimeInterface|null $datePart
-     */
-    public function setDatePart(?\DateTimeInterface $datePart): void
+    // /**
+     // * @param \DateTimeInterface|null $datePart
+     // */
+    /*public function setDatePart(?\DateTimeInterface $datePart): void
     {
         $this->datePart = $datePart;
-    }
+    }*/
 
 
 
