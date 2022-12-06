@@ -27,10 +27,17 @@
 </head>
 
 
+		<!-- FAVICONS ICON ============================================= -->
+		<link rel="icon" href="{{ asset('front/assets/images/favicon.ico')}}" type="image/x-icon"/>
+		<link
+		rel="shortcut icon" type="image/x-icon" href="{{ asset('front/assets/images/favicon.png')}}"/>
+
+
 <body id="bg">
 <div class="page-wraper">
 
 	{% include('front_office/components/navbar.html.twig') %}
+
 
 	<div class="page-content bg-white">
 		{% include('front_office/components/header.html.twig') %}
@@ -42,6 +49,7 @@
 			{%  include('front_office/components/testimonial.html.twig') %}
 			{% set postss=posts %}
 			{%  include('front_office/components/post.html.twig') with {postss:postss} only %}
+
 		</div>
 		{%include('front_office/components/footer.html.twig') %}
 

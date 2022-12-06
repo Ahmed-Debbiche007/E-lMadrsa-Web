@@ -39,6 +39,7 @@ class ParticipationRepository extends ServiceEntityRepository
         }
     }
 
+
 //    /**
 //     * @return Participation[] Returns an array of Participation objects
 //     */
@@ -63,6 +64,104 @@ class ParticipationRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+    /*$queryBuilder->select($queryBuilder->expr()->count('u.id'))
+    ->from(User::class, 'u');
+
+    $query = $queryBuilder->getQuery();*/
+/*SELECT *,COUNT(participation.idFormation) as nbParticipation  FROM participation
+JOIN formation ON participation.idFormation=formation.idFormation
+GROUP BY sujet ORDER BY COUNT(participation.idFormation) DESC*/
+
+
+
+   public function getFormByParticipation()  {
+
+
+        $qb= $this->createQueryBuilder('p');
+        $qb->select($qb->expr()->count('p.idformation'))
+            ->addSelect('IDENTITY(p.formation)')
+            ->groupBy('p.idformation')
+            ->setMaxResults(1);
+        print_r(intval($qb->getQuery()
+            ->getScalarResult()));
+        return  ($qb->getQuery()
+            ->getResult());
+
+
+
+    }
+    public function getFormByParticipation1()  {
+
+
+        $qb= $this->createQueryBuilder('p');
+        $qb->select('p.idformation')
+            ->groupBy('p.idformation')
+            ->setMaxResults(1);
+        print_r(intval($qb->getQuery()
+            ->getScalarResult()));
+        return  intval($qb->getQuery()
+            ->getSingleScalarResult());
+
+
+
+    }
+
+
+
+
+
+    public function getFormByParticipation2()  {
+
+
+        $qb= $this->createQueryBuilder('p');
+        $qb->select('p.idformation')
+            ->groupBy('p.idformation');
+
+
+        return  ($qb->getQuery()
+            ->getResult());
+
+
+    }
+
+
+    public function countParticipationForm()
+    {
+        $dql = 'SELECT count(p.idformation) from App\Entity\Participation p  Group BY p.idformation ';
+        $query = $this->getEntityManager()->createQuery($dql);
+        return ($query->execute());
+    }
+
+
+    public function ParticipationByForm(FormationRepository $formationRepository)
+    {
+
+        $nbParticipation = $this->countParticipationForm();
+
+
+
+
+
+        /*public function getFormByParticipation()
+        {
+            $dql = 'SELECT count(e) FROM App\Entity\Participation e group by e.idformation order by DESC limit 1';
+            $query = $this->getEntityManager()->createQuery($dql);
+            return ($query->execute());
+        }*/
+        return $nbParticipation;
+
+    }
+
+    public function getSumresultatParFormation(){
+        $dql = 'SELECT sum(p.resultat) from App\Entity\Participation p  Group BY p.idformation ';
+        $query = $this->getEntityManager()->createQuery($dql);
+        return ($query->execute());
+
+
+    }
+
 //SELECT  u.nom FROM participation p join user u   order by p.resultat DESC  limit 3 ;
 //$qry = $this->manager()->createQueryBuilder()
 //        ->select(array('e', 's', 'a'))
@@ -114,4 +213,5 @@ class ParticipationRepository extends ServiceEntityRepository
         return ($query->getResult());
     }
 */
+
 }
