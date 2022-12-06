@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Category;
 use App\Entity\Post;
 use App\Entity\User;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,9 +17,8 @@ class PostType extends AbstractType
     {
         $builder
             ->add('posttitle')
-            ->add('postcontent')
-            ->add('user', EntityType::class,array('class'=>User::class,
-                'choice_label'=>'nom'))
+          #  ->add('postcontent')
+          ->add('postcontent', CKEditorType::class)
             ->add('category', EntityType::class,array('class'=>Category::class,
                 'choice_label'=>'categoryname'))
            // ->add('postvote')

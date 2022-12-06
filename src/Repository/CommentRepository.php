@@ -39,6 +39,22 @@ class CommentRepository extends ServiceEntityRepository
         }
     }
 
+    public function adjustlike($commentid,$commentvotefinal):void
+    {
+
+        $this->createQueryBuilder('u')
+            ->update('App\Entity\Comment','u')
+            ->set('u.commentvote', $commentvotefinal)
+
+            ->where('u.commentid = :commentid')
+            ->setParameter('commentid', $commentid)->getQuery()->execute()
+
+        ;
+
+
+
+    }
+
 //    /**
 //     * @return Comment[] Returns an array of Comment objects
 //     */

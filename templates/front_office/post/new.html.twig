@@ -1,0 +1,13 @@
+
+
+{% extends 'front_office/blogbase.html.twig' %}
+
+{% block title %}New Post{% endblock %}
+
+{% block body %}
+    <h1>Create new Post</h1>
+
+    {{ include('back_office/post/_form.html.twig') }}
+
+    <a href="{{ path('app_post_index') }}">back to list</a>
+{% endblock %}
