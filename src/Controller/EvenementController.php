@@ -89,7 +89,7 @@ class EvenementController extends AbstractController
     public function sendSMS(): Response
     {
         $account_sid = 'ACc2294319aa2eaba8e91273055538a50e';
-        $auth_token = '7be328216a1826238e2010638dbf8ede';
+        $auth_token = 'b5ea8fab2e0e063aa2366bfb59a1e98b';
         // In production, these should be environment variables. E.g.:
         // $auth_token = $_ENV["TWILIO_AUTH_TOKEN"]
         
