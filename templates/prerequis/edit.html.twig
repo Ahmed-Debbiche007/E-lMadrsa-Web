@@ -1,0 +1,15 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}Edit Prerequis{% endblock %}
+
+{% block body %}
+    <h1>Edit Prerequis</h1>
+
+    {{ include('prerequis/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+
+    {{ include('prerequis/_delete_form.html.twig') }}
+
+    <a href="{{ path('app_prerequis_index') }}">Liste Des Prerequis</a>
+{% endblock %}

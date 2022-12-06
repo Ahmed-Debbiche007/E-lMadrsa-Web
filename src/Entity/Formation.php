@@ -20,7 +20,9 @@ class Formation
         minMessage: 'Le Sujet de Formation doit avoir au moins {{ limit }} characters de Longeur ',
         maxMessage: 'Le Sujet ne peut pas avoir plus que  {{ limit }} characters de Longeur ',)]
 
-    private ?string $sujet;
+        private ?string $sujet;
+
+
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "La description de Formation  est obligatoire")]
@@ -216,6 +218,7 @@ class Formation
     {
         return (String)$this->sujet ;
     }
+
 
 
 

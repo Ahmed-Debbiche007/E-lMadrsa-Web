@@ -1,0 +1,62 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <head>
+        <meta charset="UTF-8">
+
+
+
+        <title>Title of the PDF</title>
+
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        h1 {
+            color: red;
+            text-align: center;
+            font-size: 60px;
+
+        }
+        p{
+            color: blue;
+            text-align: right;
+            font-size: 20px;
+        }
+        h5{
+            color: #212121;
+            font-family: Calibri;
+            font-size: 15px ;
+
+
+        }
+
+    </style>
+</head>
+<body>
+<h1>Attestation </h1>
+<h2></h2>
+<h2></h2>
+<h5>
+    Je sougnié Ahmed Gouiaa agissant en qualité de responsable de qualité de l'organisme E-Lmadrsa atteste que :
+    <br>
+    Madame/Monsieur {{ attestation.participation.user.getNom()}}  {{ attestation.participation.user.getPrenom()}} a suivi avec Suidité et réussite une formation {{ attestation.participation.formation.getSujet() }} au sein de notre plateforme E-Lmadrsa avec passage de l'examen
+</h5>
+<h5>
+
+    Le résultat obtenu est : {{ attestation.participation.resultat }} %
+</h5>
+
+<h5>
+    Cette Attestation est délivrée le : {{ attestation.dateAcq ? attestation.dateAcq|date('Y-m-d') : '' }}
+</h5>
+
+{% if qrCode%}
+    <img src="{{ qrCode}} " alt="qr-code">
+{% endif %}
+
+<img src="">
+<p>E-LMadrsa </p>
+</body>
+</html>

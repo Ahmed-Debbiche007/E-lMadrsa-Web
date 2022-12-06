@@ -103,14 +103,15 @@ class Examen
     {
         $this->categorie = $categorie;
     }
-
-
-
-
-
-    public function  __toString()
+    public  function  __toString()
     {
         return (String)$this->nomexamen ;
     }
+
+
+
+
+
+
 
 }

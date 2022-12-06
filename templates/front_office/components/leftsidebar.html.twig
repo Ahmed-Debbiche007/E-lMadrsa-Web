@@ -9,11 +9,21 @@
                     </div>
                 </div>
                 <div class="widget widget_archive">
+
+
+                    <h5 class="widget-title style-1">all categories</h5>
+                    <ul>
+                        {% for i in categories %}
+                            <li><a href="{{ path('show_FormationByCatagory',{id:i.idcategorie})}}">{{ i.nomcategorie }}</a></li>
+                        {% endfor %}
+
+
                     <h5 class="widget-title style-1"><a href=" {{ path('app_examen_listt') }}">toutes les catégories</a></h5>
                     <ul>
                            {% for i in categories %}
                          <li><a href="{{ path('app_examen_listtbycategorie'  , {id:i.idcategorie}) }}">{{ i.nomcategorie }}</a></li>
                            {% endfor %}
+
                     </ul>
                 </div>
                 <div class="widget">
@@ -22,6 +32,7 @@
                 <div class="widget recent-posts-entry widget-courses">
 
                     <div class="widget-post-bx">
+
 
                     </div>
                 </div>

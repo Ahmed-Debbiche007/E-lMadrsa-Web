@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\CategorieRepository;
+use App\Repository\CompetencesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: CategorieRepository::class)]
+#[ORM\Entity(repositoryClass: CompetencesRepository::class)]
 class Competences
 {
     #[ORM\Id]
@@ -13,7 +14,12 @@ class Competences
     #[ORM\Column]
     private ?int $idcompetence;
 
+
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le nom de Compétence est obligatoire"),Assert\Length(min: 2,
+        max: 50,
+        minMessage: 'Le nom de Compétence doit avoir au moins {{ limit }} characters de Longeur ',
+        maxMessage: 'Le nom de compétence ne peut pas avoir plus que  {{ limit }} characters de Longeur ',)]
     private ?string $nomcompetence;
 
     public function getIdcompetence(): ?int
@@ -32,6 +38,11 @@ class Competences
 
         return $this;
     }
+    public function  __toString()
+    {
+        return (String)$this->nomcompetence ;
+    }
+
 
 
 }

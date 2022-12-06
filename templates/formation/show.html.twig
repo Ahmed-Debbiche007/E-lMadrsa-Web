@@ -1,0 +1,54 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}Formation{% endblock %}
+
+{% block body %}
+    <h1>Formation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idformation</th>
+                <td>{{ formation.idformation }}</td>
+            </tr>
+            <tr>
+                <th>Sujet</th>
+                <td>{{ formation.sujet }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ formation.description }}</td>
+            </tr>
+            <tr>
+                <th>Difficulté</th>
+                <td>{{ formation.difficulte }}</td>
+            </tr>
+            <tr>
+                <th>Durée</th>
+                <td>{{ formation.duree }}</td>
+            </tr>
+            <tr>
+                <th>prerequis</th>
+                <td>{{ formation.prerequis }}</td>
+            </tr>
+            <tr>
+                <th>competence</th>
+                <td>{{ formation.competences }}</td>
+            </tr>
+            <tr>
+                <th>examen</th>
+                <td>{{ formation.examen }}</td>
+            </tr>
+            <tr>
+                <th>categorie</th>
+                <td>{{ formation.categorie }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <a ²href="{{ path('app_formation_edit', {'idformation': formation.idformation}) }}">edit</a>
+
+    {{ include('formation/_delete_form.html.twig') }}
+{% endblock %}

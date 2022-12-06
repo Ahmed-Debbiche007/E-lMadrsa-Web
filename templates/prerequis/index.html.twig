@@ -1,0 +1,49 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}Gestion Prerequis{% endblock %}
+
+{% block body %}
+    <h1>Gestion Prerequis</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idprerequis</th>
+                <th>Nomprerequis</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for prerequi in prerequis %}
+            <tr>
+                <td>{{ prerequi.idprerequis }}</td>
+                <td>{{ prerequi.nomprerequis }}</td>
+                <td>
+
+
+
+                    <form id="my_form" method="post" action="{{ path('app_prerequis_show', {'idprerequis': prerequi.idprerequis}) }}" >
+                        <a href="{{ path('app_prerequis_show', {'idprerequis': prerequi.idprerequis}) }}">
+                            <span class="badge bg-primary">show</span>
+                        </a>
+                        <a href="{{ path('app_prerequis_edit', {'idprerequis': prerequi.idprerequis}) }}">
+                            <span class="badge bg-success">edit</span>
+                        </a>
+
+
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~prerequi.idprerequis) }}">
+
+                        <a href="#" class="badge bg-danger" onclick="document.getElementById('my_form').submit();">Delete</a>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_prerequis_new') }}">Create new Prerequis </a>
+{% endblock %}

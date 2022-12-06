@@ -17,17 +17,29 @@ class Participation
     #[ORM\Column]
     private ?int $idparticipation;
 
+
     #[ORM\ManyToOne(inversedBy: 'participations')]
     #[ORM\JoinColumn(name: 'idUser', referencedColumnName: 'id')]
     #[Assert\NotBlank(message: "l'utilisateur est obligatoire")]
+
     //#[ORM\JoinColumn(onDelete: "CASCADE",name: 'classroom_ref',referencedColumnName: 'ref')]
     private ?User $user;
 
     #[ORM\ManyToOne(inversedBy: 'participations')]
     #[ORM\JoinColumn(name: 'idformation', referencedColumnName: 'idformation')]
+
     #[Assert\NotBlank(message: "la formation est obligatoire")]
     //#[ORM\JoinColumn(onDelete: "CASCADE",name: 'classroom_ref',referencedColumnName: 'ref')]
     private ?Formation $formation;
+
+    #[ORM\Column]
+    private ?int $iduser;
+
+    #[ORM\Column]
+    private ?int $idformation;
+
+
+
 
     #[ORM\Column]
     #[Assert\Positive(message: "la résultat doit être positif ")]
@@ -35,8 +47,8 @@ class Participation
     private ?float $resultat;
 
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $datePart = null;
+    //#[ORM\Column(type: Types::DATE_MUTABLE)]
+    //private ?\DateTimeInterface $datePart = null;
 
 
 
@@ -69,25 +81,47 @@ class Participation
         $this->formation = $formation;
     }
 
-    /**
-     * @return \DateTimeInterface|null
-     */
-    public function getDatePart(): ?\DateTimeInterface
+    ///**
+    // * @return \DateTimeInterface|null
+     //*/
+    /*public function getDatePart(): ?\DateTimeInterface
     {
         return $this->datePart;
-    }
+    }*/
 
-    /**
-     * @param \DateTimeInterface|null $datePart
-     */
-    public function setDatePart(?\DateTimeInterface $datePart): void
+    // /**
+     // * @param \DateTimeInterface|null $datePart
+     // */
+    /*public function setDatePart(?\DateTimeInterface $datePart): void
     {
         $this->datePart = $datePart;
+    }*/
+
+
+
+    public function getIduser(): ?int
+    {
+        return $this->iduser;
     }
 
+    public function setIduser(int $iduser): self
+    {
+        $this->iduser = $iduser;
 
+        return $this;
+    }
 
+    public function getIdformation(): ?int
+    {
+        return $this->idformation;
+    }
 
+    public function setIdformation(int $idformation): self
+    {
+        $this->idformation = $idformation;
+
+        return $this;
+    }
 
 
     public function getResultat(): ?float
@@ -102,5 +136,12 @@ class Participation
         return $this;
     }
 
+
+
+
+    public function  __toString()
+    {
+        return (String)$this->idparticipation ;
+    }
 
 }

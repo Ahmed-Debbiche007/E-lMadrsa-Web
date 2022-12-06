@@ -13,11 +13,18 @@
         "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.13",
+
+        "dompdf/dompdf": "^2.0",
+        "endroid/qr-code": "^4.6",
+        "endroid/qr-code-bundle": "^4.1",
+        "omines/datatables-bundle": "^0.7.0",
+
         "friendsofsymfony/ckeditor-bundle": "^2.4",
         "google/apiclient": "^2.12.1",
-        "helios-ag/fm-elfinder-bundle": "^12.2",
+         "helios-ag/fm-elfinder-bundle": "^12.2",
         "knplabs/knp-paginator-bundle": "*",
-        "phpdocumentor/reflection-docblock": "^5.3",
+ 
+         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.13",
         "sensio/framework-extra-bundle": "^6.2",
         "symfony/asset": "5.4.*",
@@ -54,13 +61,15 @@
         "symfony/yaml": "5.4.*",
         "tattali/calendar-bundle": "^1.2",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "webmen/datatable-bundle": "^1.0"
     },
     "config": {
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "symfony/flex": true,
-            "symfony/runtime": true
+            "symfony/runtime": true,
+            "endroid/installer": true
         },
         "optimize-autoloader": true,
         "preferred-install": {

@@ -1,0 +1,110 @@
+{% extends 'front_office/SecondBase.html.twig' %}
+{% block body %}
+    <html>
+    <style>
+        h1{
+            position : center;
+        }
+    </style>
+    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js') }}"></script>
+    <body>
+    {% set dataArrayformation=[] %}
+    {% set countidformation=[] %}
+    {% set SumResListe=[] %}
+    {%  for i in formations %}
+        {% set dataArrayformation = (dataArrayformation)|merge([i.sujet]) %}
+    {% endfor %}
+    {% for i in countParticipation %}
+        {% set countidformation = (countidformation)|merge([ i[1]]) %}
+    {% endfor %}
+
+    {% for i in SommeRes %}
+        {% set SumResListe = (SumResListe)|merge([ i[1]]) %}
+    {% endfor %}
+
+
+
+    <canvas id="doughnut11" ></canvas>
+    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js') }}"></script>
+
+    <script>
+        var exampleArray = "{{dataArrayformation|json_encode()}}"
+        console.log(JSON.parse(exampleArray.replace(/&quot;/g,'"')))
+        var xValues = JSON.parse(exampleArray.replace(/&quot;/g,'"'))
+        xValues1 = xValues.reverse();
+
+
+
+        var cat2 = JSON.parse("{{countidformation|json_encode()}}")
+        var cat = JSON.parse("{{SumResListe|json_encode()}}")
+        console.log((cat));
+        var cat1=[];
+        var cat3=[];
+        j=0;
+        for( i=0 ; i<cat.length;i++ ) {
+
+            console.log(cat[i]);
+
+            cat3.push(cat[i]/cat2[j]) ;
+            j=j+1;
+
+
+        }
+
+
+        var barColors = [
+            "#b91d47",
+            "#00aba9",
+            "#2b5797",
+            "#e8c3b9",
+            "#1e7145",
+            "#2b5471",
+            "#e845b9",
+            "#1e1445",
+
+
+        ];
+
+
+        new Chart("doughnut11", {
+            type: "doughnut",
+            data: {
+                labels: xValues1,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data:cat3
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Répartition des moyennes des résultats Par Formation"
+                }
+            }
+        });
+
+
+
+    </script>
+    {% set j = 0 %}
+    {% for i in formations %}
+
+
+
+
+
+
+    <h1>
+        La formation {{ i.sujet }} a un moyenne de Résultat {{ SommeRes[j][1]/countParticipation[j][1]  }} %
+        {% set j=j+1 %}
+    </h1>
+    {% endfor %}
+
+
+    </body>
+
+
+
+
+    </html>
+{% endblock %}
