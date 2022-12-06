@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\ParticipationRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 use Symfony\Component\Form\Form;
 
 #[ORM\Entity(repositoryClass: ParticipationRepository::class)]
@@ -16,16 +19,26 @@ class Participation
 
     #[ORM\ManyToOne(inversedBy: 'participations')]
     #[ORM\JoinColumn(name: 'idUser', referencedColumnName: 'id')]
+    #[Assert\NotBlank(message: "l'utilisateur est obligatoire")]
     //#[ORM\JoinColumn(onDelete: "CASCADE",name: 'classroom_ref',referencedColumnName: 'ref')]
     private ?User $user;
 
     #[ORM\ManyToOne(inversedBy: 'participations')]
     #[ORM\JoinColumn(name: 'idformation', referencedColumnName: 'idformation')]
+    #[Assert\NotBlank(message: "la formation est obligatoire")]
     //#[ORM\JoinColumn(onDelete: "CASCADE",name: 'classroom_ref',referencedColumnName: 'ref')]
     private ?Formation $formation;
 
     #[ORM\Column]
+    #[Assert\Positive(message: "la résultat doit être positif ")]
+    #[Assert\NotBlank(message: "la résultat est obligatoire")]
     private ?float $resultat;
+
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $datePart = null;
+
+
 
     public function getIdparticipation(): ?int
     {
@@ -54,6 +67,22 @@ class Participation
     public function setFormation(?Formation $formation): void
     {
         $this->formation = $formation;
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getDatePart(): ?\DateTimeInterface
+    {
+        return $this->datePart;
+    }
+
+    /**
+     * @param \DateTimeInterface|null $datePart
+     */
+    public function setDatePart(?\DateTimeInterface $datePart): void
+    {
+        $this->datePart = $datePart;
     }
 
 

@@ -5,7 +5,6 @@
         <div class="logo">
           <h4><a href="index.html">E-lMadrsa</a></h4>
         </div>
-
         <div class="sidebar-toggler x">
           <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
         </div>
@@ -14,7 +13,6 @@
     <div class="sidebar-menu">
       <ul class="menu">
         <li class="sidebar-title">Menu</li>
-
         <li class="sidebar-item active">
           <a href="/dashboard" class="sidebar-link">
             <i class="bi bi-grid-fill"></i>
@@ -53,21 +51,25 @@
           </a>
           <ul class="submenu">
             <li class="submenu-item">
-              <a href="/dashboard/examen" class="sidebar-link">Exams</a>
+              <a href="{{ path('app_examen_index') }}" class="sidebar-link">Examens</a>
             </li>
             <li class="submenu-item">
-              <a href="/dashboard/participation" class="sidebar-link">Participations</a>
+              <a href="{{ path('app_participation_index') }}" class="sidebar-link">Participations</a>
+            </li>
+              <li class="submenu-item">
+                  <a href="{{ path('app_reclamation_index') }}" class="sidebar-link">Réclamations</a>
+              </li>
+              <li class="submenu-item">
+                  <a href="{{ path('app_question_index') }}" class="sidebar-link">Questions</a>
+              </li>
+
+            <li class="submenu-item">
+              <a href="{{ path('app_examen_piechart') }}" class="sidebar-link">PieChart</a>
             </li>
             <li class="submenu-item">
-              <a href="/dashboard" class="sidebar-link">Certificates</a>
+              <a href="{{ path('app_calendar') }}" class="sidebar-link">Calendar</a>
             </li>
           </ul>
-        </li>
-        <li class="sidebar-item">
-          <a href="/reclamation" class="sidebar-link">
-            <i class="bi bi-patch-check-fill"></i>
-            <span>Réclamation</span>
-          </a>
         </li>
         <li class="sidebar-item">
           <a href="/dashboard" class="sidebar-link">

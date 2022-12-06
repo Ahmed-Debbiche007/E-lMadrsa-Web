@@ -1,0 +1,99 @@
+
+
+{% extends 'front_office/SecondBase.html.twig' %}
+
+ {% block slidestitle %} Nos exames {% endblock %}
+
+            {% block leftslide %}
+
+
+            {% endblock %}
+
+{% block body %}
+
+
+     {% set names={} %}
+    {% for i in topstudents %}
+
+
+        {% set names = (names)|merge([{
+            name: i.nom
+        }]) %}
+    {%  endfor %}
+
+
+    <link rel="stylesheet" type="text/css" href="{{ asset("front/assets/css/poduim.css") }}">
+
+                        <div class="col-lg6 col-md-8 col-sm-12" style="margin: 10px">
+                            <div class="courses-post">
+                                <div class="ttr-post-media media-effect">
+                                    <a href="#"><img src="{{ asset('assets/images/blog/default/thum1.jpg') }}" alt=""></a>
+                                </div>
+                                <div class="ttr-post-info">
+                                    <div class="ttr-post-title ">
+                                        <h2 class="post-title">{{ examen? examen.nomexamen }}
+                                        </h2>
+                                    </div>
+                                    <div class="ttr-post-text">
+                                        <p>Ce test mesure votre connaissance, avec un niveau de débutant(e), en ce qui concerne le framework Hibernate (la version 5).
+                                            Sujets : concepts de base, Eager Loading, Session, SessionFactory, HQL, Criteria, etc.</p>                                    </div>
+                                </div>
+                            </div>
+
+                              <div class="courese-overview" id="overview">
+                                <h4>Overview</h4>
+                                     <div class="col-md-12 col-lg-4">
+                                        <ul class="course-features">
+                                            <li><i class="ti-book"></i> <span class="label">Lectures</span> <span class="value">8</span></li>
+                                            <li><i class="ti-help-alt"></i> <span class="label">Quizzes</span> <span class="value">1</span></li>
+                                            <li><i class="ti-time"></i> <span class="label">Duration</span> <span class="value">60 hours</span></li>
+                                            <li><i class="ti-stats-up"></i> <span class="label">Skill level</span> <span class="value">Beginner</span></li>
+
+                                        </ul>
+                                         <div class="course-buy-now text-center">
+                                             <a href= "{{ path('app_examen_pass',{id:examen? examen.idexamen}) }}" class="btn radius-xl text-uppercase">Passer l'examen</a>
+                                         </div>
+                                    </div>
+
+
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                    <div class="col-lg-3 col-md-8 col-sm-12" style="margin-top: 140px;">
+                        <div class="containerPoduim podium ">
+                            <div class="podium__item">
+                                {% if names[0].name is defined   %}
+                                    <p class="podium__city">  {{ names[0].name }}</p>
+                                {%  endif %}
+                                <div class="podium__rank second">2</div>
+                            </div>
+                            <div class="podium__item">
+                                {% if names[1].name is defined   %}
+                                    <p class="podium__city">  {{ names[1].name }}</p>
+                                {%  endif %}
+                                <div class="podium__rank first">
+                                    <svg class="podium__number"   >
+                                        <g transform="matrix(1, 0, 0, 1, 214.957736, -43.117417)">
+                                            <path   d="m -198.928 43.419 C -200.528 47.919 -203.528 51.819 -207.828 55.219 C -210.528 57.319 -213.028 58.819 -215.428 60.019 L -215.428 72.819 C -210.328 70.619 -205.628 67.819 -201.628 64.119 L -201.628 117.219 L -187.528 117.219 L -187.528 43.419 L -198.928 43.419 L -198.928 43.419 Z" style="fill: #000;"/>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="podium__item">
+                                {% if names[2].name is defined   %}
+                                <p class="podium__city">  {{ names[2].name }}</p>
+                                {%  endif %}
+                                <div class="podium__rank third">3</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+{% endblock %}
+

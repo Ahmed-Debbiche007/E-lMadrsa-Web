@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+
+
+
+     <link rel="icon" href="{{ asset('front/assets/images/favicon.ico') }}" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('front/assets/images/favicon.png') }}" />
+
+
+
+
+    <title>
+        {% block title %} E-lmadrsa : examens {% endblock %}
+    </title>
+     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/assets.css') }}">
+
+     <link rel="stylesheet" type="text/css" href="{{ asset("front/assets/css/typography.css") }}">
+
+    <!-- SHORTCODES ============================================= -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/shortcodes/shortcodes.css') }}">
+
+    <!-- STYLESHEETS ============================================= -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/style.css') }}">
+    <link class="skin" rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/color/color-1.css') }}">
+
+</head>
+<body id="bg">
+<div class="page-wraper">
+    {% include('front_office/components/SecondNav.html.twig') %}
+
+    <!-- Content -->
+    <div class="page-content bg-white">
+        <!-- inner page banner -->
+        <div class="page-banner ovbl-dark" style="background-image:url({{ asset('front/assets/images/banner/banner3.jpg') }});">
+            <div class="container">
+                <div class="page-banner-entry">
+                    <h1 class="text-white">
+                        {% block slidestitle %}  {% endblock %}
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <!-- inner page banner END -->
+        <div class="content-block">
+
+
+            {% block leftslide %}
+
+            {% endblock %}
+
+            {% block body1 %}
+
+            {% endblock %}
+
+            <div class="col-lg-9 col-md-8 col-sm-12"  >
+                            <div class="row">
+
+
+
+                                {% block body %}
+
+                                {% endblock %}
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- contact area END -->
+
+    </div>
+
+{%include('front_office/components/footer.html.twig') %}
+    <button class="back-to-top fa fa-chevron-up" ></button>
+</div>
+<!-- External JavaScripts -->
+
+</body>
+
+</html>

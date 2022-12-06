@@ -1,0 +1,96 @@
+
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}pie chart
+{% endblock %}
+{% block pageHeading %}
+ <h1>pie chart :</h1>
+
+{% endblock %}
+{% block body %}
+<html>
+<script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js') }}"></script>
+<body>
+
+
+{% set dataArraycategorie=[] %}
+{% set examscountbycatliste=[] %}
+
+{% set examscount = allexamscount  %}
+
+ {% for i in countExams %}
+   {% set examscountbycatliste = (examscountbycatliste)|merge([ i[1]]) %}
+ {% endfor %}
+
+{%  for i in categorie %}
+ {% set dataArraycategorie = (dataArraycategorie)|merge([i.nomcategorie]) %}
+{% endfor %}
+
+
+
+<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+<script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js') }}"></script>
+ <script>
+  var counts = JSON.parse("{{examscount|json_encode()}}")
+  console.log((counts));
+
+  var cat = JSON.parse("{{examscountbycatliste|json_encode()}}")
+  console.log((cat));
+   var cat1=[];
+  for( i=0 ; i<cat.length;i++ ) {
+
+   console.log(cat[i]);
+   cat1.push((parseInt(cat[i])))
+
+  }
+  //console.log( cat1 );
+  for( i=0 ; i<cat.length;i++ ) {
+   cat1[i] /= parseInt(counts);
+  }
+  console.log( cat1 );
+
+  var exampleArray = "{{dataArraycategorie|json_encode()}}"
+  console.log(JSON.parse(exampleArray.replace(/&quot;/g,'"')))
+    var xValues = JSON.parse(exampleArray.replace(/&quot;/g,'"'))
+    // var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+   // var yValues = [cat[0], cat[1], cat[2], cat[3],cat[4] ];
+  var yValues=[] ;
+
+  for(i=0 ; i<cat.length;i++) {
+   yValues.push(cat[i]/11) ;
+  }
+
+
+    var barColors = [
+        "#b91d47",
+        "#00aba9",
+        "#2b5797",
+        "#e8c3b9",
+        "#1e7145",
+        "#2b5471",
+        "#e845b9",
+        "#1e1445",
+
+    ];
+
+    new Chart("myChart", {
+        type: "pie",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Réartition des Examens selon les catégories"
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
+{% endblock %}

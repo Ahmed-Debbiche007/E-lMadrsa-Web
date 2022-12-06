@@ -1,0 +1,49 @@
+ <script
+        src="https://code.jquery.com/jquery-1.12.4.js"
+        integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+        crossorigin="anonymous"></script>
+<link href="{{ asset('https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css')}}" rel="stylesheet" />
+<script src="{{ asset('https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js')}}"></script>
+ <select id="ahha" class="js-example-basic-multiple" name="states[]" multiple="multiple"  style="width: 60%;     margin: 14px 38px;">
+ {%  for i in categories %}
+    <option value="{{ i.idcategorie }}">{{ i.nomcategorie }}</option>
+    {% endfor %}
+</select>
+  <button class="btn-check  "  onclick="printt()"><a > chercher </a></button>
+
+ <script>
+     $(document).ready(function() {
+         $('.js-example-basic-multiple').select2();
+
+     });
+
+     function printt() {
+         listeidstring=$("#ahha").val();
+         listeidstring.forEach(  a => { a= parseInt(a[0]) ; })
+         listeintcat = [];
+
+         for (let i = 0; i < listeidstring.length; i++) {
+
+             listeintcat[i] = parseInt(listeidstring[i][0]) ;
+
+         }
+
+         jsonString = JSON.stringify(Object.assign({}, listeintcat))
+         console.log(jsonString) ;
+
+
+         //listeidstring.forEach(a=>listeintcat.add(a[0]));
+         console.log(listeintcat);
+      location.href = "/dashboard/examen/list/examenbymanygategories?"+listeintcat;
+
+
+
+
+
+
+
+
+
+
+     }
+ </script>

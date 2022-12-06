@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ReclamationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,5 +29,18 @@ class AuthController extends AbstractController
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+
+
+    #[Route(path: '/profil', name: 'app_profil')]
+    public function profil(ReclamationRepository $reclamationRepository)
+    {
+        $user = $this->getUser();
+        if (!$user){
+            return $this->redirect('/login');
+        }
+        return $this->render('front_office/exams/profil.html.twig',["reclamations"=>$reclamationRepository->findByUserId($user->getId())]);
+
     }
 }

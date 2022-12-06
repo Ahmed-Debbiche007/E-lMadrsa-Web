@@ -39,44 +39,43 @@ class QuestionRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
     public function get()
     {
         $qb = $this->createQueryBuilder('q')
-            ->join('q.examen','e');
+            ->join('q.examen', 'e');
         return $qb->getQuery()->getResult();
     }
 
 
-    public function getQbyEId($id) {
+    public function getQbyEId($id)
+    {
         $qb = $this->createQueryBuilder('q')
-             ->join('q.examen','e');
+            ->join('q.examen', 'e');
 
 
-
-
-        return $qb->getQuery()->getResult() ;
+        return $qb->getQuery()->getResult();
     }
 
 
 
 
-}
+
 
 
 //    /**
 //     * @return Question[] Returns an array of Question objects
 //     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('q')
-//            ->andWhere('q.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('q.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findByExamsId($value): array
+    {
+        return $this->createQueryBuilder('q')
+            ->andWhere('q.examen = :val')
+            ->setParameter('val', $value)
+             ->getQuery()
+            ->getResult();
+    }
+}
+
 
 //    public function findOneBySomeField($value): ?Question
 //    {

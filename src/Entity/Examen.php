@@ -21,10 +21,12 @@ class Examen
 
     #[ORM\Column]
     #[Assert\NotBlank(message: "la pourcentage est obligatoire")]
+    #[Assert\Positive(message: "la pourcentage de l'examen doit être positif")]
     private ?float $pourcentage;
 
     #[ORM\Column]
     #[Assert\NotBlank(message: "la duree de l'examen  est obligatoire")]
+    #[Assert\Positive(message: "la durée de l'examen doit être positif")]
     private ?int $dureeexamen;
 
     #[ORM\ManyToOne(inversedBy: 'examens')]
