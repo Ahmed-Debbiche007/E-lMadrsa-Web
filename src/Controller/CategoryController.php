@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Categorie;
 use App\Entity\Category;
+use App\Form\CategoriersearchType;
 use App\Form\CategoryType;
+use App\Repository\CategorieRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
 use Doctrine\ORM\Mapping\PostRemove;
@@ -31,6 +34,26 @@ class CategoryController extends AbstractController
         ]);
     }
 
+    // ena ameltha : gouiaa
+    #[Route('/search', name: 'app_category_new_searching', methods: ['GET' ])]
+    public function searchcat(Request $request, CategorieRepository $categoryRepository, SluggerInterface $slugger): Response
+    {
+        $category = new Categorie();
+        $categories = $categoryRepository->findAll();
+        $form = $this->createForm(CategoriersearchType::class, $category);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            return $this->redirectToRoute('front_office/exams/searchcategorieform.html.twig' );
+        }
+
+        return $this->renderForm('front_office/exams/searchcategorieform.html.twig', [
+            'category' => $category,
+            'form' => $form,
+            'categories'=>$categories
+        ]);
+    }
     #[Route('/new', name: 'app_category_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CategoryRepository $categoryRepository, SluggerInterface $slugger): Response
     {
@@ -133,4 +156,33 @@ class CategoryController extends AbstractController
 
         return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
+
+/*
+    #[Route('/search', name: 'app_category_search', methods: ['GET', 'POST'])]
+    public function search(Request $request, CategoryRepository $categoryRepository, SluggerInterface $slugger): Response
+    {
+        $category = new Category();
+        $form = $this->createForm(CategoriersearchType::class, $category);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+            return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('back_office/category/.html.twig', [
+            'category' => $category,
+            'form' => $form,
+        ]);
+    }
+*/
+
+
+
+
+
 }

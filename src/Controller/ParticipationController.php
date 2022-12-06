@@ -33,7 +33,13 @@ public function listQuestions1(ParticipationRepository $participationRepository 
     ]);
 }
 
-
+    #[Route('/PartByMonths', name: 'app_participation_show_PartByMonths', methods: ['GET'])]
+    public function PartByMonths(ParticipationRepository $participationRepository): Response
+    {
+        return $this->render('back_office/participation/PartByMonths.html.twig', [
+            'PartByMonths' =>$participationRepository->PartByMonths()
+        ]);
+    }
 
 
     #[Route('/', name: 'app_participation_index', methods: ['GET'])]
@@ -52,6 +58,7 @@ public function listQuestions1(ParticipationRepository $participationRepository 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $participation->setDatePart(new \DateTime('now'));
             $participationRepository->save($participation, true);
 
             return $this->redirectToRoute('app_participation_index', [], Response::HTTP_SEE_OTHER);
@@ -98,4 +105,7 @@ public function listQuestions1(ParticipationRepository $participationRepository 
 
         return $this->redirectToRoute('app_participation_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
 }

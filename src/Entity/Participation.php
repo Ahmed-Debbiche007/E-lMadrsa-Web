@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ParticipationRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -45,6 +46,12 @@ class Participation
     #[Assert\NotBlank(message: "la résultat est obligatoire")]
     private ?float $resultat;
 
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $datePart = null;
+
+
+
     public function getIdparticipation(): ?int
     {
         return $this->idparticipation;
@@ -72,6 +79,22 @@ class Participation
     public function setFormation(?Formation $formation): void
     {
         $this->formation = $formation;
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getDatePart(): ?\DateTimeInterface
+    {
+        return $this->datePart;
+    }
+
+    /**
+     * @param \DateTimeInterface|null $datePart
+     */
+    public function setDatePart(?\DateTimeInterface $datePart): void
+    {
+        $this->datePart = $datePart;
     }
 
 

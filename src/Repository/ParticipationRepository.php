@@ -65,6 +65,7 @@ class ParticipationRepository extends ServiceEntityRepository
 //        ;
 //    }
 
+
     /*$queryBuilder->select($queryBuilder->expr()->count('u.id'))
     ->from(User::class, 'u');
 
@@ -160,4 +161,57 @@ GROUP BY sujet ORDER BY COUNT(participation.idFormation) DESC*/
 
 
     }
+
+//SELECT  u.nom FROM participation p join user u   order by p.resultat DESC  limit 3 ;
+//$qry = $this->manager()->createQueryBuilder()
+//        ->select(array('e', 's', 'a'))
+//        ->from($this->entity, 'e')
+//        ->leftJoin('e.sources', 's')
+//        ->leftJoin('s.node', 'a');
+
+
+    public function topstudentsresults($val): array
+    {
+        return $this->createQueryBuilder('e')
+            ->join('e.user','u')
+            ->join('e.formation','f')
+            ->join('f.examen','ex')
+            ->select('u.nom')
+            ->orderBy('e.resultat', 'ASC')
+            ->where('ex=:val')
+            ->setParameter('val',$val)
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+/*
+    public function PartByMonths(): array
+    {
+        $em = partici->getDoctrine()->getManager();
+        $emConfig = $em->getConfiguration();
+        $emConfig->addCustomDatetimeFunction('YEAR', 'DoctrineExtensions\Query\Mysql\Year');
+
+        $emConfig->addCustomDatetimeFunction('MONTH', 'DoctrineExtensions\Query\Mysql\Month');
+        $emConfig->addCustomDatetimeFunction('DAY', 'DoctrineExtensions\Query\Mysql\Day');
+        return $this->createQueryBuilder('p')
+            ->addSelect('SUM( Month(p.datePart) ) AS February')
+            ->where('p.datePart BETWEEN :date1 AND :date2')
+            ->setParameter('date1','2022/01/01')
+            ->setParameter('date2','2022/12/12')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+*/
+/*
+    public function PartByMonths()
+    {
+        $dql = "SELECT SUM(CASE Month(p.datePart) WHEN 1 THEN 1 ELSE 0 END) AS February FROM App\Entity\Participation p WHERE p.datePart BETWEEN '2022/01/01' AND '2022/12/12'  ";
+        $query = $this->getEntityManager()->createQuery($dql);
+        return ($query->getResult());
+    }
+*/
+
 }

@@ -22,6 +22,8 @@ class Formation
 
         private ?string $sujet;
 
+
+
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "La description de Formation  est obligatoire")]
     private ?string $description;
@@ -216,6 +218,7 @@ class Formation
     {
         return (String)$this->sujet ;
     }
+
 
 
 

@@ -23,7 +23,7 @@
                 <th>Dureeexamen</th>
                 <th>Formation</th>
                 <th>categorie</th>
-                <th>actions</th>
+                <th style="width: 250px" >actions</th>
             </tr>
             </thead>
             <tbody>
@@ -39,13 +39,13 @@
 
                     <td>
                             <a href="{{ path('app_examen_show', {'idexamen': examan.idexamen}) }}">
-                                <span class="badge bg-primary">show    </span>
+                                <span class="badge bg-primary">show</span>
                             </a>
-                            <br>
+
                             <a href="{{ path('app_examen_edit', {'idexamen': examan.idexamen}) }}">
-                                <span class="badge bg-success">edit    </span>
+                                <span class="badge bg-success">edit</span>
                             </a>
-                            <br>
+
 
 
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ examan.idexamen) }}">
@@ -65,7 +65,7 @@
     </div>
 
     <script
-            src="https://code.jquery.com/jquery-1.12.4.js"
+            src="{{ asset('https://code.jquery.com/jquery-1.12.4.js') }}"
             integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ asset('https://cdn.datatables.net/v/bs4/jqc-1.12.4/dt-1.13.1/datatables.min.js') }}"></script>
@@ -74,7 +74,25 @@
         console.log(jQuery().jquery);
 
         $(document).ready(function () {
-            $('#table1').DataTable();
+            $('#table1').DataTable({
+                "language": {
+
+                    "lengthMenu": "Display _MENU_ records per page",
+                    "search":"chercher",
+                    "zeroRecords": "Pas d'examens",
+                    "info": "afficher page _PAGE_ of _PAGES_",
+                    "infoEmpty": "pas d'examens",
+                    "infoFiltered": "(filtered from _MAX_ total records)",
+                    "paginate": {
+                        "first": "Première",
+                        "last": "Dernière",
+                        "next": "Suivante",
+                        "previous": "Précédente"
+                    },
+
+
+                }
+             });
         });
 
     </script>
