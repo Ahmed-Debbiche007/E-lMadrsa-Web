@@ -79,7 +79,7 @@ GROUP BY sujet ORDER BY COUNT(participation.idFormation) DESC*/
 
 
         $qb= $this->createQueryBuilder('p');
-        $qb->select($qb->expr()->count('p.idparticipation'))
+        $qb->select($qb->expr()->count('p.idformation'))
             ->addSelect('IDENTITY(p.formation)')
             ->groupBy('p.idformation')
             ->setMaxResults(1);
@@ -96,7 +96,7 @@ GROUP BY sujet ORDER BY COUNT(participation.idFormation) DESC*/
 
         $qb= $this->createQueryBuilder('p');
         $qb->select('p.idformation')
-
+            ->groupBy('p.idformation')
             ->setMaxResults(1);
         print_r(intval($qb->getQuery()
             ->getScalarResult()));
@@ -108,9 +108,27 @@ GROUP BY sujet ORDER BY COUNT(participation.idFormation) DESC*/
     }
 
 
+
+
+
+    public function getFormByParticipation2()  {
+
+
+        $qb= $this->createQueryBuilder('p');
+        $qb->select('p.idformation')
+            ->groupBy('p.idformation');
+
+
+        return  ($qb->getQuery()
+            ->getResult());
+
+
+    }
+
+
     public function countParticipationForm()
     {
-        $dql = 'SELECT count(p) from App\Entity\Participation p  Group BY p.idformation ';
+        $dql = 'SELECT count(p.idformation) from App\Entity\Participation p  Group BY p.idformation ';
         $query = $this->getEntityManager()->createQuery($dql);
         return ($query->execute());
     }
@@ -132,6 +150,14 @@ GROUP BY sujet ORDER BY COUNT(participation.idFormation) DESC*/
             return ($query->execute());
         }*/
         return $nbParticipation;
+
+    }
+
+    public function getSumresultatParFormation(){
+        $dql = 'SELECT sum(p.resultat) from App\Entity\Participation p  Group BY p.idformation ';
+        $query = $this->getEntityManager()->createQuery($dql);
+        return ($query->execute());
+
 
     }
 }

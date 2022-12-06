@@ -33,7 +33,7 @@ class TestController extends AbstractController
         $id = $participationRepository ->getFormByParticipation1();
         $idForm = $formationRepository->find($id);
 
-        return $this->render("front_office/formations/BestForm.html.twig",['formation'=>$Participation,'nomform'=>$idForm]);
+        return $this->render("front_office/desginBestForm.html.twig",['formation'=>$Participation,'nomform'=>$idForm]);
 
 
 

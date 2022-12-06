@@ -24,9 +24,10 @@ class QrcodeService
             ->data($url.$query)
             ->encoding(new Encoding('UTF-8'))
             ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
-            ->size(300)
+            ->size(200)
             ->margin(10)
-            ->labelText('Code-Qr')
+
+            ->labelText('Scan Me')
             ->build()
 
             ;
