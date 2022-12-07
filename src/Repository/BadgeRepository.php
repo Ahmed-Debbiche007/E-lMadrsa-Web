@@ -39,6 +39,8 @@ class BadgeRepository extends ServiceEntityRepository
         }
     }
 
+
+
 //    /**
 //     * @return Badge[] Returns an array of Badge objects
 //     */

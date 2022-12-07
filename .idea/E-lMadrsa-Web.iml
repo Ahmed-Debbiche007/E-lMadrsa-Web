@@ -5,8 +5,6 @@
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="App\Tests\" />
-
-
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/phpunit-bridge" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/password-hasher" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-intl-icu" />
@@ -151,7 +149,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/endroid/qr-code-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/bacon/bacon-qr-code" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dasprid/enum" />
-
       <excludeFolder url="file://$MODULE_DIR$/vendor/myclabs/deep-copy" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/browser-kit" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/asset" />
@@ -301,6 +298,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/league/uri" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/league/uri-parser" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/league/uri-interfaces" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/uri" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/twilio/sdk" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/guzzlehttp/promises" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/guzzlehttp/guzzle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/guzzlehttp/psr7" />
@@ -329,15 +328,14 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/studio-42/elfinder" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/knplabs/knp-components" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/knplabs/knp-paginator-bundle" />
- 
       <excludeFolder url="file://$MODULE_DIR$/vendor/tattali/calendar-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/ux-autocomplete" />
-       <excludeFolder url="file://$MODULE_DIR$/vendor/beberlei/doctrineextensions" />
- 
+      <excludeFolder url="file://$MODULE_DIR$/vendor/beberlei/doctrineextensions" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/webmen/datatable-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/openspout/openspout" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/omines/datatables-bundle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
-
-
 </module>

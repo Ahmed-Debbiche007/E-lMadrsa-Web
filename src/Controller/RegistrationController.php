@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,21 +19,24 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, SluggerInterface $slugger,UserRepository $userrepository): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-            
+
+            if($form->get('plainPassword')->getData()) {
+
+                // encode the plain password
+                $user->setPassword(
+                    $userPasswordHasher->hashPassword(
+                        $user,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+            }
             $image = $form->get('image')->getData();
             if ($image) {
                 $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
@@ -56,15 +60,18 @@ class RegistrationController extends AbstractController
             }
             // do anything else you need here, like send an email
             $user->setApproved(0);
-            $user->setRoles([]);
-            $entityManager->persist($user);
-            $entityManager->flush();
-            
-            return $this->redirectToRoute('app_login');
+            $user->setRole("User");
+            $userrepository->save($user, true);
+
+            return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
+
         }
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+
+
+
         ]);
     }
 }

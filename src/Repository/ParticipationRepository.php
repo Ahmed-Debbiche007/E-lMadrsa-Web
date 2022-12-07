@@ -55,7 +55,21 @@ class ParticipationRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Participation
+     public function findBySomeUser($val, $user): ?Participation
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.resultat >= :val')
+            ->andWhere('p.user = :user')
+            ->setParameter('val', $val)
+            ->setParameter('user', $user)
+            ->orderBy("p.user", ' DESC ')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+
+ //    public function findOneBySomeField($value): ?Participation
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')
@@ -214,4 +228,4 @@ GROUP BY sujet ORDER BY COUNT(participation.idFormation) DESC*/
     }
 */
 
-}
+ }

@@ -20,35 +20,53 @@
                 <div class="auth-logo">
                     <a href="/"> <h1 class="auth-title">E-lMadrsa</h1></a>
                 </div>
+
                 <h1 >Sign Up</h1>
                 <p class="auth-subtitle mb-5">Sign up quick and be the best</p>
 
-                {{ form_start(registrationForm) }}
+                {{ form_start(registrationForm, {'attr': {'novalidate' : 'novalidate'}} ) }}
+                {% if form_errors(registrationForm.nom) %}
+                    <div class="alert alert-danger">{{ form_errors(registrationForm.nom) }}</div>
+                {% endif %}
                 <div class="form-group position-relative has-icon-left mb-4">
                     {{ form_widget(registrationForm.nom, { 'attr': {'class': 'form-control form-control-xl', 'placeholder': 'Nom'} }) }}
                     <div class="form-control-icon">
                         <i class="bi bi-person"></i>
                     </div>
                 </div>
-
+                {% if form_errors(registrationForm.prenom) %}
+                    <div class="alert alert-danger">{{ form_errors(registrationForm.prenom) }}</div>
+                {% endif %}
                 <div class="form-group position-relative has-icon-left mb-4">
                     {{ form_widget(registrationForm.prenom, { 'attr': {'class': 'form-control form-control-xl', 'placeholder': 'Prenom'} }) }}
                     <div class="form-control-icon">
                         <i class="bi bi-person"></i>
                     </div>
                 </div>
+                {% if form_errors(registrationForm.email) %}
+                    <div class="alert alert-danger">{{ form_errors(registrationForm.email) }}</div>
+                {% endif %}
+
                 <div class="form-group position-relative has-icon-left mb-4">
                     {{ form_widget(registrationForm.email, { 'attr': {'class': 'form-control form-control-xl', 'placeholder': 'Email'} }) }}
                     <div class="form-control-icon">
                         <i class="bi bi-envelope"></i>
                     </div>
                 </div>
+
+                {% if form_errors(registrationForm.username) %}
+                    <div class="alert alert-danger">{{ form_errors(registrationForm.username) }}</div>
+                {% endif %}
                 <div class="form-group position-relative has-icon-left mb-4">
                     {{ form_widget(registrationForm.username, { 'attr': {'class': 'form-control form-control-xl', 'placeholder': 'Username'} }) }}
                     <div class="form-control-icon">
                         <i class="bi bi-person"></i>
                     </div>
                 </div>
+
+                {% if form_errors(registrationForm.image) %}
+                    <div class="alert alert-danger">{{ form_errors(registrationForm.image) }}</div>
+                {% endif %}
                 <div class="form-group position-relative mb-4">
 
                     {{ form_widget(registrationForm.image, { 'attr': {'class': 'form-control '} }) }}
@@ -57,10 +75,18 @@
                 <div class="form-control-icon">
                     <i class="fa-fw select-all fas"></i>
                 </div>
+
+                {% if form_errors(registrationForm.date_naissance) %}
+                    <div class="alert alert-danger">{{ form_errors(registrationForm.date_naissance) }}</div>
+                {% endif %}
                 <div class="form-group position-relative has-icon-left mb-4">
                     {{ form_widget(registrationForm.date_naissance, { 'attr': {'class': 'form-control form-control-xl'} }) }}
 
                 </div>
+
+                {% if form_errors(registrationForm.plainPassword) %}
+                    <div class="alert alert-danger">{{ form_errors(registrationForm.plainPassword) }}</div>
+                {% endif %}
                 <div class="form-group position-relative has-icon-left mb-4">
                     {{ form_widget(registrationForm.plainPassword, { 'attr': {'class': 'form-control form-control-xl', 'placeholder': 'Password'} }) }}
                     <div class="form-control-icon">
@@ -73,10 +99,10 @@
                     <label>Agree on Terms</label>
                 </div>
 
-                <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Sign Up</button>
+                <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5" type="submit">Sign Up</button>
                 {{ form_end(registrationForm) }}
                 <div class="text-center mt-5 text-lg fs-4">
-                    <p class='text-gray-600'>Already have an account? <a href="/login" class="font-bold">Log in</a>.</p>
+                    <p class='text-gray-600'>Already have an account? <a href="{{ path('app_login') }}" class="font-bold">Log in</a>.</p>
                 </div>
             </div>
         </div>

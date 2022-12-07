@@ -3,6 +3,7 @@
 
 <head>
 
+
     <link rel="icon" href="{{ asset('front/assets/images/favicon.ico') }}" type="image/x-icon"/>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('front/assets/images/favicon.png') }}"/>
 
@@ -20,6 +21,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/revolution/css/layers.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/revolution/css/settings.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendors/revolution/css/navigation.css') }}">
+
+    <link  rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/pd.SCSS') }}">
+
     <script src="{{ asset('front/assets/js/html5shiv.min.js') }}"></script>
     <script src="{{ asset('front/assets/js/respond.min.js') }}"></script>
 </head>
@@ -27,6 +31,7 @@
 
 <body id="bg">
 <div class="page-wraper">
+
 
     {% include('front_office/components/navbar.html.twig') %}
 
@@ -45,6 +50,9 @@
 
     </div>
     {% include('front_office/components/scripts.html.twig') %}
+
+    {% include('front_office/components/stats.html.twig') %}
+
 </div>
 </body>
 <script src="{{ asset('front/assets/js/html5shiv.min.js') }}"></script>

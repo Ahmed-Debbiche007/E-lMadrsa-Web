@@ -12,9 +12,9 @@
         </div>
 
         <div class="ms-3 name">
-          <a href="/dashboard/profile"><h6 class="text-muted mb-3">@{{ app.user.userIdentifier }}</h6></a>
+          <a href="{{ path('app_profil') }}"><h6 class="text-muted mb-3">@{{ app.user.userIdentifier }}</h6></a>
 
-          <a href="/logout"><p>logout</p></a>
+          <a href="{{ path('app_logout') }}"><p>logout</p></a>
         </div>
         <div>
           <div class="theme-toggle d-flex gap-2 align-items-center mt-2">

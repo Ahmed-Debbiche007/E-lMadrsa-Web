@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Participation;
+use App\Entity\Formation;
 use App\Form\ParticipationType;
 use App\Repository\ParticipationRepository;
 use App\Repository\ReclamationRepository;

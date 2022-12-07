@@ -1,0 +1,73 @@
+{{ form_start(form, {'attr': {'novalidate' : 'novalidate'}} ) }}
+                {% if form_errors(form.nom) %}
+                  <div class="alert alert-danger">{{ form_errors(form.nom) }}</div>
+                {% endif %}
+<div class="form-group position-relative has-icon-left mb-4">
+  {{ form_widget(form.nom, { 'attr': {'class': 'form-control form-control-xl', 'placeholder': 'Nom'} }) }}
+  <div class="form-control-icon">
+    <i class="bi bi-person"></i>
+  </div>
+</div>
+{% if form_errors(form.prenom) %}
+  <div class="alert alert-danger">{{ form_errors(form.prenom) }}</div>
+{% endif %}
+<div class="form-group position-relative has-icon-left mb-4">
+  {{ form_widget(form.prenom, { 'attr': {'class': 'form-control form-control-xl', 'placeholder': 'Prenom'} }) }}
+  <div class="form-control-icon">
+    <i class="bi bi-person"></i>
+  </div>
+</div>
+{% if form_errors(form.email) %}
+  <div class="alert alert-danger">{{ form_errors(form.email) }}</div>
+{% endif %}
+
+<div class="form-group position-relative has-icon-left mb-4">
+  {{ form_widget(form.email, { 'attr': {'class': 'form-control form-control-xl', 'placeholder': 'Email'} }) }}
+  <div class="form-control-icon">
+    <i class="bi bi-envelope"></i>
+  </div>
+</div>
+
+{% if form_errors(form.username) %}
+  <div class="alert alert-danger">{{ form_errors(form.username) }}</div>
+{% endif %}
+<div class="form-group position-relative has-icon-left mb-4">
+  {{ form_widget(form.username, { 'attr': {'class': 'form-control form-control-xl', 'placeholder': 'Username'} }) }}
+  <div class="form-control-icon">
+    <i class="bi bi-person"></i>
+  </div>
+</div>
+
+{% if form_errors(form.image) %}
+  <div class="alert alert-danger">{{ form_errors(form.image) }}</div>
+{% endif %}
+<div class="form-group position-relative mb-4">
+
+  {{ form_widget(form.image, { 'attr': {'class': 'form-control '} }) }}
+
+</div>
+<div class="form-control-icon">
+  <i class="fa-fw select-all fas"></i>
+</div>
+
+{% if form_errors(form.date_naissance) %}
+  <div class="alert alert-danger">{{ form_errors(form.date_naissance) }}</div>
+{% endif %}
+<div class="form-group position-relative has-icon-left mb-4">
+  {{ form_widget(form.date_naissance, { 'attr': {'class': 'form-control form-control-xl'} }) }}
+
+</div>
+
+{% if form_errors(form.plainPassword) %}
+  <div class="alert alert-danger">{{ form_errors(form.plainPassword) }}</div>
+{% endif %}
+<div class="form-group position-relative has-icon-left mb-4">
+  {{ form_widget(form.plainPassword, { 'attr': {'class': 'form-control form-control-xl', 'placeholder': 'Password'} }) }}
+  <div class="form-control-icon">
+    <i class="bi bi-shield-lock"></i>
+  </div>
+</div>
+
+
+<button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Sign Up</button>
+{{ form_end(form) }}

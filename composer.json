@@ -62,8 +62,10 @@
         "tattali/calendar-bundle": "^1.2",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
+         "twilio/sdk": "^6.43",
+
         "webmen/datatable-bundle": "^1.0"
-    },
+     },
     "config": {
         "allow-plugins": {
             "composer/package-versions-deprecated": true,

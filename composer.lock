@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "da6d27ed9643eac6bd76c2e14ef39008",
+    "content-hash": "e74df0046d40d04f7b0fd25ad161c99b",
     "packages": [
         {
             "name": "amphp/amp",
@@ -940,16 +940,16 @@
         },
         {
             "name": "bacon/bacon-qr-code",
-            "version": "2.0.7",
+            "version": "2.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Bacon/BaconQrCode.git",
-                "reference": "d70c840f68657ce49094b8d91f9ee0cc07fbf66c"
+                "reference": "8674e51bb65af933a5ffaf1c308a660387c35c22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/d70c840f68657ce49094b8d91f9ee0cc07fbf66c",
-                "reference": "d70c840f68657ce49094b8d91f9ee0cc07fbf66c",
+                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/8674e51bb65af933a5ffaf1c308a660387c35c22",
+                "reference": "8674e51bb65af933a5ffaf1c308a660387c35c22",
                 "shasum": ""
             },
             "require": {
@@ -988,9 +988,9 @@
             "homepage": "https://github.com/Bacon/BaconQrCode",
             "support": {
                 "issues": "https://github.com/Bacon/BaconQrCode/issues",
-                "source": "https://github.com/Bacon/BaconQrCode/tree/2.0.7"
+                "source": "https://github.com/Bacon/BaconQrCode/tree/2.0.8"
             },
-            "time": "2022-03-14T02:02:36+00:00"
+            "time": "2022-12-07T17:46:57+00:00"
         },
         {
             "name": "beberlei/doctrineextensions",
@@ -1623,16 +1623,16 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "2.7.1",
+            "version": "2.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "a2dcad48741c9d12fd6040398cf075025030096e"
+                "reference": "22d53b2c5ad03929628fb4a928b01135585b7179"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/a2dcad48741c9d12fd6040398cf075025030096e",
-                "reference": "a2dcad48741c9d12fd6040398cf075025030096e",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/22d53b2c5ad03929628fb4a928b01135585b7179",
+                "reference": "22d53b2c5ad03929628fb4a928b01135585b7179",
                 "shasum": ""
             },
             "require": {
@@ -1717,7 +1717,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/DoctrineBundle/issues",
-                "source": "https://github.com/doctrine/DoctrineBundle/tree/2.7.1"
+                "source": "https://github.com/doctrine/DoctrineBundle/tree/2.7.2"
             },
             "funding": [
                 {
@@ -1733,7 +1733,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-10-23T09:47:06+00:00"
+            "time": "2022-12-07T12:07:11+00:00"
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",
@@ -5022,16 +5022,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.14.0",
+            "version": "1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "df1a79430e14e30cd192fe6c05842133d076e58d"
+                "reference": "6ff970a7101acfe99b3048e4bbfbc094e55c5b04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/df1a79430e14e30cd192fe6c05842133d076e58d",
-                "reference": "df1a79430e14e30cd192fe6c05842133d076e58d",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/6ff970a7101acfe99b3048e4bbfbc094e55c5b04",
+                "reference": "6ff970a7101acfe99b3048e4bbfbc094e55c5b04",
                 "shasum": ""
             },
             "require": {
@@ -5061,9 +5061,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.14.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.15.0"
             },
-            "time": "2022-11-27T19:09:16+00:00"
+            "time": "2022-12-07T16:12:39+00:00"
         },
         {
             "name": "psr/cache",
@@ -6307,16 +6307,16 @@
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v3.1.1",
+            "version": "v3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "07f1b9cc2ffee6aaafcf4b710fbc38ff736bd918"
+                "reference": "1ee04c65529dea5d8744774d474e7cbd2f1206d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/07f1b9cc2ffee6aaafcf4b710fbc38ff736bd918",
-                "reference": "07f1b9cc2ffee6aaafcf4b710fbc38ff736bd918",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/1ee04c65529dea5d8744774d474e7cbd2f1206d3",
+                "reference": "1ee04c65529dea5d8744774d474e7cbd2f1206d3",
                 "shasum": ""
             },
             "require": {
@@ -6325,7 +6325,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "3.1-dev"
+                    "dev-main": "3.3-dev"
                 },
                 "thanks": {
                     "name": "symfony/contracts",
@@ -6354,7 +6354,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.1.1"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.2.0"
             },
             "funding": [
                 {
@@ -6370,7 +6370,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-02-25T11:15:52+00:00"
+            "time": "2022-11-25T10:21:52+00:00"
         },
         {
             "name": "symfony/doctrine-bridge",
@@ -6791,16 +6791,16 @@
         },
         {
             "name": "symfony/event-dispatcher-contracts",
-            "version": "v3.1.1",
+            "version": "v3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher-contracts.git",
-                "reference": "02ff5eea2f453731cfbc6bc215e456b781480448"
+                "reference": "0782b0b52a737a05b4383d0df35a474303cabdae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/02ff5eea2f453731cfbc6bc215e456b781480448",
-                "reference": "02ff5eea2f453731cfbc6bc215e456b781480448",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/0782b0b52a737a05b4383d0df35a474303cabdae",
+                "reference": "0782b0b52a737a05b4383d0df35a474303cabdae",
                 "shasum": ""
             },
             "require": {
@@ -6813,7 +6813,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "3.1-dev"
+                    "dev-main": "3.3-dev"
                 },
                 "thanks": {
                     "name": "symfony/contracts",
@@ -6850,7 +6850,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.1.1"
+                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.2.0"
             },
             "funding": [
                 {
@@ -6866,7 +6866,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-02-25T11:15:52+00:00"
+            "time": "2022-11-25T10:21:52+00:00"
         },
         {
             "name": "symfony/expression-language",
@@ -11676,6 +11676,55 @@
                 }
             ],
             "time": "2022-09-28T08:42:51+00:00"
+        },
+        {
+            "name": "twilio/sdk",
+            "version": "6.43.4",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:twilio/twilio-php.git",
+                "reference": "805dd4890602542c98351921f50a664d89f782a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twilio/twilio-php/zipball/805dd4890602542c98351921f50a664d89f782a0",
+                "reference": "805dd4890602542c98351921f50a664d89f782a0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^6.3 || ^7.0",
+                "phpunit/phpunit": ">=7.0"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "An HTTP client to execute the API requests"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Twilio\\": "src/Twilio/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Twilio API Team",
+                    "email": "api@twilio.com"
+                }
+            ],
+            "description": "A PHP wrapper for Twilio's API",
+            "homepage": "https://github.com/twilio/twilio-php",
+            "keywords": [
+                "api",
+                "sms",
+                "twilio"
+            ],
+            "time": "2022-11-30T20:02:35+00:00"
         },
         {
             "name": "webmen/datatable-bundle",

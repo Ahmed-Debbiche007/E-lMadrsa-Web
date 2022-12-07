@@ -23,7 +23,7 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('email', EmailType::class)
+            ->add('email')
             ->add('username')
             ->add('date_naissance', DateType::class, [
                 'widget' => 'single_text',

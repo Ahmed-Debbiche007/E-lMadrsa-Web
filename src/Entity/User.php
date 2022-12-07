@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -22,18 +23,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Assert\NotBlank(message:"Nom is required")]
     private ?string $nom = null;
 
     #[ORM\Column(length: 180)]
+    #[Assert\NotBlank(message:"Prenom is required")]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\NotBlank(message:"Username is required")]
     private ?string $username = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\NotBlank(message:"Email is required")]
+    #[Assert\Email(
+        message: 'The email {{ value }} is not a valid email.',
+    )]
     private ?string $email = null;
 
     #[ORM\Column(length: 180)]
+
+
     private ?string $image = null;
 
     #[ORM\Column]
@@ -45,10 +55,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
+
     #[ORM\Column]
+    #[Assert\NotBlank(message:"le mot de passe is required")]
+    #[Assert\MinLength(limit:6,message:"Votre mot de passe ne contient pas {{ limit }} caractères.")]
     private ?string $password = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message:"date_naissance is required")]
     private ?\DateTimeInterface $date_naissance = null;
 
     #[ORM\Column]
@@ -63,11 +77,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'idTutor', targetEntity: Tutorshipsessions::class)]
     private Collection $tutorshipsessions;
 
+    #[ORM\ManyToMany(targetEntity: Badge::class, mappedBy: 'userid')]
+    private Collection $badges;
+
     public function __construct()
     {
         $this->requests = new ArrayCollection();
         $this->studentRequest = new ArrayCollection();
         $this->tutorshipsessions = new ArrayCollection();
+        $this->badges = new ArrayCollection();
     }
 
 
@@ -367,5 +385,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (String)$this->getNom() ;
     }
 
+    /**
+     * @return Collection<int, Badge>
+     */
+    public function getBadges(): Collection
+    {
+        return $this->badges;
+    }
 
+    public function addBadge(Badge $badge): self
+    {
+        if (!$this->badges->contains($badge)) {
+            $this->badges->add($badge);
+            $badge->addUserid($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBadge(Badge $badge): self
+    {
+        if ($this->badges->removeElement($badge)) {
+            $badge->removeUserid($this);
+        }
+
+        return $this;
+    }
+
+    
 }
+
