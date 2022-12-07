@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\FormationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: FormationRepository::class)]
 class Formation
@@ -11,31 +12,64 @@ class Formation
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private $idformation;
+    private ?int $idformation;
 
     #[ORM\Column(length: 255)]
-    private ?string $sujet;
+    #[Assert\NotBlank(message: "Le Sujet de Formation est obligatoire"),Assert\Length(min: 2,
+        max: 50,
+        minMessage: 'Le Sujet de Formation doit avoir au moins {{ limit }} characters de Longeur ',
+        maxMessage: 'Le Sujet ne peut pas avoir plus que  {{ limit }} characters de Longeur ',)]
+
+        private ?string $sujet;
+
+
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "La description de Formation  est obligatoire")]
     private ?string $description;
 
     #[ORM\Column(length: 255)]
-    private ?string $difficulté;
+    #[Assert\NotBlank(message: "La Difficulte de Formation est obligatoire")]
+    private ?string $Difficulte;
 
     #[ORM\Column]
-    private ?int $durée;
+    #[Assert\NotBlank(message: "La Duree est obligatoire"),Assert\GreaterThan(
+        value: 4,
+        message: 'La Duree d une  Formation doit etre au moins plus de 4 heures !',)]
+    private ?int $duree;
 
-    #[ORM\Column]
-    private ?int $idprerequis;
+    #[ORM\ManyToOne(inversedBy: 'formations')]
+    #[ORM\JoinColumn(name: 'idprerequis', referencedColumnName: 'idprerequis')]
+    #[Assert\NotBlank(message: "Prerequis Formation est obligatoire")]
+    private ?Prerequis $prerequis;
 
+    /*#[ORM\Column]
+    private ?int $idprerequis;*/
+
+
+
+    #[ORM\ManyToOne(inversedBy: 'formations')]
+    #[ORM\JoinColumn(name: 'idcompetence', referencedColumnName: 'idcompetence')]
+    #[Assert\NotBlank(message: "Competences Formation est obligatoire")]
+    private ?Competences $competences;
     #[ORM\Column]
     private ?int $idcompetence;
 
-    #[ORM\Column]
-    private ?int $idexamen;
+    #[ORM\ManyToOne(inversedBy: 'formations')]
+    #[ORM\JoinColumn(name: 'idexamen', referencedColumnName: 'idexamen')]
+    #[Assert\NotBlank(message: "nom de l'examen est obligatoire")]
+    private ?Examen $examen;
+
+    /*#[ORM\Column]
+    private ?int $idexamen;*/
 
     #[ORM\Column]
     private ?int $idcategorie;
+
+    #[ORM\ManyToOne(inversedBy: 'formations')]
+    #[ORM\JoinColumn(name: 'idcategorie', referencedColumnName: 'idcategorie')]
+    #[Assert\NotBlank(message: "Categorie Formation  est obligatoire")]
+    private ?Categorie $categorie;
 
     public function getIdformation(): ?string
     {
@@ -66,26 +100,26 @@ class Formation
         return $this;
     }
 
-    public function getDifficulté(): ?string
+    public function getDifficulte(): ?string
     {
-        return $this->difficulté;
+        return $this->Difficulte;
     }
 
-    public function setDifficulté(string $difficulté): self
+    public function setDifficulte(string $Difficulte): self
     {
-        $this->difficulté = $difficulté;
+        $this->Difficulte = $Difficulte;
 
         return $this;
     }
 
-    public function getDurée(): ?int
+    public function getDuree(): ?int
     {
-        return $this->durée;
+        return $this->duree;
     }
 
-    public function setDurée(int $durée): self
+    public function setDuree(int $duree): self
     {
-        $this->durée = $durée;
+        $this->duree = $duree;
 
         return $this;
     }
@@ -137,9 +171,55 @@ class Formation
 
         return $this;
     }
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
 
-    public function  __toString()
+
+    public function setCategorie(?Categorie $categorie): void
+    {
+        $this->categorie = $categorie;
+    }
+    public function getExamen(): ?Examen
+    {
+        return $this->examen;
+    }
+    public function setExamen(?Examen $examen): void
+    {
+        $this->examen = $examen;
+    }
+    public function getCompetences(): ?Competences
+    {
+        return $this->competences;
+    }
+
+
+    public function setcompetences(?Competences $competences): void
+    {
+        $this->competences = $competences;
+    }
+
+    public function getPrerequis(): ?Prerequis
+    {
+        return $this->prerequis;
+    }
+
+
+    public function setPrerequis(?Prerequis $prerequis): void
+    {
+        $this->prerequis = $prerequis;
+    }
+
+
+
+
+    public  function  __toString()
     {
         return (String)$this->sujet ;
     }
+
+
+
+
 }

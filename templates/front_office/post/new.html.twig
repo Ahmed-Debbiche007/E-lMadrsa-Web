@@ -1,0 +1,13 @@
+
+
+{% extends 'front_office/blogbase.html.twig' %}
+
+{% block title %}New Post{% endblock %}
+
+{% block body %}
+    <div style="margin: 40px 0px;">
+    <h1>Create new Post</h1>
+
+    {{ include('back_office/post/_form.html.twig') }}
+    </div>
+ {% endblock %}

@@ -64,6 +64,7 @@ class RegistrationController extends AbstractController
             $userrepository->save($user, true);
 
             return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
+
         }
 
         return $this->render('registration/register.html.twig', [

@@ -1,0 +1,24 @@
+
+{% extends 'front_office/SecondBase.html.twig' %}
+
+{% block title %}  liste des réclamation {% endblock %}
+
+            {% block leftslide %}
+                {% include('front_office/components/leftsidebar.html.twig') %}
+
+            {% endblock %}
+{% block filtrage %}
+
+
+
+{% endblock %}
+
+
+{% block body %}
+    <div style="margin: 50px;">
+
+        <h1>Ajouter une  Reclamation</h1>
+
+        {{ include('front_office/reclamation/_form.html.twig') }}
+    </div>
+ {% endblock %}

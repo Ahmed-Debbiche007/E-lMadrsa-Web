@@ -1,0 +1,39 @@
+
+{{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+
+<table>
+    <tr>
+        <div class="form-group position-relative has-icon-left mb-4">
+            {{ form_widget(form.sujet, { attr: { class: 'form-control form-control-xl', placeholder: 'sujet' } }) }}
+            <td> {{ form_errors(form.sujet) }}</td>
+
+        </div>
+    </tr>
+    <tr>
+        <div class="form-group position-relative has-icon-left mb-4">
+            {{ form_widget(form.description, { attr: { class: 'form-control form-control-xl', placeholder: 'description' } }) }}
+            <td> {{ form_errors(form.description) }}</td>
+
+        </div>
+    </tr>
+
+
+
+    </div>
+        <button  class="btn"  onclick="myFunction()">{{ button_label|default('enover la réclamation') }}</button>
+    </tr>
+
+</table>
+<div class="alert alert-success" role="alert" id="msg" hidden>
+    Réclamation envoyée avec succée!
+</div>
+<script>
+
+    function myFunction(p1, p2) {
+        alert("Réclamation envoyée !");
+        document.getElementById("msg").show ;
+    }
+
+</script>
+
+{{ form_end(form) }}

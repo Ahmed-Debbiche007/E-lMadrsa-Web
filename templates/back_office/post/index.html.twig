@@ -1,0 +1,64 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}
+  Post list
+{% endblock %}
+
+{% block pageHeading %}
+  <h1>Liste des publications :</h1>
+  <a href="{{ path('app_post_new') }}"><span class="btn btn-primary btn-lg shadow-lg">Ajouter une publication</span></a>
+{% endblock %}
+
+{% block body %}
+  {% for message in app.flashes('info') %}
+    <div class="alert alert succ">{{ message }}</div>
+  {% endfor %}
+  <div class="row">
+    {% for post in posts %}
+      <div class="col-8 col-lg-4 col-md-7">
+        <div class="card">
+          <div class="card-body px-4 py-4-5">
+            <div class="row">
+              <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start">
+                <div class="mb-2">
+                  <img src="{{ asset('uploads/images/' ~ post.user.getImage()) }}" alt="taswira" style="width: 100px; height: 100px; border-radius:50%" />
+                </div>
+              </div>
+              <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                <h4 class="font-bold">{{ post.posttitle }}</h4>
+                <h6 class="text-muted">{{ post.category.getCategoryname() }}</h6>
+                <br />
+                {# using the ckeditor #}
+                {{ post.postcontent|raw  }}
+               {#{{ (post.postcontent|length) > 20 ? (post.postcontent|slice(0, 35)) ~ '...' : post.postcontent|raw }} #}
+
+                <i class="bi bi-calendar2-week-fill"></i><h6 class="text-muted">
+                  {{ post.postdate ? post.postdate|date('Y-m-d H:i') : '' }} <br /><i class="bi bi-chat-dots-fill"></i>
+                  {{ post.postnbcom }} <br /> <i class="bi bi-arrow-down-up"></i>{{ post.postvote }}
+                </h6>
+              </div>
+              <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                <a href="{{ path('app_post_show', { postid: post.postid }) }}"><span class="badge bg-primary">show</span></a>
+
+                <a href="{{ path('app_post_edit', { postid: post.postid }) }}"><span class="badge bg-success">edit</span></a>
+
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.postid) }}" />
+                {{ include('back_office/post/_delete_form.html.twig') }}
+                <br>
+                <br>
+                <a  href="{{ path('app_post_like', { postid: post.postid }) }}" ><span class="badge bg-primary">like</span></a>
+                <a href="{{ path('app_post_dislike', { postid: post.postid }) }}"><span class="badge bg-primary">dislike</span></a>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <tr>
+        <td colspan="9">no records found</td>
+      </tr>
+    {% endfor %}
+  </div>
+{% endblock %}

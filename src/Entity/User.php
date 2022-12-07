@@ -88,7 +88,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->badges = new ArrayCollection();
     }
 
-    
+
 
     public function getId(): ?int
     {
@@ -119,6 +119,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return (string) $this->username;
     }
+
+
 
     /**
      * @see UserInterface
@@ -260,7 +262,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function isAdmin() :?bool
     {
-        
+
         return $this->role == "Admin";
 
     }
@@ -376,7 +378,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    
+
 
     public function  __toString()
     {
@@ -412,3 +414,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     
 }
+

@@ -6,6 +6,7 @@ use App\Entity\Participation;
 use App\Entity\Formation;
 use App\Form\ParticipationType;
 use App\Repository\ParticipationRepository;
+use App\Repository\ReclamationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,34 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('dashboard/participation')]
 class ParticipationController extends AbstractController
 {
+
+    #[Route('/list/', name: 'app_participations_listt')]
+    public function listQuestions(ParticipationRepository $participationRepository )
+    {
+        return $this->render('front_office/participations/participation.html.twig', [
+            'participations' => $participationRepository->findAll(),
+
+        ]);
+    }
+
+    #[Route('/list1/', name: 'app_participations_listt')]
+public function listQuestions1(ParticipationRepository $participationRepository )
+{
+    return $this->render('back_office/participation/datatable.html.twig', [
+        'participations' => $participationRepository->findAll(),
+
+    ]);
+}
+
+    #[Route('/PartByMonths', name: 'app_participation_show_PartByMonths', methods: ['GET'])]
+    public function PartByMonths(ParticipationRepository $participationRepository): Response
+    {
+        return $this->render('back_office/participation/PartByMonths.html.twig', [
+            'PartByMonths' =>$participationRepository->PartByMonths()
+        ]);
+    }
+
+
     #[Route('/', name: 'app_participation_index', methods: ['GET'])]
     public function index(ParticipationRepository $participationRepository): Response
     {
@@ -30,6 +59,7 @@ class ParticipationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $participation->setDatePart(new \DateTime('now'));
             $participationRepository->save($participation, true);
 
             return $this->redirectToRoute('app_participation_index', [], Response::HTTP_SEE_OTHER);
@@ -76,4 +106,7 @@ class ParticipationController extends AbstractController
 
         return $this->redirectToRoute('app_participation_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
 }

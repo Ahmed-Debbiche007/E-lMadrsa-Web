@@ -1,0 +1,76 @@
+{% extends 'front_office/blogbase.html.twig' %}
+{% block title %}Comment index{% endblock %}
+{% block pageHeading %}
+    <h1>Liste des commentaires :</h1>
+    <a href="{{ path('app_comment_new')}}">
+        <span class=" btn btn-primary  btn-lg shadow-lg  ">Ajouter un commentaire</span>
+    </a>
+{% endblock %}
+
+{% block body %}
+
+
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>Commentcontent</th>
+                <th>Userid</th>
+                <th>Postid</th>
+                <th>Commentvote</th>
+                <th>Commentdate</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+
+                <td>{{ comment.commentcontent |length > 35 ? comment.commentcontent|slice(0, 35) ~ '...' : comment.commentcontent}}</td>
+                <td>{{ comment.user.getNom() }}</td>
+                <td>{{ comment.post.getPosttitle}}</td>
+                <td>{{ comment.commentvote }}</td>
+                <td>{{ comment.commentdate ? comment.commentdate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+
+
+
+
+
+                        <a href="{{ path('app_comment_show', {'commentid': comment.commentid}) }}">
+                            <span class="badge bg-primary">show</span>
+                        </a>
+                        <br>
+
+                        <a href="{{ path('app_comment_edit', {'commentid': comment.commentid}) }}">
+                            <span class="badge bg-success">edit</span>
+                        </a>
+                        <br>
+
+
+
+
+
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.commentid) }}" />
+
+                        {{ include('back_office/comment/_delete_form.html.twig') }}
+
+
+
+
+
+
+
+
+
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'front_office/blogbase.html.twig' %}
+{% block title %}Edit Comment{% endblock %}
+
+{% block body %}
+    <h1>Edit Comment</h1>
+
+    {{ include('back_office/comment/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_comment_index') }}">back to list</a>
+
+    {{ include('back_office/comment/_delete_form.html.twig') }}
+{% endblock %}

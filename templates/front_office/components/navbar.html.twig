@@ -1,3 +1,5 @@
+
+
 <header class="header rs-nav header-transparent">
   <div class="top-bar">
     <div class="container">
@@ -16,7 +18,9 @@
           <ul>
             <li>
               <a href=" {{path( 'app_login') }}">Login</a>
+
             </li>
+
             <li>
               <a href="{{path('app_register')}}">Register</a>
             </li>
@@ -30,7 +34,9 @@
       <div class="container clearfix">
         <!-- Header Logo ==== -->
         <div class="menu-logo">
-          <a href="/"><h1>E-lMadrsa</h1></a>
+
+          <a href="/"><h1 STYLE="color: white">E-lMadrsa</h1></a>
+
         </div>
         <!-- Mobile Nav Button ==== -->
         <button class="navbar-toggler collapsed menuicon justify-content-end" type="button" data-toggle="collapse" data-target="#menuDropdown" aria-controls="menuDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,23 +75,9 @@
         <!-- Navigation Menu ==== -->
         <div class="menu-links navbar-collapse collapse justify-content-start" id="menuDropdown">
           <div class="menu-logo">
-            <a href="index.html"><img src="front/assets/images/logo.png" alt="" /></a>
+            <a href="index.html"><img src="{{ asset('front/assets/images/logo.png') }}" alt="" /></a>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active">
-              <a href="javascript:;">
-                Home
-                <i class="fa fa-chevron-down"></i>
-              </a>
-              <ul class="sub-menu">
-                <li>
-                  <a href="index.html">Home 1</a>
-                </li>
-                <li>
-                  <a href="index-2.html">Home 2</a>
-                </li>
-              </ul>
-            </li>
 
 
 
@@ -93,7 +85,7 @@
 
             <li>
               <a href="javascript:;">
-                Pages
+                 Pages
                 <i class="fa fa-chevron-down"></i>
               </a>
               <ul class="sub-menu">
@@ -188,80 +180,75 @@
             </li>
             <li>
               <a href="javascript:;">
+
                 Blog
                 <i class="fa fa-chevron-down"></i>
               </a>
               <ul class="sub-menu">
                 <li>
-                  <a href="blog-classic-grid.html">Blog Classic</a>
+                  <a href="{{ path('app_category_frontlist') }}">Blog Category</a>
                 </li>
-                <li>
-                  <a href="blog-classic-sidebar.html">Blog Classic Sidebar</a>
-                </li>
-                <li>
-                  <a href="blog-list-sidebar.html">Blog List Sidebar</a>
-                </li>
-                <li>
-                  <a href="blog-standard-sidebar.html">Blog Standard Sidebar</a>
-                </li>
-                <li>
-                  <a href="blog-details.html">Blog Details</a>
-                </li>
+
+
+
               </ul>
             </li>
             <li class="nav-dashboard">
-              <a href="javascript:;">
+              <a href="{{ path('app_back_office') }}">
                 Dashboard
                 <i class="fa fa-chevron-down"></i>
               </a>
               <ul class="sub-menu">
                 <li>
-                  <a href="{{ path('app_user_top')}}">TOP 3</a>
-                </li>
+                   <a href="{{ path('app_user_top')}}">TOP 3</a>
 
-                <li>
-                  <a href="admin/add-listing.html">Add Listing</a>
-                </li>
-                <li>
-                  <a href="admin/bookmark.html">Bookmark</a>
-                </li>
-                <li>
-                  <a href="admin/courses.html">Courses</a>
-                </li>
-                <li>
-                  <a href="admin/review.html">Review</a>
-                </li>
+                  <a href="{{ path('app_back_office') }}">Dashboard</a>
+                 </li>
+
                 <li>
                   <a href="{{ path('app_profil')}}">Teacher Profile</a>
                 </li>
                 <li>
                   <a href="{{ path('app_profil')}}">User Profile</a>
                 </li>
+
+
+                </li>
+              </ul>
+            </li>
+
+            <li class="active">
+              <a href="javascript:;">
+
+                Formations
+
+                <i class="fa fa-chevron-down"></i>
+              </a>
+              <ul class="sub-menu">
                 <li>
-                  <a href="javascript:;">Calendar<i class="fa fa-angle-right"></i></a>
-                  <ul class="sub-menu">
-                    <li>
-                      <a href="admin/basic-calendar.html">Basic Calendar</a>
-                    </li>
-                    <li>
-                      <a href="admin/list-view-calendar.html">List View Calendar</a>
-                    </li>
-                  </ul>
+
+                  <a href="{{ path('app_formation_listt')}}">Formations </a>
+                </li>
+
+                <li>
+
+                  <a href="{{ path('BestForm_app')}}" >Meilleur Formation</a>
+                </li>
+
+                <li>
+
+                  <a href="{{ path('app_formation_Chart')}}" >Statistiques Des Participations Par Formation</a>
                 </li>
                 <li>
-                  <a href="javascript:;">Mailbox<i class="fa fa-angle-right"></i></a>
-                  <ul class="sub-menu">
-                    <li>
-                      <a href="admin/mailbox.html">Mailbox</a>
-                    </li>
-                    <li>
-                      <a href="admin/mailbox-compose.html">Compose</a>
-                    </li>
-                    <li>
-                      <a href="admin/mailbox-read.html">Mail Read</a>
-                    </li>
-                  </ul>
+
+                  <a href="{{ path('app_doughnut')}}" >Doughnut</a>
                 </li>
+
+
+
+
+
+
               </ul>
             </li>
 
@@ -272,10 +259,15 @@
               </a>
               <ul class="sub-menu">
                 <li>
-                  <a href="dashboard/examen/list">Examen 1</a>
+                  <a href="{{ path('app_examen_listt')}}">Examen </a>
                 </li>
+
                 <li>
-                  <a href="index-2.html">Examen 2</a>
+                  <a href="{{ path('app_reclamations_add')}}">Ajouter une reclamation</a>
+                </li>
+
+                <li>
+                  <a href="{{ path('app_profil')}}">mon profil </a>
                 </li>
 
                 <li>
@@ -284,7 +276,23 @@
 
               </ul>
             </li>
+
+
           </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <div class="nav-social-link">
             <a href="javascript:;"><i class="fa fa-facebook"></i></a>
             <a href="javascript:;"><i class="fa fa-google-plus"></i></a>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+
+
+
+    <!-- FAVICONS ICON ============================================= -->
+    <link rel="icon" href="{{ asset('front/assets/images/favicon.ico') }}" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('front/assets/images/favicon.png') }}" />
+
+    <!-- PAGE TITLE HERE ============================================= -->
+
+
+
+    <title>
+        {% block title %} E-lmadrsa : examens {% endblock %}
+    </title>
+    <!-- All PLUGINS CSS ============================================= -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/assets.css') }}">
+
+    <!-- TYPOGRAPHY ============================================= -->
+    <link rel="stylesheet" type="text/css" href="{{ asset("front/assets/css/typography.css") }}">
+
+    <!-- SHORTCODES ============================================= -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/shortcodes/shortcodes.css') }}">
+
+    <!-- STYLESHEETS ============================================= -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/style.css') }}">
+    <link class="skin" rel="stylesheet" type="text/css" href="{{ asset('front/assets/css/color/color-1.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"/>
+
+</head>
+<body id="bg">
+<div class="page-wraper">
+    {% include('front_office/components/navbar.html.twig') %}
+
+    <!-- Content -->
+    <div class="page-content bg-white">
+        <!-- inner page banner -->
+        <div class="page-banner ovbl-dark" style="background-image:url({{ asset('front/assets/images/banner/banner3.jpg') }});">
+            <div class="container" style="margin-top: 100px">
+                <div class="page-banner-entry">
+                    <h1 class="text-white">
+                        {% block slidestitle %} BLOG PAGE {% endblock %}
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <!-- inner page banner END -->
+        <div class="content-block d-flex justify-content-center" >
+
+
+            {% block leftslide %}
+
+            {% endblock %}
+
+            {% block body1 %}
+
+            {% endblock %}
+
+            <div class="col-lg-9 col-md-8 col-sm-12 d-flex justify-content-center "  >
+                <div class="row d-flex justify-content-center" >
+
+
+
+                    {% block body %}
+
+                    {% endblock %}
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- contact area END -->
+
+</div>
+<!-- Content END-->
+<!-- Footer ==== -->
+{% include('front_office/components/footer.html.twig') %}
+
+<!-- Footer END ==== -->
+<button class="back-to-top fa fa-chevron-up" ></button>
+</div>
+<!-- External JavaScripts -->
+<script src="{{ asset('front/assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('front/assets/vendors/bootstrap/js/popper.min.js') }}"></script>
+<script src="{{ asset('front/assets/vendors/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ ('front/assets/vendors/bootstrap-select/bootstrap-select.min.js') }}"></script>
+<script src="{{ asset('front/assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js') }}"></script>
+<script src="{{ asset('front/assets/vendors/magnific-popup/magnific-popup.js') }}"></script>
+<script src="{{ asset('front/assets/vendors/counter/waypoints-min.js') }}"></script>
+<script src="{{ asset('front/assets/vendors/counter/counterup.min.js') }}"></script>
+<script src="{{ asset('front/assets/vendors/imagesloaded/imagesloaded.js') }}"></script>
+<script src="{{ asset('front/assets/vendors/masonry/masonry.js') }}"></script>
+<script src="{{ asset('front/assets/vendors/masonry/filter.js') }}"></script>
+<script src="{{ asset('front/assets/vendors/owl-carousel/owl.carousel.js') }}"></script>
+<script src="{{ asset('front/assets/js/functions.js') }}"></script>
+<script src="{{ asset('front/assets/js/contact.js') }}"></script>
+<script src='{{ asset('front/assets/vendors/switcher/switcher.js') }}'></script>
+</body>
+
+</html>

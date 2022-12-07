@@ -1,0 +1,33 @@
+<!-- About Us -->
+<div class="section-area section-sp1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-12 m-b30">
+                <div class="widget courses-search-bx placeani">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+                <div class="widget widget_archive">
+
+
+
+                    <h5 class="widget-title style-1"><a href=" {{ path('app_examen_listt') }}">toutes les catégories</a></h5>
+                    <ul>
+                           {% for i in categories %}
+                         <li><a href="{{ path('app_examen_listtbycategorie'  , {id:i.idcategorie}) }}">{{ i.nomcategorie }}</a></li>
+                           {% endfor %}
+
+                    </ul>
+                </div>
+                <div class="widget">
+                    <a href="#"><img src="{{ asset("/front/assets/images/adv/adv.jpg")}}" alt=""/></a>
+                </div>
+                <div class="widget recent-posts-entry widget-courses">
+
+                    <div class="widget-post-bx">
+
+
+                    </div>
+                </div>
+            </div>

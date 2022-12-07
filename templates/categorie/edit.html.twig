@@ -1,0 +1,15 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}Edit Categorie{% endblock %}
+
+{% block body %}
+    <h1>Edit Categorie</h1>
+
+    {{ include('categorie/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+
+    {{ include('categorie/_delete_form.html.twig') }}
+
+    <a href="{{ path('app_categorie_index') }}">Liste Des Catégories </a>
+{% endblock %}

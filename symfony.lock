@@ -38,6 +38,18 @@
             "migrations/.gitignore"
         ]
     },
+    "endroid/qr-code-bundle": {
+        "version": "4.1.1"
+    },
+    "friendsofsymfony/ckeditor-bundle": {
+        "version": "2.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "2.0",
+            "ref": "f5ad42002183a6881962683e6d84bbb25cdfce5d"
+        }
+    },
     "google/apiclient": {
         "version": "2.12",
         "recipe": {
@@ -48,6 +60,34 @@
         },
         "files": [
             "config/packages/google_apiclient.yaml"
+        ]
+    },
+    "helios-ag/fm-elfinder-bundle": {
+        "version": "12.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "10.0",
+            "ref": "addd79a9903ee92664f4cff61eb6cdd1b95945e7"
+        },
+        "files": [
+            "./config/packages/fm_elfinder.yaml",
+            "./config/routes/fm_elfinder.yaml"
+        ]
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.9.0"
+    },
+    "omines/datatables-bundle": {
+        "version": "0.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "0.1",
+            "ref": "467488ddc00aa190c37a4357f226457d4dd6b339"
+        },
+        "files": [
+            "./config/packages/datatables.yaml"
         ]
     },
     "phpunit/phpunit": {
@@ -272,6 +312,18 @@
             "templates/base.html.twig"
         ]
     },
+    "symfony/ux-autocomplete": {
+        "version": "2.6",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.6",
+            "ref": "07d9602b7231ba355f484305d6cea58310c01741"
+        },
+        "files": [
+            "./config/routes/ux_autocomplete.yaml"
+        ]
+    },
     "symfony/validator": {
         "version": "5.4",
         "recipe": {
@@ -309,7 +361,22 @@
             "config/packages/messenger.yaml"
         ]
     },
+    "tattali/calendar-bundle": {
+        "version": "1.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.1",
+            "ref": "0c643e17b5340747b35c2c75e11727fa31bfa9bb"
+        },
+        "files": [
+            "./config/routes/calendar.yaml"
+        ]
+    },
     "twig/extra-bundle": {
         "version": "v3.4.0"
+    },
+    "webmen/datatable-bundle": {
+        "version": "v1.0.0"
     }
 }

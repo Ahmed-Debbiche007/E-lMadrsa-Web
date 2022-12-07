@@ -7,7 +7,10 @@ parameters:
     images_directory: '%kernel.project_dir%/public/uploads/images'
     app.email: '%env(EMAIL)%'
     app.dsn: '%env(MAILER_DSN)%'
+
 services:
+    App\EventSubscriber\CalendarSubscriber:
+
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.

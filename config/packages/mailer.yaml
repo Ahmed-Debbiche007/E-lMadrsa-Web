@@ -1,8 +1,10 @@
 framework:
     mailer:
         dsn: '%env(MAILER_DSN)%'
+
         envelope:
             sender: '%env(EMAIL)%'
         headers:
             From: 'E-lMadrsa <%env(EMAIL)%>'
             X-Custom-Header: 'foobar'
+

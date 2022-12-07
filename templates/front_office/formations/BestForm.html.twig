@@ -1,0 +1,34 @@
+{% extends 'front_office/desginBestForm.html.twig' %}
+
+{% block title %} Best Formation {% endblock %}
+
+{% block body %}
+
+
+
+
+
+    {% for i in formation%}
+        <div class=" ">
+            <div class="card" style="    flex: auto; box-sizing: border-box; margin: 1rem .25em; ">
+                {#<img class="card-img-top" src="" alt="Card image cap"> #}
+                <div class="card-body">
+                    <h3 class="card-title"> {{ nomform.sujet }} </h3>
+                    <h4>
+                        Cette Formation posséde pour nombre de Participation
+                    </h4>
+                    <h5 class="card-text"> {{i[1]}}</h5>
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+    {% endfor %}
+
+
+
+{% endblock %}
