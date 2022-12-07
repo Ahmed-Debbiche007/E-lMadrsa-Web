@@ -1,0 +1,18 @@
+{% extends 'front_office/SecondBase2.html.twig' %}
+
+{% block title %}
+  Hello
+{% endblock %}
+
+{% block body %}
+  <div class="col d-flex justify-content-center">
+    <!-- Your Profile Views Chart -->
+    <div class="d-flex flex-column">
+      <h1>Request a new session</h1>
+
+      {{ include('back_office/requests/_form.html.twig') }}
+    </div>
+    <!-- Your Profile Views Chart END -->
+  </div>
+  <br />
+{% endblock %}

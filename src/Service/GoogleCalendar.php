@@ -23,10 +23,11 @@ class GoogleCalendar
     public function getClient(): Google_Client
     {
         $client = new Google_Client();
-        $path = "/home/ahmed/PiDev/E-lMadrsa-Web/src/Service/credentials.json";
+        $workdir = substr(getcwd(),0,-6);
+        $path = $workdir."src/Service/credentials.json";
         $client->setAuthConfig($path);
         $client->addScope(\Google_Service_Calendar::CALENDAR);
-        $redirect_uri = "http://localhost:8000/dashboard/requests/callback";
+        $redirect_uri = "http://localhost:5000/dashboard/requests/callback";
         $client->setRedirectUri($redirect_uri);
 
         return $client;

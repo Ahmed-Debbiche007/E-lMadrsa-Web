@@ -58,10 +58,27 @@ class TutorshipSessionRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('t')
             ->where('t.idStudent = :val')
+            ->andWhere('t.type = :type')
             ->orWhere('t.idTutor = :val')
+            ->andWhere('t.type = :type')
             ->setParameter('val', $id)
+            ->setParameter('type', "MessagesChat")
             ->getQuery()
             ->getResult();
+    }
+    public function findLatestChat($id): ?Tutorshipsessions
+    {
+        return $this->createQueryBuilder('t')
+            ->where('t.idStudent = :val')
+            ->andWhere('t.type = :type')
+            ->orWhere('t.idTutor = :val')
+            ->andWhere('t.type = :type')
+            ->setParameter('val', $id)
+            ->setParameter('type', "MessagesChat")
+            ->orderBy('t.id', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     //    public function findOneBySomeField($value): ?Tutorshipsessions

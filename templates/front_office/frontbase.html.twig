@@ -47,6 +47,7 @@
         {% include 'front_office/components/footer.html.twig' %}
          
       </div>
+      {% if app.user %}
       <button class="chat">
         <span class="notification" id="notification"></span>
         <i class="fa fa-comments fa-2x"></i>
@@ -54,6 +55,7 @@
       <div id="chatbox">
       {{ render(path('api_messages')) }}
       </div>
+      {% endif %}
       {% include 'front_office/components/scripts.html.twig' %}
     </div>
 

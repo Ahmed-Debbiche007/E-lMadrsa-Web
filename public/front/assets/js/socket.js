@@ -1,5 +1,3 @@
-
-
 const socket = new WebSocket('ws://localhost:3001')
 
 socket.addEventListener('open', function () {
@@ -11,6 +9,7 @@ function addMessage(id, message) {
     const msg = document.createElement('div')
     const p = document.createElement('p')
     var user = document.getElementById('receive').value;
+
 
 
     if (id == user) {
@@ -32,24 +31,31 @@ function addMessage(id, message) {
 }
 
 socket.addEventListener('message', function (e) {
-    try {
-        const message = JSON.parse(e.data)
-        if (message.message != "") {
-            url = "http://localhost:5000/front/assets/js/notification.mp3"
-            $.get(url)
-                .done(function () {
-                    audio = new Audio(url);
-                    audio.loop = false;
-                    audio.play();
-                }).fail(function () {
-                    console.log("uuuuuuup")
-                })
+    e.preventDefault();
+    var session = document.getElementById('idSession').value;
+    if (message.idSender != user && session == message.idSession) {
+        try {
+            const message = JSON.parse(e.data)
+            if (message.message != "") {
+                url = "http://localhost:5000/front/assets/js/notification.mp3"
+                $.get(url)
+                    .done(function () {
+                        audio = new Audio(url);
+                        audio.loop = false;
+                        audio.play();
+                    }).fail(function () {
+                        console.log("uuuuuuup")
+                    })
+                var user = document.getElementById('receive').value;
 
-            addMessage(message.name, message.message)
+                addMessage(message.idSender, message.message)
+
+
+            }
+
+        } catch (e) {
+            // Catch any errors
         }
-
-    } catch (e) {
-        // Catch any errors
     }
 })
 
@@ -65,10 +71,13 @@ document.getElementById('sendbtn').addEventListener('click', function () {
     if (message.message != "") {
         addMessage(message.idSender, message.message)
         try {
-            return axios.post("/dashboard/messages/api/post",{idSession: message.idSession, body: message.message});
-          } catch (error) {
+            return axios.post("/dashboard/messages/api/post", {
+                idSession: message.idSession,
+                body: message.message
+            });
+        } catch (error) {
             console.log(error);
-          }
+        }
     }
 
 })
@@ -82,14 +91,17 @@ document.getElementById("input-default").addEventListener('keypress', function (
         }
         document.getElementById('input-default').value = ""
         socket.send(JSON.stringify(message))
-    
+
         if (message.message != "") {
             addMessage(message.idSender, message.message)
             try {
-                return axios.post("/dashboard/messages/api/post",{idSession: message.idSession, body: message.message});
-              } catch (error) {
+                return axios.post("/dashboard/messages/api/post", {
+                    idSession: message.idSession,
+                    body: message.message
+                });
+            } catch (error) {
                 console.log(error);
-              }
+            }
         }
     }
 });

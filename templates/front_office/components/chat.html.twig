@@ -7,14 +7,25 @@
             {% for session in sessions %}
               <div class="row">
                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 h-100 d-inline-block">
-                  <a href="#" class="link" data-attribute="{{ session.idsession }}" data-url="{{session.getUrl()}}">
-                    <h4 class="font-semi-bold text-left">{{ session.getIdTutor().getNom() }} {{ session.getIdTutor().getPrenom() }}</h4>
+                  <a href="#" class="link" data-attribute="{{ session.idsession }}" data-url="{{ session.getUrl() }}">
+                    {% if app.user.isStudent() %}
+                      <h4 class="font-semi-bold text-left">{{ session.getIdTutor().getNom() }} {{ session.getIdTutor().getPrenom() }}</h4>
+                    {% else %}
+                      <h4 class="font-semi-bold text-left">{{ session.getIdStudent().getNom() }} {{ session.getIdStudent().getPrenom() }}</h4>
+                    {% endif %}
                     {% if session.getMessages() is empty %}
                       <p class="font-semi-bold text-muted text-left" style="font-size: 12px; ">No messages yet ! ..</p>
                     {% else %}
                       <p class="font-semi-bold text-muted text-left" style="font-size: 12px; ">{{ session.getMessages()|last }}</p>
                     {% endif %}
                   </a>
+                  <hr />
+                </div>
+              </div>
+            {% else %}
+              <div class="row">
+                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 h-100 d-inline-block">
+                  <h4 class="font-semi-bold text-left">Pas de sessions planifiée</h4>
                   <hr />
                 </div>
               </div>
@@ -30,7 +41,13 @@
                 <i class="fa fa-circle" style="color:green ;"></i>
               </div>
               <div class="mt-1 mr-1">
-                <h5 class="font-semi-bold" id="openchatid">{{currentSession.getIdTutor().getNom() }} {{currentSession.getIdTutor().getPrenom() }}</h5>
+              {% if sessions %}
+                {% if app.user.isStudent() %}
+                  <h5 class="font-semi-bold" id="openchatid">{{ sessions[0].getIdTutor().getNom() }} {{ sessions[0].getIdTutor().getPrenom() }}</h5>
+                {% else %}
+                  <h5 class="font-semi-bold" id="openchatid">{{ sessions[0].getIdStudent().getNom() }} {{ sessions[0].getIdStudent().getPrenom() }}</h5>
+                {% endif %}
+                {% endif %}
               </div>
             </div>
             <button type="button" class="btn" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false" style="background: #435ebe ; color:#fff;"><i class="fa fa-ellipsis-v"></i></button>
@@ -154,9 +171,8 @@
           $('#chatbox').html(res)
           var objDiv = document.getElementById('messages-card')
           objDiv.scrollTop = objDiv.scrollHeight
-          document.getElementById('openchatid').innerHTML = element.firstElementChild.innerHTML;
-          document.getElementById('switchToVideo').href = element.getAttribute('data-url');
-          
+          document.getElementById('openchatid').innerHTML = element.firstElementChild.innerHTML
+          document.getElementById('switchToVideo').href = element.getAttribute('data-url')
         })
       } catch (error) {
         console.log(error)

@@ -49,17 +49,25 @@ class MessagesController extends AbstractController
     #[Route('/api/messages', name: 'api_messages', methods: ['GET'])]
     public function indexApi(Request $request,  LoggerInterface $logger, MessagesRepository $messagesRepository, TutorshipSessionRepository $repo, SerializerInterface $serializer)
     {
+        $user = $this->getUser();
+        if ($user){
+
+        
         
         $sessions = $repo->getSessions($this->getUser());
         //dd($request);
         $refresh = 0;
         if (is_null($request->get('idSession'))) {
             if ($this->getUser()){
-            $lastSession = $repo->findLatest($this->getUser()->getId());
+                $lastSession = $repo->findLatestChat($this->getUser());
         }else{
             $lastSession = $repo->find(1); 
         }
+        if(is_null($lastSession)){
+            $messages =[];
+        }else{
             $messages = $messagesRepository->findBy(["idsession" => $lastSession->getIdsession()]);
+        }
         } else {
             $lastSession= $repo->find($request->get('idSession'));
             $messages = $messagesRepository->findBy(["idsession" => $request->get('idSession')]);
@@ -72,6 +80,15 @@ class MessagesController extends AbstractController
             'refresh' => $refresh,
             'id' => $request->get('idSession'),
         ]);
+    }else {
+        return  $this->renderForm('front_office/components/chat.html.twig', [
+            'messages' => "null",
+            'currentSession'=>"null",
+            'sessions' => "null",
+            'refresh' => "null",
+            'id' => "null",
+        ]);
+    }
     }
 
     #[Route('/api/post', name: 'api_messages_post', methods: ['POST'])]

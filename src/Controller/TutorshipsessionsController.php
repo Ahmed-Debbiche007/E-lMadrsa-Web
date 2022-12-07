@@ -23,6 +23,7 @@ class TutorshipsessionsController extends AbstractController
     #[Route('/', name: 'app_tutorshipsessions_index', methods: ['GET'])]
     public function index(TutorshipSessionRepository $tutorshipSessionRepository): Response
     {
+
         return $this->render('back_office/tutorshipsessions/index.html.twig', [
             'tutorshipsessions' => $tutorshipSessionRepository->findAll(),
         ]);
@@ -78,13 +79,14 @@ class TutorshipsessionsController extends AbstractController
     }
 
     #[Route('/{idsession}', name: 'app_tutorshipsessions_delete', methods: ['POST'])]
-    public function delete(Request $request, Tutorshipsessions $tutorshipsession, TutorshipSessionRepository $tutorshipSessionRepository): Response
+    public function delete(Request $request, TutorshipSessionRepository $tutorshipSessionRepository): Response
     {
+        $tutorshipsession = $tutorshipSessionRepository->find($request->get('idsession'));
         if ($this->isCsrfTokenValid('delete'.$tutorshipsession->getIdsession(), $request->request->get('_token'))) {
             
-            if ($this->googleServices->getClient()->auth){
-                $this->googleServices->removeEvent("session".$tutorshipsession->getIdsession());
-            }
+            // if ($this->googleServices->getClient()){
+            //     $this->googleServices->removeEvent("session".$tutorshipsession->getIdsession());
+            // }
             $tutorshipSessionRepository->remove($tutorshipsession, true);
         }
 

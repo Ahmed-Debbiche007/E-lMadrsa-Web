@@ -1,0 +1,64 @@
+{% extends 'front_office/SecondBase2.html.twig' %}
+
+{% block title %}
+  Hello
+{% endblock %}
+
+{% block body %}
+  <div class="col d-flex justify-content-center">
+    <!-- Your Profile Views Chart -->
+
+    <div class="card-body">
+      <table class="table table-striped" id="table1">
+        <thead>
+          <tr>
+            {% if not app.user.isTutor() %}
+              <th>Tutor</th>
+            {% endif %}
+            {% if not app.user.isStudent() %}
+              <th>Student</th>
+            {% endif %}
+            <th>Type</th>
+            <th>Body</th>
+            <th>Date</th>
+            <th>actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for request in requests %}
+            <tr>
+              {% if not app.user.isTutor() %}
+                <td>{{ request.idtutor.nom }}</td>
+              {% endif %}
+              {% if not app.user.isStudent() %}
+                <td>{{ request.idstudent.nom }}</td>
+              {% endif %}
+              <td>{{ request.type }}</td>
+              <td>{{ request.body }}</td>
+              <td>{{ request.date ? request.date|date('Y-m-d H:i') : '' }}</td>
+              <td>
+                <form id="my_form" method="post" action="{{ path('app_requests_delete_front', { id: request.id }) }}">
+                  {% if not app.user.isStudent() %}
+                    <a href="{{ path('app_requests_approve_front', { id: request.id }) }}"><span class="badge bg-success text-light">Approve</span></a>
+                  {% else %}
+                  <a href="{{ path('app_requests_edit_front', { id: request.id }) }}"><span class="badge bg-success text-light">edit</span></a>
+                  {% endif %}
+                  <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ request.id) }}" />
+
+                  <a href="#" class="badge bg-danger text-light" onclick="document.getElementById('my_form').submit();">Delete</a>
+                </form>
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="7">no records found</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Your Profile Views Chart END -->
+  </div>
+  <br />
+{% endblock %}

@@ -1,5 +1,3 @@
-
-
 const socket = new WebSocket('ws://localhost:3001')
 
 socket.addEventListener('open', function () {
@@ -26,10 +24,11 @@ function addMessage(id, message) {
     msg.append(p)
     justify.append(msg)
     document.getElementById('messages-card').append(justify);
-   
+
 }
 
 socket.addEventListener('message', function (e) {
+    e.preventDefault();
     try {
         const message = JSON.parse(e.data)
         if (message.message != "") {
@@ -43,7 +42,10 @@ socket.addEventListener('message', function (e) {
                     console.log("uuuuuuup")
                 })
 
-            addMessage(message.name, message.message)
+            var user = document.getElementById('receive').value;
+            if (message.idSender != user) {
+                addMessage(message.idSender, message.message)
+            }
         }
 
     } catch (e) {
@@ -63,10 +65,13 @@ document.getElementById('sendbtn').addEventListener('click', function () {
     if (message.message != "") {
         addMessage(message.idSender, message.message)
         try {
-            return axios.post("/dashboard/messages/api/post",{idSession: message.idSession, body: message.message});
-          } catch (error) {
+            return axios.post("/dashboard/messages/api/post", {
+                idSession: message.idSession,
+                body: message.message
+            });
+        } catch (error) {
             console.log(error);
-          }
+        }
     }
 
 })
@@ -80,15 +85,18 @@ document.getElementById("input-default").addEventListener('keypress', function (
         }
         document.getElementById('input-default').value = ""
         socket.send(JSON.stringify(message))
-    
+
         if (message.message != "") {
             addMessage(message.idSender, message.message)
             try {
-                return axios.post("/dashboard/messages/api/post",{idSession: message.idSession, body: message.message});
-              } catch (error) {
+                return axios.post("/dashboard/messages/api/post", {
+                    idSession: message.idSession,
+                    body: message.message
+                });
+            } catch (error) {
                 console.log(error);
-              }
+            }
         }
-    
+
     }
 });
