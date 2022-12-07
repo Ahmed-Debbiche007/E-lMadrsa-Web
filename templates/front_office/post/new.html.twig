@@ -5,9 +5,9 @@
 {% block title %}New Post{% endblock %}
 
 {% block body %}
+    <div style="margin: 40px 0px;">
     <h1>Create new Post</h1>
 
     {{ include('back_office/post/_form.html.twig') }}
-
-    <a href="{{ path('app_post_index') }}">back to list</a>
-{% endblock %}
+    </div>
+ {% endblock %}
