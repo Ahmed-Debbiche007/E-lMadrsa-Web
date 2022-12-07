@@ -39,28 +39,55 @@ class TutorshipSessionRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Tutorshipsessions[] Returns an array of Tutorshipsessions objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('t.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Tutorshipsessions[] Returns an array of Tutorshipsessions objects
+    //     */
+    public function findLatest($id): ?Tutorshipsessions
+    {
+        return $this->createQueryBuilder('t')
+            ->where('t.idStudent = :val')
+            ->orWhere('t.idTutor = :val')
+            ->setParameter('val', $id)
+            ->orderBy('t.id', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 
-//    public function findOneBySomeField($value): ?Tutorshipsessions
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function getSessions($id): array
+    {
+        return $this->createQueryBuilder('t')
+            ->where('t.idStudent = :val')
+            ->andWhere('t.type = :type')
+            ->orWhere('t.idTutor = :val')
+            ->andWhere('t.type = :type')
+            ->setParameter('val', $id)
+            ->setParameter('type', "MessagesChat")
+            ->getQuery()
+            ->getResult();
+    }
+    public function findLatestChat($id): ?Tutorshipsessions
+    {
+        return $this->createQueryBuilder('t')
+            ->where('t.idStudent = :val')
+            ->andWhere('t.type = :type')
+            ->orWhere('t.idTutor = :val')
+            ->andWhere('t.type = :type')
+            ->setParameter('val', $id)
+            ->setParameter('type', "MessagesChat")
+            ->orderBy('t.id', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    //    public function findOneBySomeField($value): ?Tutorshipsessions
+    //    {
+    //        return $this->createQueryBuilder('t')
+    //            ->andWhere('t.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

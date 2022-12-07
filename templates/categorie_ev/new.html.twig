@@ -1,0 +1,12 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+
+{% block title %}New CategorieEv{% endblock %}
+
+{% block body %}
+    <h1>Create new CategorieEv</h1>
+
+    {{ include('categorie_ev/_form.html.twig') }}
+
+    <a href="{{ path('app_categorie_ev_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,75 @@
+
+{% extends 'back_office/backbase.html.twig' %}
+{% block body %}
+   
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      </script>
+      <script type = "text/javascript">
+         google.charts.load('current', {packages: ['corechart']});     
+      </script>
+    <div class="row">
+              <h5 class="card-title">Evenements</h5>
+
+              <!-- Table with stripped rows -->
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                <th>NomEvenement</th>
+                <th>type category</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for evenement in evenements %}
+            <tr>
+                <td>{{ evenement.nomEvenement }}</td>
+                <td>{{ evenement.idcate.getTypeEvenement() }}</td>
+                
+                <td>{{ evenement.description }}</td>
+                <td>{{ evenement.image }}</td>
+                <td>{{ evenement.date ? evenement.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}">show</a>
+                    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+                </tbody>
+              </table>
+<div id="piechart"></div>
+<script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+     
+  var data = google.visualization.arrayToDataTable([
+  ['Task', 'Hours per Day'],
+  
+{% for e in stat %}
+//
+//
+['{{ e.type }}', {{ e.nbr }}],
+{% endfor %}
+  
+]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':'Statistiques', 'width':700, 'height':550};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}
+</script>
+    <a href="{{ path('app_evenement_new') }}">Create new</a>
+{% endblock %}

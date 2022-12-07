@@ -10,9 +10,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use App\Repository\TokenRepository;
 
 class AuthController extends AbstractController
 {
+
+    private TokenRepository $tokenRepo;
+
+    public function __construct(TokenRepository $tokenRepo)
+    {
+        
+        $this->tokenRepo = $tokenRepo;
+    }
+
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -22,6 +32,10 @@ class AuthController extends AbstractController
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
+        $allToken = $this->tokenRepo->findAll();
+        foreach ($allToken as $token){
+            $this->tokenRepo->remove($token, true);
+        }
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 

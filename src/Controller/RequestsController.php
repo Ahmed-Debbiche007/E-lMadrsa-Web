@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Chatsessions;
 use App\Entity\Requests;
 use App\Form\RequestsType;
 use App\Repository\RequestsRepository;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\GoogleCalendar;
 use App\Entity\Token;
+use App\Repository\ChatSessionsRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Repository\TokenRepository;
 
@@ -23,11 +25,11 @@ class RequestsController extends AbstractController
 {
     private GoogleCalendar $googleServices;
     private TokenRepository $em;
-    
+
     public function __construct(GoogleCalendar $googleServices, TokenRepository $em)
     {
         $this->googleServices = $googleServices;
-        $this->em = $em;       
+        $this->em = $em;
     }
     #[Route('/', name: 'app_requests_index', methods: ['GET'])]
     public function index(RequestsRepository $requestsRepository, Request $request): Response
@@ -72,7 +74,7 @@ class RequestsController extends AbstractController
     }
 
     #[Route('/approve/{id}', name: 'app_requests_approve')]
-    public function approve(Request $request, Requests $trequest, TutorshipSessionRepository $tutorshipSessionRepository, RequestsRepository $requestsRepository)
+    public function approve(Request $request, Requests $trequest, TutorshipSessionRepository $tutorshipSessionRepository, ChatSessionsRepository $chatrepo, RequestsRepository $requestsRepository)
     {
         $tutorshipsession = new Tutorshipsessions();
         $tutorshipsession->setIdRequest($trequest);
@@ -81,18 +83,15 @@ class RequestsController extends AbstractController
         $tutorshipsession->setDate($trequest->getDate());
         $tutorshipsession->setType($trequest->getType());
         $tutorshipsession->setBody($trequest->getBody());
-        if (strcmp($trequest->getType(), "MessagesChat") == 0) {
-            $tutorshipsession->setUrl("none");
-            $tutorshipSessionRepository->save($tutorshipsession, true);
-            
-            $this->addFlash('success', 'The request has been approved!');
-            return $this->redirectToRoute('app_tutorshipsessions_index', [], Response::HTTP_SEE_OTHER);
-        } elseif (strcmp($trequest->getType(), "VideoChat") == 0) {
-            return $this->generateLink($tutorshipsession, $tutorshipSessionRepository, $trequest, $requestsRepository);
-        }
+        $tutorshipsession->setUrl("none");
+        $tutorshipSessionRepository->save($tutorshipsession, false);
+        
+        $this->generateLink($tutorshipsession, $tutorshipSessionRepository, $trequest, $requestsRepository);
+        $this->addFlash('success', 'The request has been approved!');
+        return $this->redirectToRoute('app_tutorshipsessions_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    public function generateLink(TutorshipSessions $tutorshipsession, TutorshipSessionRepository $tutorshipSessionRepository, Requests $trequest ,RequestsRepository $requestsRepository)
+    public function generateLink(TutorshipSessions $tutorshipsession, TutorshipSessionRepository $tutorshipSessionRepository, Requests $trequest, RequestsRepository $requestsRepository)
     {
         $allToken = $this->em->findAll();
         /** @var Token $token */

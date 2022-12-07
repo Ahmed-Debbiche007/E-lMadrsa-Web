@@ -1,4 +1,18 @@
 {
+    "api-platform/core": {
+        "version": "2.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.5",
+            "ref": "05b57782a78c21a664a42055dc11cf1954ca36bb"
+        },
+        "files": [
+            "config/packages/api_platform.yaml",
+            "config/routes/api_platform.yaml",
+            "src/Entity/.gitignore"
+        ]
+    },
     "doctrine/annotations": {
         "version": "1.13",
         "recipe": {
@@ -17,12 +31,24 @@
             "repo": "github.com/symfony/recipes",
             "branch": "main",
             "version": "2.4",
-            "ref": "da713d006953b90d1c085c1be480ecdd6c4a95e0"
+            "ref": "d562b46dd8075ab2de3d58bf7895cf6b8365cb72"
         },
         "files": [
             "config/packages/doctrine.yaml",
             "src/Entity/.gitignore",
             "src/Repository/.gitignore"
+        ]
+    },
+    "doctrine/doctrine-fixtures-bundle": {
+        "version": "3.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "3.0",
+            "ref": "1f5514cfa15b947298df4d771e694e578d4c204d"
+        },
+        "files": [
+            "src/DataFixtures/AppFixtures.php"
         ]
     },
     "doctrine/doctrine-migrations-bundle": {
@@ -48,7 +74,10 @@
             "branch": "main",
             "version": "2.0",
             "ref": "f5ad42002183a6881962683e6d84bbb25cdfce5d"
-        }
+        },
+        "files": [
+            "config/packages/fos_ckeditor.yaml"
+        ]
     },
     "google/apiclient": {
         "version": "2.12",
@@ -71,12 +100,24 @@
             "ref": "addd79a9903ee92664f4cff61eb6cdd1b95945e7"
         },
         "files": [
-            "./config/packages/fm_elfinder.yaml",
-            "./config/routes/fm_elfinder.yaml"
+            "config/packages/fm_elfinder.yaml",
+            "config/routes/fm_elfinder.yaml"
         ]
     },
     "knplabs/knp-paginator-bundle": {
         "version": "v5.9.0"
+    },
+    "nelmio/cors-bundle": {
+        "version": "2.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.5",
+            "ref": "6bea22e6c564fba3a1391615cada1437d0bde39c"
+        },
+        "files": [
+            "config/packages/nelmio_cors.yaml"
+        ]
     },
     "omines/datatables-bundle": {
         "version": "0.7",
@@ -87,7 +128,7 @@
             "ref": "467488ddc00aa190c37a4357f226457d4dd6b339"
         },
         "files": [
-            "./config/packages/datatables.yaml"
+            "config/packages/datatables.yaml"
         ]
     },
     "phpunit/phpunit": {
@@ -193,7 +234,7 @@
         ]
     },
     "symfony/maker-bundle": {
-        "version": "1.47",
+        "version": "1.48",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -238,7 +279,7 @@
         ]
     },
     "symfony/phpunit-bridge": {
-        "version": "6.1",
+        "version": "6.2",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -321,8 +362,11 @@
             "ref": "07d9602b7231ba355f484305d6cea58310c01741"
         },
         "files": [
-            "./config/routes/ux_autocomplete.yaml"
+            "config/routes/ux_autocomplete.yaml"
         ]
+    },
+    "symfony/ux-chartjs": {
+        "version": "v2.6.1"
     },
     "symfony/validator": {
         "version": "5.4",
@@ -349,16 +393,23 @@
             "config/routes/web_profiler.yaml"
         ]
     },
-    "symfony/webapp-pack": {
-        "version": "1.1",
+    "symfony/webpack-encore-bundle": {
+        "version": "1.16",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "1.0",
-            "ref": "2fb3513dbc139884fc5b7c751242b66f9f10f0c3"
+            "version": "1.10",
+            "ref": "5878c7c28468ca0fdce2497a04cfc66bab0dc3ef"
         },
         "files": [
-            "config/packages/messenger.yaml"
+            "assets/app.js",
+            "assets/bootstrap.js",
+            "assets/controllers.json",
+            "assets/controllers/hello_controller.js",
+            "assets/styles/app.css",
+            "config/packages/webpack_encore.yaml",
+            "package.json",
+            "webpack.config.js"
         ]
     },
     "tattali/calendar-bundle": {
@@ -370,7 +421,7 @@
             "ref": "0c643e17b5340747b35c2c75e11727fa31bfa9bb"
         },
         "files": [
-            "./config/routes/calendar.yaml"
+            "config/routes/calendar.yaml"
         ]
     },
     "twig/extra-bundle": {

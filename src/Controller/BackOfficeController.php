@@ -21,7 +21,7 @@ class BackOfficeController extends AbstractController
             return $this->redirect('/');
         }
 */
-        return $this->render('back_office/backbase.html.twig', [
+        return $this->render('back_office/dashboard.html.twig', [
             'controller_name' => 'BackOfficeController',
         ]);
     }

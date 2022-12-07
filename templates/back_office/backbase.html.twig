@@ -1,68 +1,59 @@
-<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+        Dashboard
+      {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{{ asset('back/assets/css/main/app.css') }}" />
+    <link rel="stylesheet" href="{{ asset('back/assets/css/main/app-dark.css') }}" />
+    <link rel="shortcut icon" href="{{ asset('back/assets/images/logo/favicon.svg') }}" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{ asset('back/assets/images/logo/favicon.png') }}" type="image/png" />
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>
-			{% block title %}Dashboard
-			{% endblock %}
-		</title>
-		<link rel="stylesheet" href={{ asset('back/assets/css/main/app.css')}}>
-		<link rel="stylesheet" href={{ asset('back/assets/css/main/app-dark.css')}}>
-		<link rel="shortcut icon" href={{ asset('back/assets/images/logo/favicon.svg')}} type="image/x-icon">
-		<link rel="shortcut icon" href={{ asset('back/assets/images/logo/favicon.png')}} type="image/png">
+    <link rel="stylesheet" type="text/css" href="{{ asset('https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css') }}" />
 
-		<link rel="stylesheet" type="text/css" href="{{ asset('https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css') }}"/>
-		<link rel="stylesheet" href={{ asset('back/assets/css/shared/iconly.css')}}>
-		<link rel="stylesheet" type="text/css" href="{{ asset('https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css') }}"/>
- 
+    <link rel="stylesheet" href="{{ asset('back/assets/css/emojis.css') }}" />
+    <link rel="stylesheet" href="{{ asset('back/assets/css/shared/iconly.css') }}" />
+    <link rel="stylesheet" href="{{ asset('back/assets/css/widgets/chat.css') }}" />
+  </head>
 
-		<link rel="stylesheet" href="{{ asset('back/assets/css/shared/iconly.css')}}">
+  <body>
+    <div id="app">
+      {% include 'back_office/components/sidebar.html.twig' %}
+      <div id="main">
+        <header class="mb-3">
+          <a href="#" class="burger-btn d-block d-xl-none"><i class="bi bi-justify fs-3"></i></a>
+        </header>
 
- 
-	</head>
+        <div class="page-content">
+          <section class="row">
+            <div class="col-12 col-lg-9">
+              {% include 'back_office/components/stats.html.twig' %}
+              {% include 'back_office/components/noty.html.twig' %}
 
-	<body>
-		<div id="app">
-			{% include 'back_office/components/sidebar.html.twig' %}
-			<div id="main">
-				<header class="mb-3">
-					<a href="#" class="burger-btn d-block d-xl-none">
-						<i class="bi bi-justify fs-3"></i>
-					</a>
-				</header>
+              <div class="page-heading">
+                {% block pageHeading %}
 
-				
-				<div class="page-content">
-					<section class="row">
-						<div class="col-12 col-lg-9">
+                {% endblock %}
+              </div>
+              {% block body %}
 
+              {% endblock %}
+            </div>
+            {% include 'back_office/components/info.html.twig' %}
+          </section>
+        </div>
 
-							{% include 'back_office/components/stats.html.twig' %}
-							{% include 'back_office/components/noty.html.twig' %}
+  
 
-							<div class="page-heading">{% block pageHeading %}{% endblock %}</div>
-							{% block body %}{% endblock %}
-						</div>
-						{% include 'back_office/components/info.html.twig' %}
-					</section>
+        {% include 'back_office/components/footer.html.twig' %}
+      </div>
+    </div>
+    <script src="{{ asset('back/assets/js/bootstrap.js')}}"></script>
+    <script src="{{ asset('back/assets/js/app.js')}}"></script>
 
-				</div>
-				
-				{% include 'back_office/components/footer.html.twig' %}
-				{% include 'back_office/components/st.html.twig' %}
-
-			</div>
-		</div>
-		<script src={{ asset('back/assets/js/bootstrap.js')}}></script>
-		<script src={{ asset('back/assets/js/app.js')}}></script>
-
-		<!-- Need: Apexcharts -->
-		
-		
-		<script src={{ asset('back/assets/js/pages/dashboard.js')}}></script>
-
-
-	</body>
-</html></body></html>
+    <!-- Need: Apexcharts -->
+  </body>
+</html>

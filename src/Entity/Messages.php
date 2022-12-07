@@ -5,7 +5,8 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use App\Repository\MessagesRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity as AcmeAssert;
 #[ORM\Entity(repositoryClass: MessagesRepository::class)]
 class Messages
 {
@@ -14,12 +15,13 @@ class Messages
     #[ORM\GeneratedValue]
     private ?int $idmessage;
 
-    #[ORM\Column]
-    private ?int $idsession;
+    
 
     #[ORM\Column]
     private ?int $idsender;
 
+    #[Assert\NotBlank]
+    #[AcmeAssert\profanityconstraint]
     #[ORM\Column(length: 255)]
     private ?string $body;
 
@@ -27,22 +29,16 @@ class Messages
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $statusdate = null;
 
+    #[ORM\ManyToOne(inversedBy: 'messages')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Tutorshipsessions $idsession = null;
+
     public function getIdmessage(): ?int
     {
         return $this->idmessage;
     }
 
-    public function getIdsession(): ?int
-    {
-        return $this->idsession;
-    }
-
-    public function setIdsession(int $idsession): self
-    {
-        $this->idsession = $idsession;
-
-        return $this;
-    }
+    
 
     public function getIdsender(): ?int
     {
@@ -78,6 +74,23 @@ class Messages
         $this->statusdate = $statusdate;
 
         return $this;
+    }
+
+    public function getIdsession(): ?Tutorshipsessions
+    {
+        return $this->idsession;
+    }
+
+    public function setIdsession(?Tutorshipsessions $idsession): self
+    {
+        $this->idsession = $idsession;
+
+        return $this;
+    }
+
+    public function  __toString()
+    {
+        return (String)$this->getBody() ;
     }
 
 

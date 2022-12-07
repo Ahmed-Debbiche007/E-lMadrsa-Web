@@ -1,0 +1,39 @@
+{% extends 'back_office/backbase.html.twig' %}
+
+{% block title %}CategorieEv index{% endblock %}
+
+{% block body %}
+    
+
+   <div class="row">
+              <h5 class="card-title">Types Evenements</h5>
+
+              <!-- Table with stripped rows -->
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                <th>TypeEvenement</th>
+                <th>actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for categorie_ev in categorie_evs %}
+            <tr>
+                <td>{{ categorie_ev.id }}</td>
+                <td>{{ categorie_ev.typeEvenement }}</td>
+                <td>
+                    <a href="{{ path('app_categorie_ev_show', {'id': categorie_ev.id}) }}">show</a>
+                    <a href="{{ path('app_categorie_ev_edit', {'id': categorie_ev.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+                </tbody>
+              </table>
+
+    <a href="{{ path('app_categorie_ev_new') }}">Create new</a>
+{% endblock %}

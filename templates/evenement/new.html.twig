@@ -1,0 +1,65 @@
+{% extends 'back_office/backbase.html.twig' %} 
+{% block title %}New Evenement{% endblock %}
+
+{% block body %}
+   {{form_start(form,{'attr': {'novalidate': 'novalidate'}} )}}
+<div class="card-body">
+              <h5 class="card-title">General Form Elements</h5>
+
+              <!-- General Form Elements -->
+              <form>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Type evenement</label>
+                  <div class="col-sm-10">
+                    {{ form_widget(form.IdCate,{'attr':{'class':'form-controle'}})}}
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Nom Evenement</label>
+                  <div class="col-sm-10">
+                    
+                    {{ form_widget(form.nomEvenement,{'attr':{'class':'form-controle'}})}}
+                    {{ form_errors(form.nomEvenement) }}
+                    
+                </div>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Description</label>
+                  <div class="col-sm-10">
+                    {{ form_widget(form.description,{'attr':{'class':'form-controle'}})}}
+                    {{ form_errors(form.description) }}
+                </div>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Image</label>
+                  <div class="col-sm-10">
+                   {{ form_widget(form.image,{'attr':{'class':'form-controle'}})}}
+                  
+                </div>
+                <div class="row mb-3">
+                  <label for="inputDate" class="col-sm-2 col-form-label">Date</label>
+                  <div class="col-sm-10">
+                    {{ form_widget(form.date,{'attr':{'class':'form-controle'}})}}
+                    {{ form_errors(form.date) }}
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">User</label>
+                  <div class="col-sm-10">
+                     {{ form_widget(form.IdUser,{'attr':{'class':'form-controle'}})}}
+                  </div>
+                </div>
+
+                
+               
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">Submit Button</label>
+                  <div class="col-sm-10">
+                    <button class="btn">{{ button_label|default('Save') }}</button>
+                  </div>
+                </div>
+
+              </form><!-- End General Form Elements -->
+
+            </div>
+{{ form_end(form) }}
+    <a href="http://localhost:8000/">back to list</a>
+{% endblock %}

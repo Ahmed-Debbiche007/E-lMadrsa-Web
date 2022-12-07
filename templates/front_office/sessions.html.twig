@@ -1,0 +1,149 @@
+{% extends 'front_office/SecondBase2.html.twig' %}
+
+{% block title %}
+  Hello
+{% endblock %}
+
+{% block body %}
+  <div class="content-block">
+    <div class="content-block">
+      <main class="ttr-wrapper">
+        <div class="container-fluid d-flex justify-content-center">
+          <div class="col-8 d-flex mt-3 justify-content-center">
+            <div class="row">
+              <!-- Your Profile Views Chart -->
+              <div class="col-lg-12 mb-3">
+                <div class="d-flex justify-content-end mb-3">
+                  {% if app.user.isStudent() %}
+                    <a href="/newRequest" class="btn btn-lg btn-success mb-3 mr-2">Request a new session</a>
+                  {% endif %}
+                    <a href="/indexRequests" class="btn btn-lg btn-success mb-3 ">See Requests</a>
+                  
+                </div>
+                <div class="widget-box">
+                  <div class="wc-title"></div>
+                  <div class="widget-inner">
+                    <div id="calendar"></div>
+                  </div>
+                </div>
+              </div>
+              <!-- Your Profile Views Chart END -->
+            </div>
+          </div>
+        </div>
+      </main>
+      <div class="ttr-overlay"></div>
+    </div>
+    
+  
+  </div>
+   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+
+  function rm(){
+    $("#popupSession").remove();
+  }
+
+
+  const p = document.createElement("script");
+  p.innerHTML = `
+    document.getElementById("submitFormSession").addEventListener('click', ()=>{
+        var session ={
+          id : document.getElementById("tutorshipid").value,
+          type : document.getElementById("tutorshipsessions_type").value,
+          date : document.getElementById("tutorshipsessions_date").value,
+          body : document.getElementById("tutorshipsessions_body").value,
+        };
+      url = '/api/formPost/';
+  axios.get(url, { params: { tutSession: session } }).then(response => {
+  
+   window.location.reload();
+  
+}).catch(error => console.error(error));
+         
+    });
+   
+    if (document.getElementById("tutorshipsessions_type").value == "VideoChat"){
+           document.getElementById("connect").href= document.getElementById("tutorshipsessions_url").value;
+        }
+        if (document.getElementById("tutorshipsessions_type").value == "MessagesChat"){
+           document.getElementById("connect").href= "/messages";
+        }
+
+   
+`;
+
+
+
+    const MyDiv = (info)=>{
+      
+      var e = window.event;
+      var posX = e.clientX;
+      var posY = e.clientY;
+      const popupSession = document.createElement('div');
+   
+      popupSession.classList.add('popupSession');
+      
+      popupSession.innerHTML="ssss";
+      popupSession.style.top = posY+"px";
+      popupSession.id = "popupSession";
+      popupSession.style.left = posX+"px";
+        url = '/api/form/'
+   axios.get(url, { params: { info: info.id } }).then(response => {
+  const data = response;
+  popupSession.innerHTML = response.data;
+  $("body")[0].append(p);
+
+}).catch(error => console.error(error));
+     return popupSession;
+
+     
+      
+    }
+    
+      $(document).ready(function () {
+        $('#calendar').fullCalendar({
+          header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay,listWeek'
+          },
+           eventClick: function(info) {
+            
+            $("#popupSession").remove();
+            $("body")[0].append(MyDiv(info));
+            
+            
+            },
+      
+          navLinks: true, // can click day/week names to navigate views
+      
+          weekNumbers: true,
+          weekNumbersWithinDays: true,
+          weekNumberCalculation: 'ISO',
+      
+          editable: false,
+          eventLimit: true, // allow "more" link when too many events
+          events: [
+            {% for session in sessions %}
+        { 
+          id: '{{session.getIdSession()}}',
+          title: '{{session.getType()}}',
+          start: "{{session.getDate()? session.date|date('Y-m-d H:i') : ''}}",
+          
+        },
+        {% endfor %}
+          ]
+        })
+      })
+      
+      var cas = document.getElementsByClassName('fc-day')
+      Array.from(cas).forEach((element) => {
+        console.log(element.getAttribute('data-date'))
+      })
+
+     
+    </script>
+
+  
+{% endblock %}

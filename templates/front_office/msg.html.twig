@@ -1,0 +1,142 @@
+<div class="row">
+  <div class="col-2 h-100 d-inline-block ml-4 mt-2 mb-2">
+    <div class="card" style="max-height: 500px; height: 500px; overflow-y: auto; background:#fff">
+      <div class="card-body h-100 d-inline-block">
+        {% for session in sessions %}
+          <div class="row">
+            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 h-100 d-inline-block">
+              <a href="#" class="link" data-attribute="{{ session.idsession }}" data-url="{{session.getUrl()}}">
+              {% if app.user.isStudent() %}
+                <h4 class="font-semi-bold text-left">{{ session.getIdTutor().getNom() }} {{ session.getIdTutor().getPrenom() }}</h4>
+                {% else %}
+                <h4 class="font-semi-bold text-left">{{ session.getIdStudent().getNom() }} {{ session.getIdStudent().getPrenom() }}</h4>
+                {% endif %}
+                {% if session.getMessages() is empty %}
+                  <p class="font-semi-bold text-muted text-left" style="font-size: 12px; ">No messages yet ! ..</p>
+                {% else %}
+                  {% set last = session.getMessages()|last %}
+                  <p class="font-semi-bold text-muted text-left" style="font-size: 12px; ">{{ (last|length) > 25 ? (last|slice(0, 25)) ~ '...' : last }}</p>
+                {% endif %}
+              </a>
+              <hr />
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-9 h-100 mr-5 mt-2" id="result">
+    <div class="card" id="chat2" style="max-height: 500px; height: 500px; ">
+      <div class="card-header d-flex justify-content-between align-items-center" style="position: sticky ; top:0%; background:#fff; z-index:90;">
+        <div class="d-flex">
+          <div class="mt-1 mr-2">
+            <i class="fa fa-circle" style="color:green ;"></i>
+          </div>
+          <div class="mt-1 mr-1">
+          {% if app.user.isStudent() %}
+            <h5 class="font-semi-bold" id="openchatid">{{  messages[0].getIdSession().getIdTutor().getNom() }} {{  messages[0].getIdSession().getIdTutor().getPrenom() }} </h5>
+                          {% else %}
+            <h5 class="font-semi-bold" id="openchatid">{{  messages[0].getIdSession().getIdStudent().getNom() }} {{  messages[0].getIdSession().getIdStudent().getPrenom() }} </h5>
+            {% endif %}
+          </div>
+        </div>
+        <button type="button" class="btn" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false" style="background: #435ebe ; color:#fff;"><i class="fa fa-ellipsis-v"></i></button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+         <a class="dropdown-item" href="/dashboard/deleteAll">Delete Session</a>
+              <a class="dropdown-item" href="" id="switchToVideo">Switch to Video Chat</a>
+              <a class="dropdown-item" href="#">🥚🐇</a>
+        </div>
+      </div>
+      <div class="card-body" id="messages-card" data-mdb-perfect-scrollbar="true" style="position: relative; height: 300px; overflow-y: auto;">
+        {% for message in messages %}
+          {% if app.user.getId() == message.idsender %}
+            <div class="d-flex flex-row justify-content-end">
+              <div class="message message-sent">
+                <p class="small p-2 ms-3 mb-1 text-white rounded-3">{{ message.body }}</p>
+              </div>
+            </div>
+          {% else %}
+            <div class="d-flex flex-row justify-content-start">
+              <div class="message message-received">
+                <p class="small p-2 ms-3 mb-1 rounded-3">{{ message.body }}</p>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="card-footer d-flex justify-content-between align-items-center" id="chat-footer" style="position: sticky ; bottom:0%; background:#fff; z-index:999; ">
+        <input id="send" type="hidden" name="secret" value="{{ app.user.getId() }}" />
+        <input id="receive" type="hidden" name="secret" value="{{ app.user.getId() }}" />
+        <input id="idSession" type="hidden" name="secret" value="{{ id }}" />
+        <input name="body" type="text" id="input-default" class="emojiable-option form-control" placeholder="Type message" style="width:500% ;" />
+        <button id="sendbtn" type="submit" class="btn" style="color: #435ebe ; background:#fff;"><i class="fa fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <script type="text/javascript">
+      $(document).ready(function (e) {
+        $('#input-default').emojiPicker()
+      
+        $('#input-custom-size').emojiPicker({
+          width: '300px',
+          height: '200px'
+        })
+      
+        $('#input-left-position').emojiPicker({
+          position: 'left'
+        })
+      
+        $('#create').click(function (e) {
+          e.preventDefault()
+          $('#text-custom-trigger').emojiPicker({
+            width: '300px',
+            height: '200px',
+            button: false
+          })
+        })
+      
+        $('#toggle').click(function (e) {
+          e.preventDefault()
+          $('#text-custom-trigger').emojiPicker('toggle')
+        })
+      
+        $('#destroy').click(function (e) {
+          e.preventDefault()
+          $('#text-custom-trigger').emojiPicker('destroy')
+        })
+      
+        // keyup event is fired
+        $('.emojiable-question, .emojiable-option').on('keyup', function () {
+          //console.log("emoji added, input val() is: " + $(this).val());
+        })
+      })
+    </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="{{ asset('front/assets/js/sessionSocket.js') }}"></script>
+    <script>
+      var array = jQuery('a.link')
+      Array.from(array).forEach((element) => {
+        element.addEventListener('click', () => {
+          url = '/api/messages/'
+          try {
+            $.ajax({
+              method: 'get',
+              url: url,
+              data: { idSession: element.getAttribute('data-attribute') }
+            }).done(function (res) {
+              $('#chatboxx').html(res)
+              var objDiv = document.getElementById('messages-card')
+              objDiv.scrollTop = objDiv.scrollHeight
+              document.getElementById('openchatid').innerHTML = element.firstElementChild.innerHTML;
+              document.getElementById('switchToVideo').href = element.getAttribute('data-url');
+            })
+          } catch (error) {
+            console.log(error)
+          }
+        })
+      })
+    </script>
