@@ -1,0 +1,46 @@
+{% extends 'front_office/SecondBase2.html.twig' %}
+{% block title %}
+  Reservation
+{% endblock %}
+
+{% block body %}
+  <div class="col d-flex justify-content-center">
+    <div class="row">
+      <h5 class="card-title">Reservation</h5>
+
+      <!-- Table with stripped rows -->
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Id Utilisateur</th>
+            <th>Id Evenement</th>
+            <th>Date Reservation</th>
+            <th>actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for reservation in reservations %}
+            <tr>
+              <td>{{ reservation.idReservation }}</td>
+              <td>{{ reservation.dateReservation ? reservation.dateReservation|date('Y-m-d') : '' }}</td>
+              <td>{{ reservation.idEvenement }}</td>
+              <td>{{ reservation.idUtilisateur }}</td>
+              <td>
+                <a href="{{ path('app_reservation_show', { idReservation: reservation.idReservation }) }}">show</a>
+                <a href="{{ path('app_reservation_edit', { idReservation: reservation.idReservation }) }}">edit</a>
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="5">no records found</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <a href="{{ path('app_reservation_new') }}">Create new</a>
+    </div>
+  </div>
+
+  
+{% endblock %}

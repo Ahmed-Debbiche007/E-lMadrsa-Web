@@ -63,4 +63,42 @@ class ReservationRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+
+/**public function findAllGreaterThanPrice(int $id): array
+{
+    $entityManager = $this->getEntityManager();
+
+    $query = $entityManager->createQuery(
+        'SELECT r
+        FROM App\Entity\Reservation r
+        WHERE r.id_reservation > :id
+        '
+    )->setParameter('id', $id);
+
+    // returns an array of Product objects
+    return $query->getResult();
+}*
+
+public function findd($id): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT r
+            FROM reservation
+            WHERE r.id_reservation =:id
+            '
+        )->setParameter('id', $id);
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
+
+
+*/
+
+
 }

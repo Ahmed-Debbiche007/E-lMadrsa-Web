@@ -1,0 +1,17 @@
+{% extends 'front_office/SecondBase2.html.twig' %}
+
+{% block title %}
+  New Reservation
+{% endblock %}
+
+{% block body %}
+  <div class="col d-flex justify-content-center">
+    <div class="row">
+      <h1>Create new Reservation</h1>
+
+      {{ include('reservation/_form.html.twig') }}
+
+      <a href="http://localhost:8000/">back to list</a>
+    </div>
+  </div>
+{% endblock %}

@@ -5,55 +5,76 @@ namespace App\Entity;
 use App\Repository\EvenementRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * Attestation
- *
- * @ORM\Table(name="attestation", indexes={@ORM\Index(name="Attestation_fk0", columns={"idparticipation"})})
- * @ORM\Entity
- */
+use Symfony\Component\Validator\Constraints\Date;
+
+
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
 class Evenement
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $idEvenement;
+    private ?int $id;
    
-    #[ORM\Column]
-    private ?int $idCat;
+    
+    
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Veuillez renseigner le champ nomEvenement")]
     private ?string $nomEvenement;
 
+    
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Veuillez renseigner le champ description")]
     private ?string $description;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Veuillez renseigner le champ image")]
     private ?string $image;
 
-    #[ORM\Column]
-    private ?int $idUtilisateur;
+    #[ORM\ManyToOne(inversedBy: 'evenements')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?CategorieEv $IdCate = null;
 
+ /**
+     * @var datetime
+     * @Assert\Type(
+     *      type = "\DateTime",
+     *      message = "vacancy.date.valid",
+     * )
+     * @Assert\GreaterThanOrEqual(
+     *      value = "today")
+     * */
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\NotBlank(message:"Veuillez renseigner le champ date")]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Veuillez renseigner le champ etatEvenement")]
     private ?string $etatEvenement;
 
-    public function getIdEvenement(): ?int
+   
+
+    #[ORM\ManyToOne(inversedBy: 'evenements')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $IdUser = null;
+
+
+    public function getId(): ?int
     {
-        return $this->idEvenement;
+        return $this->id;
     }
 
-    public function getIdCat(): ?int
+    public function getIdCate(): ?CategorieEv
     {
-        return $this->idCat;
+        return $this->IdCate;
     }
 
-    public function setIdCat(int $idCat): self
+    public function setIdCate(?CategorieEv $IdCate): self
     {
-        $this->idCat = $idCat;
+        $this->IdCate = $IdCate;
 
         return $this;
     }
@@ -82,27 +103,28 @@ class Evenement
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage($image): self
     {
         $this->image = $image;
 
         return $this;
     }
 
-    public function getIdUtilisateur(): ?int
+    public function getIdUser(): ?User
     {
-        return $this->idUtilisateur;
+        return $this->IdUser;
     }
 
-    public function setIdUtilisateur(int $idUtilisateur): self
+    public function setIdUser(?User $IdUser): self
     {
-        $this->idUtilisateur = $idUtilisateur;
+        $this->IdUser = $IdUser;
 
+        
         return $this;
     }
 

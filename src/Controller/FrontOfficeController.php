@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\EvenementRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Post;
@@ -40,12 +41,13 @@ class FrontOfficeController extends AbstractController
         $this->em = $em;
     }
     #[Route('/', name: 'home')]
-    public function index(PostRepository $postRepo, LoggerInterface $logger): Response
+    public function index(PostRepository $postRepo, LoggerInterface $logger, EvenementRepository $evenementRepository): Response
     {
         
         $posts = $postRepo->findAll();
         return $this->render('front_office/index.html.twig', [
             'posts' => $posts,
+            'evenements' => $evenementRepository->findAll(),
         ]);
     }
 

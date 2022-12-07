@@ -1,0 +1,40 @@
+{% extends 'front_office/SecondBase2.html.twig' %}
+
+{% block title %}
+  Reservation
+{% endblock %}
+
+{% block body %}
+  <div class="col d-flex justify-content-center">
+    <div class="row">
+      <h1>Reservation</h1>
+
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>IdReservation</th>
+            <td>{{ reservation.idReservation }}</td>
+          </tr>
+          <tr>
+            <th>DateReservation</th>
+            <td>{{ reservation.dateReservation ? reservation.dateReservation|date('Y-m-d') : '' }}</td>
+          </tr>
+          <tr>
+            <th>IdEvenement</th>
+            <td>{{ reservation.idEvenement }}</td>
+          </tr>
+          <tr>
+            <th>IdUtilisateur</th>
+            <td>{{ reservation.idUtilisateur }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <a href="{{ path('app_reservation_index') }}">back to list</a>
+
+      <a href="{{ path('app_reservation_edit', { idReservation: reservation.idReservation }) }}">edit</a>
+
+      {{ include('reservation/_delete_form.html.twig') }}
+    </div>
+  </div>
+{% endblock %}
