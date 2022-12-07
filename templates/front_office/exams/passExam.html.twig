@@ -122,6 +122,7 @@
                     if (quiz.JS[this.currentque].options[0].hasOwnProperty(key)) {
 
                         $("#question-options").append(
+
                             "<div class='form-check option-block'>" +
                             "<label class='form-check-label'>" +
                             "<input type='radio' class='form-check-input' name='option'   id='q"+key+"' value='" + quiz.JS[this.currentque].options[0][key] + "'><span id='optionval'>" +
@@ -182,7 +183,7 @@
 
 
 
-            $("#pod").html('<a href="{{ path('app_category_index' )    }}"> <span class="badge bg-warning">Génerer Attestation </span> </a>' );
+            $("#pod").html('<a href="{{ path('GenererPDF_app' , {'idattestation': 2 }) }}"> <span class="btn ">Génerer Attestation </span> </a>' );
 
 
         }
@@ -229,7 +230,7 @@
             //var radio = $(this).find('input:radio');
             $(this).prop("checked", true);
             selectedopt = $(this).val();
-        });
+         });
 
 
 
@@ -242,8 +243,10 @@
         e.preventDefault();
         if(selectedopt) {
             jsq.checkAnswer(selectedopt);
+
         }
         jsq.changeQuestion(1);
+
     });
 
     $('#previous').click(function(e) {

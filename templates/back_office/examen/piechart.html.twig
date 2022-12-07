@@ -31,6 +31,11 @@
 <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
 <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js') }}"></script>
  <script>
+
+
+  var allexamscount = JSON.parse("{{allexamscount|json_encode()}}")
+  console.log((allexamscount));
+
   var counts = JSON.parse("{{examscount|json_encode()}}")
   console.log((counts));
 
@@ -57,7 +62,7 @@
   var yValues=[] ;
 
   for(i=0 ; i<cat.length;i++) {
-   yValues.push(cat[i]/11) ;
+   yValues.push(cat[i]/allexamscount) ;
   }
 
 
