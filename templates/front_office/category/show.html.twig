@@ -156,8 +156,7 @@
             </div>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
-            </tr>
+             </tr>
         {% endfor %}
         {% do posts.setPageRange(4) %}
         {{ knp_pagination_render(posts) }}

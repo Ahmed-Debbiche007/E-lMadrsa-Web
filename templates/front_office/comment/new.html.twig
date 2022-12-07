@@ -1,10 +1,9 @@
 {% extends 'front_office/blogbase.html.twig' %}
 {% block title %}New Comment{% endblock %}
 
-{% block body %}
+{% block body %}<div style="margin: 100px 0px">
     <h1>Create new Comment</h1>
 
     {{ include('back_office/comment/_form.html.twig') }}
-
-    <a href="{{ path('app_comment_index') }}">back to list</a>
-{% endblock %}
+</div>
+ {% endblock %}
