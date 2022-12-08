@@ -13,17 +13,8 @@ do
     fi
 done
 
-if grep -q "No changes" migrations.txt; then
-echo "Already migrated!"
-sleep 1
-echo "Fixtures already loaded!"
-else 
-echo "Running migrations"
-php bin/console d:m:m 
-echo "loading fixtures" 
-php bin/console doctrine:fixtures:load --append
-fi
-
+npm install
+npm run build
 
 symfony serve -d
 echo "start server" 

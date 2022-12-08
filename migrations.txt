@@ -1,11 +1,19 @@
 
- [WARNING] You have 2 available migrations to execute.                          
+In ExceptionConverter.php line 101:
+                                                                               
+  An exception occurred in the driver: SQLSTATE[HY000] [2002] No such file or  
+   directory                                                                   
+                                                                               
 
- Are you sure you wish to continue? (yes/no) [yes]:
- > 
- Generated new migration class to "/var/www/html/migrations/Version20221207122723.php"
- 
- To run just this migration for testing purposes, you can use migrations:execute --up 'DoctrineMigrations\\Version20221207122723'
- 
- To revert the migration you can use migrations:execute --down 'DoctrineMigrations\\Version20221207122723'
- 
+In Exception.php line 28:
+                                                    
+  SQLSTATE[HY000] [2002] No such file or directory  
+                                                    
+
+In Driver.php line 28:
+                                                    
+  SQLSTATE[HY000] [2002] No such file or directory  
+                                                    
+
+doctrine:migrations:diff [--configuration CONFIGURATION] [--em EM] [--conn CONN] [--namespace NAMESPACE] [--filter-expression FILTER-EXPRESSION] [--formatted] [--line-length LINE-LENGTH] [--check-database-platform [CHECK-DATABASE-PLATFORM]] [--allow-empty-diff] [--from-empty-schema]
+
