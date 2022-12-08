@@ -14,22 +14,22 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th>Id</th>
+           
                 <th>NomEvenement</th>
                 <th>type category</th>
                 <th>Description</th>
-                <th>Image</th>
+            
                 <th>Date</th>
                   </tr>
                 </thead>
                 <tbody>
                   {% for evenement in evenements %}
             <tr>
-                <td>{{ evenement.nomEvenement }}</td>
+                <td>  <div class="avatar avatar-xl"><img src={{ asset('uploads/images/' ~ evenement.image) }} alt="taswira"> {{ evenement.nomEvenement }}</div></td>
                 <td>{{ evenement.idcate.getTypeEvenement() }}</td>
                 
                 <td>{{ evenement.description }}</td>
-                <td>{{ evenement.image }}</td>
+                
                 <td>{{ evenement.date ? evenement.date|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}">show</a>

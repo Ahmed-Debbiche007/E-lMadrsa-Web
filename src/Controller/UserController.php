@@ -62,18 +62,18 @@ class UserController extends AbstractController
 
     $participation=$participationRepository->findBySomeUser(50,$this->getUser());
     if(!is_null($participation)){
-        $this->getUser()->addBadge($badgeRepository->findOneBy(['badgetype'=>'BRONZ']));
+        $this->getUser()->addBadge($badgeRepository->findOneBy(['badgetype'=>'Bronze']));
         $userRepository->save($this->getUser(),true);
     }
 
         $participation=$participationRepository->findBySomeUser(70,$this->getUser());
         if(!is_null($participation)){
-            $this->getUser()->addBadge($badgeRepository->findOneBy(['badgetype'=>'SILVER']));
+            $this->getUser()->addBadge($badgeRepository->findOneBy(['badgetype'=>'Silver']));
             $userRepository->save($this->getUser(),true);
         }
         $participation=$participationRepository->findBySomeUser(90,$this->getUser());
         if(!is_null($participation)){
-            $this->getUser()->addBadge($badgeRepository->findOneBy(['badgetype'=>'GOLD']));
+            $this->getUser()->addBadge($badgeRepository->findOneBy(['badgetype'=>'Gold']));
             $userRepository->save($this->getUser(),true);
         }
 

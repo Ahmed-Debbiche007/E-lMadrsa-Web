@@ -69,11 +69,13 @@
 
        
     </div>
- 
+    {% if app.user %}
+ {% if  app.user.isAdmin() %}
     <div class="text-center">
       <a href="{{ path('app_evenement_new') }}" class="btn">Add Event</a>
     </div>
-     
+     {% endif %}
+     {% endif %}
   </div>
 </div>
         
