@@ -258,19 +258,19 @@ class FrontOfficeController extends AbstractController
         $tutorshipsession->setUrl("none");
         $tutorshipSessionRepository->save($tutorshipsession, false);
         
-        $this->generateLink($tutorshipsession, $tutorshipSessionRepository, $trequest, $requestsRepository);
-        $this->addFlash('success', 'The request has been approved!');
-        return $this->redirectToRoute('app.sessions', [], Response::HTTP_SEE_OTHER);
+        return $this->generateLink($tutorshipsession, $tutorshipSessionRepository, $trequest, $requestsRepository);
+        
     }
 
     public function generateLink(TutorshipSessions $tutorshipsession, TutorshipSessionRepository $tutorshipSessionRepository, Requests $trequest, RequestsRepository $requestsRepository)
     {
+        
         $allToken = $this->em->findAll();
-        /** @var Token $token */
+        
         $token = end($allToken);
 
         if (!$token) {
-            $client = $this->googleServices->getClient();
+            $client = $this->googleServices->getClientFront();
             return $this->redirect($client->createAuthUrl());
         }
         $tutorshipSessionRepository->save($tutorshipsession, true);
@@ -279,16 +279,14 @@ class FrontOfficeController extends AbstractController
         $tutorshipSessionRepository->save($tutorshipsession, true);
         $requestsRepository->remove($trequest, true);
         $this->addFlash('success', 'The request has been approved!');
-        return $this->redirectToRoute('app_tutorshipsessions_index_front', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app.sessions', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/callback', name: 'callback')]
+    #[Route('/callback', name: 'callback.front')]
     public function handleGoogle(Request $request): RedirectResponse
     {
-
         $code = $request->query->get('code');
-        $token = $this->googleServices->getClient()->fetchAccessTokenWithAuthCode($code);
-
+        $token = $this->googleServices->getClientFront()->fetchAccessTokenWithAuthCode($code);
         $newToken = (new Token())->setToken($token['access_token']);
         $this->em->save($newToken, true);
         $this->addFlash('success', 'Connected! you can approve the request now');

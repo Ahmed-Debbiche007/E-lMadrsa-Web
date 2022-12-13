@@ -32,30 +32,27 @@ function addMessage(id, message) {
 
 socket.addEventListener('message', function (e) {
     e.preventDefault();
-    var session = document.getElementById('idSession').value;
-    if (message.idSender != user && session == message.idSession) {
-        try {
-            const message = JSON.parse(e.data)
-            if (message.message != "") {
-                url = "http://localhost:5000/front/assets/js/notification.mp3"
-                $.get(url)
-                    .done(function () {
-                        audio = new Audio(url);
-                        audio.loop = false;
-                        audio.play();
-                    }).fail(function () {
-                        console.log("uuuuuuup")
-                    })
-                var user = document.getElementById('receive').value;
+    try {
+        const message = JSON.parse(e.data)
+        if (message.message != "") {
+            url = "http://localhost:5000/front/assets/js/notification.mp3"
+            $.get(url)
+                .done(function () {
+                    audio = new Audio(url);
+                    audio.loop = false;
+                    audio.play();
+                }).fail(function () {
+                    console.log("uuuuuuup")
+                })
 
+            var user = document.getElementById('receive').value;
+            if (message.idSender != user) {
                 addMessage(message.idSender, message.message)
-
-
             }
-
-        } catch (e) {
-            // Catch any errors
         }
+
+    } catch (e) {
+        // Catch any errors
     }
 })
 

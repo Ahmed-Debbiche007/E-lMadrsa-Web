@@ -7,7 +7,7 @@
 # 
 # Host: 127.0.0.1 ((Ubuntu) 8.0.31)
 # Database: springfever
-# Generation time: 2022-12-08T00:17:08+01:00
+# Generation time: 2022-12-08T09:10:58+01:00
 # ************************************************************
 
 
@@ -54,9 +54,18 @@ CREATE TABLE `badge` (
   `badgetype` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `badgeimage` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+LOCK TABLES `badge` WRITE;
+/*!40000 ALTER TABLE `badge` DISABLE KEYS */;
 
+INSERT INTO `badge` (`id`, `badgetype`, `badgeimage`) VALUES
+	(1, "Gold", "ssss"),
+	(2, "Silver", "ssss"),
+	(3, "Bronze", "sqsqs");
+
+/*!40000 ALTER TABLE `badge` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 
@@ -75,7 +84,16 @@ CREATE TABLE `badge_user` (
   CONSTRAINT `FK_299D3A50F7A2C2FC` FOREIGN KEY (`badge_id`) REFERENCES `badge` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+LOCK TABLES `badge_user` WRITE;
+/*!40000 ALTER TABLE `badge_user` DISABLE KEYS */;
 
+INSERT INTO `badge_user` (`badge_id`, `user_id`) VALUES
+	(1, 1),
+	(2, 1),
+	(3, 1);
+
+/*!40000 ALTER TABLE `badge_user` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 
@@ -114,9 +132,17 @@ CREATE TABLE `categorie_ev` (
   `id` int NOT NULL AUTO_INCREMENT,
   `type_evenement` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+LOCK TABLES `categorie_ev` WRITE;
+/*!40000 ALTER TABLE `categorie_ev` DISABLE KEYS */;
 
+INSERT INTO `categorie_ev` (`id`, `type_evenement`) VALUES
+	(1, "Conférance"),
+	(2, "Party");
+
+/*!40000 ALTER TABLE `categorie_ev` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 
@@ -130,14 +156,15 @@ CREATE TABLE `category` (
   `categoryNAME` varchar(255) NOT NULL,
   `categoryIMAGE` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`categoryID`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
 
 INSERT INTO `category` (`categoryID`, `categoryNAME`, `categoryIMAGE`) VALUES
-	(25, "python", "python-logo-icon-vector-logos-logo-icons-set-social-media-flat-banner-vectors-svg-eps-jpg-jpeg-emblem-wallpaper-background-python-208329675-63906abe8a414.jpg"),
-	(26, "java", "java-logo-640-639068a753578.jpg");
+	(27, "Python", "python-6391957669ab3.png"),
+	(28, "physics", "physics-63919596302c3.jpg"),
+	(29, "java", "java-639195b5686ab.jpg");
 
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -180,13 +207,8 @@ LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
 
 INSERT INTO `comment` (`commentID`, `commentCONTENT`, `userID`, `postID`, `commentVOTE`) VALUES
-	(19, "it\'s easy just try to google it and good night", 2, 58, -1),
-	(20, "lkkk", 2, 59, 1),
-	(21, "kkjjjjjjkkkkkkkkkk", 2, 59, 0),
-	(22, "kkjjjjjjkkkkkkkkkk", 2, 60, 0),
-	(23, "kkjjjjjjkkkkkkkkkk", 2, 60, 0),
-	(24, "lll", 2, 58, 0),
-	(25, "kkk,,,,,,,,,,,,,,", 2, 58, 0);
+	(20, "I can help you bro just delete system32 and your problems will be solved ", 3, 58, 0),
+	(21, "no sadly you need to install python premium to do that ", 3, 58, 0);
 
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -275,9 +297,18 @@ CREATE TABLE `evenement` (
   KEY `IDX_B26681E79F37AE5` (`id_user_id`),
   CONSTRAINT `FK_B26681E79F37AE5` FOREIGN KEY (`id_user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_B26681EA3ADA195` FOREIGN KEY (`id_cate_id`) REFERENCES `categorie_ev` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+LOCK TABLES `evenement` WRITE;
+/*!40000 ALTER TABLE `evenement` DISABLE KEYS */;
 
+INSERT INTO `evenement` (`id`, `id_cate_id`, `id_user_id`, `nom_evenement`, `description`, `image`, `date`, `etat_evenement`) VALUES
+	(2, 1, 1, "React summittttttttt", "react summit with facebook developers", "/tmp/php08lUor", "2023-01-01 13:04:00", "en cours"),
+	(3, 1, 1, "React summittttttttt", "react summit with facebook developers", "/tmp/phpIozieP", "2023-01-01 13:04:00", "en cours"),
+	(4, 1, 1, "React", "React SUmmit", "Emploi-639190e4a440e.png", "2023-01-01 18:00:00", "en cours");
+
+/*!40000 ALTER TABLE `evenement` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 
@@ -345,12 +376,7 @@ LOCK TABLES `formation` WRITE;
 INSERT INTO `formation` (`idFormation`, `Sujet`, `Description`, `difficulte`, `duree`, `idPrerequis`, `idCompetence`, `idExamen`, `idCategorie`) VALUES
 	(3, "formation python", "code", "difficile", 2, 1, 1, 20, 2),
 	(18, "Python", "Python Language", "difficile", 12, 2, 2, 25, 2),
-	(17, "formation8", "description 8", "moyen", 12, 2, 2, 8, 4),
-	(15, "formationn", "description 5", "moyen", 12, 2, 2, 8, 2),
-	(19, "Python", "Python Language", "difficile", 12, 2, 2, 25, 2),
-	(6, "Python", "Python Language", "difficile", 12, 2, 2, 25, 2),
-	(5, "formation8", "description 8", "moyen", 12, 2, 2, 8, 4),
-	(4, "formationn", "description 5", "moyen", 12, 2, 2, 8, 2);
+	(15, "formationn", "description 5", "moyen", 12, 2, 2, 8, 2);
 
 /*!40000 ALTER TABLE `formation` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -398,21 +424,8 @@ LOCK TABLES `participation` WRITE;
 
 INSERT INTO `participation` (`idParticipation`, `idUser`, `idFormation`, `resultat`, `date_part`) VALUES
 	(11, 1, 3, 100, "2022-11-27"),
-	(10, 2, 3, 70, "2022-11-25"),
-	(12, 2, 3, 90, "2022-11-26"),
-	(13, 1, 3, 50, "2022-11-27"),
-	(14, 1, 3, 50, "2022-12-07"),
-	(15, 1, 3, 50, "2022-12-07"),
-	(35, 6, 18, 60, "2022-12-09"),
-	(36, 2, 3, 3, "2022-12-15"),
-	(30, 6, 15, 80, "2022-12-10"),
-	(31, 2, 15, 20, "2022-12-11"),
-	(32, 3, 15, 20, "2022-12-13"),
-	(33, 6, 17, 80, "2022-12-15"),
-	(34, 6, 17, 80, "2022-12-14"),
-	(37, 2, 3, 4, "2022-12-22"),
-	(38, 2, 3, 7, "2022-12-08"),
-	(39, 2, 3, 6, "2022-12-23");
+	(10, 2, 15, 70, "2022-11-25"),
+	(33, 6, 18, 80, "2022-12-15");
 
 /*!40000 ALTER TABLE `participation` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -436,15 +449,17 @@ CREATE TABLE `post` (
   PRIMARY KEY (`postID`),
   KEY `fkuser` (`userID`),
   KEY `catfk` (`categoryID`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
 
 INSERT INTO `post` (`postID`, `postTITLE`, `postCONTENT`, `userID`, `categoryID`, `postVOTE`, `postNBCOM`) VALUES
-	(58, "hh", "kj", 1, 25, 1, 2),
-	(60, "YHJ", "?.", 3, 25, 1, 0),
-	(62, "JJ", "JJJ", 2, 25, 1, 0);
+	(46, "metier is done", "<p><img alt=\"\" src=\"https://www.google.com/url?sa=i&amp;url=https%3A%2F%2Fwww.wikihow.com%2FGet-the-URL-for-Pictures&amp;psig=AOvVaw31k5QP83vOb4Un7AOtsVwe&amp;ust=1669930306282000&amp;source=images&amp;cd=vfe&amp;ved=0CBAQjRxqFwoTCIir2Kft1vsCFQAAAAAdAAAAABAJ\" /><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Smiley.svg/1024px-Smiley.svg.png\" style=\"height:1024px; width:1024px\" /></p>", 1, 28, -1, 0),
+	(48, "this post is made by ya boi lil broomstick", "<p><img alt=\"\" src=\"https://symfony.com/images/opengraph/symfony.png\" style=\"height:300px; width:600px\" /></p>", 2, 28, 1, 0),
+	(58, "can someone please post the solution to this Query that i have", "<p><span style=\"color:#f1c40f\">i am trying to solve the question using arrays</span> and i am getting stuck/error at the array initialization in the init function. I dont know what to do and need help.</p>\r\n\r\n<p>Here is my code. Feel free to work on it:</p>", 1, 27, -1, 3),
+	(59, "Remove link from image using python", "<p><span style=\"color:#3498db\">There is an image embedded with an hyperlink in a docx, how do I remove the link from that image using python?</span></p>\r\n\r\n<p><span style=\"color:#3498db\">Can anyone help me with the code for this problem?</span></p>", 2, 27, 0, 0),
+	(60, "how to package all parameters as one?", "<p><span style=\"color:#e74c3c\">I always import one function.py to do some special calculate,</span></p>\r\n\r\n<p><span style=\"color:#e74c3c\">one day I found this function.py have steps of read files, that means, every time I call this function, function.py will open several excel files.</span></p>\r\n\r\n<p><img alt=\"\" src=\"https://www.mssqltips.com/tipimages2/7169_define-call-python-functions.003.png\" style=\"height:142px; width:402px\" /></p>", 3, 27, 0, 0);
 
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -650,9 +665,16 @@ CREATE TABLE `reservation` (
   `id_evenement` int NOT NULL,
   `id_utilisateur` int NOT NULL,
   PRIMARY KEY (`id_reservation`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+LOCK TABLES `reservation` WRITE;
+/*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
 
+INSERT INTO `reservation` (`id_reservation`, `date_reservation`, `id_evenement`, `id_utilisateur`) VALUES
+	(1, "2022-12-08", 2, 5);
+
+/*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 
@@ -725,10 +747,10 @@ LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 
 INSERT INTO `user` (`id`, `nom`, `prenom`, `username`, `email`, `image`, `roles`, `role`, `password`, `date_naissance`, `approved`) VALUES
-	(1, "admin", "admin", "admin", "admin@admin.com", "random", "[]", "Admin", "fec79a625cf074ea4e73bf6bb3bbada7f1ba98b2f7e18dbd02ec79cfb4317d82", "2022-12-07", 1),
-	(2, "tutor", "tutor", "tutor", "tutor@admin.com", "random", "[]", "Tutor", "fec79a625cf074ea4e73bf6bb3bbada7f1ba98b2f7e18dbd02ec79cfb4317d82", "2022-12-07", 1),
-	(3, "student", "student", "student", "student@admin.com", "random", "[]", "Student", "fec79a625cf074ea4e73bf6bb3bbada7f1ba98b2f7e18dbd02ec79cfb4317d82", "2022-12-07", 1),
-	(6, "q", "q", "q", "q@q.q", "q", "[]", "User", "fec79a625cf074ea4e73bf6bb3bbada7f1ba98b2f7e18dbd02ec79cfb4317d82", "2023-07-21", 1);
+	(1, "admin", "admin", "admin", "admin@admin.com", "1.jpg", "[]", "Admin", "fec79a625cf074ea4e73bf6bb3bbada7f1ba98b2f7e18dbd02ec79cfb4317d82", "2022-12-07", 1),
+	(2, "tutor", "tutor", "tutor", "tutor@admin.com", "2.jpg", "[]", "Tutor", "fec79a625cf074ea4e73bf6bb3bbada7f1ba98b2f7e18dbd02ec79cfb4317d82", "2022-12-07", 1),
+	(3, "student", "student", "student", "student@admin.com", "3.jpg", "[]", "Student", "fec79a625cf074ea4e73bf6bb3bbada7f1ba98b2f7e18dbd02ec79cfb4317d82", "2022-12-07", 1),
+	(6, "q", "q", "q", "q@q.q", "4.jpg", "[]", "User", "fec79a625cf074ea4e73bf6bb3bbada7f1ba98b2f7e18dbd02ec79cfb4317d82", "2023-07-21", 1);
 
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -746,7 +768,7 @@ CREATE TABLE `vote` (
   `postID` bigint NOT NULL,
   `votenb` int NOT NULL,
   PRIMARY KEY (`voteID`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 LOCK TABLES `vote` WRITE;
 /*!40000 ALTER TABLE `vote` DISABLE KEYS */;
@@ -766,7 +788,8 @@ INSERT INTO `vote` (`voteID`, `userID`, `postID`, `votenb`) VALUES
 	(17, 2, 61, 1),
 	(18, 3, 58, -1),
 	(19, 3, 60, -1),
-	(20, 3, 62, 1);
+	(20, 3, 62, 1),
+	(21, 1, 58, -1);
 
 /*!40000 ALTER TABLE `vote` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -815,4 +838,4 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
-# Dump completed on 2022-12-08T00:17:09+01:00
+# Dump completed on 2022-12-08T09:10:59+01:00

@@ -33,6 +33,19 @@ class GoogleCalendar
         return $client;
     }
 
+    public function getClientFront(): Google_Client
+    {
+        $client = new Google_Client();
+        $workdir = substr(getcwd(),0,-6);
+        $path = $workdir."src/Service/credentials.json";
+        $client->setAuthConfig($path);
+        $client->addScope(\Google_Service_Calendar::CALENDAR);
+        $redirect_uri = "http://localhost:5000/callback";
+        $client->setRedirectUri($redirect_uri);
+
+        return $client;
+    }
+
     /**
      * Client with last access token
      * @return Client
